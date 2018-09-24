@@ -4,10 +4,14 @@ class Match {
 
     private $id;
     private $nom;
+    private $adresse;
+    private $date;
 
-    public function __construct($id, $nom) {
+    public function __construct($id, $nom, $adresse, $date) {
         $this->id = $id;
         $this->nom = $nom;
+        $this->adresse = $adresse;
+        $this->date = $date;
     }
 
     public function getId() {
@@ -18,17 +22,26 @@ class Match {
         return $this->nom;
     }
 
+    public function getAdresse() {
+        return $this->adresse;
+    }
+
+    public function getDate() {
+        return $this->date;
+    }
+
     public function afficherMatch() {
         echo
-            '<div class="container">
-                <input type="text" value="'.$this->getNom().'" id="'.$this->getId().'" />
-                <button class="moins" id="moins'.$this->getId().'">-</button>
-                <button class="plus" id="plus'.$this->getId().'">+</button>
-                <button id="modifier'.$this->getId().'">modifier</button>
-                <button id="suppr'.$this->getId().'">supprimmer</button>
-                <div>
-                    <textarea type="text"></textarea>
-                    <h1>joueurs</h1>
+            '<div id="match'.$this->getId().'" class="container">
+                <input type="text" value="'.$this->getNom().'" id="nom'.$this->getId().'" />
+                <textarea type="text" id="adresse'.$this->getId().'">'.$this->getAdresse().'</textarea>
+                <input type="date" value="'.$this->getDate().'" id="date'.$this->getId().'" />
+                <button class="btn moins" id="moins'.$this->getId().'">-</button>
+                <button class="btn plus" id="plus'.$this->getId().'">+</button>
+                <button class="btn btn-danger suppr" id="suppr'.$this->getId().'" title="supprimmer">X</button>
+                <div id="joueurs'.$this->getId().'">
+                </div>
+                <div id="commentaires'.$this->getId().'" class="commentaires">
                 </div>
             </div>';
     }
