@@ -39,3 +39,95 @@ body {
     border-radius: 50px;
     font-size: 3rem;
 }
+
+.joueur .nom {
+    width: 100px;
+}
+
+
+/* -------------- CSS du slider ------------- */
+ /* The switch - the box around the slider */
+ .switch {
+    position: relative;
+    display: inline-block;
+    width: 200px;
+    height: 40px;
+    text-align: center;    
+  }
+  
+  /* Hide default HTML checkbox */
+  .switch input {display:none;}
+  
+  /* The slider */
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 30px;
+    width: 30px;
+    left: 4px;
+    bottom: 5px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  input:checked + .slider.present{
+    background-color: #2196F3;
+  }
+  
+  input:focus + .slider.present {
+    box-shadow: 0 0 1px #2196F3;
+  }
+
+  input:checked + .slider.retard{
+    background-color: rgb(243, 222, 33);
+  }
+  
+  input:focus + .slider.retard {
+    box-shadow: 0 0 1px rgb(243, 222, 33);
+  }
+
+  input:checked + .slider.absent{
+    background-color: rgb(243, 33, 33);
+  }
+  
+  input:focus + .slider.absent {
+    box-shadow: 0 0 1px rgb(243, 33, 33);
+  }
+  
+  input:checked + .slider.incertain{
+    background-color: rgb(132, 41, 182);
+  }
+  
+  input:focus + .slider.incertain {
+    box-shadow: 0 0 1px rgb(132, 41, 182);
+  }
+  
+  
+  input:checked + .slider:before {
+    -webkit-transform: translateX(162px);
+    -ms-transform: translateX(162px);
+    transform: translateX(162px);
+  }
+  
+  /* Rounded sliders */
+  .slider.round {
+    border-radius: 34px;
+    padding-top: 6px;
+  }
+  
+  .slider.round:before {
+    border-radius: 50%;
+  } 
