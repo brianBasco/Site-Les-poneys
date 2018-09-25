@@ -26,11 +26,12 @@
         $balise->afficherMatch();
 
         //Affichage des joueurs
+        echo '<div id="joueurs'.$balise->getId().'" class="container joueurs">';
         for($i = 0; $i<sizeof($joueurs); $i++) {
             $joueurs[$i]->afficherJoueur();
         }
-
-        //Affichage des commentaires
+        echo '</div>';
+        
     }
 
     echo

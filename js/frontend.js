@@ -7,11 +7,30 @@ document.addEventListener("DOMContentLoaded",
     document.querySelector(".moins")
         .addEventListener("click", moins(this.id)); */
 
+    /*
     document.querySelector("#ajout")
         .addEventListener("click", function() {
             //ouvrirBalise();
             ajouterMatch();
         });
+    */
+   
+    var nbreMatchs = document.getElementsByClassName("match");
+    for(var i = 0; i<nbreMatchs.length; i++) { 
+        document.querySelector("#moins" + (i+1))
+        .addEventListener("click", function() {
+            //fermerBalise();
+            fermerJoueurs(this);
+        
+        });
+        document.querySelector("#plus" + (i+1))
+        .addEventListener("click", function() {
+            //ouvrirBalise();
+            ouvrirJoueurs(this);
+        });    
+    }
+    
+    
   });
 
 //Afficher le contenu du match
@@ -63,6 +82,20 @@ function ajouterMatch() {
         <div class="commentaires">
         </div>
     </div> */
- 
+}
 
+function fermerJoueurs(element) {
+
+    //On récupère le numéro en substring de "moins"
+    var num = element.id.substring(5);
+    var div = document.getElementById("joueurs" + num);
+    div.style = "max-height: 0px";
+}
+
+function ouvrirJoueurs(element) {
+    
+    //On récupère le numéro en substring de "plus"
+    var num = element.id.substring(4);
+    var div = document.getElementById("joueurs" + num);
+    div.style = "max-height: 999px";
 }

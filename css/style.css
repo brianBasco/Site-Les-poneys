@@ -4,7 +4,7 @@ body {
 }
 
 .header {
-    height: 200px;
+    height: 100px;
     background-color: black;
     color: wheat;
 }
@@ -16,7 +16,7 @@ body {
 .header .menu .boite {
     display: inline-block;
     width: 150px;
-    height: 150px;    
+    height: 50px;    
     background-color: white;
 }
 
@@ -43,6 +43,61 @@ body {
 .joueur .nom {
     width: 100px;
 }
+
+.joueur label, .joueur input {
+  vertical-align: top;
+  border: 2px solid black;
+  border-radius: 0;
+  text-align: center;
+  height: 40px;
+}
+
+.joueur label {
+  line-height: 2rem;
+}
+
+
+.joueurs {
+  text-align: center; 
+  max-height: 0px; 
+  overflow: hidden;
+  transition: all cubic-bezier(.39,.42,0,1.09) 1.2s;
+}
+
+.match {
+  text-align: center;
+  position: relative;
+  background-color: #7f8aff;
+  margin: 30px 0 20px 0;
+}
+
+.match .nom {
+  position: absolute;
+  left: 0;
+}
+
+.match .participants {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
+
+.match input, .match button, .match textarea {
+  vertical-align: top;
+  border: 2px solid black;
+  border-radius: 0;
+  text-align: center;
+}
+
+.match input, .match button {
+  height: 40px;
+}
+
+.match textarea {
+  resize: none;
+}
+
+
 
 
 /* -------------- CSS du slider ------------- */
@@ -76,19 +131,19 @@ body {
     content: "";
     height: 30px;
     width: 30px;
-    left: 4px;
-    bottom: 5px;
+    left: 3px;
+    bottom: 3px;
     background-color: white;
     -webkit-transition: .4s;
     transition: .4s;
   }
   
   input:checked + .slider.present{
-    background-color: #2196F3;
+    background-color: rgb(34, 245, 7);
   }
   
   input:focus + .slider.present {
-    box-shadow: 0 0 1px #2196F3;
+    box-shadow: 0 0 1px rgb(34, 245, 7);
   }
 
   input:checked + .slider.retard{

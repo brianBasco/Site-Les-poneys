@@ -2,9 +2,10 @@
 document.addEventListener("DOMContentLoaded",
   function (event) {
     
+    
     // Unobtrusive event binding
-    document.querySelector("#test")
-      .addEventListener("click", function () {
+    //document.querySelector("#test")
+    //  .addEventListener("click", function () {
         
         // Call server to get the name
         $ajaxUtils
@@ -20,6 +21,7 @@ document.addEventListener("DOMContentLoaded",
 
         
       });
+      
   }
 );
 
