@@ -36,7 +36,7 @@ class Match {
                 
                 
                     <input type="text" class="nom" value="'.$this->getNom().'" id="nom'.$this->getId().'" />
-                    <input type="text" class="participants" placeholder="participants" />
+                    <input type="text" class="participants" placeholder="participants" id="participants'.$this->getId().'" />
                
                 <textarea type="text" rows="3" id="adresse'.$this->getId().'">'.$this->getAdresse().'</textarea>
                 <input type="date" value="'.$this->getDate().'" id="date'.$this->getId().'" />

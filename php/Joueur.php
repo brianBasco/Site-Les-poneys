@@ -23,7 +23,7 @@
                 '<div class="joueur">
                 <label class="nom">'.$this->nom.'</label>
                 <label class="switch">
-                    <input type="checkbox" />
+                    <input type="checkbox" class="select sqlno'.$this->getId().'" />
                     <span class="slider present">Présent</span>
                 </label>
                 <input type="text" placeholder="commentaire" />

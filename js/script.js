@@ -1,11 +1,10 @@
 // Event handling
 document.addEventListener("DOMContentLoaded",
   function (event) {
-    
-    
+
     // Unobtrusive event binding
-    //document.querySelector("#test")
-    //  .addEventListener("click", function () {
+    document.querySelector("#test")
+      .addEventListener("click", function () {
         
         // Call server to get the name
         $ajaxUtils
@@ -13,10 +12,10 @@ document.addEventListener("DOMContentLoaded",
             function (request) {
 
               
-             /*  var nom = request.responseText;
+            //  var nom = request.responseText;
 
-              document.querySelector("#reponse")
-                .innerHTML = "<h2>Updated</h2>"; */
+              document.querySelector("#valeurDeRetour")
+                .innerHTML = "<h2>Updated</h2>"; 
             });
 
         

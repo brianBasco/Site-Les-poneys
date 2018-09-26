@@ -27,8 +27,18 @@ document.addEventListener("DOMContentLoaded",
         .addEventListener("click", function() {
             //ouvrirBalise();
             ouvrirJoueurs(this);
-        });    
+        });
+        
+        
+            
     }
+    //eventListener sur les input des joueurs
+    //var nbreJoueurs = document.getElementsByClassName("joueurs").children;
+    document.querySelectorAll(".select").forEach(element => {
+        element.addEventListener("click", function() {
+            nbreParticipants(this);            
+        })
+    })
     
     
   });
@@ -98,4 +108,46 @@ function ouvrirJoueurs(element) {
     var num = element.id.substring(4);
     var div = document.getElementById("joueurs" + num);
     div.style = "max-height: 999px";
+}
+
+function nbreParticipants(element) {
+    
+    //element est l'input qui a été cliquée
+    //ID du Parent de l'élément qui contient l'id
+    var id = element.parentNode.parentNode.parentNode.id;
+    console.log(id);
+
+    //NUMERO DU MATCH, substring de "joueurs..."
+    var numMatch = id.substring(7);
+
+    //NUMERO DE JOUEUR, contenu dans la classe sqlno
+    var numJoueur = element.classList[1].substring(5);
+    
+
+    var parent = document.getElementById(id);
+    var noeuds = parent.children;
+    var count = 0;
+    for(var i = 0; i<noeuds.length; i++) {        
+        
+        //Itération sur tous les chidlren de "joueurs" qui contiennent une input
+        if(noeuds[i].children[1].children[0].checked) count++;
+    }
+
+    //insertion dans la balise participants, substring de "joueurs..."
+    var div = document.getElementById("participants" + numMatch);
+
+    if(count > 1) div.value = count + " joueurs";
+    else div.value = count + " joueur";
+
+    
+    let url = "php/updatedb.php?match=" + numMatch +"&joueur=" + numJoueur;
+    console.log(url);
+    //insertion dans la bdd de la présence du joueur en requête AJAX
+    $ajaxUtils
+          .sendGetRequest(url, function(request) {
+        let div = document.getElementById("valeurDeRetour");
+        console.log(div);
+        div.innerHTML = "updated";
+        //location = url;
+    });
 }

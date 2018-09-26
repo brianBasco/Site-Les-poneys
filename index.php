@@ -8,7 +8,8 @@
       include('html/header.html');
     ?>
 
-    <button onclick="test1()">TEST</button>
+    <button id="test">TEST</button>
+    <div id="valeurDeRetour"></div>
    
     <?php
       include('php/listeDesMatchs.php');  
