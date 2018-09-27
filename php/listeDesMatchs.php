@@ -54,12 +54,10 @@
              }
              
         }
+        //fin de la div des joueurs
         echo '</div>';
         
     }
 
-    echo
-        '<div id="insertionMatch"></div>
-        </div>';
-
+    echo '</div>';
 ?>

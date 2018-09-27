@@ -5,6 +5,7 @@
 
     $numMatch = (int)$_GET['match'];
     $numJoueur = (int)$_GET['joueur'];
+    $presence = (int)$_GET['presence'];
 
     echo 'numMatch = '.$_GET['match'];
 
@@ -17,7 +18,8 @@
             //$req = $pdo->query("UPDATE matchs SET adresse='adresse de test' WHERE id =".$numMatch) or exit(print_r($pdo->errorInfo()));
 
             //update de la bdd, à chaque match créé la table presence doit être initialisée avec 0
-            $req = $pdo->query("UPDATE presence SET present=1 WHERE num_Match =".$numMatch." AND num_Joueur=".$numJoueur) or exit(print_r($pdo->errorInfo()));
+            $req = $pdo->prepare("UPDATE presence SET present=(?) WHERE num_Match =".$numMatch." AND num_Joueur=".$numJoueur) or exit(print_r($pdo->errorInfo()));
+            $req->execute(array($presence));
 
             $nom = "buchannon";
             //$req->bindParam(':nom', $nom, PDO::PARAM_STR);

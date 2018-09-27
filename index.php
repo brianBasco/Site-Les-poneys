@@ -7,9 +7,7 @@
     <?php
       include('html/header.html');
     ?>
-
-    <button id="test">TEST</button>
-    <div id="valeurDeRetour"></div>
+    
    
     <?php
       include('php/listeDesMatchs.php');  

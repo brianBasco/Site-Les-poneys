@@ -1,32 +1,24 @@
 document.addEventListener("DOMContentLoaded",
   function (event) {
-
-    /* document.querySelector(".plus")
-        .addEventListener("click", plus(this.id));
-        
-    document.querySelector(".moins")
-        .addEventListener("click", moins(this.id)); */
-   
    
     var nbreMatchs = document.getElementsByClassName("match");
+
     for(var i = 0; i<nbreMatchs.length; i++) { 
         document.querySelector("#moins" + (i+1))
         .addEventListener("click", function() {
-            //fermerBalise();
+            //fermer le container;
             fermerJoueurs(this);
         
         });
         document.querySelector("#plus" + (i+1))
         .addEventListener("click", function() {
-            //ouvrirBalise();
+            //ouvrir le container;
             ouvrirJoueurs(this);
         });
         
-        
-            
+        afficherNbreParticipants(nbreMatchs[i]);
     }
-    //eventListener sur les input des joueurs
-    //var nbreJoueurs = document.getElementsByClassName("joueurs").children;
+    //eventListener sur les input des joueurs    
     document.querySelectorAll(".select").forEach(element => {
         element.addEventListener("click", function() {
             nbreParticipants(this);            
@@ -36,56 +28,6 @@ document.addEventListener("DOMContentLoaded",
     
   });
 
-//Afficher le contenu du match
-function plus(container) {
-    var id = "#" + container;
-    document.getElementById(id).style = "height:0px";
-}
-
-//Cacher le contenu du match
-function moins(container) {
-    var id = "#" + container;
-    document.getElementById(id).style = "height:intial";
-}
-
-function ouvrirBalise() {
-    document.getElementById("matchPlus").style = "height:100px";
-}
-
-function ajouterMatch() {
-
-    
-        // crée un nouvel élément div 
-        var newDiv = document.createElement("div");
-        
-        var monInput = document.createElement("input") ;
-        monInput.setAttribute("type", "text");
-        monInput.setAttribute("name", "nom");
-        monInput.setAttribute("placeholder" , "Nom du match");
-
-        // ajoute le noeud texte au nouveau div créé
-        newDiv.appendChild(monInput); 
-        
-        var noeud = document.getElementById("listeMatchs");
-      
-        // ajoute le nouvel élément créé et son contenu dans le DOM 
-        var currentDiv = document.getElementById("insertionMatch"); 
-        noeud.insertBefore(newDiv, currentDiv); 
-
-        /* <div id="matchPlus" class="ajout container">
-        <input type="text" name="nom" placeholder="Nom du match"/>
-        <button class="moins">-</button>
-        <button class="plus">+</button>
-        <button class="modifier">modifier</button>
-        <button class="supprimmer">supprimmer</button>
-        <div class="joueurs">
-            <textarea type="text"></textarea>
-            <h1>joueurs</h1>
-        </div>
-        <div class="commentaires">
-        </div>
-    </div> */
-}
 
 function fermerJoueurs(element) {
 
@@ -115,32 +57,58 @@ function nbreParticipants(element) {
 
     //NUMERO DE JOUEUR, contenu dans la classe sqlno
     var numJoueur = element.classList[1].substring(5);
-    
 
+    //nombre d'inputs checked d'après le container "joueurs"
     var parent = document.getElementById(id);
-    var noeuds = parent.children;
-    var count = 0;
-    for(var i = 0; i<noeuds.length; i++) {        
-        
-        //Itération sur tous les chidlren de "joueurs" qui contiennent une input
-        if(noeuds[i].children[1].children[0].checked) count++;
-    }
-
+    let count = rechercheDansNoeuds(parent);
+    
     //insertion dans la balise participants, substring de "joueurs..."
     var div = document.getElementById("participants" + numMatch);
 
     if(count > 1) div.value = count + " joueurs";
     else div.value = count + " joueur";
 
-    
-    let url = "php/updatedb.php?match=" + numMatch +"&joueur=" + numJoueur;
-    console.log(url);
     //insertion dans la bdd de la présence du joueur en requête AJAX
+    //Présence du joueur
+    let presence;
+    element.checked? presence = 1: presence=0;
+
+    let url = "php/updatedb.php?match=" + numMatch +"&joueur=" + numJoueur +"&presence=" + presence;
+    console.log(url);
+    
     $ajaxUtils
-          .sendGetRequest(url, function(request) {
-        let div = document.getElementById("valeurDeRetour");
-        console.log(div);
-        div.innerHTML = "updated";
-        //location = url;
+        .sendGetRequest(url, function(request) {
+            //location = url;
     });
+}
+
+function afficherNbreParticipants(element) {
+
+    //numero du match
+    let numMatch = element.id.substring(5);
+
+    //Recherche des input dans le conteneur joueurs    
+    let parent = document.getElementById("joueurs" + numMatch);
+
+    let count = rechercheDansNoeuds(parent);
+    
+    //insertion dans la balise participants, substring de "joueurs..."
+    var div = document.getElementById("participants" + numMatch);
+
+    if(count > 1) div.value = count + " joueurs";
+    else div.value = count + " joueur";
+
+}
+
+function rechercheDansNoeuds(div) {
+   
+    let noeuds = div.children;
+    let count = 0;
+    for(let i = 0; i<noeuds.length; i++) {        
+        
+        //Itération sur tous les chidlren de "joueurs" qui contiennent une input
+        if(noeuds[i].children[1].children[0].checked) count++;
+    }
+
+    return count;
 }
