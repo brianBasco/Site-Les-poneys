@@ -36,7 +36,3 @@ INSERT INTO joueurs VALUES (default, "ju"),(default, "seb"),(default, "marie"),(
 (default, "eric"),(default, "pierrot"),(default, "sego"),(default, "terence"),(default, "jeremy"),
 (default, "benbob"),(default, "sylvain");
 
-INSERT INTO matchs VALUES (default, "MIOS", "place François Miterrand", '1983-02-19'),
-(default, "JSA", "à merignac", '2018-12-31'),
-(default, "EYSINES", "salle neuve", '2018-03-30'),
-(default, "VBBB", "salle de merde", '2018-02-20');

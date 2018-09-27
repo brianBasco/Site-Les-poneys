@@ -1,6 +1,7 @@
 <?php
     require 'Match.php';
     require 'Joueur.php';
+    require 'Presence.php';
 
     echo '<div id="listeMatchs" class="container listeMatchs">';
 
@@ -20,6 +21,15 @@
         array_push($joueurs, $joueur);
     }
 
+    //Récupération des présences de la bdd et insertion dans un tableau
+    $reqPresence = $pdo->prepare('SELECT * FROM presence');
+    $reqPresence->execute();
+    $presences = array();
+    while($row = $reqPresence->fetch()) {
+        $presence = new Presence($row['num_match'], $row['num_joueur'],$row['present']);
+        array_push($presences, $presence);
+    }
+
     //Création et affichade des matchs
     while($row = $reqMatch->fetch()){
         $balise = new Match($row['id'], $row['nom'], $row['adresse'], $row['date_match']);
@@ -28,7 +38,21 @@
         //Affichage des joueurs
         echo '<div id="joueurs'.$balise->getId().'" class="container joueurs">';
         for($i = 0; $i<sizeof($joueurs); $i++) {
-            $joueurs[$i]->afficherJoueur();
+
+            $joueurPresent = $presences[$i];
+            
+            echo 'joueur present num: '.$joueurPresent->getNumJoueur();
+            echo 'joueur present match : '.$joueurPresent->getNumMatch();
+            echo 'joueur present present : '.$joueurPresent->getPresent();
+            echo 'joueurs[i] id : '.$joueurs[$i]->getId();
+            echo 'balise id : '.$balise->getId();
+            //sécurité de correspondance entre id
+            
+            if($joueurPresent->getNumJoueur() == $joueurs[$i]->getId() &&
+             $joueurPresent->getNumMatch() == $balise->getId()) {
+                $joueurs[$i]->afficherJoueur($joueurPresent->getPresent());
+             }
+             
         }
         echo '</div>';
         

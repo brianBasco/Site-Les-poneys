@@ -6,14 +6,7 @@ document.addEventListener("DOMContentLoaded",
         
     document.querySelector(".moins")
         .addEventListener("click", moins(this.id)); */
-
-    /*
-    document.querySelector("#ajout")
-        .addEventListener("click", function() {
-            //ouvrirBalise();
-            ajouterMatch();
-        });
-    */
+   
    
     var nbreMatchs = document.getElementsByClassName("match");
     for(var i = 0; i<nbreMatchs.length; i++) { 
