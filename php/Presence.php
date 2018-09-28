@@ -2,14 +2,20 @@
 
     class Presence {
 
+        private $id;
         private $numMatch;
         private $numJoueur;
         private $present;
 
-        public function __construct($numMatch, $numJoueur, $present) {
+        public function __construct($id, $numMatch, $numJoueur, $present) {
+            $this->id = $id;
             $this->numMatch = $numMatch;
             $this->numJoueur = $numJoueur;
             $this->present = $present;
+        }
+
+        public function getId() {
+            return $this->id;
         }
 
         public function getNumMatch() {

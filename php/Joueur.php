@@ -18,13 +18,13 @@
             return $this->nom;
         }
 
-        public function afficherJoueur($presence) {
+        public function afficherJoueur($presence, $numsql, $numMatch) {
             echo
                 '<div class="joueur">
                 <label class="nom">'.$this->nom.'</label>
                 <label class="switch">';
-                if($presence == 1) echo '<input type="checkbox" checked="true" class="select sqlno'.$this->getId().'" />';
-                else echo '<input type="checkbox" class="select sqlno'.$this->getId().'" />'; 
+                if($presence == 1) echo '<input type="checkbox" id="sqlno'.$numsql.'" checked="true" class="select input'.$numMatch.'" />';
+                else echo '<input type="checkbox" id="sqlno'.$numsql.'" class="select input'.$numMatch.'" />'; 
             echo '
                 <span class="slider present">Présent</span>
                 </label>

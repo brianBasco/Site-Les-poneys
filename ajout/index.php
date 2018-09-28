@@ -12,7 +12,7 @@
 
 
 <!-- Bundle Bootstrap --------------------------------- -->
-<script type="text/javascript" src="../../bundle.js"></script>
+<script type="text/javascript" src="../bundle.js"></script>
    
 </body>
 </html>

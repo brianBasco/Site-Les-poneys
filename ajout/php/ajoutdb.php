@@ -1,5 +1,10 @@
 <?php
 
+// A FAIRE !!!!! VERIFIER INPUT VIDES !!!!!!!!! 
+//ATTENTION aux espaces vides
+
+
+header('location:../../index.php');
 extract($_POST);
 
 //ajout du match dans la bdd
@@ -11,8 +16,13 @@ $pdo = new PDO('mysql:host=localhost;dbname=talence_volley', 'root', 'jordan');
 $pdo->query('SET NAMES UTF8');
 
 //insertion du match
-$req = $pdo->prepare("INSERT INTO matchs (nom, adresse, date_match) VALUES (?,?,?)") or exit(print_r($req->ErrorInfo()));
-$req->execute(array($nom, $adresse, $date));
+try {
+    $req = $pdo->prepare("INSERT INTO matchs (nom, adresse, date_match) VALUES (?,?,?)") or exit(print_r($req->ErrorInfo()));
+    $req->execute(array($nom, $adresse, $date));
+}
+catch(PDOException $e) {
+    print_r($e->getMessage());
+}
 
 //Récupération du numéro de match
 $reqNumMatch = $pdo->prepare("SELECT MAX(id) FROM matchs ");

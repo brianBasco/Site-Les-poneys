@@ -15,8 +15,6 @@ body {
 
 .header .menu .boite {
     display: inline-block;
-    width: 150px;
-    height: 50px;    
     background-color: white;
 }
 
@@ -71,25 +69,25 @@ body {
   margin: 30px 0 20px 0;
 }
 
-.match .nom {
-  position: absolute;
-  left: 0;
+.match p, .match textarea {
+  width: 200px;
+  background-color: white;
 }
 
-.match .participants {
-  position: absolute;
-  left: 0;
-  bottom: 0;
+.match p {
+  margin: 0 auto;
+  padding-top: 5px;
 }
 
-.match input, .match button, .match textarea {
+
+.match p, .match button, .match textarea {
   vertical-align: top;
   border: 2px solid black;
   border-radius: 0;
   text-align: center;
 }
 
-.match input, .match button {
+.match p, .match button {
   height: 40px;
 }
 

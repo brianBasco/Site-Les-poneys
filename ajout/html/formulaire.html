@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container formulaire">
 
     <form action="php/ajoutdb.php" method="POST">
 
@@ -7,19 +7,21 @@
             <legend>Nouveau Match</legend>
 
             <div class="container">
-            <input type="text" name="nom" placeholder="nom du match" />
+            <input type="text" name="nom" placeholder="nom du match" required/>
             </div>
 
             <div class="container">
-                <textarea type="text" name="adresse" placeholder="adresse"></textarea>
+                <textarea rows="4" type="text" name="adresse" placeholder="adresse" required></textarea>
             </div>
 
             <div class="container">
-                <input type="date" name="date" />
+                <input type="date" name="date" required/>
             </div>
-
-            <input type="submit" class="btn" value="envoyer" name="envoyer" />
-            <input type="reset" class="btn" value="reset" />
+            
+            <div class="boutons">
+                <input type="submit" class="btn" value="envoyer" name="envoyer" />
+                <input type="reset" class="btn" value="reset" />
+            </div>
         </fieldset>
     
     </form>

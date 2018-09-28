@@ -1,0 +1,36 @@
+body {
+    background-color: rgb(50, 47, 90)
+}
+
+.formulaire {
+    margin-top: 40px;
+}
+
+fieldset {
+    color: white;
+}
+
+form {
+    margin: 0 auto;
+    text-align: center;
+}
+
+input, textarea {
+    width: 80%;    
+    border: 2px solid black;
+    border-radius: none;
+    box-shadow: 2px 2px 3px black;
+}
+
+input {
+   height: 50px;
+}
+
+div {
+    margin-top: 5px; 
+}
+
+.boutons {
+    position: relative;
+    bottom: -20px;
+}

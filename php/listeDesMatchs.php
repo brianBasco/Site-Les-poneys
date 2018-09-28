@@ -1,4 +1,5 @@
 <?php
+    require 'ConnexionDb.php';
     require 'Match.php';
     require 'Joueur.php';
     require 'Presence.php';
@@ -6,8 +7,8 @@
     echo '<div id="listeMatchs" class="container listeMatchs">';
 
     //affichage de chaque match trouvé dans la bdd
-    $pdo = new PDO('mysql:host=localhost;dbname=talence_volley', 'root', 'jordan');
-    $pdo->query('SET NAMES UTF8');
+    $pdo = new PDO(MYSQL, USER, PSWD);
+    $pdo->query("SET NAMES UTF8");
 
     $reqMatch = $pdo->prepare('SELECT * FROM matchs');
     $reqMatch->execute();
@@ -26,7 +27,7 @@
     $reqPresence->execute();
     $presences = array();
     while($row = $reqPresence->fetch()) {
-        $presence = new Presence($row['num_match'], $row['num_joueur'],$row['present']);
+        $presence = new Presence($row['id'], $row['num_match'], $row['num_joueur'],$row['present']);
         array_push($presences, $presence);
     }
 
@@ -37,22 +38,31 @@
 
         //Affichage des joueurs
         echo '<div id="joueurs'.$balise->getId().'" class="container joueurs">';
-        for($i = 0; $i<sizeof($joueurs); $i++) {
+        
+        //Pour chaque élément de presence, si l'élément de num_Match = numMatch
+        foreach($presences as $element) {
+            
+            if($element->getNumMatch() == $balise->getId()) {
+            
+                echo ' joueur present match : '.$element->getNumMatch();
+                echo 'joueur present num: '.$element->getNumJoueur();            
+                echo ' joueur present present : '.$element->getPresent();
+                echo ' balise id : '.$balise->getId();
+                            
+                //Pour chaque joueur du tableau joueurs
+                //si le num de joueur de l'élément correspond à une id de joueur on l'affiche
+                foreach($joueurs as $joueur) {
+                    if($joueur->getId() == $element->getNumJoueur()){
+                        
+                        $joueurPresent = $element->getPresent();
+                        $joueurId = $element->getId();
+                        $numMatch = $element->getNumMatch();
 
-            $joueurPresent = $presences[$i];
-            
-            echo 'joueur present num: '.$joueurPresent->getNumJoueur();
-            echo 'joueur present match : '.$joueurPresent->getNumMatch();
-            echo 'joueur present present : '.$joueurPresent->getPresent();
-            echo 'joueurs[i] id : '.$joueurs[$i]->getId();
-            echo 'balise id : '.$balise->getId();
-            //sécurité de correspondance entre id
-            
-            if($joueurPresent->getNumJoueur() == $joueurs[$i]->getId() &&
-             $joueurPresent->getNumMatch() == $balise->getId()) {
-                $joueurs[$i]->afficherJoueur($joueurPresent->getPresent());
-             }
-             
+                        $joueur->afficherJoueur($joueurPresent,$joueurId,$numMatch);
+                    }
+                        
+                }
+            }
         }
         //fin de la div des joueurs
         echo '</div>';

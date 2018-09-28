@@ -1,30 +1,37 @@
 document.addEventListener("DOMContentLoaded",
   function (event) {
    
-    var nbreMatchs = document.getElementsByClassName("match");
+    document.querySelectorAll(".match").forEach(element => {
+        afficherNbreParticipants(element);
+    });
 
-    for(var i = 0; i<nbreMatchs.length; i++) { 
-        document.querySelector("#moins" + (i+1))
-        .addEventListener("click", function() {
+    document.querySelectorAll(".moins").forEach(element => {
+        element.addEventListener("click", function() {
             //fermer le container;
             fermerJoueurs(this);
+        }) 
+    });
+
+        document.querySelectorAll(".plus").forEach(element => {
+            element.addEventListener("click", function() {
+                //ouvrir le container;
+                ouvrirJoueurs(this);
+        })
+    });
         
-        });
-        document.querySelector("#plus" + (i+1))
-        .addEventListener("click", function() {
-            //ouvrir le container;
-            ouvrirJoueurs(this);
-        });
         
-        afficherNbreParticipants(nbreMatchs[i]);
-    }
     //eventListener sur les input des joueurs    
     document.querySelectorAll(".select").forEach(element => {
         element.addEventListener("click", function() {
-            nbreParticipants(this);            
+            updateParticipants(this);            
         })
     })
     
+    document.querySelectorAll(".suppr").forEach(element => {
+        element.addEventListener("click", function() {
+            demandeDeSuppression(this);
+        })
+    })
     
   });
 
@@ -45,35 +52,33 @@ function ouvrirJoueurs(element) {
     div.style = "max-height: 999px";
 }
 
-function nbreParticipants(element) {
+function updateParticipants(element) {
     
-    //element est l'input qui a été cliquée
-    //ID du Parent de l'élément qui contient l'id
-    var id = element.parentNode.parentNode.parentNode.id;
-    console.log(id);
+    //substring de "sqlno" pour update de la bdd
+    let row = element.id.substring(5);
 
-    //NUMERO DU MATCH, substring de "joueurs..."
-    var numMatch = id.substring(7);
+    let count = 0;
 
-    //NUMERO DE JOUEUR, contenu dans la classe sqlno
-    var numJoueur = element.classList[1].substring(5);
+    let maClasse = element.classList[1];
 
-    //nombre d'inputs checked d'après le container "joueurs"
-    var parent = document.getElementById(id);
-    let count = rechercheDansNoeuds(parent);
+    //substring de "input" pour recalculer le nbre de participants
+    let numMatch = maClasse.substring(5);
+
+    document.querySelectorAll("." + maClasse).forEach(el => {
+        if(el.checked) count ++;
+    })
+
+    let div = document.getElementById("participants" + numMatch);
+
+    if(count > 1) div.innerHTML = count + " joueurs";
+    else div.innerHTML = count + " joueur";
     
-    //insertion dans la balise participants, substring de "joueurs..."
-    var div = document.getElementById("participants" + numMatch);
-
-    if(count > 1) div.value = count + " joueurs";
-    else div.value = count + " joueur";
-
     //insertion dans la bdd de la présence du joueur en requête AJAX
     //Présence du joueur
     let presence;
     element.checked? presence = 1: presence=0;
 
-    let url = "php/updatedb.php?match=" + numMatch +"&joueur=" + numJoueur +"&presence=" + presence;
+    let url = "php/updatedb.php?ligne=" + row + "&presence=" + presence;
     console.log(url);
     
     $ajaxUtils
@@ -84,31 +89,31 @@ function nbreParticipants(element) {
 
 function afficherNbreParticipants(element) {
 
-    //numero du match
+    //
+    //numero du match, substring de "match"
     let numMatch = element.id.substring(5);
+    let div = document.getElementById("participants" + numMatch);
 
-    //Recherche des input dans le conteneur joueurs    
-    let parent = document.getElementById("joueurs" + numMatch);
+    let count = 0;
+    document.querySelectorAll(".input" + numMatch).forEach(el => {
+        if(el.checked) count ++;
+    });
 
-    let count = rechercheDansNoeuds(parent);
-    
-    //insertion dans la balise participants, substring de "joueurs..."
-    var div = document.getElementById("participants" + numMatch);
-
-    if(count > 1) div.value = count + " joueurs";
-    else div.value = count + " joueur";
-
+    if(count > 1) div.innerHTML = count + " joueurs";
+    else div.innerHTML = count + " joueur";
+   
 }
 
-function rechercheDansNoeuds(div) {
-   
-    let noeuds = div.children;
-    let count = 0;
-    for(let i = 0; i<noeuds.length; i++) {        
-        
-        //Itération sur tous les chidlren de "joueurs" qui contiennent une input
-        if(noeuds[i].children[1].children[0].checked) count++;
-    }
+function demandeDeSuppression(element) {
+    if(window.confirm("supprimmer le match ?")) {
 
-    return count;
+        //num de match = id et substring de "suppr"
+        let numMatch = element.id.substring(5);
+        let url = "php/supprMatch.php?match=" + numMatch;
+        $ajaxUtils.sendGetRequest(url, function() {
+
+        });
+
+        location = location;
+    }
 }
