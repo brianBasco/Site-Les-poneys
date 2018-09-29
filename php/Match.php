@@ -32,7 +32,7 @@ class Match {
 
     public function afficherMatch() {
         echo
-            '<div id="match'.$this->getId().'" class="match container">
+            '<div id="match'.$this->getId().'" class="match container" data-match="'.$this->getId().'" >
             <div>
                 <p id="nom'.$this->getId().'" class="nom">'.$this->getNom().'</p>
             </div>
@@ -46,9 +46,9 @@ class Match {
                 <textarea type="text" rows="3" id="adresse'.$this->getId().'">'.$this->getAdresse().'</textarea>
             </div>
             <div>
-                <button class="btn moins" id="moins'.$this->getId().'">-</button>
-                <button class="btn plus" id="plus'.$this->getId().'">+</button>
-                <button class="btn btn-danger suppr" id="suppr'.$this->getId().'" title="supprimmer">X</button>
+                <button class="btn moins" data-match="'.$this->getId().'" >-</button>
+                <button class="btn plus" data-match="'.$this->getId().'" >+</button>
+                <button class="btn btn-danger suppr" data-match="'.$this->getId().'" title="supprimmer">X</button>
             </div>
                 
             </div>';

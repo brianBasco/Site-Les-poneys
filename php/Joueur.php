@@ -23,8 +23,8 @@
                 '<div class="joueur">
                 <label class="nom">'.$this->nom.'</label>
                 <label class="switch">';
-                if($presence == 1) echo '<input type="checkbox" id="sqlno'.$numsql.'" checked="true" class="select input'.$numMatch.'" />';
-                else echo '<input type="checkbox" id="sqlno'.$numsql.'" class="select input'.$numMatch.'" />'; 
+                if($presence == 1) echo '<input type="checkbox" id="sqlno'.$numsql.'" checked="true" class="select input'.$numMatch.'" data-match="'.$numMatch.'" />';
+                else echo '<input type="checkbox" id="sqlno'.$numsql.'" class="select input'.$numMatch.'" data-match="'.$numMatch.'" />'; 
             echo '
                 <span class="slider present">Présent</span>
                 </label>
