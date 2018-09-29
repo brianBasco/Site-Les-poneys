@@ -56,10 +56,12 @@ body {
 
 
 .joueurs {
-  text-align: center; 
-  max-height: 0px; 
+  display: hidden;
+  max-height: 0px;
+  opacity: 0;
+  text-align: center;
   overflow: hidden;
-  transition: all cubic-bezier(.39,.42,0,1.09) 1.2s;
+  transition: max-height cubic-bezier(1,.72,.05,.97) 1s;
 }
 
 .match {

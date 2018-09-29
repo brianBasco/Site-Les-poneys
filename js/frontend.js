@@ -41,7 +41,14 @@ function fermerJoueurs(element) {
     //On récupère le numéro en substring de "moins"
     var num = element.id.substring(5);
     var div = document.getElementById("joueurs" + num);
-    div.style = "max-height: 0px";
+    console.log(num);
+    //    
+   
+    div.style.maxHeight = "0px";
+    setTimeout(function() {
+        div.style.opacity = 0;
+        div.style.display = "hidden";
+    }, 1100);
 }
 
 function ouvrirJoueurs(element) {
@@ -49,7 +56,19 @@ function ouvrirJoueurs(element) {
     //On récupère le numéro en substring de "plus"
     var num = element.id.substring(4);
     var div = document.getElementById("joueurs" + num);
-    div.style = "max-height: 999px";
+    console.log(num);
+    div.style.maxHeight = "initial";
+    div.style.display = "block";    
+    let hauteur = div.offsetHeight;
+    div.style.maxHeight = "0px";
+    setTimeout(function() {
+        div.style.opacity = 1;
+        div.style.maxHeight = hauteur + "px";
+    }, 10);
+    
+    
+    console.log(hauteur);
+    
 }
 
 function updateParticipants(element) {
@@ -111,9 +130,14 @@ function demandeDeSuppression(element) {
         let numMatch = element.id.substring(5);
         let url = "php/supprMatch.php?match=" + numMatch;
         $ajaxUtils.sendGetRequest(url, function() {
+            let noeud = document.getElementById("listeMatchs");
+            let divMatch = document.getElementById("match" + numMatch);
+            let divJoueurs = document.getElementById("joueurs" + numMatch);
 
+            noeud.removeChild(divMatch);
+            noeud.removeChild(divJoueurs);
         });
 
-        location = location;
+        //location = location;
     }
 }

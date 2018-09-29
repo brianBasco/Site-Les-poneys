@@ -28,7 +28,6 @@
             echo '
                 <span class="slider present">Présent</span>
                 </label>
-                <input type="text" placeholder="commentaire" />
                 </div>';
         }
     }

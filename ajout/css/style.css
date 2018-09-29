@@ -34,3 +34,11 @@ div {
     position: relative;
     bottom: -20px;
 }
+
+.btn {
+    height: 50px;
+    width: 80%;    
+    border: 2px solid black;
+    border-radius: none;
+    box-shadow: 2px 2px 3px black;
+}

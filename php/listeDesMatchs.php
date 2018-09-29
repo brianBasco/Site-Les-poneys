@@ -33,7 +33,9 @@
 
     //Création et affichade des matchs
     while($row = $reqMatch->fetch()){
-        $balise = new Match($row['id'], $row['nom'], $row['adresse'], $row['date_match']);
+        $strJour = strtotime($row['date_match']);
+        $jour = date("d-m-Y", $strJour);
+        $balise = new Match($row['id'], $row['nom'], $row['adresse'], $jour);
         $balise->afficherMatch();
 
         //Affichage des joueurs
@@ -44,10 +46,10 @@
             
             if($element->getNumMatch() == $balise->getId()) {
             
-                echo ' joueur present match : '.$element->getNumMatch();
+                /* echo ' joueur present match : '.$element->getNumMatch();
                 echo 'joueur present num: '.$element->getNumJoueur();            
                 echo ' joueur present present : '.$element->getPresent();
-                echo ' balise id : '.$balise->getId();
+                echo ' balise id : '.$balise->getId(); */
                             
                 //Pour chaque joueur du tableau joueurs
                 //si le num de joueur de l'élément correspond à une id de joueur on l'affiche
