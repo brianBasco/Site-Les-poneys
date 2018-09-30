@@ -21,7 +21,7 @@
         public function afficherJoueur($presence, $numsql, $numMatch) {
             echo
                 '<div class="joueur">
-                <label class="nom">'.$this->nom.'</label>
+                <label class="nom" data-match="'.$numMatch.'" data-joueur="'.$numsql.'" >'.$this->nom.'</label>
                 <label class="switch">';
                 if($presence == 1) echo '<input type="checkbox" id="sqlno'.$numsql.'" checked="true" class="select input'.$numMatch.'" data-match="'.$numMatch.'" />';
                 else echo '<input type="checkbox" id="sqlno'.$numsql.'" class="select input'.$numMatch.'" data-match="'.$numMatch.'" />'; 
@@ -30,4 +30,11 @@
                 </label>
                 </div>';
         }
+
+        public function afficherVote() {
+            echo
+                '<input type="text" value="'.$this->getNom().'" />';
+        }
     }
+
+    ?>

@@ -18,6 +18,13 @@ document.addEventListener("DOMContentLoaded",
                 ouvrirJoueurs(this);
         })
     });
+
+    document.querySelectorAll(".nom").forEach(element => {
+        element.addEventListener("click", function() {
+            //ouvrir le container;
+            ouvrirJoueur(this);
+    })
+});
         
         
     //eventListener sur les input des joueurs    
@@ -53,7 +60,7 @@ function ouvrirJoueurs(element) {
     
     let num = element.getAttribute("data-match");
     let div = document.getElementById("joueurs" + num);
-    
+
     div.style.maxHeight = "initial";
     div.style.display = "block";    
     let hauteur = div.offsetHeight;
@@ -102,8 +109,11 @@ function calculerParticipants(numMatch, div){
         if(el.checked) count ++;
     });
 
-    if(count > 1) div.innerHTML = count + " joueurs";
-    else div.innerHTML = count + " joueur";
+    let joueur = " joueur";
+    
+    if(count > 1) joueur+="s";
+
+    div.innerHTML = count + joueur;
 }
 
 function demandeDeSuppression(element) {
@@ -122,4 +132,19 @@ function demandeDeSuppression(element) {
 
         //location = location;
     }
+}
+
+function ouvrirJoueur(element) {
+
+    //nosql
+    console.log("sql : " + element.getAttribute("data-joueur"));
+    //nomjoueur
+    console.log("nom : " + element.innerHTML);
+    let nomjoueur = element.innerHTML;
+    //presence
+    //commentaire
+
+    let divJoueur = document.getElementById("nomJoueur");
+    divJoueur.value = nomjoueur;
+
 }

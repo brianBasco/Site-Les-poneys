@@ -12,6 +12,12 @@
     <?php
       include('php/listeDesMatchs.php');  
     ?>
+
+    <?php
+
+      include('php/view/joueur.php');
+
+    ?>    
     
 
     <?php
