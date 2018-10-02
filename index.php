@@ -13,11 +13,10 @@
       include('php/listeDesMatchs.php');  
     ?>
 
-    <?php
-
-      include('php/view/joueur.php');
-
-    ?>    
+    
+    <?php      
+      include('html/gestionJoueur.html');
+    ?>
     
 
     <?php

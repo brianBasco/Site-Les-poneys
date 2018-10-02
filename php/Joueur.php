@@ -21,13 +21,15 @@
         public function afficherJoueur($presence, $numsql, $numMatch) {
             echo
                 '<div class="joueur">
-                <label class="nom" data-match="'.$numMatch.'" data-joueur="'.$numsql.'" >'.$this->nom.'</label>
-                <label class="switch">';
-                if($presence == 1) echo '<input type="checkbox" id="sqlno'.$numsql.'" checked="true" class="select input'.$numMatch.'" data-match="'.$numMatch.'" />';
-                else echo '<input type="checkbox" id="sqlno'.$numsql.'" class="select input'.$numMatch.'" data-match="'.$numMatch.'" />'; 
+                <label data-match="'.$numMatch.'" data-no="'.$this->getId().'" data-joueur="'.$numsql.'" 
+                class="nom select input'.$numMatch.'" >'.$this->nom.'</label>';
+                if($presence == 0) echo '<input type="text" class="sansVote" value="no vote" />';
+                if($presence == 1) echo '<input type="text" class="present" value="présent" />';
+                if($presence == 2) echo '<input type="text" class="retard" value="à la bourre" />';
+                if($presence == 3) echo '<input type="text" class="absent" value="absent" />';
+                if($presence == 4) echo '<input type="text" class="incertain" value="incertain" />'; 
             echo '
-                <span class="slider present">Présent</span>
-                </label>
+                
                 </div>';
         }
 

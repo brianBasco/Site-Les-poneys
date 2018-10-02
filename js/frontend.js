@@ -25,14 +25,14 @@ document.addEventListener("DOMContentLoaded",
             ouvrirJoueur(this);
     })
 });
-        
-        
-    //eventListener sur les input des joueurs    
-    document.querySelectorAll(".select").forEach(element => {
-        element.addEventListener("click", function() {
-            updateParticipants(this);            
+
+    document.querySelectorAll(".querySelect").forEach(el => {
+        el.addEventListener("click", function() {
+            //Check si les autres balises ne sont pas aussi ouvertes
+            checkBalise(this);
         })
     })
+    
     
     document.querySelectorAll(".suppr").forEach(element => {
         element.addEventListener("click", function() {
@@ -71,29 +71,6 @@ function ouvrirJoueurs(element) {
     }, 10);
 }
 
-function updateParticipants(element) {
-    
-    let numMatch = element.getAttribute("data-match");
-    let div = document.getElementById("participants" + numMatch);
-
-    calculerParticipants(numMatch, div);
-   
-    //insertion dans la bdd de la présence du joueur en requête AJAX
-    //Présence du joueur
-    //substring de "sqlno" pour update de la bdd
-    let row = element.id.substring(5);
-
-    let presence;
-    element.checked? presence = 1: presence=0;
-
-    let url = "php/updatedb.php?ligne=" + row + "&presence=" + presence;
-    console.log(url);
-    
-    $ajaxUtils
-        .sendGetRequest(url, function(request) {
-            //location = url;
-    });
-}
 
 function afficherNbreParticipants(element) {
    
@@ -136,8 +113,15 @@ function demandeDeSuppression(element) {
 
 function ouvrirJoueur(element) {
 
+    
     //nosql
     console.log("sql : " + element.getAttribute("data-joueur"));
+    //noMatch
+    let noMatch = element.getAttribute("data-match");
+    console.log("numMatch : " +noMatch);
+    //noJoueur
+    let noJoueur = element.getAttribute("data-no");
+    console.log("noJoueur : " + noJoueur);
     //nomjoueur
     console.log("nom : " + element.innerHTML);
     let nomjoueur = element.innerHTML;
@@ -147,4 +131,56 @@ function ouvrirJoueur(element) {
     let divJoueur = document.getElementById("nomJoueur");
     divJoueur.value = nomjoueur;
 
+    let url = "index.php?id=" + noJoueur;
+    console.log(url);
+    //location = url;
+    
+
+    construireVotes(noMatch, noJoueur);
+
+}
+
+function construireVotes(numMatch, numJoueur) {
+
+    let div = document.createElement("div");
+    div.setAttribute("id", "listeVotes");
+
+    document.querySelectorAll(".input" + numMatch).forEach(el => {
+        let num = el.getAttribute("data-no");
+        if(numJoueur != num) {
+            //construire input
+            let input = document.createElement("input");
+            input.setAttribute("type", "text");
+            input.setAttribute("value", el.innerHTML);
+
+            div.appendChild(input);
+
+        }
+    });
+
+    let root = document.getElementById("votes");
+    let ancre = document.getElementById("finDesVotes");
+
+    root.insertBefore(div, ancre);
+
+    document.querySelector("#fermerVotes").addEventListener("click",
+        detruireVotes);
+}
+
+function detruireVotes() {
+    
+    let div = document.getElementById("listeVotes");
+    let root = document.getElementById("votes");
+    root.removeChild(div);
+
+    document.querySelector("#fermerVotes").removeEventListener("click",
+        detruireVotes);
+    
+}
+
+function checkBalise(element) {
+    console.log("checked");
+    document.querySelectorAll(".querySelect").forEach(el => {
+        if(el.checked && el.id != element.id) el.checked = false;
+    })
 }

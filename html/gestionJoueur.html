@@ -6,29 +6,29 @@
 
     <div class="container">
         <div class="container">
-            <label class="switch">';
-                <input type="checkbox" class="select input" />;                
+            <label class="switch">
+                <input id="queryPresent" type="checkbox" class="querySelect input" />;                
                 <span class="slider present">Présent</span>
             </label>
         </div>
         
         <div class="container">
-            <label class="switch">';
-                <input type="checkbox" class="select input" />;                
+            <label class="switch">
+                <input id="queryRetard" type="checkbox" class="querySelect input" />;                
                 <span class="slider retard">à la bourre</span>
             </label>
         </div>
 
         <div class="container">
-            <label class="switch">';
-                <input type="checkbox" class="select input" />;                
+            <label class="switch">
+                <input id="queryAbsent" type="checkbox" class="querySelect input" />;                
                 <span class="slider absent">absent</span>
             </label>
         </div>
 
         <div class="container">
-            <label class="switch">';
-                <input type="checkbox" class="select input" />;                
+            <label class="switch">
+                <input id="queryIncertain" type="checkbox" class="querySelect input" />;                
                 <span class="slider incertain">incertain</span>
             </label>
         </div>
@@ -42,5 +42,16 @@
         <button id="enregisJoueur">Enregistrer modifs</button>
     </div>
 </div>
+
+
+<!-- ancre pour insérer les inputs des votes-->
+<div id="votes">
+
+    <div id="finDesVotes"></div>
+
+    <button>Voter</button>
+</div>
+
+<button id="fermerVotes">X</button>
 
        
