@@ -6,12 +6,17 @@ body {
 .header {
     height: 100px;
     background-color: black;
-    color: wheat;
 }
 
 .header .titre {
     font-family: 'Pacifico', cursive;
+    color: #ffc107;
 }
+
+.header .titre bold {
+  color: #d22121;
+}
+
 
 .header .menu .boite {
     display: inline-block;
@@ -65,15 +70,17 @@ body {
 }
 
 .match {
+  background-color: #001e3c;
+  border-radius: 8px;
   text-align: center;
   position: relative;
-  background-color: #7f8aff;
   margin: 30px 0 20px 0;
 }
 
 .match p, .match textarea {
   width: 200px;
-  background-color: white;
+  background-color: transparent;
+  color: white;
 }
 
 .match p {
@@ -84,7 +91,7 @@ body {
 
 .match p, .match button, .match textarea {
   vertical-align: top;
-  border: 2px solid black;
+  border: 2px solid white;
   border-radius: 0;
   text-align: center;
 }
@@ -121,7 +128,8 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #ccc;
+    background: transparent;
+    border: 2px solid white;
     -webkit-transition: .4s;
     transition: .4s;
   }
@@ -169,6 +177,14 @@ body {
   input:focus + .slider.incertain {
     box-shadow: 0 0 1px rgb(132, 41, 182);
   }
+
+  input:checked + .slider.vote{
+    background-color: rgb(34, 245, 7);
+  }
+  
+  input:focus + .slider.vote {
+    box-shadow: 0 0 1px rgb(34, 245, 7);
+  }
   
   
   input:checked + .slider:before {
@@ -185,4 +201,27 @@ body {
   
   .slider.round:before {
     border-radius: 50%;
-  } 
+  }
+  
+  /* ---------------- Formulaire Joueur ------------- */
+  .gestionJoueur {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    padding-top: 80px;
+    display: none;
+    background-color: #001e3c;
+    text-align: center;
+    color: white;
+    width: 100%;
+    
+  }
+
+  .gestionJoueur .fermer {
+    position: absolute;
+    right: 20px;
+    background: transparent;
+    color: white;
+    border: none;
+    font-size: 2rem;
+  }

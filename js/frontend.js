@@ -25,14 +25,6 @@ document.addEventListener("DOMContentLoaded",
             ouvrirJoueur(this);
     })
 });
-
-    document.querySelectorAll(".querySelect").forEach(el => {
-        el.addEventListener("click", function() {
-            //Check si les autres balises ne sont pas aussi ouvertes
-            checkBalise(this);
-        })
-    })
-    
     
     document.querySelectorAll(".suppr").forEach(element => {
         element.addEventListener("click", function() {
@@ -113,7 +105,8 @@ function demandeDeSuppression(element) {
 
 function ouvrirJoueur(element) {
 
-    
+    let div = document.getElementById("gestionJoueur");
+    div.style.display = "block";
     //nosql
     console.log("sql : " + element.getAttribute("data-joueur"));
     //noMatch
@@ -144,16 +137,28 @@ function construireVotes(numMatch, numJoueur) {
 
     let div = document.createElement("div");
     div.setAttribute("id", "listeVotes");
+   
 
     document.querySelectorAll(".input" + numMatch).forEach(el => {
         let num = el.getAttribute("data-no");
         if(numJoueur != num) {
+            //construire label
+            let label = document.createElement("label");
+            label.setAttribute("class", "switch");
             //construire input
             let input = document.createElement("input");
-            input.setAttribute("type", "text");
-            input.setAttribute("value", el.innerHTML);
+            input.setAttribute("type", "checkbox");
+            input.setAttribute("class", "queryVote");
+            input.setAttribute("data-no", num);
+            //construire span
+            let span = document.createElement("span");
+            span.className = "slider vote";
+            span.innerHTML = el.innerHTML;
+                   
+            label.appendChild(input);
+            label.appendChild(span);
 
-            div.appendChild(input);
+            div.appendChild(label);
 
         }
     });
@@ -162,9 +167,24 @@ function construireVotes(numMatch, numJoueur) {
     let ancre = document.getElementById("finDesVotes");
 
     root.insertBefore(div, ancre);
-
-    document.querySelector("#fermerVotes").addEventListener("click",
+    
+    document.querySelector("#fermerGestion").addEventListener("click",
         detruireVotes);
+
+    document.querySelectorAll(".querySelect").forEach(el => {
+        el.addEventListener("click", function() {
+            //Check si les autres balises ne sont pas aussi ouvertes
+           
+            checkClick(this, "querySelect", "data-present");
+        })
+    })
+
+   document.querySelectorAll(".queryVote").forEach(el => {
+        el.addEventListener("click", function() {
+            
+            checkClick(this, "queryVote", "data-no");
+        })
+    });
 }
 
 function detruireVotes() {
@@ -173,14 +193,20 @@ function detruireVotes() {
     let root = document.getElementById("votes");
     root.removeChild(div);
 
-    document.querySelector("#fermerVotes").removeEventListener("click",
+    document.querySelector("#fermerGestion").removeEventListener("click",
         detruireVotes);
     
 }
 
-function checkBalise(element) {
+
+//on passe un attribut qui porte un numero, data-no - date-present
+//Sélection de toutes les inputs avec la classe à vérifier
+function checkClick(element, classe, attribut) {
     console.log("checked");
-    document.querySelectorAll(".querySelect").forEach(el => {
-        if(el.checked && el.id != element.id) el.checked = false;
+    let noElement = element.getAttribute(attribut);
+
+    document.querySelectorAll("." + classe).forEach(el => {
+        let noEl = el.getAttribute(attribut);
+        if(el.checked && noElement != noEl) el.checked = false;
     })
 }

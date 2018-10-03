@@ -1,3 +1,7 @@
+<div id="gestionJoueur" class="gestionJoueur">
+
+    <button id="fermerGestion" class="fermer" >X</button>
+
 <div id="formulaireJoueur" class="container">
 
     <div class="container">
@@ -7,28 +11,28 @@
     <div class="container">
         <div class="container">
             <label class="switch">
-                <input id="queryPresent" type="checkbox" class="querySelect input" />;                
+                <input id="queryPresent" data-present="1" type="checkbox" class="querySelect input" />;                
                 <span class="slider present">Présent</span>
             </label>
         </div>
         
         <div class="container">
             <label class="switch">
-                <input id="queryRetard" type="checkbox" class="querySelect input" />;                
+                <input id="queryRetard" data-present="2" type="checkbox" class="querySelect input" />;                
                 <span class="slider retard">à la bourre</span>
             </label>
         </div>
 
         <div class="container">
             <label class="switch">
-                <input id="queryAbsent" type="checkbox" class="querySelect input" />;                
+                <input id="queryAbsent" data-present="3" type="checkbox" class="querySelect input" />;                
                 <span class="slider absent">absent</span>
             </label>
         </div>
 
         <div class="container">
             <label class="switch">
-                <input id="queryIncertain" type="checkbox" class="querySelect input" />;                
+                <input id="queryIncertain" data-present="4" type="checkbox" class="querySelect input" />;                
                 <span class="slider incertain">incertain</span>
             </label>
         </div>
@@ -52,6 +56,6 @@
     <button>Voter</button>
 </div>
 
-<button id="fermerVotes">X</button>
 
-       
+
+</div>
