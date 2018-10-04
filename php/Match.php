@@ -32,25 +32,23 @@ class Match {
 
     public function afficherMatch() {
         echo
-            '<div id="match'.$this->getId().'" class="match container" data-match="'.$this->getId().'" >
-            <div>
+            '<div id="match'.$this->getId().'" class="match col-4" data-match="'.$this->getId().'" >
+            <div class="info">
                 <p id="nom'.$this->getId().'" class="nom">'.$this->getNom().'</p>
             </div>
-            <div>
+            <div class="info">
                 <p class="participants" id="participants'.$this->getId().'"></p>
             </div>
-            <div>
+            <div class="info">
                 <p>'.$this->getDate().'</p>
             </div>
-            <div>            
+            <div class="info">            
                 <textarea type="text" rows="3" id="adresse'.$this->getId().'">'.$this->getAdresse().'</textarea>
             </div>
-            <div>
-                <button class="btn moins" data-match="'.$this->getId().'" >-</button>
-                <button class="btn plus" data-match="'.$this->getId().'" >+</button>
-                <button class="btn btn-danger suppr" data-match="'.$this->getId().'" title="supprimmer">X</button>
-            </div>
-                
+            <div class="info">
+                <button class="btn btn-match moins" data-match="'.$this->getId().'" >-</button>
+                <button class="btn btn-match plus" data-match="'.$this->getId().'" >+</button>
+                <button class="btn btn-match btn-danger suppr" data-match="'.$this->getId().'" title="supprimmer">X</button>
             </div>';
     }
 }

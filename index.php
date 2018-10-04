@@ -4,8 +4,14 @@
 
   <body>
 
+     
     <?php
       include('html/header.html');
+    ?>
+
+    <?php
+
+      include('html/presentation.html');
     ?>
     
    
@@ -13,11 +19,10 @@
       include('php/listeDesMatchs.php');  
     ?>
 
-    
+
     <?php      
       include('html/gestionJoueur.html');
     ?>
-    
 
     <?php
       include('html/footer.html');

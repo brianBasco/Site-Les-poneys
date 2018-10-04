@@ -4,7 +4,8 @@
     require 'Joueur.php';
     require 'Presence.php';
 
-    echo '<div id="listeMatchs" class="container listeMatchs">';
+    echo '<div id="listeMatchs" class="container listeMatchs">
+            <div class="row">';
 
     //affichage de chaque match trouvé dans la bdd
     $pdo = new PDO(MYSQL, USER, PSWD);
@@ -66,10 +67,14 @@
                 }
             }
         }
+        
         //fin de la div des joueurs
+        echo '</div>';
         echo '</div>';
         
     }
+    
 
-    echo '</div>';
+    echo '      </div>
+            </div>';
 ?>

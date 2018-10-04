@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded",
     document.querySelectorAll(".nom").forEach(element => {
         element.addEventListener("click", function() {
             //ouvrir le container;
-            ouvrirJoueur(this);
+            ouvrirGestionJoueur(this);
     })
 });
     
@@ -103,10 +103,12 @@ function demandeDeSuppression(element) {
     }
 }
 
-function ouvrirJoueur(element) {
+function ouvrirGestionJoueur(element) {
 
     let div = document.getElementById("gestionJoueur");
     div.style.display = "block";
+
+    location = "#gestionJoueur";
     //nosql
     console.log("sql : " + element.getAttribute("data-joueur"));
     //noMatch
@@ -137,11 +139,15 @@ function construireVotes(numMatch, numJoueur) {
 
     let div = document.createElement("div");
     div.setAttribute("id", "listeVotes");
+    div.className = "row";
    
 
     document.querySelectorAll(".input" + numMatch).forEach(el => {
         let num = el.getAttribute("data-no");
         if(numJoueur != num) {
+            //construire la div container
+            let divContainer = document.createElement("div");
+            divContainer.className = "col-4";
             //construire label
             let label = document.createElement("label");
             label.setAttribute("class", "switch");
@@ -158,7 +164,9 @@ function construireVotes(numMatch, numJoueur) {
             label.appendChild(input);
             label.appendChild(span);
 
-            div.appendChild(label);
+            divContainer.appendChild(label);
+
+            div.appendChild(divContainer);
 
         }
     });
@@ -195,6 +203,9 @@ function detruireVotes() {
 
     document.querySelector("#fermerGestion").removeEventListener("click",
         detruireVotes);
+
+    let divGestion = document.getElementById("gestionJoueur");
+    divGestion.style.display = "none";  
     
 }
 
