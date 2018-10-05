@@ -16,8 +16,9 @@ html {
 .header {
   position: relative;
   height: 100px;
+  padding-top: 18px;
   box-shadow: 0px 0px 15px 12px black;
-  background-image: linear-gradient(#009cff, #0600ff);
+  background-image: linear-gradient(#38596e, #0d0c1d);
 }
 
 .header .titre {
@@ -28,6 +29,29 @@ html {
 
 .header .titre bold {
   color: #d22121;
+}
+
+.header .logo {
+  width: 70px;
+  height: 65px;
+  vertical-align: middle;
+}
+
+.header .menu_button:hover {
+  cursor: pointer;
+}
+
+.header .menu_button {
+	fill: #fff;
+	width: 45px;
+	height: 40px;
+	-ms-flex-item-align: center;
+	-ms-grid-row-align: center;
+	align-self: center;
+	margin: 0 auto;
+	-webkit-filter: drop-shadow(0 0 8px rgba(0,15,30,.75));
+	filter: drop-shadow(0 0 8px rgba(0,15,30,.75));
+	transition: fill .1s linear;
 }
 
 
@@ -118,8 +142,8 @@ html {
 
 .match p, .match textarea {
   width: 80%;
-  background-color: transparent;
-  color: white;
+  background-color: #ede200;
+  color: #001e3c;
 }
 
 .match p {
@@ -263,6 +287,10 @@ html {
     color: white;
     border: none;
     font-size: 2rem;
+  }
+
+  .gestionJoueur .fermer:hover {
+    cursor: pointer;
   }
 
   .gestionJoueur input {
