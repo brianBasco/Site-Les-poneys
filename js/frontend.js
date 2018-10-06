@@ -31,6 +31,8 @@ document.addEventListener("DOMContentLoaded",
             demandeDeSuppression(this);
         })
     })
+
+    document.querySelector("#menu_bouton").addEventListener("click", toggleMenu);
     
   });
 
@@ -45,7 +47,7 @@ function fermerJoueurs(element) {
     setTimeout(function() {
         div.style.opacity = 0;
         div.style.display = "hidden";
-    }, 1100);
+    }, 1500);
 }
 
 function ouvrirJoueurs(element) {
@@ -220,4 +222,25 @@ function checkClick(element, classe, attribut) {
         let noEl = el.getAttribute(attribut);
         if(el.checked && noElement != noEl) el.checked = false;
     })
+}
+
+function toggleMenu() {
+
+    let div = document.getElementById("menu_deplie");
+    let classes = div.classList;
+    let ouvert = false;
+    classes.forEach(element => {
+        console.log(element);
+        if(element == "ouvert") ouvert = true;
+    
+    });
+
+    if(!ouvert) {
+        div.style.height = "100px";
+        div.className += " ouvert";
+    }
+    else {
+        div.style.height = "0";
+        div.className = "menu_deplie";
+    }    
 }
