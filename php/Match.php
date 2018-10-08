@@ -32,9 +32,10 @@ class Match {
 
     public function afficherMatch() {
         echo
-            '<div id="match'.$this->getId().'" class="match col-4" data-match="'.$this->getId().'" >
+            '<div class="col-sm-12 col-md-6 col-lg-4">
+            <div id="match'.$this->getId().'" class="match  data-match="'.$this->getId().'" >
             <div class="info">
-                <p id="nom'.$this->getId().'" class="nom">'.$this->getNom().'</p>
+                <p id="nom'.$this->getId().'" >'.$this->getNom().'</p>
             </div>
             <div class="info">
                 <p class="participants" id="participants'.$this->getId().'"></p>
@@ -43,12 +44,13 @@ class Match {
                 <p>'.$this->getDate().'</p>
             </div>
             <div class="info">            
-                <textarea type="text" rows="3" id="adresse'.$this->getId().'">'.$this->getAdresse().'</textarea>
+                <textarea type="text" readonly rows="3" id="adresse'.$this->getId().'">'.$this->getAdresse().'</textarea>
             </div>
-            <div class="info">
+            <div class="info boutons">
                 <button class="btn btn-match moins" data-match="'.$this->getId().'" >-</button>
                 <button class="btn btn-match plus" data-match="'.$this->getId().'" >+</button>
                 <button class="btn btn-match btn-danger suppr" data-match="'.$this->getId().'" title="supprimmer">X</button>
-            </div>';
+            </div>';            
+            //La fin de la div col etc est dans le fichier listeDesMatchs
     }
 }

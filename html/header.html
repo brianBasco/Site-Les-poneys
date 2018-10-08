@@ -2,38 +2,44 @@
 
     <div class="container">
 
-        <div class="row">
-
-            <div>
-                <img class="logo" src="css/images/logo.png" />
+        
+        <div class="wrapper-logo">
+            <div class="logo">
+                <img src="css/images/logo.png" />
             </div>
 
-            <div class="titre col">
-                <h1>Les pone<bold>y</bold>s</h1>
+            <div class="titre">
+                <h1>Les pone<b>y</b>s</h1>
             </div>
-
-            <div class="menu col">
-
-                <div id="menu_bouton" class="menu_button">                
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                        <path fill="none" d="M24 0v24H0V0" data-name="Bounding area"></path>
-                        <rect x="4" y="11.25" width="16" height="1.5" rx=".5" ry=".5"></rect>
-                        <rect x="4" y="6" width="16" height="1.5" rx=".5" ry=".5"></rect>
-                        <rect x="4" y="16.5" width="16" height="1.5" rx=".5" ry=".5"></rect>
-                    </svg>
-                </div>
-            </div>
-
-            <div>
-                <button class="btn btn-success btn-ajouter" title="ajouter match">+</button>
-            </div>
-
-            
         </div>
 
+        <div class="menu">
+            <div id="menu_bouton" class="menu_button">                
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path fill="none" d="M24 0v24H0V0" data-name="Bounding area"></path>
+                    <rect x="4" y="11.25" width="16" height="1.5" rx=".5" ry=".5"></rect>
+                    <rect x="4" y="6" width="16" height="1.5" rx=".5" ry=".5"></rect>
+                    <rect x="4" y="16.5" width="16" height="1.5" rx=".5" ry=".5"></rect>
+                </svg>
+            </div>
+        </div>
+    
+       
+
+        <!-- Menu caché -->
         <div id="menu_deplie" class="menu_deplie">
-            <div class="boite"><a href="pages/score.html">Score</a></div>
-            <div class="boite"><a href="pages/placements.html">Placement</a></div>
+            <div class="menu-item">                
+                <button id="ajouterMatch" class="btn btn-primary">ajouter Match</button>               
+            </div>
+            <div class="menu-item">
+                <button id="gestionEquipe" class="btn btn-primary">Gestion Equipe</button>
+            </div>
+            <div class="menu-item">
+                <button class="btn btn-primary">Appli score</button>
+            </div>
+            <div class="menu-item">
+                <button class="btn btn-primary">Appli placement</button>
+            </div>
         </div>
 
     </div>

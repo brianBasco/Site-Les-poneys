@@ -33,6 +33,10 @@ document.addEventListener("DOMContentLoaded",
     })
 
     document.querySelector("#menu_bouton").addEventListener("click", toggleMenu);
+
+    //click du menu
+    document.querySelector("#ajouterMatch").addEventListener("click", ouvrirAjoutMatch);
+    document.querySelector("#gestionEquipe").addEventListener("click", ouvrirGestionEquipe);
     
   });
 
@@ -43,9 +47,10 @@ function fermerJoueurs(element) {
     let div = document.getElementById("joueurs" + num);
     //console.log(num);
     
+    div.style.paddingBottom = "0";
     div.style.maxHeight = "0px";
     setTimeout(function() {
-        div.style.opacity = 0;
+        div.style.opacity = 0;        
         div.style.display = "hidden";
     }, 1500);
 }
@@ -56,11 +61,12 @@ function ouvrirJoueurs(element) {
     let div = document.getElementById("joueurs" + num);
 
     div.style.maxHeight = "initial";
-    div.style.display = "block";    
+    div.style.display = "block"; 
+    div.style.paddingBottom = "10px";   
     let hauteur = div.offsetHeight;
     div.style.maxHeight = "0px";
     setTimeout(function() {
-        div.style.opacity = 1;
+        div.style.opacity = 1;       
         div.style.maxHeight = hauteur + "px";
     }, 10);
 }
@@ -84,7 +90,7 @@ function calculerParticipants(numMatch, div){
     
     if(count > 1) joueur+="s";
 
-    div.innerHTML = count + joueur;
+    //div.innerHTML = count + joueur;
 }
 
 function demandeDeSuppression(element) {
@@ -149,7 +155,7 @@ function construireVotes(numMatch, numJoueur) {
         if(numJoueur != num) {
             //construire la div container
             let divContainer = document.createElement("div");
-            divContainer.className = "col-4";
+            divContainer.className = "col-sm-12 col-md-6 col-lg-4";
             //construire label
             let label = document.createElement("label");
             label.setAttribute("class", "switch");
@@ -235,12 +241,20 @@ function toggleMenu() {
     
     });
 
-    if(!ouvert) {
-        div.style.height = "100px";
+    if(!ouvert) {        
+        div.style.maxHeight = "400px";
+        div.style.paddingTop = "30px";
+        div.style.paddingBottom = "30px";
         div.className += " ouvert";
     }
     else {
-        div.style.height = "0";
+        div.style.paddingBottom = "0";
+        div.style.paddingTop = "0";        
+        div.style.maxHeight = "0";                
         div.className = "menu_deplie";
     }    
+}
+
+function ouvrirAjoutMatch() {
+    location = "ajout/index.php";
 }

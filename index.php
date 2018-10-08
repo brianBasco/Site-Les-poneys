@@ -12,7 +12,7 @@
     
     <?php
 
-      include('html/presentation.html');
+      include('html/infos.html');
     ?>
     
    

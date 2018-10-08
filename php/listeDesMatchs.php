@@ -70,11 +70,15 @@
         
         //fin de la div des joueurs
         echo '</div>';
+        //fin du container match
+        echo '</div>';
+        //fin de la div col etc.. 
         echo '</div>';
         
     }
-    
-
-    echo '      </div>
-            </div>';
+            
+        //fin de row
+        //fin de listeDesMatchs
+    echo '</div>    
+        </div>';
 ?>

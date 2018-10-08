@@ -1,13 +1,11 @@
 body {
-    background-color: rgb(50, 47, 90)
+    background-color: #001e3c;
+    font-family: 'Roboto Condensed', sans-serif;
+    color: white;
 }
 
 .formulaire {
     margin-top: 40px;
-}
-
-fieldset {
-    color: white;
 }
 
 form {
@@ -15,11 +13,14 @@ form {
     text-align: center;
 }
 
-input, textarea {
-    width: 80%;    
-    border: 2px solid black;
-    border-radius: none;
-    box-shadow: 2px 2px 3px black;
+.form-group {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.form-control:focus {
+    border-color: #00ff27;
+    box-shadow: none;
 }
 
 input {
@@ -30,15 +31,8 @@ div {
     margin-top: 5px; 
 }
 
-.boutons {
-    position: relative;
-    bottom: -20px;
-}
 
 .btn {
     height: 50px;
-    width: 80%;    
-    border: 2px solid black;
-    border-radius: none;
-    box-shadow: 2px 2px 3px black;
+    width: 80%;
 }
