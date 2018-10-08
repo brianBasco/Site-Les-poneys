@@ -1,0 +1,352 @@
+
+/* CSS App scores */
+
+.body-scores .row {
+  margin: 0;
+  padding-top: 6px;
+}
+
+.body-scores {
+  background-color: rgb(77, 77, 226);
+  /*
+  background-color: #312c2c;
+  background-color: #272020; */
+  color: white; }
+
+.body-scores .header {
+  padding: 10px 0;
+  background-color: white;
+  box-shadow: 1px 3px 1px black;
+  text-align: center;
+}
+
+.header button{
+  background-color: rgb(77, 77, 226);;
+  color: white;
+  font-weight: bold;
+  border: 2px solid rgb(77, 77, 226);
+  box-shadow: 0px 1px blue;
+}
+
+.header .btn-recap{
+  font-style: oblique;
+}
+
+.body-scores h1 {
+  font-size: 2rem;
+}
+
+.round{
+text-align: center;
+text-transform: uppercase;
+background-color: rgba(0,0,0,0.5);
+font-size: 20px;
+font-style: oblique;
+font-weight: bold;
+color: #ffba13;
+}
+
+.numeroRound {
+  color: #f80000;
+  font-size: 30px;
+}
+
+section.scores{
+  padding-top: 10px;
+}
+
+.scores-panneau {
+  border: 1px solid white; }
+
+.scores-panneau .container {
+  margin-bottom: 15px; }
+
+.equipe input {
+  text-align: center;
+  width: 99%;
+  height: 50px;
+  border-radius: 20px;
+  border: 2px solid black;
+}
+
+
+.temps-mort button {
+  opacity: 0;
+  padding: 0;
+  height: 60px;
+  width: 50%;
+  font-size: 12px;
+  border: 1px solid black;
+  border-radius: 0;
+  box-shadow: 1px 3px 1px black;
+}
+
+#serviceGauche, #serviceDroite {
+  width: 100%;
+  background-color: rgba(0,0,0,0.4);
+  border-radius: 0;
+  border: 1px solid black;
+  color: grey;
+}
+
+#serviceGauche.hasService, #serviceDroite.hasService {
+  background-color: black;
+  color: white;
+  border-color: #ffba13;
+}
+
+.equipe-gauche, .equipe-droite {
+  position: absolute;
+  width: 50%;
+  left: 0;
+}
+
+.score {
+  height: 50px;
+}
+
+.btn-score{
+  position: absolute;
+  font-size: 25px;
+  width: 49%;
+  height: 50px;
+  left: 0;
+  border-radius: 25px;
+  border: 2px solid #030200;
+  color: #030200;
+  background-color: transparent;
+  background-image: none;
+}
+
+#scoreGauche, #scoreDroite {
+  font-family: 'Teko', sans-serif;
+  text-shadow: 3px 3px 3px rgb(140, 151, 160);
+  margin: 0 auto;
+  width: 98%;
+  height: 200px;
+  font-size: 150px;
+  color: rgb(0, 0, 0);
+  background-color: white;
+  border: 2px solid black;
+}
+
+
+.droite{
+  left: 50%;
+}
+
+.anime {
+  transition: all 1s cubic-bezier(.64,.2,.3,.94);
+}
+
+.nomEquipe {
+  padding: 5px;
+  border: 1px solid white;
+}
+
+
+.set button {
+  color: white;
+  width: 100%;
+  border-radius: 0;
+  background-color: rgb(0, 0, 0);
+  border: 1px solid rgb(255, 255, 255);
+}
+
+.set .col-6{
+  padding: 0;
+}
+
+/* CSS des affichages entre 2 sets */
+
+.askUser{
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 1000px;
+  background-color: rgba(0,0,0,0.9);
+}
+
+.askUser h1{
+  padding: 20px;
+}
+
+.askUser .col-6{
+  text-align: center;
+}
+
+.askUser button {
+  width: 100%;
+  height: 100px;
+  color: wheat;
+  background-color: black;
+  border: 1px solid wheat;
+  border-radius: 0;
+}
+
+.askUser .btn-ask-score{
+  height: 100px;
+  font-size: 40px;
+  background-color: white;
+  color: black;
+  box-shadow: 2px 2px 2px black;
+}
+
+/* CSS du recap */
+
+.recap {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 0;
+  background-color: #000000;
+  z-index: 2;
+  display: none;
+  opacity: 0;
+  transition : all linear 0.1s;
+}
+
+.recap .container{
+  margin: 0 auto;
+  width: 70%;
+  text-align: center;
+}
+
+.recap table{
+  margin: 0 auto;
+}
+
+.recap tr, th {
+  padding: 5px;
+  text-align: center;
+  border-bottom: 1px solid wheat;
+}
+
+.recap td {
+  padding: 5px;
+  font-size: 1.4rem;
+}
+
+
+.recap h2{
+  padding-top: 20px;
+  font-size: initial;
+}
+
+.recap button {
+  width: 60px;
+  background-color: wheat;
+  box-shadow: 2px 2px 2px black;
+}
+
+/* CSS du temps Mort technique */
+.accepterTpsMort {
+  display: none;
+  text-align: center;
+}
+
+.accepterTpsMort .btn {
+  height: 100px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.tempsMortTechnique {
+  display: none;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 1000px;
+  padding: 20px;
+  text-align: center;
+  color: white;
+  background-color: rgba(0,0,0,0.9);
+  transition: all linear 0.3s;
+}
+
+
+.tempsMortTechnique .info{
+  width: 100%;
+  font-size: 20px;
+  text-align: center;
+  margin-bottom: 5px;
+}
+
+.tempsMortTechnique img{
+  width: 80%;
+  margin-top: 40px;
+}
+
+.tempsMortTechnique .btn-tpsMort {
+  width: 100%;
+  height: 120px;
+  font-size: 40px;
+  background-color: white;
+  color: black;
+}
+
+.tempsMortTechnique .btn-tpsMort.btn-passer {
+  font-size: 25px;
+}
+
+.tempsMortTechnique .btn-tpsMort.chrono {
+  font-size: 60px;
+  background-color:black;
+  color: rgb(231, 114, 36);
+  border: 2px solid white;
+}
+
+/* CSS de la fin du match */
+
+.finMatch {
+  display: none;
+}
+
+.finMatch .row {
+  padding: 15px;
+}
+
+.finMatch h1 {
+  text-align: center;
+}
+
+/* CSS de confMatch*/
+
+.confMatch  {
+  display: none;
+}
+
+.confMatch h1 {
+  text-align: center;
+  margin: 3px 0;
+}
+
+/* CSS du changement de position */
+.chgtPosition {
+  display: none;
+}
+
+.chgtPosition h1 {
+  text-align: center;
+  margin: 3px 0;
+}
+
+
+/* CSS alternatif */
+.body-scores.alt {
+  background-color: rgb(42, 34, 34);
+}
+
+.score .alt {
+  color: #00bcdb;
+  border-color: #00bcdb;
+}
+
+.equipe.alt input {
+  color: #00bcdb;
+  border-radius: 0;
+  border: 1px solid #00bcdb;
+  box-shadow: none;
+  background-color: transparent;
+}

@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+		<title>US TALENCE</title>
+
+        <!-- CSS -->
+
+    <link rel="stylesheet"  href="style/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet"  href="style/style.css"  /> <!-- css de la landing-page -->
+    <link rel="stylesheet"  href="style/media.css"  /> <!-- css suivant la taille du device -->
+
+    <!-- FOnts -->
+    <link href="https://fonts.googleapis.com/css?family=Teko" rel="stylesheet"> 
+
+	</head>
+
+	<body class="body-scores">
+
+
+
+		<header class="header">
+            <button class="btn" onclick="ouvrirDiv('confMatch')">Nouveau Match</button>
+            <button class="btn btn-recap" onclick="recap()">Recap</button>
+            <button id="nveauSet" class="btn" onclick="nouveauSet()" disabled>Nouveau set</button>
+		</header>
+
+
+
+            <!-- Sections du main-container -->
+    <section id="round" class="round">
+
+        <span>SET N° </span>
+        <span id="numeroRound" class="numeroRound"></span>
+
+    </section>
+
+
+	<section class="scores container-fluid row">
+
+            <!-- Score gauche -->
+            <div class="equipe-gauche anime">
+
+                <div class="equipe">
+                     <input id="nomGauche" type="text" placeholder="equipe" onblur="scoreGauche.attribuerNom()">
+                </div>
+
+                <div>
+
+                    <div class="row">
+                        <div class="score">
+                            <button id="annulerGauche" class="btn-score btn" onclick="clickScore(scoreGauche.moins())">-</button>
+                            <button class="btn-score btn  droite" onclick="clickScore(scoreGauche.plus())">+</button>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <button id="scoreGauche" class="btn"></button>
+                    </div>
+
+
+                </div>
+
+
+
+                <div class="temps-mort row">
+
+                        <button id="tps1" class="btn btn-warning" onclick="enlever(1)">tps-mort</button>
+                        <button id="tps2"class="btn btn-warning" onclick="enlever(2)">tps-mort</button>
+
+                </div>
+
+                <div class="service row">
+                    <button id="serviceGauche" class="btn">Service</button>
+                </div>
+                        <!-- on-click: changer la couleur -->
+
+                <div class="set row">
+                    <div class="col-6">
+                        <button class="btn">Set</button>
+                    </div>
+                    <div class="col-6">
+                        <button id="setGauche" class="btn" ></button>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <!-- Score droite -->
+            <div class="equipe-droite anime droite">
+
+                <div class="equipe">
+                     <input id="nomDroite" type="text" placeholder="equipe" onblur="scoreDroite.attribuerNom()">
+                </div>
+
+                <div>
+
+                    <div class="row">
+                        <div class="score">
+                            <button id="annulerDroite" class="btn-score btn" onclick="clickScore(scoreDroite.moins())">-</button>
+                            <button class="btn-score btn droite" onclick="clickScore(scoreDroite.plus())">+</button>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <button id="scoreDroite" class="btn"></button>
+                    </div>
+
+
+                </div>
+
+
+
+                <div class="temps-mort row">
+
+                        <button id="tps3" class="btn btn-warning" onclick="enlever(3)">tps-mort</button>
+                        <button id="tps4"class="btn btn-warning" onclick="enlever(4)">tps-mort</button>
+
+                </div>
+
+                <div class="service row">
+                    <button id="serviceDroite" class="btn">Service</button>
+                </div>
+                        <!-- on-click: changer la couleur -->
+
+                <div class="set row">
+                    <div class="col-6">
+                        <button class="btn">Set</button>
+                    </div>
+                    <div class="col-6">
+                        <button id="setDroite" class="btn" ></button>
+                    </div>
+                </div>
+
+            </div>
+
+    </section>
+
+
+<!-- //////////////////// TEMPS MORT technique ////////////  -->
+
+    <section id="accepterTpsMort" class="accepterTpsMort askUser">
+
+        <button class="btn" onclick="fermerDiv('accepterTpsMort')">Passer</button>
+        <button class="btn" onclick="afficherTempsMort('technique')">Prendre le Temps Mort Technique</button>
+    </section>
+
+
+    <div id="tempsMortTechnique" class="tempsMortTechnique">
+
+        <div class="row">
+            <div class="col-6 equipeGauche">
+                    <p class="nomEquipe"></p>
+                    <button class="btn btn-tpsMort"></button>
+            </div>
+
+            <div class="col-6 equipeDroite">
+                    <p class="nomEquipe"></p>
+                    <button class="btn btn-tpsMort"></button>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-6">
+                <button class="btn btn-tpsMort btn-passer" onclick="passerTempsMortTechnique()">passer</button>
+            </div>
+            <div class="col-6">
+                    <button id="chrono" class="btn btn-tpsMort chrono"></button>
+            </div>
+        </div>
+
+        <img  id="image" />
+
+    </div>
+
+
+
+<!-- //////////////////// fin de match ///////////////////// -->
+
+<section id="finMatch" class="finMatch askUser">
+    <h1>End of Game</h1>
+    
+    <div class="row">
+        <div class="col-6 equipeGauche">
+            <p class="nomEquipe"></p>
+            <button class="btn btn-ask-score"></button>
+        </div>
+    
+        <div class="col-6 equipeDroite">
+            <p class="nomEquipe"></p>
+            <button class="btn btn-ask-score"></button>
+        </div>
+    </div>
+    
+    <div class="row">
+        <button class="btn" onclick="recap()">Recap</button>
+        <button class="btn" onclick="nouveauMatch()">Nouveau Match</button>    
+    </div>
+</section>
+
+
+<!-- ///////////////////////// Fin de Set ///////////////////// -->
+<section id="confMatch" class="confMatch askUser">
+
+    <div class="container">
+        <h1>Vous Confirmez ?</h1>
+    </div>
+
+    <div class="container">
+        <button class="btn" onclick="fermerDiv('confMatch')">NON</button>
+        <button class="btn" onclick="nouveauMatch()">OUI</button>
+    </div>
+
+
+</section>
+
+<!-- //////////////////// Set5 changement de position ///////////////////// -->
+
+<section id="chgtPosition" class="chgtPosition askUser">
+
+    <h1>Changer la position des équipes ?</h1>
+
+        <button class="btn" onclick="fermerDiv('chgtPosition')">NON</button>
+        <button class="btn" onclick="inverserPositionSet5()">OUI</button>
+
+</section>
+
+<!-- //////////////// RECAP ///////////// -->
+<section class="recap">
+
+        <button class="btn" onclick="close_recap()">X</button>
+
+    <div class="container">
+        <h1>Scores</h1>
+
+        <table>
+            <tr>
+                <th id="nom_score_gauche">Equipe 1</th>
+                <th></th>
+                <th id="nom_score_droite">Equipe 2</th>
+            </tr>
+
+            <tr>
+                <td id="set1_score_gauche"></td>
+                <td>set 1</td>
+                <td id="set1_score_droite"></td>
+            </tr>
+
+            <tr>
+                <td id="set2_score_gauche"></td>
+                <td>set 2</td>
+                <td id="set2_score_droite"></td>
+            </tr>
+
+            <tr>
+                <td id="set3_score_gauche"></td>
+                <td>set 3</td>
+                <td id="set3_score_droite"></td>
+            </tr>
+
+            <tr>
+                <td id="set4_score_gauche"></td>
+                <td>set 4</td>
+                <td id="set4_score_droite"></td>
+            </tr>
+
+            <tr>
+                <td id="set5_score_gauche"></td>
+                <td>set 5</td>
+                <td id="set5_score_droite"></td>
+            </tr>
+
+            <tr>
+                <td id="total_score_gauche"></td>
+                <td>TOTAL</td>
+                <td id="total_score_droite"></td>
+            </tr>
+
+        </table>
+
+    </div>
+
+    <div class="container">
+        <h2 id="total"></h2>
+    </div>
+
+</section>
+
+
+
+
+        <script src="style/jquery/jquery.js"></script>
+        <script src="style/popper.js/dist/umd/popper.js"></script>
+        <script src="style/bootstrap/dist/js/bootstrap.js"></script>
+
+        <!-- scripts de l'application -->
+        <script src="js/Scores.js"></script>
+        <script src="js/app.js"></script>
+        <script src="js/init.js"></script>
+        <script src="js/recap.js"></script>
+
+    </body>
+</html>

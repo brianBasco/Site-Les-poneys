@@ -1,0 +1,35 @@
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) { }
+
+@media (max-width: 576px) { 
+    /* .temps-mort button {
+        height: 40px;
+        width: 40px;
+        border-radius: 20px;
+        font-size: 8px;
+    }
+
+    .temps-mort li {
+        margin: 0 5px;
+    } */
+ }
+
+/* Medium devices (tablets, 768px and up) */
+@media (max-width: 768px) {
+ }
+
+ @media (min-width: 768px) { 
+    
+ }
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) { 
+    
+ }
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) { 
+    .temps-mort .nav {
+        width: 50%;
+    }
+ }

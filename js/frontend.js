@@ -37,6 +37,8 @@ document.addEventListener("DOMContentLoaded",
     //click du menu
     document.querySelector("#ajouterMatch").addEventListener("click", ouvrirAjoutMatch);
     document.querySelector("#gestionEquipe").addEventListener("click", ouvrirGestionEquipe);
+    document.querySelector("#appliScores").addEventListener("click", ouvrirAppliScores);
+    document.querySelector("#appliPlacements").addEventListener("click", ouvrirAppliPlacements);
     
   });
 
@@ -257,4 +259,16 @@ function toggleMenu() {
 
 function ouvrirAjoutMatch() {
     location = "ajout/index.php";
+}
+
+function ouvrirAppliScores() {
+    location = "applis/scores/index.html";
+}
+
+function ouvrirAppliPlacements() {
+    location = "applis/placements/index.html";
+}
+
+function ouvrirGestionEquipe() {
+    
 }
