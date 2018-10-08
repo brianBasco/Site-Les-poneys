@@ -193,6 +193,17 @@ html {
   padding-bottom: 8px;
 }
 
+.match .btn-mail {
+  background-image: url("images/mail.png");
+  height: 40px; /* You must set a specified height */
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: cover; /* Resize the background image to cover the entire container */
+  width: 60px;
+  border-radius: 0;
+  border: none;
+}
+
 
 
 /* -------------- CSS du slider ------------- */

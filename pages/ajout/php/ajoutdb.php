@@ -4,7 +4,7 @@
 //ATTENTION aux espaces vides
 
 
-header('location:../../index.php');
+header('location:../../../index.php');
 extract($_POST);
 
 //ajout du match dans la bdd
@@ -12,8 +12,9 @@ extract($_POST);
 //ajout de la présence des joueurs à 0 dans la bdd
 // 0 = absent, 1 = présent
 
-$pdo = new PDO('mysql:host=localhost;dbname=talence_volley', 'root', 'jordan');
-$pdo->query('SET NAMES UTF8');
+require '../../../php/ConnexionDb.php';
+$pdo = new PDO(MYSQL, USER, PSWD);
+$pdo->query("SET NAMES UTF8");
 
 //insertion du match
 try {

@@ -32,6 +32,13 @@ document.addEventListener("DOMContentLoaded",
         })
     })
 
+    document.querySelectorAll(".btn-mail").forEach(element => {
+        element.addEventListener("click", function() {
+            ouvrirGestionMails(this);
+        })
+    })
+
+    //Bouton du header
     document.querySelector("#menu_bouton").addEventListener("click", toggleMenu);
 
     //click du menu
@@ -258,7 +265,7 @@ function toggleMenu() {
 }
 
 function ouvrirAjoutMatch() {
-    location = "ajout/index.php";
+    location = "pages/ajout/index.php";
 }
 
 function ouvrirAppliScores() {
@@ -270,5 +277,11 @@ function ouvrirAppliPlacements() {
 }
 
 function ouvrirGestionEquipe() {
-    
+    location = "pages/gestionEquipe/index.php";
+}
+
+function ouvrirGestionMails (element) {
+    let numMatch = element.getAttribute("data-match");
+    let url = "pages/mails/index.php?match=" + numMatch;    
+    location = url; 
 }

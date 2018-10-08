@@ -7,6 +7,8 @@ USE talence_volley;
 CREATE TABLE joueurs (
 id int(11) NOT NULL AUTO_INCREMENT,
 nom VARCHAR(255) NOT NULL,
+mail VARCHAR(255),
+photo VARCHAR(255),
 PRIMARY KEY(id)
 )
 
@@ -32,7 +34,18 @@ PRIMARY KEY(id)
 
 ENGINE = INNODB;
 
-INSERT INTO joueurs VALUES (default, "ju"),(default, "seb"),(default, "marie"),(default, "stef"),
-(default, "eric"),(default, "pierrot"),(default, "sego"),(default, "terence"),(default, "jeremy"),
-(default, "benbob"),(default, "sylvain");
+INSERT INTO joueurs (id,nom,mail,photo) VALUES 
+(default, "ju", "julien.dablemont@elitt-sas.fr", "default"),
+(default, "seb", "bast620@gmail.com", "default"),
+(default, "marie", "baget.marie@gmail.com", "default"),
+(default, "stef","stephane.meynard@nouvelle-aquitaine.fr", "default"),
+(default, "eric","ericveber@hotmail.com", "default"),
+(default, "pierrot","pierrepers2@gmail.com", "default"),
+(default, "sego","sego_debay@yahoo.fr", "default"),
+(default, "terence", "rien", "default"),
+(default, "jeremy","rien", "default"),
+(default, "benbob","coyoben45@aol.com", "default"),
+(default, "sylvain", "sylvod@hotmail.com", "default");
+
+
 
