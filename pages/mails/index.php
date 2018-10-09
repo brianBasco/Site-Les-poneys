@@ -19,6 +19,10 @@
         include('php/vue/joueurs.php');
     ?>
 
+    <?php
+        include('php/vue/mail.php');
+    ?>
+
 
 <!-- Bundle Bootstrap --------------------------------- -->
 <script type="text/javascript" src="../../bundle.js"></script>

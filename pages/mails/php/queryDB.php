@@ -17,4 +17,10 @@
         array_push($joueurs, $row);
     }
 
+
+    $reqMatch = $pdo->prepare('SELECT nom FROM matchs WHERE id = (?)');
+    $reqMatch->execute(array($match));
+    while($row = $reqMatch->fetch()) {
+        $nomMatch = $row['nom'];
+    }
 ?>
