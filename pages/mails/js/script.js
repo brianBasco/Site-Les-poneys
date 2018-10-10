@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded",
 
       document.querySelector("#tous").addEventListener("click", selectTous);
       document.querySelector("#presents").addEventListener("click", selectPresents);
+      document.querySelector("#envoyerMail").addEventListener("click", envoyerMail);
   }
 );
 
@@ -21,12 +22,32 @@ function selectTous () {
 }
 
 function recupAdressesMail() {
-    let mails = [];
+    let adresses = [];
     document.querySelectorAll(".querySelect").forEach(el => {
-        if(!el.checked) {
-            let mail = el.value;
-            mails.push(mail);
+        if(el.checked) {
+            let adresse = el.value;
+            adresses.push(adresse);
         }
     })
-    return mails;
+    return adresses;
+}
+
+function recupMail() {
+    return document.getElementById("email").value;
+}
+
+function recupEntete() {
+    return document.getElementById("entete").value;
+}
+
+function envoyerMail() {
+    let adresses = recupAdressesMail();
+    let entete = recupEntete();
+    let mail = recupMail();
+    let destinataires = "";
+
+    url = "php/envoiMail.php?destinataires=" + adresses +"&entete=" + entete +"&mail=" + mail;
+    console.log(url);
+
+    location = url;
 }

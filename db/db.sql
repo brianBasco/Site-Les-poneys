@@ -35,17 +35,17 @@ PRIMARY KEY(id)
 ENGINE = INNODB;
 
 INSERT INTO joueurs (id,nom,mail,photo) VALUES 
-(default, "ju", "julien.dablemont@elitt-sas.fr", "default"),
-(default, "seb", "bast620@gmail.com", "default"),
-(default, "marie", "baget.marie@gmail.com", "default"),
-(default, "stef","stephane.meynard@nouvelle-aquitaine.fr", "default"),
-(default, "eric","ericveber@hotmail.com", "default"),
-(default, "pierrot","pierrepers2@gmail.com", "default"),
-(default, "sego","sego_debay@yahoo.fr", "default"),
-(default, "terence", "rien", "default"),
-(default, "jeremy","rien", "default"),
-(default, "benbob","coyoben45@aol.com", "default"),
-(default, "sylvain", "sylvod@hotmail.com", "default");
+(default, "ju", "julien.dablemont@elitt-sas.fr", "ju.png"),
+(default, "seb", "bast620@gmail.com", "default.svg"),
+(default, "marie", "baget.marie@gmail.com", "default.svg"),
+(default, "stef","stephane.meynard@nouvelle-aquitaine.fr", "default.svg"),
+(default, "eric","ericveber@hotmail.com", "default.svg"),
+(default, "pierrot","pierrepers2@gmail.com", "default.svg"),
+(default, "sego","sego_debay@yahoo.fr", "sego.png"),
+(default, "terence", "rien", "default.svg"),
+(default, "jeremy","rien", "jeremy.png"),
+(default, "benbob","coyoben45@aol.com", "default.svg"),
+(default, "sylvain", "sylvod@hotmail.com", "default.svg");
 
 
 
