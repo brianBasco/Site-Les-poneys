@@ -34,6 +34,16 @@ PRIMARY KEY(id)
 
 ENGINE = INNODB;
 
+CREATE TABLE commentaires (
+id int(11) NOT NULL AUTO_INCREMENT,
+num_match int(11) NOT NULL,
+nom_joueur VARCHAR(255) NOT NULL,
+commentaire VARCHAR(255) NOT NULL,
+PRIMARY KEY(id)
+)
+
+ENGINE = INNODB;
+
 INSERT INTO joueurs (id,nom,mail,photo) VALUES 
 (default, "ju", "julien.dablemont@elitt-sas.fr", "ju.png"),
 (default, "seb", "bast620@gmail.com", "default.svg"),

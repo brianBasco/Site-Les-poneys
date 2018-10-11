@@ -1,4 +1,7 @@
 <?php
+ini_set('display_errors', true);
+error_reporting (E_ALL);
+
     require 'ConnexionDb.php';
     require 'Match.php';
     require 'Joueur.php';
@@ -32,6 +35,16 @@
         array_push($presences, $presence);
     }
 
+    //Récupération des commentaires de la bdd et insertion dans un tableau          
+    $reqCommentaires = $pdo->prepare('SELECT * FROM commentaires');
+    $reqCommentaires->execute();
+    $commentaires = array();
+    while($ligne = $reqCommentaires->fetch()) {
+        array_push($commentaires, $ligne);
+    }
+    
+   
+
     //Création et affichade des matchs
     while($row = $reqMatch->fetch()){
         $strJour = strtotime($row['date_match']);
@@ -46,12 +59,7 @@
         foreach($presences as $element) {
             
             if($element->getNumMatch() == $balise->getId()) {
-            
-                /* echo ' joueur present match : '.$element->getNumMatch();
-                echo 'joueur present num: '.$element->getNumJoueur();            
-                echo ' joueur present present : '.$element->getPresent();
-                echo ' balise id : '.$balise->getId(); */
-                            
+
                 //Pour chaque joueur du tableau joueurs
                 //si le num de joueur de l'élément correspond à une id de joueur on l'affiche
                 foreach($joueurs as $joueur) {
@@ -62,12 +70,23 @@
                         $numMatch = $element->getNumMatch();
 
                         $joueur->afficherJoueur($joueurPresent,$joueurId,$numMatch);
-                    }
-                        
+                    }                        
                 }
             }
         }
-        
+        //Liste des commentaires
+        echo '<div class="commentaires">';
+            foreach($commentaires as $commentaire) {
+                if($commentaire['num_match'] == $balise->getId()) {
+                    echo '
+                            <div>
+                            <input class="form-control nom" type="text" readonly value="'.$commentaire['nom_joueur'].'" />
+                            <input class="form-control contenu" type="text" readonly value="'.$commentaire['commentaire'].'" />                             
+                            </div>';
+                }
+            }
+        //fin de la div commentaires
+        echo '</div>';
         //fin de la div des joueurs
         echo '</div>';
         //fin du container match

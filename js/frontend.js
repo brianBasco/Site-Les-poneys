@@ -36,7 +36,8 @@ document.addEventListener("DOMContentLoaded",
         element.addEventListener("click", function() {
             ouvrirGestionMails(this);
         })
-    })
+    })  
+    
 
     //Bouton du header
     document.querySelector("#menu_bouton").addEventListener("click", toggleMenu);
@@ -126,29 +127,34 @@ function ouvrirGestionJoueur(element) {
     div.style.display = "block";
 
     location = "#gestionJoueur";
-    //nosql
-    console.log("sql : " + element.getAttribute("data-joueur"));
-    //noMatch
-    let noMatch = element.getAttribute("data-match");
-    console.log("numMatch : " +noMatch);
-    //noJoueur
-    let noJoueur = element.getAttribute("data-no");
-    console.log("noJoueur : " + noJoueur);
+
     //nomjoueur
     console.log("nom : " + element.innerHTML);
     let nomjoueur = element.innerHTML;
-    //presence
+
+    //MAJ du frontend presence
+    let presence = element.getAttribute("data-presence");
+    affichagePresence(presence); 
     //commentaire
 
     let divJoueur = document.getElementById("nomJoueur");
     divJoueur.value = nomjoueur;
 
-    let url = "index.php?id=" + noJoueur;
-    console.log(url);
-    //location = url;
-    
+    //no de match
+    let noMatch = element.getAttribute("data-match");
+    console.log("numMatch : " +noMatch);
+    //noJoueur
+    let noJoueur = element.getAttribute("data-no");
+    console.log("noJoueur : " + noJoueur);
+    //ligne sql
+    let nosql = element.getAttribute("data-sqlno");
 
-    construireVotes(noMatch, noJoueur);
+    divJoueur.setAttribute("data-nosql", nosql);
+    divJoueur.setAttribute("data-match", noMatch);
+    divJoueur.setAttribute("data-no", noJoueur);
+
+    construireVotes(noMatch, noJoueur);   
+    enregistrerModifs();
 
 }
 
@@ -221,6 +227,8 @@ function detruireVotes() {
     document.querySelector("#fermerGestion").removeEventListener("click",
         detruireVotes);
 
+    document.querySelector("#enregisJoueur").removeEventListener("click", UpdateDb);
+
     let divGestion = document.getElementById("gestionJoueur");
     divGestion.style.display = "none";  
     
@@ -285,3 +293,52 @@ function ouvrirGestionMails (element) {
     let url = "pages/mails/index.php?match=" + numMatch;    
     location = url; 
 }
+
+function enregistrerModifs(nosql) {
+
+    document.querySelector("#enregisJoueur").addEventListener("click", UpdateDb); 
+}
+
+function UpdateDb() {
+    let num_match = document.getElementById("nomJoueur").getAttribute("data-match");
+    let nom_joueur = document.getElementById("nomJoueur").value;
+
+    //update de la table commentaire, num_match, num_joueur
+    let commentaire = document.getElementById("commentJoueur").value;
+    let urlCommentaire;
+    //si le commentaire n'est pas vide
+    if(commentaire != "") {
+        urlCommentaire = "php/updateCommentaire.php?commentaire=" + commentaire +
+        "&num_match=" + num_match + "&nom_joueur=" + nom_joueur ;
+        //requête ajax
+        location = urlCommentaire;
+    }
+    
+
+    //update de la table presence
+    let presence;
+    let nosql = document.getElementById("nomJoueur").getAttribute("data-nosql");
+
+    document.querySelectorAll(".querySelect").forEach(element => {
+        if(element.checked == true) presence = element.getAttribute("data-present");
+    })
+
+    if(presence == undefined) presence = 0;
+
+    //requête AJAX update presence
+    let urlPresence = "php/updatedb.php?ligne=" + nosql + "&presence=" + presence;
+    console.log(urlPresence); 
+}
+
+function affichagePresence(presence) {
+    //remise à zero de l'affichage
+    document.querySelectorAll(".querySelect").forEach(element => {
+        element.checked = false;
+    });
+    //element present checked, si presence  = 0, rien n'est coché
+    document.querySelectorAll(".querySelect").forEach(element => {
+        let dataPresent = element.getAttribute("data-present");
+        if(dataPresent == presence) element.checked = true;
+    });
+}
+

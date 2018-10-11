@@ -23,7 +23,7 @@
                 '<div class="container joueur">
                 <div class="row">
                 <div class="col-5">
-                <button data-match="'.$numMatch.'" data-no="'.$this->getId().'" data-joueur="'.$numsql.'" 
+                <button data-match="'.$numMatch.'" data-presence="'.$presence.'" data-no="'.$this->getId().'" data-sqlno="'.$numsql.'" 
                 class="btn-joueur nom select input'.$numMatch.'" >'.$this->nom.'</button>
                 </div>
                 <div class="col-7">';

@@ -204,6 +204,23 @@ html {
   border: none;
 }
 
+.match .commentaires {
+  padding-top: 20px;
+  width: 100%;
+}
+
+.match .commentaires .nom {
+  text-align: center;
+  background-color: #001e3c;  
+  color: #db0a40;
+}
+
+
+.match .commentaires .contenu {
+  text-align: center;
+  background-color:white;
+  color: black;
+}
 
 
 /* -------------- CSS du slider ------------- */
