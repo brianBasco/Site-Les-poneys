@@ -47,6 +47,10 @@ document.addEventListener("DOMContentLoaded",
     document.querySelector("#gestionEquipe").addEventListener("click", ouvrirGestionEquipe);
     document.querySelector("#appliScores").addEventListener("click", ouvrirAppliScores);
     document.querySelector("#appliPlacements").addEventListener("click", ouvrirAppliPlacements);
+
+
+    //affichage de la date du prochain match
+    afficherDateMatch();
     
   });
 
@@ -353,3 +357,28 @@ function affichagePresence(presence) {
     });
 }
 
+function afficherDateMatch() {
+
+    date = new Date();
+    date = date.getTime();
+    //récup de l'écart min entre la date du jour et les dates
+    //de tous les matchs si leur date > date du jour
+    
+    let min = 365;
+    let numMatch;
+
+    document.querySelectorAll(".match").forEach(el => {
+        let dateMatch = el.getAttribute("data-date");
+        if(dateMatch >= date) {
+            let ecart = dateMatch - date;
+            if(ecart <= min) numMatch = el.getAttribute("data-match");
+        }
+    });
+
+    if(numMatch != undefined) {
+        let div = document.getElementById("prochainMatch");
+        let dateMatch = document.getElementById("match" + numMatch).getAttribute("data-date");
+        let equipe = document.getElementById("nom" + numMatch).innerHTML;
+        div.innerHTML = "Prochain match le " + dateMatch + " contre " + equipe;
+    }
+}

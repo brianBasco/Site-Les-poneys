@@ -33,7 +33,8 @@ class Match {
     public function afficherMatch() {
         echo
             '<div class="col-sm-12 col-md-6 col-lg-4">
-            <div id="match'.$this->getId().'" class="match"  data-match="'.$this->getId().'" >
+            <div id="match'.$this->getId().'" class="match"  data-match="'.$this->getId().'" 
+            data-date="'.$this->getDate().'" >
             <div class="info">
                 <p id="nom'.$this->getId().'" >'.$this->getNom().'</p>
             </div>
