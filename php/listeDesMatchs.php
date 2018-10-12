@@ -22,7 +22,7 @@ error_reporting (E_ALL);
     $reqJoueurs->execute();
     $joueurs = array();
     while($row = $reqJoueurs->fetch()) {
-        $joueur = new Joueur($row['id'], $row['nom']);
+        $joueur = new Joueur($row['id'], $row['nom'], $row['photo']);
         array_push($joueurs, $joueur);
     }
 

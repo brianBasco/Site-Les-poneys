@@ -1,11 +1,19 @@
 <div id="gestionJoueur" class="gestionJoueur">
 
-    <button id="fermerGestion" class="fermer" >X</button>
+    <div class="fermer">
+        <button id="fermerGestion" class="btn-fermer" >X</button>
+    </div>
 
 <div id="formulaireJoueur" class="container">
 
-    <div class="container">
-        <input id="nomJoueur" type="text" readonly />
+    <div class="presentation">
+        <div class="container">
+            <input id="nomJoueur" type="text" readonly />
+        </div>
+
+        <div class="container">
+            <img id="photoJoueur" src="css/images/joueurs/default.svg" class="photoJoueur" />
+        </div>
     </div>
 
     <div class="container">
@@ -39,7 +47,7 @@
     </div>
 
     <div class="container">
-        <input id="commentJoueur" type="text" placeholder="commentaire" />
+        <input id="commentJoueur" class="commentaire" type="text" placeholder="commentaire" />
     </div>
 
     <div class="container">

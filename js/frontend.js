@@ -84,23 +84,26 @@ function ouvrirJoueurs(element) {
 
 function afficherNbreParticipants(element) {
    
-    let numMatch = element.getAttribute("data-match");
-    let div = document.getElementById("participants" + numMatch);
+    let numMatch = element.getAttribute("data-match");   
 
-    calculerParticipants(numMatch, div);
+    calculerParticipants(numMatch);
 }
 
-function calculerParticipants(numMatch, div){
+function calculerParticipants(numMatch){
+
+    let div = document.getElementById("participants" + numMatch);
+
     let count = 0;
     document.querySelectorAll(".input" + numMatch).forEach(el => {
-        if(el.checked) count ++;
+        let presence = el.getAttribute("data-presence");
+        if(presence == 1 || presence == 2) count ++;
     });
 
     let joueur = " joueur";
     
     if(count > 1) joueur+="s";
 
-    //div.innerHTML = count + joueur;
+    div.innerHTML = count + joueur;
 }
 
 function demandeDeSuppression(element) {
@@ -152,6 +155,11 @@ function ouvrirGestionJoueur(element) {
     divJoueur.setAttribute("data-nosql", nosql);
     divJoueur.setAttribute("data-match", noMatch);
     divJoueur.setAttribute("data-no", noJoueur);
+
+    //Affichage de la photo
+    let photo = document.getElementById("photoJoueur");
+    let photoPath = element.getAttribute("data-photo");
+    photo.src = "css/images/joueurs/" + photoPath;
 
     construireVotes(noMatch, noJoueur);   
     enregistrerModifs();
@@ -311,9 +319,8 @@ function UpdateDb() {
         urlCommentaire = "php/updateCommentaire.php?commentaire=" + commentaire +
         "&num_match=" + num_match + "&nom_joueur=" + nom_joueur ;
         //requête ajax
-        location = urlCommentaire;
-    }
-    
+        //location = urlCommentaire;
+    }    
 
     //update de la table presence
     let presence;
@@ -326,8 +333,12 @@ function UpdateDb() {
     if(presence == undefined) presence = 0;
 
     //requête AJAX update presence
-    let urlPresence = "php/updatedb.php?ligne=" + nosql + "&presence=" + presence;
-    console.log(urlPresence); 
+    let urlPresence = "php/updatePresence.php?ligne=" + nosql + "&presence=" + presence;
+    console.log(urlPresence);
+    location = urlPresence;
+    
+    //MAJ du frontend nbre de participants
+    calculerParticipants(num_match);
 }
 
 function affichagePresence(presence) {

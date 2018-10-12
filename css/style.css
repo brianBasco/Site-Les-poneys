@@ -138,15 +138,17 @@ html {
 }
 
 .joueur .retard{
-  background-color: rgb(243, 222, 33);
+  background-color: rgb(255, 234, 0);
 }
 
 .joueur .absent{
   background-color: rgb(243, 33, 33);
+  color: white;
 }
 
 .joueur .incertain{
   background-color: rgb(132, 41, 182);
+  color: white;
 }
 
 /* --------------- classe match -----------------*/
@@ -325,7 +327,7 @@ html {
     position: absolute;
     top: 0;
     bottom: 0;
-    padding-top: 80px;
+    padding-top: 20px;
     display: none;
     background-color: #001e3c;
     text-align: center;
@@ -335,6 +337,11 @@ html {
   }
 
   .gestionJoueur .fermer {
+    position: relative;
+    margin-bottom: 80px;
+  }
+
+  .gestionJoueur .btn-fermer {
     position: absolute;
     right: 20px;
     background: transparent;
@@ -343,8 +350,18 @@ html {
     font-size: 2rem;
   }
 
-  .gestionJoueur .fermer:hover {
+  .gestionJoueur .btn-fermer:hover {
     cursor: pointer;
+  }
+
+  .gestionJoueur .photoJoueur {
+    width: 200px;
+    height: 200px;
+    border: 2px solid white;
+  }
+
+  .gestionJoueur .presentation {
+    margin-bottom: 30px;
   }
 
   .gestionJoueur input {
@@ -356,6 +373,10 @@ html {
     margin-bottom: 0.5rem;
     border: none;
     text-align: center;
+  }
+
+  .gestionJoueur .commentaire {
+    width: 100%;
   }
 
   .gestionJoueur .votes {
