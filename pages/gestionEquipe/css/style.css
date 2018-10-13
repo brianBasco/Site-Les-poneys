@@ -39,43 +39,21 @@ body {
     float: right;
   }
   
-  .header .menu_button:hover {
+  .header .menu button:hover {
     cursor: pointer;
   }
   
-  .header .menu_button {
-      fill: black;
-      width: 45px;
-      height: 40px;
-      -ms-flex-item-align: center;
-      -ms-grid-row-align: center;
-      align-self: center;
-      margin: 0 auto;
-      transition: fill .1s linear;
+  .header .menu button {
+    background-color: #001e3c;
+    color: #ffc107;
+    width: 120px;
+    height: 50px;
+    border: none;    
   }
   
   
   
   
-  .header .menu-item {
-    height: 70px;
-    color: white;
-    border-bottom: 2px solid white;
-    padding: 5px 0;
-  }
-  
-  .header .menu-item button {
-    height: 60px;
-    width: 100%;
-    background-color: #111515;
-  }
-  
-  .header .menu_deplie {
-    max-height: 0;
-    overflow: hidden;
-    transition: all ease 0.7s;
-  }
-
   .listeJoueurs .photo {
       width: 150px;
       height: 150px;

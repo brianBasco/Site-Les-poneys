@@ -1,38 +1,46 @@
-document.addEventListener("DOMContentLoaded",
-  function (event) {
-   
-    document.querySelectorAll(".match").forEach(element => {
+document.onreadystatechange = function() {
+    if (document.readyState === "complete") {
+      test();
+    }
+  }
+
+//document.addEventListener("DOMContentLoaded",
+//  function (event) {
+  
+function test() {
+    document.querySelectorAll(".match").forEach(function(element){
         afficherNbreParticipants(element);
+        colorerDiv(element);
     });
 
-    document.querySelectorAll(".moins").forEach(element => {
+    document.querySelectorAll(".moins").forEach(function(element){
         element.addEventListener("click", function() {
             //fermer le container;
             fermerJoueurs(this);
         }) 
     });
 
-        document.querySelectorAll(".plus").forEach(element => {
+        document.querySelectorAll(".plus").forEach(function(element){
             element.addEventListener("click", function() {
                 //ouvrir le container;
                 ouvrirJoueurs(this);
         })
     });
 
-    document.querySelectorAll(".nom").forEach(element => {
+    document.querySelectorAll(".nom").forEach(function(element){
         element.addEventListener("click", function() {
             //ouvrir le container;
             ouvrirGestionJoueur(this);
     })
 });
     
-    document.querySelectorAll(".suppr").forEach(element => {
+    document.querySelectorAll(".suppr").forEach(function(element){
         element.addEventListener("click", function() {
             demandeDeSuppression(this);
         })
     })
 
-    document.querySelectorAll(".btn-mail").forEach(element => {
+    document.querySelectorAll(".btn-mail").forEach(function(element){
         element.addEventListener("click", function() {
             ouvrirGestionMails(this);
         })
@@ -44,7 +52,6 @@ document.addEventListener("DOMContentLoaded",
 
     //click du menu
     document.querySelector("#ajouterMatch").addEventListener("click", ouvrirAjoutMatch);
-    document.querySelector("#gestionEquipe").addEventListener("click", ouvrirGestionEquipe);
     document.querySelector("#appliScores").addEventListener("click", ouvrirAppliScores);
     document.querySelector("#appliPlacements").addEventListener("click", ouvrirAppliPlacements);
 
@@ -52,8 +59,8 @@ document.addEventListener("DOMContentLoaded",
     //affichage de la date du prochain match
     afficherDateMatch();
     
-  });
-
+ // });
+}
 
 function fermerJoueurs(element) {
 
@@ -98,7 +105,7 @@ function calculerParticipants(numMatch){
     let div = document.getElementById("participants" + numMatch);
 
     let count = 0;
-    document.querySelectorAll(".input" + numMatch).forEach(el => {
+    document.querySelectorAll(".input" + numMatch).forEach(function(el){
         let presence = el.getAttribute("data-presence");
         if(presence == 1 || presence == 2) count ++;
     });
@@ -296,10 +303,6 @@ function ouvrirAppliPlacements() {
     location = "applis/placements/index.html";
 }
 
-function ouvrirGestionEquipe() {
-    location = "pages/gestionEquipe/index.php";
-}
-
 function ouvrirGestionMails (element) {
     let numMatch = element.getAttribute("data-match");
     let url = "pages/mails/index.php?match=" + numMatch;    
@@ -359,26 +362,73 @@ function affichagePresence(presence) {
 
 function afficherDateMatch() {
 
-    date = new Date();
-    date = date.getTime();
+    let date = new Date();
+    let dateDuJour = date.getTime();
+    console.log("Date du jour : " + dateDuJour);
     //récup de l'écart min entre la date du jour et les dates
-    //de tous les matchs si leur date > date du jour
+    //de tous les matchs si leur date > date du jour    
     
-    let min = 365;
     let numMatch;
+    let dates = [];
 
-    document.querySelectorAll(".match").forEach(el => {
-        let dateMatch = el.getAttribute("data-date");
-        if(dateMatch >= date) {
-            let ecart = dateMatch - date;
-            if(ecart <= min) numMatch = el.getAttribute("data-match");
+    let matchs = document.querySelectorAll(".match");
+    //S'il y a des matchs
+    if(matchs != null) {
+        matchs.forEach(el => {
+            let dateMatch = el.getAttribute("data-date");
+            dateMatch = dateMatch.split('-');
+            dateMatch.reverse();
+            dateMatch = dateMatch.join('-');
+            console.log("datematch = " + dateMatch);
+            let DateMatch = new Date(dateMatch);
+    
+            let dateTime = DateMatch.getTime();
+            console.log("date du match " + dateTime);
+            if(dateTime >= dateDuJour) {
+                
+                numMatch = el.getAttribute("data-match");
+                console.log("num de match " + numMatch);
+                dates.push([dateTime, numMatch]);
+                
+                }
+            });
         }
-    });
+    //S'il ya des matchs à jouer
+    //pop supprimme le dernier élément, si undefined alors le tableau est vide
+     if(dates[0] != undefined) {
+         console.log(dates);
+        let min = dates[0][0] - dateDuJour;
+        dates.forEach(el => {
+            let ecart = el[0] - dateDuJour;
+            if(ecart <= min) {
+                    min = ecart;
+                    numMatch = el[1];
+            }
+        });
+    }  
 
     if(numMatch != undefined) {
         let div = document.getElementById("prochainMatch");
         let dateMatch = document.getElementById("match" + numMatch).getAttribute("data-date");
         let equipe = document.getElementById("nom" + numMatch).innerHTML;
         div.innerHTML = "Prochain match le " + dateMatch + " contre " + equipe;
+    }
+}
+
+function colorerDiv (el) {
+
+    let date = new Date();
+    let dateDuJour = date.getTime();
+
+    let dateMatch = el.getAttribute("data-date");
+    dateMatch = dateMatch.split('-');
+    dateMatch.reverse();
+    dateMatch = dateMatch.join('-');
+
+    let DateMatch = new Date(dateMatch);
+    DateDuMatch = DateMatch.getTime();
+
+    if(DateDuMatch < dateDuJour) {
+        el.style.backgroundColor = "#ff7b25";
     }
 }

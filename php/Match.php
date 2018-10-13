@@ -50,7 +50,6 @@ class Match {
             <div class="info boutons">
                 <button class="btn btn-match moins" data-match="'.$this->getId().'" >-</button>
                 <button class="btn btn-match plus" data-match="'.$this->getId().'" >+</button>
-                <button class="btn btn-match btn-danger suppr" data-match="'.$this->getId().'" title="supprimmer">X</button>
                 <button class="btn btn-mail" data-match="'.$this->getId().'" ></button>
             </div>';            
             //La fin de la div col etc est dans le fichier listeDesMatchs

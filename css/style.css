@@ -1,10 +1,10 @@
 /* variables à sauvegarder 
 bleu redbull : #001e3c;
+jaune michigan : #f5c300;
 */
 
 body {
     font-family: 'Roboto Condensed', sans-serif;
-    padding-bottom: 50px;
     min-height: 100%;
     position: relative;
 }
@@ -33,7 +33,7 @@ html {
 .header .titre {
   height: 65px;
   font-family: 'Pacifico', cursive;
-  color: #ffc107;
+  color: #f5c300;
   text-shadow: 1px 1px 4px black, 2px 2px 2px black;
   padding-top: 8px;
   margin-left: 15px;
@@ -155,10 +155,11 @@ html {
 .match {
   padding-top: 15px;
   background-color: #001e3c;
-  border-radius: 8px;
+  border-radius: 0px;
   text-align: center;
   margin-top: 20px;
   margin-bottom: 20px;
+  box-shadow: 2px 2px 3px rgba(1, 2, 2, 0.6);
 }
 
 .match .info {
@@ -167,7 +168,7 @@ html {
 
 .match p, .match textarea {
   width: 80%;
-  background-color: #ede200;
+  background-color: #f5c300;
   color: #001e3c;
 }
 
@@ -177,13 +178,30 @@ html {
 }
 
 
-.match p, .match textarea, .match .btn-match {
+.match p, .match textarea {
   border: 2px solid white;
   border-radius: 0;
   text-align: center;
 }
 
-.match p, .match button {
+.match .btn-match {
+  height: 60px;
+  width: 60px;
+  border: 2px solid white;
+  border-radius: 0;
+}
+
+.match .btn-match.plus {
+  background-color: #001e3c;
+  color: #f5c300;
+}
+
+.match .btn-match.moins {
+  color: #001e3c;
+  background-color: #f5c300;
+}
+
+.match p {
   height: 40px;
 }
 
@@ -197,7 +215,7 @@ html {
 
 .match .btn-mail {
   background-image: url("images/mail.png");
-  height: 40px; /* You must set a specified height */
+  height: 50px; /* You must set a specified height */
   background-position: center; /* Center the image */
   background-repeat: no-repeat; /* Do not repeat the image */
   background-size: cover; /* Resize the background image to cover the entire container */
@@ -414,7 +432,30 @@ html {
 
   .infos .dates {
     text-shadow: 1px 1px 4px black, 2px 2px 2px black;
-    padding: 20px 20px;
+    padding: 45px 20px;
   }
 
     
+  /* --------------------- Style du footer -------------- */
+  .footer {
+    margin-top: 50px;
+    background-color: black;
+    color: white;
+    height: 200px;
+    text-align: center;
+  }
+
+  .footer .nom {    
+    padding-top: 60px;
+  }
+
+  .footer b {
+    padding: 0 10px;
+    font-size: 2rem;
+    color: #f5c300;
+    font-family: 'Great Vibes', cursive;
+  }
+
+  .footer .links {
+    color: white;
+  }
