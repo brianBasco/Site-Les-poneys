@@ -110,6 +110,7 @@ html {
 }
 
 .joueur .btn-joueur {
+  height: 40px;
   background-color: white;
   color: #001e3c;
   border: 2px solid black;

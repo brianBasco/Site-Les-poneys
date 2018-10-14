@@ -1,52 +1,41 @@
-document.onreadystatechange = function() {
-    if (document.readyState === "complete") {
-      test();
+
+document.addEventListener("DOMContentLoaded",
+  function (event) {
+
+    let matchs = document.querySelectorAll(".match");
+    for(let i = 0; i<matchs.length; i++) {
+        afficherNbreParticipants(matchs[i]);
+        colorerDiv(matchs[i]);
     }
-  }
-
-//document.addEventListener("DOMContentLoaded",
-//  function (event) {
-  
-function test() {
-    document.querySelectorAll(".match").forEach(function(element){
-        afficherNbreParticipants(element);
-        colorerDiv(element);
-    });
-
-    document.querySelectorAll(".moins").forEach(function(element){
-        element.addEventListener("click", function() {
-            //fermer le container;
+   
+    let moins = document.querySelectorAll(".moins");
+    for(let i = 0; i<moins.length; i++) {
+        moins[i].addEventListener("click", function() {
             fermerJoueurs(this);
-        }) 
-    });
+    })
+    }
 
-        document.querySelectorAll(".plus").forEach(function(element){
-            element.addEventListener("click", function() {
-                //ouvrir le container;
-                ouvrirJoueurs(this);
-        })
-    });
+    let plus = document.querySelectorAll(".plus");
+    for(let i = 0; i<plus.length; i++) {
+        plus[i].addEventListener("click", function() {
+            ouvrirJoueurs(this);
+    })
+    }
 
-    document.querySelectorAll(".nom").forEach(function(element){
-        element.addEventListener("click", function() {
-            //ouvrir le container;
+    let nom = document.querySelectorAll(".nom");
+    for(let i = 0; i<nom.length; i++) {
+        nom[i].addEventListener("click", function() {
             ouvrirGestionJoueur(this);
     })
-});
-    
-    document.querySelectorAll(".suppr").forEach(function(element){
-        element.addEventListener("click", function() {
-            demandeDeSuppression(this);
-        })
-    })
+    }
 
-    document.querySelectorAll(".btn-mail").forEach(function(element){
-        element.addEventListener("click", function() {
+    let btnMail = document.querySelectorAll(".btn-mail");
+    for(let i = 0; i<btnMail.length; i++) {
+        btnMail[i].addEventListener("click", function() {
             ouvrirGestionMails(this);
-        })
-    })  
-    
-
+    })
+    }
+       
     //Bouton du header
     document.querySelector("#menu_bouton").addEventListener("click", toggleMenu);
 
@@ -59,8 +48,8 @@ function test() {
     //affichage de la date du prochain match
     afficherDateMatch();
     
- // });
-}
+  });
+
 
 function fermerJoueurs(element) {
 
@@ -95,6 +84,7 @@ function ouvrirJoueurs(element) {
 
 function afficherNbreParticipants(element) {
    
+    console.log(element);
     let numMatch = element.getAttribute("data-match");   
 
     calculerParticipants(numMatch);
@@ -105,10 +95,12 @@ function calculerParticipants(numMatch){
     let div = document.getElementById("participants" + numMatch);
 
     let count = 0;
-    document.querySelectorAll(".input" + numMatch).forEach(function(el){
-        let presence = el.getAttribute("data-presence");
+    
+    let inputs = document.querySelectorAll(".input" + numMatch);
+    for(let i = 0; i<inputs.length; i++) {
+        let presence = inputs[i].getAttribute("data-presence");
         if(presence == 1 || presence == 2) count ++;
-    });
+    }    
 
     let joueur = " joueur";
     
@@ -183,9 +175,10 @@ function construireVotes(numMatch, numJoueur) {
     div.setAttribute("id", "listeVotes");
     div.className = "row";
    
+    let inputs = document.querySelectorAll(".input" + numMatch);
+    for(let i = 0; i<inputs.length; i++) {
 
-    document.querySelectorAll(".input" + numMatch).forEach(el => {
-        let num = el.getAttribute("data-no");
+        let num = inputs[i].getAttribute("data-no");
         if(numJoueur != num) {
             //construire la div container
             let divContainer = document.createElement("div");
@@ -201,7 +194,7 @@ function construireVotes(numMatch, numJoueur) {
             //construire span
             let span = document.createElement("span");
             span.className = "slider vote";
-            span.innerHTML = el.innerHTML;
+            span.innerHTML = inputs[i].innerHTML;
                    
             label.appendChild(input);
             label.appendChild(span);
@@ -211,7 +204,7 @@ function construireVotes(numMatch, numJoueur) {
             div.appendChild(divContainer);
 
         }
-    });
+    }
 
     let root = document.getElementById("votes");
     let ancre = document.getElementById("finDesVotes");
@@ -221,20 +214,20 @@ function construireVotes(numMatch, numJoueur) {
     document.querySelector("#fermerGestion").addEventListener("click",
         detruireVotes);
 
-    document.querySelectorAll(".querySelect").forEach(el => {
-        el.addEventListener("click", function() {
-            //Check si les autres balises ne sont pas aussi ouvertes
-           
+    let querySelects = document.querySelectorAll(".querySelect");
+    for(let i = 0; i<querySelects.length; i++) {
+        querySelects[i].addEventListener("click", function() {
+            //Check si les autres balises ne sont pas aussi ouvertes           
             checkClick(this, "querySelect", "data-present");
-        })
-    })
+        });
+    }
 
-   document.querySelectorAll(".queryVote").forEach(el => {
-        el.addEventListener("click", function() {
-            
+    let queryVotes = document.querySelectorAll(".queryVote");
+    for(let i = 0; i<queryVotes.length; i++) {
+        queryVotes[i].addEventListener("click", function() {            
             checkClick(this, "queryVote", "data-no");
-        })
-    });
+        });
+    }
 }
 
 function detruireVotes() {
@@ -260,10 +253,11 @@ function checkClick(element, classe, attribut) {
     console.log("checked");
     let noElement = element.getAttribute(attribut);
 
-    document.querySelectorAll("." + classe).forEach(el => {
-        let noEl = el.getAttribute(attribut);
-        if(el.checked && noElement != noEl) el.checked = false;
-    })
+    let classes = document.querySelectorAll("." + classe);
+    for(let i = 0; i<classes.length; i++) {
+        let noEl = classes[i].getAttribute(attribut);
+        if(classes[i].checked && noElement != noEl) classes[i].checked = false;
+    }
 }
 
 function toggleMenu() {
@@ -271,11 +265,11 @@ function toggleMenu() {
     let div = document.getElementById("menu_deplie");
     let classes = div.classList;
     let ouvert = false;
-    classes.forEach(element => {
-        console.log(element);
-        if(element == "ouvert") ouvert = true;
+    for(let i =0; i<classes.length; i++) {
     
-    });
+        if(classes[i] == "ouvert") ouvert = true;
+    
+    };
 
     if(!ouvert) {        
         div.style.maxHeight = "400px";
@@ -333,9 +327,10 @@ function UpdateDb() {
     let presence;
     let nosql = document.getElementById("nomJoueur").getAttribute("data-nosql");
 
-    document.querySelectorAll(".querySelect").forEach(element => {
-        if(element.checked == true) presence = element.getAttribute("data-present");
-    })
+    let querySelects = document.querySelectorAll(".querySelect");
+    for(let i =0; i<querySelects.length; i++){
+        if(querySelects[i].checked == true) presence = querySelects[i].getAttribute("data-present");
+    }
 
     if(presence == undefined) presence = 0;
 
@@ -350,14 +345,16 @@ function UpdateDb() {
 
 function affichagePresence(presence) {
     //remise à zero de l'affichage
-    document.querySelectorAll(".querySelect").forEach(element => {
-        element.checked = false;
-    });
+    let querySelects = document.querySelectorAll(".querySelect");
+
+    for(let i = 0; i<querySelects.length; i++) {
+    querySelects[i].checked = false;
+    }
     //element present checked, si presence  = 0, rien n'est coché
-    document.querySelectorAll(".querySelect").forEach(element => {
-        let dataPresent = element.getAttribute("data-present");
-        if(dataPresent == presence) element.checked = true;
-    });
+   for(let i = 0; i<querySelects.length; i++) {
+        let dataPresent = querySelects[i].getAttribute("data-present");
+        if(dataPresent == presence) querySelects[i].checked = true;
+    }
 }
 
 function afficherDateMatch() {
@@ -374,8 +371,9 @@ function afficherDateMatch() {
     let matchs = document.querySelectorAll(".match");
     //S'il y a des matchs
     if(matchs != null) {
-        matchs.forEach(el => {
-            let dateMatch = el.getAttribute("data-date");
+        for(let i = 0; i<matchs.length; i++){
+
+            let dateMatch = matchs[i].getAttribute("data-date");
             dateMatch = dateMatch.split('-');
             dateMatch.reverse();
             dateMatch = dateMatch.join('-');
@@ -386,25 +384,26 @@ function afficherDateMatch() {
             console.log("date du match " + dateTime);
             if(dateTime >= dateDuJour) {
                 
-                numMatch = el.getAttribute("data-match");
+                numMatch = matchs[i].getAttribute("data-match");
                 console.log("num de match " + numMatch);
                 dates.push([dateTime, numMatch]);
                 
                 }
-            });
+            }
         }
     //S'il ya des matchs à jouer
     //pop supprimme le dernier élément, si undefined alors le tableau est vide
      if(dates[0] != undefined) {
          console.log(dates);
         let min = dates[0][0] - dateDuJour;
-        dates.forEach(el => {
-            let ecart = el[0] - dateDuJour;
+        for(let i = 0; i<dates.length;i++) {
+        
+            let ecart = dates[i][0] - dateDuJour;
             if(ecart <= min) {
                     min = ecart;
-                    numMatch = el[1];
+                    numMatch = dates[i][1];
             }
-        });
+        }
     }  
 
     if(numMatch != undefined) {
@@ -418,7 +417,7 @@ function afficherDateMatch() {
 function colorerDiv (el) {
 
     let date = new Date();
-    let dateDuJour = date.getTime();
+    //let dateDuJour = date.getTime();
 
     let dateMatch = el.getAttribute("data-date");
     dateMatch = dateMatch.split('-');
@@ -426,9 +425,9 @@ function colorerDiv (el) {
     dateMatch = dateMatch.join('-');
 
     let DateMatch = new Date(dateMatch);
-    DateDuMatch = DateMatch.getTime();
+    //DateDuMatch = DateMatch.getTime();
 
-    if(DateDuMatch < dateDuJour) {
+    if(DateMatch < date) {
         el.style.backgroundColor = "#ff7b25";
     }
 }

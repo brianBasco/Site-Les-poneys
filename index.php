@@ -31,6 +31,7 @@
 
   <!-- Bundle Bootstrap --------------------------------- -->
   <script type="text/javascript" src="bundle.js"></script>
+  <script type="text/javascript" src="jquery.js"></script>
   <script type="text/javascript" src="js/frontend.js"></script>
        
   </body>
