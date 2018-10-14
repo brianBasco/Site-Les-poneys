@@ -5,7 +5,7 @@ error_reporting (E_ALL);
 
     require 'ConnexionDb.php';
 
-    echo '<h1>Bienvenue dans le débug</h1>';
+    //echo '<h1>Bienvenue dans le débug</h1>';
 
     $num_match = (int)$_GET['num_match'];
     $nom_joueur = $_GET['nom_joueur'];
@@ -19,5 +19,7 @@ error_reporting (E_ALL);
         commentaires (num_match, nom_joueur, commentaire) 
         VALUES (?,?,?)") or exit(print_r($pdo->errorInfo()));
     $req->execute(array($num_match, $nom_joueur, $commentaire));
+
+    echo "commentaire enregistré";
 
 ?>

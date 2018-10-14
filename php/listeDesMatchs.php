@@ -14,7 +14,7 @@ error_reporting (E_ALL);
     $pdo = new PDO(MYSQL, USER, PSWD);
     $pdo->query("SET NAMES UTF8");
 
-    $reqMatch = $pdo->prepare('SELECT * FROM matchs');
+    $reqMatch = $pdo->prepare('SELECT * FROM matchs ORDER BY date_match');
     $reqMatch->execute();
 
     //Récupération de la liste des joueurs de la bdd et insertion dans un tableau

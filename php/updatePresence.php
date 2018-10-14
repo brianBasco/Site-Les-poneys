@@ -5,7 +5,7 @@ error_reporting (E_ALL);
 
     require 'ConnexionDb.php';
 
-    echo '<h1>Bienvenue dans le débug</h1>';
+    //echo '<h1>Bienvenue dans le débug</h1>';
 
     $ligne = (int)$_GET['ligne'];
     $presence = (int)$_GET['presence'];
@@ -16,5 +16,7 @@ error_reporting (E_ALL);
     //update de la bdd, à chaque match créé la table presence doit être initialisée avec 0
     $req = $pdo->prepare("UPDATE presence SET present=(?) WHERE id=(?)") or exit(print_r($pdo->errorInfo()));
     $req->execute(array($presence,$ligne));
+
+    echo "présence mise à jour";
 
 ?>

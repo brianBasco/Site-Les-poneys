@@ -33,11 +33,9 @@
                 data-photo="'.$this->getPhotoPath().'" class="btn-joueur nom select input'.$numMatch.'" >'.$this->nom.'</button>
                 </div>
                 <div class="col-7">';
-                if($presence == 0) echo '<input type="text" readonly class="sansVote" value="no vote" />';
-                if($presence == 1) echo '<input type="text" readonly class="present" value="présent" />';
-                if($presence == 2) echo '<input type="text" readonly class="retard" value="à la bourre" />';
-                if($presence == 3) echo '<input type="text" readonly class="absent" value="absent" />';
-                if($presence == 4) echo '<input type="text" readonly class="incertain" value="incertain" />'; 
+
+                echo '<input type="text" readonly class="presence" data-presence="'.$presence.'" />';
+                
             echo '
                 </div>
                 </div>                

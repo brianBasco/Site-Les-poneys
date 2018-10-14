@@ -134,6 +134,24 @@ html {
   height: 40px;
 }
 
+.joueur [data-presence="1"] {
+  background-color: rgb(34, 245, 7);
+}
+
+.joueur [data-presence="2"] {
+  background-color: rgb(255, 234, 0);
+}
+
+.joueur [data-presence="3"] {
+  background-color: rgb(243, 33, 33);
+  color: white;
+}
+
+.joueur [data-presence="4"] {
+  background-color: rgb(132, 41, 182);
+  color: white;
+}
+
 .joueur .present{
   background-color: rgb(34, 245, 7);
 }
@@ -401,6 +419,20 @@ html {
   .gestionJoueur .votes {
     margin-top: 50px;
   }
+
+  .gestionJoueur .retour {
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  .gestionJoueur .retourCommentaire, .gestionJoueur .retourPresence{
+    background-color: #f5c300;
+    color:  #001e3c;
+    display: none;
+    width: 250px;
+    margin: 0 auto; 
+  }
+  
 
   #listeVotes {
     padding-top: 30px;

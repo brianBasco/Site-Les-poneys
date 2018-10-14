@@ -35,6 +35,11 @@ document.addEventListener("DOMContentLoaded",
             ouvrirGestionMails(this);
     })
     }
+
+    let presences = document.querySelectorAll(".presence");
+    for(let i= 0; i<presences.length; i++) {
+        afficherPresence(presences[i]);
+    }
        
     //Bouton du header
     document.querySelector("#menu_bouton").addEventListener("click", toggleMenu);
@@ -109,23 +114,7 @@ function calculerParticipants(numMatch){
     div.innerHTML = count + joueur;
 }
 
-function demandeDeSuppression(element) {
-    if(window.confirm("supprimmer le match ?")) {
-        
-        let numMatch = element.getAttribute("data-match");
-        let url = "php/supprMatch.php?match=" + numMatch;
-        $ajaxUtils.sendGetRequest(url, function() {
-            let noeud = document.getElementById("listeMatchs");
-            let divMatch = document.getElementById("match" + numMatch);
-            let divJoueurs = document.getElementById("joueurs" + numMatch);
 
-            noeud.removeChild(divMatch);
-            noeud.removeChild(divJoueurs);
-        });
-
-        //location = location;
-    }
-}
 
 function ouvrirGestionJoueur(element) {
 
@@ -230,8 +219,8 @@ function construireVotes(numMatch, numJoueur) {
     }
 }
 
-function detruireVotes() {
-    
+function detruireVotes() {     
+
     let div = document.getElementById("listeVotes");
     let root = document.getElementById("votes");
     root.removeChild(div);
@@ -242,8 +231,9 @@ function detruireVotes() {
     document.querySelector("#enregisJoueur").removeEventListener("click", UpdateDb);
 
     let divGestion = document.getElementById("gestionJoueur");
-    divGestion.style.display = "none";  
+    divGestion.style.display = "none"; 
     
+    location = "index.php";
 }
 
 
@@ -311,6 +301,7 @@ function enregistrerModifs(nosql) {
 function UpdateDb() {
     let num_match = document.getElementById("nomJoueur").getAttribute("data-match");
     let nom_joueur = document.getElementById("nomJoueur").value;
+    let no_joueur = document.getElementById("nomJoueur").getAttribute("data-no");
 
     //update de la table commentaire, num_match, num_joueur
     let commentaire = document.getElementById("commentJoueur").value;
@@ -319,8 +310,15 @@ function UpdateDb() {
     if(commentaire != "") {
         urlCommentaire = "php/updateCommentaire.php?commentaire=" + commentaire +
         "&num_match=" + num_match + "&nom_joueur=" + nom_joueur ;
-        //requête ajax
-        //location = urlCommentaire;
+        //requête ajax 
+        $ajaxUtils.sendGetRequest(urlCommentaire, 
+        function (request) {
+            
+          let retour = request.responseText;
+          let div = document.querySelector("#retourCommentaire");
+          div.value = retour;
+          div.style.display = "block";
+    });
     }    
 
     //update de la table presence
@@ -337,10 +335,17 @@ function UpdateDb() {
     //requête AJAX update presence
     let urlPresence = "php/updatePresence.php?ligne=" + nosql + "&presence=" + presence;
     console.log(urlPresence);
-    location = urlPresence;
-    
-    //MAJ du frontend nbre de participants
-    calculerParticipants(num_match);
+    $ajaxUtils
+    .sendGetRequest(urlPresence, 
+      function (request) {
+
+        let retour = request.responseText;       
+        let div  = document.querySelector("#retourPresence");
+        div.value = retour;
+        div.style.display = "block";
+  });
+
+  
 }
 
 function affichagePresence(presence) {
@@ -427,7 +432,33 @@ function colorerDiv (el) {
     let DateMatch = new Date(dateMatch);
     //DateDuMatch = DateMatch.getTime();
 
-    if(DateMatch < date) {
+    if(DateMatch < date && ((DateMatch - date) != 1)) {
+        console.log("ecart = : " + (DateMatch - date))
         el.style.backgroundColor = "#ff7b25";
+    }
+}
+
+
+function afficherPresence(element) {
+    switch(element.getAttribute("data-presence")){
+        case("0") :
+            element.value = "no vote";
+            break;
+        
+        case("1") :
+            element.value = "présent";
+            break;
+
+        case("2") :
+            element.value = "à la bourre";
+            break;
+
+        case("3") :
+            element.value = "absent";
+            break;
+
+        case("4") :
+            element.value = "incertain";
+            break;
     }
 }
