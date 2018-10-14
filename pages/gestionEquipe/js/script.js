@@ -1,5 +1,8 @@
 
 document.addEventListener("DOMContentLoaded", function (event) {
+
+    var matchs;
+
     $( ".retour" ).on( "click", function( event ) {
         retour();
       });
@@ -8,9 +11,10 @@ document.addEventListener("DOMContentLoaded", function (event) {
         function(request) {
 
             let reponse = request.responseText;
-            console.log(reponse);
-            let rep = JSON.parse(reponse);
-            construit(rep);
+            
+            matchs = JSON.parse(reponse);
+            console.log(matchs);
+            construit(matchs);
         })
 })        
 
@@ -41,10 +45,31 @@ function construit(objet) {
         let input = document.createElement("input");
 
         input.setAttribute("type", "text");
+        input.className = "matchs";
+        input.setAttribute("data-id", objet[i].id);
         input.setAttribute("value", objet[i].nom);
+        input.addEventListener("blur", function() {
+            modifierTab(this, objet);
+        });
 
         
         document.body.appendChild(input);
 
     }
 }
+
+function modifierTab(el, tab) {
+    console.log(el);
+    let num = el.getAttribute("data-id");
+
+    for(let i = 0; i<tab.length; i++) {
+        if(tab[i].id == num) {
+            /* tab[i].nom  = el.value;
+            console.log(tab[i].nom); */
+            tab.splice(i, 1);
+            construit(tab);
+            break;
+        }
+    }
+}
+
