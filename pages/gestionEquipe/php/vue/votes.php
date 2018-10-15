@@ -23,7 +23,7 @@ error_reporting (E_ALL);
 
     foreach($matchs as $match) {
         $votes = array();
-        $reqVote = $pdo->prepare("SELECT COUNT(num_vote) FROM votes WHERE num_match = (?)");
+        $reqVote = $pdo->prepare("SELECT num_vote FROM votes WHERE num_match = (?) GROUP BY num_vote");
         $reqVote->execute(array($match['num_match']));
         while($ligne = $reqVote->fetch(PDO::FETCH_ASSOC)) {
             array_push($votes, $ligne);
