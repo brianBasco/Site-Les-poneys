@@ -425,7 +425,8 @@ html {
     margin-top: 20px;
   }
 
-  .gestionJoueur .retourCommentaire, .gestionJoueur .retourPresence{
+  .gestionJoueur .retourCommentaire, .gestionJoueur .retourPresence,
+  .gestionJoueur .retourVote {
     background-color: #f5c300;
     color:  #001e3c;
     display: none;

@@ -35,10 +35,11 @@ $numMatch = (int)$reqNumMatch->fetch()[0];
 $reqJoueurs = $pdo->prepare("SELECT id FROM joueurs");
 $reqJoueurs->execute();
 $presence = 0;
+$a_vote = 0;
 while($ligne = $reqJoueurs->fetch()){
     print_r( $ligne);
-    $req = $pdo->prepare("INSERT INTO presence (num_match, num_joueur, present) VALUES (?,?,?)") or exit(print_r($req->ErrorInfo()));
-    $req->execute(array($numMatch,(int)$ligne['id'], $presence));
+    $req = $pdo->prepare("INSERT INTO presence (num_match, num_joueur, present, a_vote) VALUES (?,?,?,?)") or exit(print_r($req->ErrorInfo()));
+    $req->execute(array($numMatch,(int)$ligne['id'], $presence, $a_vote));
 }
 
 ?>

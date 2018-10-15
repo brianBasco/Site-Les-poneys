@@ -15,7 +15,18 @@ document.addEventListener("DOMContentLoaded", function (event) {
             let matchs = JSON.parse(reponse);
             console.log(matchs);
             construit(matchs);
-            construireScoreBoard(matchs);
+            //construireScoreBoard(matchs);
+        })
+
+        $ajaxUtils.sendGetRequest("php/vue/votes.php", 
+        function(request) {
+
+            let reponse = request.responseText;
+            
+            let votes = JSON.parse(reponse);
+            //console.log(matchs);
+            construitVotes(votes);
+            //construireScoreBoard(matchs);
         })
 })        
 
@@ -100,3 +111,16 @@ function construireScoreBoard(tab) {
     }
 }
 
+function construitVotes(tab) {
+    for(let i = 0; i<tab.length; i++) {
+
+        let input = document.createElement("input");
+
+        input.setAttribute("type", "text");
+        input.className = "votes";
+        input.setAttribute("data-id", tab[i].id);
+        input.setAttribute("value", tab[i].num_vote);
+        document.body.appendChild(input);
+
+    }
+}

@@ -29,6 +29,7 @@ id int(11) NOT NULL AUTO_INCREMENT,
 num_match int(11) NOT NULL,
 num_joueur int(11) NOT NULL,
 present int(11) NOT NULL,
+a_vote int(11) NOT NULL,
 PRIMARY KEY(id)
 )
 
@@ -39,6 +40,15 @@ id int(11) NOT NULL AUTO_INCREMENT,
 num_match int(11) NOT NULL,
 nom_joueur VARCHAR(255) NOT NULL,
 commentaire VARCHAR(255) NOT NULL,
+PRIMARY KEY(id)
+)
+
+ENGINE = INNODB;
+
+CREATE TABLE votes (
+id int(11) NOT NULL AUTO_INCREMENT,
+num_match int(11) NOT NULL,
+num_vote int(11) NOT NULL,
 PRIMARY KEY(id)
 )
 

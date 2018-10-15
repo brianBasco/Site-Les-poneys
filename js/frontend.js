@@ -49,6 +49,9 @@ document.addEventListener("DOMContentLoaded",
     document.querySelector("#appliScores").addEventListener("click", ouvrirAppliScores);
     document.querySelector("#appliPlacements").addEventListener("click", ouvrirAppliPlacements);
 
+    //click du bouton de vote
+    document.querySelector("#btn-vote").addEventListener("click", voter);
+
 
     //affichage de la date du prochain match
     afficherDateMatch();
@@ -231,8 +234,15 @@ function detruireVotes() {
     document.querySelector("#enregisJoueur").removeEventListener("click", UpdateDb);
 
     let divGestion = document.getElementById("gestionJoueur");
-    divGestion.style.display = "none"; 
+    divGestion.style.display = "none";
     
+    //effacement de commentaire
+    let commentaire = document.getElementById("commentJoueur").value="";
+    
+    //Bouton de retour
+    let retourPres = document.getElementById("retourPresence").value ="";
+    let retourCom = document.getElementById("retourCommentaire").value = "";
+    let retourVote = document.getElementById("retourVote").value ="";;
     location = "index.php";
 }
 
@@ -472,4 +482,41 @@ function afficherPresence(element) {
             element.value = "incertain";
             break;
     }
+}
+
+function voter() {
+
+    let ligne;
+    let num_match;    
+    let num_vote;
+
+    let div = document.getElementById("nomJoueur");
+    num_match = div.getAttribute("data-match");
+    ligne = div.getAttribute("data-nosql");
+
+    let votes = document.querySelectorAll(".queryVote");
+    for(let i = 0; i<votes.length; i++) {
+        let vote = votes[i];
+        if(vote.checked == true) {
+            num_vote = vote.getAttribute("data-no");
+            break;
+        }
+    }
+
+    if(num_vote != undefined) {
+
+        let url="php/updateVote.php?ligne=" + ligne + "&num_match=" + num_match +
+            "&num_vote=" + num_vote;
+
+        $ajaxUtils.sendGetRequest(url, function(request) {
+
+            let retour = request.responseText;
+
+            let retourVote = document.getElementById("retourVote");
+            retourVote.value = retour;
+            retourVote.style.display = "block";
+        })
+
+    }
+    
 }
