@@ -23,9 +23,9 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
             let reponse = request.responseText;
             
-            let votes = JSON.parse(reponse);
-            //console.log(matchs);
-            construitVotes(votes);
+            //let votes = JSON.parse(reponse);
+            console.log(reponse);
+            //construitVotes(votes);
             //construireScoreBoard(matchs);
         })
 })        

@@ -7,20 +7,36 @@ error_reporting (E_ALL);
     define("USER","root");
     define("PSWD","jordan");
 
-    $votes = array();
+    $matchs = array();
+    $unMatch = array();
+    
 
     //affichage de chaque match trouvé dans la bdd
     $pdo = new PDO(MYSQL, USER, PSWD);
     $pdo->query("SET NAMES UTF8");
 
-    $reqVote = $pdo->prepare('SELECT * FROM votes');
-    $reqVote->execute();
-    while($ligne = $reqVote->fetch(PDO::FETCH_ASSOC)) {
-        array_push($votes, $ligne);
+    $reqMatchs = $pdo->prepare("SELECT num_match FROM votes GROUP BY num_match");
+    $reqMatchs->execute();
+    while($ligne = $reqMatchs->fetch(PDO::FETCH_ASSOC)) {
+        array_push($matchs, $ligne);
     }
 
-    $myJSON = json_encode($votes);
+    foreach($matchs as $match) {
+        $votes = array();
+        $reqVote = $pdo->prepare("SELECT COUNT(num_vote) FROM votes WHERE num_match = (?)");
+        $reqVote->execute(array($match['num_match']));
+        while($ligne = $reqVote->fetch(PDO::FETCH_ASSOC)) {
+            array_push($votes, $ligne);
+        }
+        array_push($unMatch, $votes);
+    }
 
+   
+
+   
+    $myJSON = json_encode($unMatch);
     echo $myJSON;
+
+    //print_r($votes);
 
 ?>
