@@ -1,5 +1,6 @@
 /* variables à sauvegarder 
 bleu redbull : #001e3c;
+bleu michigan : #00274c;
 jaune michigan : #f5c300;
 */
 
@@ -17,8 +18,8 @@ html {
   position: relative;
   min-height: 100px;
   padding-top: 18px;
-  background-image: linear-gradient(#38596e, #0d0c1d);
-  margin-bottom: 30px;
+  background-color: #00274c;
+  border-bottom: 1px solid white;
 }
 
 .header .wrapper-logo {  
@@ -34,7 +35,6 @@ html {
   height: 65px;
   font-family: 'Pacifico', cursive;
   color: #f5c300;
-  text-shadow: 1px 1px 4px black, 2px 2px 2px black;
   padding-top: 8px;
   margin-left: 15px;
 }

@@ -1,7 +1,7 @@
 
 document.addEventListener("DOMContentLoaded", function (event) {
 
-    var matchs;
+    
 
     $( ".retour" ).on( "click", function( event ) {
         retour();
@@ -12,9 +12,10 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
             let reponse = request.responseText;
             
-            matchs = JSON.parse(reponse);
+            let matchs = JSON.parse(reponse);
             console.log(matchs);
             construit(matchs);
+            construireScoreBoard(matchs);
         })
 })        
 
@@ -60,16 +61,42 @@ function construit(objet) {
 
 function modifierTab(el, tab) {
     console.log(el);
-    let num = el.getAttribute("data-id");
+    //let num = el.getAttribute("data-id");
+    
+    document.body.removeChild(el);
+}
+
+function construireScoreBoard(tab) {
+    let scores = document.getElementById("scoreBoard");
+
+    let ul  = document.createElement("ul");
 
     for(let i = 0; i<tab.length; i++) {
-        if(tab[i].id == num) {
-            /* tab[i].nom  = el.value;
-            console.log(tab[i].nom); */
-            tab.splice(i, 1);
-            construit(tab);
-            break;
-        }
+
+        let match = tab[i];
+        
+
+        //let li = document.createElement("li");
+
+        let div = document.createElement("div");
+        div.className = "scoreBoardMatch";
+
+        let nom = document.createElement("div");
+        nom.setAttribute("data-id", match.id);
+        nom.className = "scoreBoardNom";
+        nom.innerHTML = match.nom;
+
+        let date = document.createElement("div");
+        date.innerHTML = match.date_match;
+        
+        //li.innerHTML = match.nom;
+        //li.appendChild(p);
+        //li.appendChild(date);
+
+        div.appendChild(nom);
+        div.appendChild(date);
+
+        scores.appendChild(div);
     }
 }
 

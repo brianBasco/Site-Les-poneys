@@ -397,7 +397,6 @@ function afficherDateMatch() {
             }
         }
     //S'il ya des matchs à jouer
-    //pop supprimme le dernier élément, si undefined alors le tableau est vide
      if(dates[0] != undefined) {
          console.log(dates);
         let min = dates[0][0] - dateDuJour;
@@ -412,10 +411,22 @@ function afficherDateMatch() {
     }  
 
     if(numMatch != undefined) {
+        let tab_jour=["Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"];
+        let tab_mois=["janv.","févr.","mars","avr.","mai","juin","juil.","août","sept.","oct.","nov.","déc."];
+
         let div = document.getElementById("prochainMatch");
         let dateMatch = document.getElementById("match" + numMatch).getAttribute("data-date");
+
+        let dateDiv = dateMatch.split("-");
+        dateDiv = new Date(dateDiv.reverse());
+
+        let num = dateDiv.getDate();
+        let jour  = tab_jour[dateDiv.getDay()];        
+        let mois = tab_mois[dateDiv.getMonth()];
+        
         let equipe = document.getElementById("nom" + numMatch).innerHTML;
-        div.innerHTML = "Prochain match le " + dateMatch + " contre " + equipe;
+        
+        div.innerHTML = "Prochain match le " + jour + " " + num + " " + mois + " contre " + equipe;
     }
 }
 

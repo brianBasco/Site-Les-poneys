@@ -6,7 +6,11 @@
 
  <body>
 
-     <?php
+    <?php
+        include('html/scoreBoard.html');
+    ?>
+
+    <?php
         include('html/header.html');
     ?>
 
