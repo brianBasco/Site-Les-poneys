@@ -20,6 +20,6 @@ error_reporting (E_ALL);
         VALUES (?,?,?)") or exit(print_r($pdo->errorInfo()));
     $req->execute(array($num_match, $nom_joueur, $commentaire));
 
-    echo "commentaire enregistré";
-
+    $retour =  json_encode(array(true,"commentaire enregistré"));
+    echo $retour;
 ?>

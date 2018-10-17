@@ -17,6 +17,7 @@ error_reporting (E_ALL);
     $req = $pdo->prepare("UPDATE presence SET present=(?) WHERE id=(?)") or exit(print_r($pdo->errorInfo()));
     $req->execute(array($presence,$ligne));
 
-    echo "présence mise à jour";
+    $retour =  json_encode(array(true,"présence mise à jour"));
+    echo $retour;
 
 ?>

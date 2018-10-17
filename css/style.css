@@ -234,14 +234,15 @@ html {
 }
 
 .match .btn-mail {
-  background-image: url("images/mail.png");
-  height: 50px; /* You must set a specified height */
-  background-position: center; /* Center the image */
-  background-repeat: no-repeat; /* Do not repeat the image */
-  background-size: cover; /* Resize the background image to cover the entire container */
-  width: 60px;
-  border-radius: 0;
-  border: none;
+	background-image: url("images/mail.png");
+	height: 50px;
+	background-position: center;
+	background-repeat: no-repeat;
+	width: 80px;
+	border-radius: 0;
+	border: 0;
+	background-color: white;
+	box-sizing: content-box;
 }
 
 .match .commentaires {
@@ -249,15 +250,20 @@ html {
   width: 100%;
 }
 
-.match .commentaires .nom {
+.match .commentaires .nom, .match .commentaires .contenu {
+  border: 0;
+  border-radius: 0;
+  margin-bottom: 3px;
   text-align: center;
+}
+
+.match .commentaires .nom {  
   background-color: #001e3c;  
   color: #db0a40;
 }
 
 
 .match .commentaires .contenu {
-  text-align: center;
   background-color:white;
   color: black;
 }
@@ -265,9 +271,11 @@ html {
 .match .expired {
   position: absolute;
   top: 20px;
-  width: 200px;
   opacity: 0.6;
-  left: 75px;
+  width: 50%;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
 }
 
 /* -------------- CSS du slider ------------- */
@@ -483,19 +491,19 @@ html {
     margin-top: 50px;
     background-color: black;
     color: white;
-    height: 200px;
+    height: 120px;
     text-align: center;
   }
 
   .footer .nom {    
-    padding-top: 60px;
+    padding-top: 30px;
   }
 
   .footer b {
     padding: 0 10px;
-    font-size: 2rem;
+    font-size: 1.2rem;
     color: #f5c300;
-    font-family: 'Great Vibes', cursive;
+    font-family: 'Indie Flower', cursive;
   }
 
   .footer .links {

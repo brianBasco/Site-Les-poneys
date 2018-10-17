@@ -29,12 +29,12 @@
                 '<div class="container joueur">
                 <div class="row">
                 <div class="col-5">
-                <button data-match="'.$numMatch.'" data-presence="'.$presence.'" data-no="'.$this->getId().'" data-sqlno="'.$numsql.'" 
+                <button id="joueur'.$numsql.'" data-match="'.$numMatch.'" data-presence="'.$presence.'" data-no="'.$this->getId().'" data-sqlno="'.$numsql.'" 
                 data-photo="'.$this->getPhotoPath().'" class="btn-joueur nom select input'.$numMatch.'" >'.$this->nom.'</button>
                 </div>
                 <div class="col-7">';
 
-                echo '<input type="text" readonly class="presence" data-presence="'.$presence.'" />';
+                echo '<input id="input'.$numsql.'" type="text" readonly class="presence" data-presence="'.$presence.'" data-sqlno="'.$numsql.'" />';
                 
             echo '
                 </div>

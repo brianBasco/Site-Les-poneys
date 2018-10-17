@@ -14,8 +14,7 @@
 
       include('html/infos.html');
     ?>
-    
-   
+
     <?php
       include('php/listeDesMatchs.php');  
     ?>
@@ -28,6 +27,7 @@
     <?php
       include('html/footer.html');
     ?>
+
 
   <!-- Bundle Bootstrap --------------------------------- -->
   <script type="text/javascript" src="bundle.js"></script>

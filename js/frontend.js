@@ -240,10 +240,17 @@ function detruireVotes() {
     let commentaire = document.getElementById("commentJoueur").value="";
     
     //Bouton de retour
-    let retourPres = document.getElementById("retourPresence").value ="";
-    let retourCom = document.getElementById("retourCommentaire").value = "";
-    let retourVote = document.getElementById("retourVote").value ="";;
-    location = "index.php";
+    let retourPres = document.getElementById("retourPresence");
+    let retourCom = document.getElementById("retourCommentaire");
+    let retourVote = document.getElementById("retourVote");
+    
+    retourPres.value ="";
+    retourCom.value ="";
+    retourVote.value ="";
+    
+    retourPres.style.display = "none";
+    retourCom.style.display = "none"; 
+    retourVote.style.display = "none";
 }
 
 
@@ -324,10 +331,38 @@ function UpdateDb() {
         $ajaxUtils.sendGetRequest(urlCommentaire, 
         function (request) {
             
-          let retour = request.responseText;
-          let div = document.querySelector("#retourCommentaire");
-          div.value = retour;
-          div.style.display = "block";
+        let retour = request.responseText;
+        let reponse = JSON.parse(retour); 
+
+        let div = document.querySelector("#retourCommentaire");
+        div.value = reponse[1];
+        div.style.display = "block";
+
+        //affichage du commentaire dans la div match
+        if(reponse[0]){
+            let DIVcommentaire = document.getElementById("commentaires" + num_match);
+           
+            let div = document.createElement("div");
+            let nom = document.createElement("input");
+            let comment = document.createElement("input");
+            nom.setAttribute("type", "text");
+            nom.setAttribute("readonly", "true");
+            nom.setAttribute("value", nom_joueur);
+            nom.className = "form-control nom";
+            
+            comment.setAttribute("type", "text");
+            comment.setAttribute("readonly", "true");
+            comment.setAttribute("value", commentaire);
+            comment.className = "form-control contenu";
+
+            div.appendChild(nom);
+            div.appendChild(comment);
+            DIVcommentaire.appendChild(div);
+
+            let DIVmatch = document.getElementById("match" + num_match);
+            ouvrirJoueurs(DIVmatch);
+            }
+
     });
     }    
 
@@ -349,10 +384,23 @@ function UpdateDb() {
     .sendGetRequest(urlPresence, 
       function (request) {
 
-        let retour = request.responseText;       
+        let retour = request.responseText;
+        let reponse = JSON.parse(retour);   
+        console.log(reponse);    
         let div  = document.querySelector("#retourPresence");
-        div.value = retour;
+        div.value = reponse[1];
         div.style.display = "block";
+
+        //si retour sans erreur
+        if(reponse[0]){
+        let nom = document.getElementById("joueur" + nosql);
+        let input = document.getElementById("input" + nosql);
+
+        nom.setAttribute("data-presence", presence);
+        input.setAttribute("data-presence", presence);
+        afficherPresence(input);
+        }
+        
   });
 
   
@@ -436,7 +484,8 @@ function afficherDateMatch() {
         
         let equipe = document.getElementById("nom" + numMatch).innerHTML;
         
-        div.innerHTML = "Prochain match le " + jour + " " + num + " " + mois + " contre " + equipe;
+        if(jour != undefined) div.innerHTML = "Prochain match le " + jour + " " + num + " " + mois + " contre " + equipe;
+        else div.innerHTML = "Prochain match le " + dateMatch + " contre " + equipe;
     }
 }
 

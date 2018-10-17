@@ -75,7 +75,7 @@ error_reporting (E_ALL);
             }
         }
         //Liste des commentaires
-        echo '<div class="commentaires">';
+        echo '<div id="commentaires'.$balise->getId().'" class="commentaires">';
             foreach($commentaires as $commentaire) {
                 if($commentaire['num_match'] == $balise->getId()) {
                     echo '

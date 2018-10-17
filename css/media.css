@@ -1,6 +1,16 @@
 /* Extra small devices (portrait phones, less than 576px) */
 /* -----------  MAX WIDTH  ----------------- */
 
+@media (max-width: 576px) {
+    .header .logo img {
+	    width: 50px;
+        height: 45px;
+    }
+
+    .header .titre h1{
+        font-size: 1.8rem;
+    }
+}
 
 
 
