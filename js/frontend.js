@@ -455,7 +455,11 @@ function colorerDiv (el) {
 
     if(DateMatch < date && ((DateMatch - date) != 1)) {
         console.log("ecart = : " + (DateMatch - date))
-        el.style.backgroundColor = "#ff7b25";
+        let image = document.createElement("img");
+        image.setAttribute("src", "css/images/expired.png");
+        image.className = "expired";
+
+        el.appendChild(image);
     }
 }
 

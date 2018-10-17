@@ -20,6 +20,7 @@ html {
   padding-top: 18px;
   background-color: #00274c;
   border-bottom: 1px solid white;
+  margin-bottom: 30px;
 }
 
 .header .wrapper-logo {  
@@ -113,8 +114,7 @@ html {
   height: 40px;
   background-color: white;
   color: #001e3c;
-  border: 2px solid black;
-  box-shadow: 2px 2px 1px black;
+  border: 0;
 }
 
 .btn-joueur:hover {
@@ -128,7 +128,7 @@ html {
 .joueur input {
   width: 100%;  
   vertical-align: top;
-  border: 2px solid black;
+  border: 0;
   border-radius: 0;
   text-align: center;
   height: 40px;
@@ -178,7 +178,8 @@ html {
   text-align: center;
   margin-top: 20px;
   margin-bottom: 20px;
-  box-shadow: 2px 2px 3px rgba(1, 2, 2, 0.6);
+  box-shadow: 0px 2px 1px rgba(1, 2, 2, 0.3);
+  position: relative;
 }
 
 .match .info {
@@ -261,6 +262,13 @@ html {
   color: black;
 }
 
+.match .expired {
+  position: absolute;
+  top: 20px;
+  width: 200px;
+  opacity: 0.6;
+  left: 75px;
+}
 
 /* -------------- CSS du slider ------------- */
  /* The switch - the box around the slider */
@@ -492,4 +500,33 @@ html {
 
   .footer .links {
     color: white;
+  }
+
+  /* ------------ style de la page AUTHENTIFICATION ---------------*/
+
+  .authentification {
+    background-color: black;
+    padding-top: 60px;
+    font-family: 'Roboto Condensed', sans-serif;
+    text-align: center;
+  }
+
+  .authentification .form {
+    padding-top: 100px;
+    text-align: center;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .authentification input {
+    border: none;
+    height: 50px;
+    padding-left: 10px;
+  }
+
+  .authentification .bouton {
+    background-color: #ff9900;
+    color: black;
+    height: 52px;
+    width: 100px;
   }

@@ -3,30 +3,26 @@
 <html style="height: 100%">
 
     <head>
-        <title>NFA017 - authentification</title>
+        <title>authentification</title>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	    <meta name="viewport" content="width=device-width, initial-scale=1" /> 
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        
+        <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:700" rel="stylesheet"> 
         <link rel="stylesheet" type="text/css" href="css/style.css" />
         
     </head>
 
     <body class="authentification" >
-        <form method="POST" action="#">          
-            <fieldset>
-                <legend>Connexion</legend>
 
+    <img class="image" src="css/images/volley-silhouette.png" >
+    
+        <form class="form" method="POST" action="#">          
+            
                 <div>
-                    <label for="mdp">Mot de passe</label>
                     <input type="password" name="mdp" id="mdp" placeholder="Votre mot de passe"/>
-                </div>
-
-                <div>
-                    <label></label> <!-- label vide pour aligner le bouton ci-dessous -->
                     <input class="bouton" type="submit" name="submit" value="Valider" />
                 </div>
-
-            </fieldset>
                   
         </form>
         
