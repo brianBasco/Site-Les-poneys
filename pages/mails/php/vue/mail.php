@@ -13,8 +13,17 @@
             placeholder="votre mail"></textarea>
         </div>
 
-        <button id="envoyerMail" class="btn btn-success">envoyer</button>
+        <div class="form-group col-lg-6">
+            <input id="envoyerMail" type="submit" class="btn btn-form btn-outline-success" value="ajouter" name="ajouter" />
+        </div>
 
+        <div class="form-group col-lg-6">
+            <input type="reset" class="btn btn-form btn-outline-warning" value="reset" />
+        </div>
+
+        <div class="form-group col-lg-6">
+            <button class="btn btn-form btn-outline-danger" id="annuler">Annuler</button>
+        </div>
         
         </div>';
 ?>

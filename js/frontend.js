@@ -44,11 +44,6 @@ document.addEventListener("DOMContentLoaded",
     //Bouton du header
     document.querySelector("#menu_bouton").addEventListener("click", toggleMenu);
 
-    //click du menu
-    document.querySelector("#ajouterMatch").addEventListener("click", ouvrirAjoutMatch);
-    document.querySelector("#appliScores").addEventListener("click", ouvrirAppliScores);
-    document.querySelector("#appliPlacements").addEventListener("click", ouvrirAppliPlacements);
-
     //click du bouton de vote
     document.querySelector("#btn-vote").addEventListener("click", voter);
 
@@ -292,17 +287,6 @@ function toggleMenu() {
     }    
 }
 
-function ouvrirAjoutMatch() {
-    location = "pages/ajout/index.php";
-}
-
-function ouvrirAppliScores() {
-    location = "applis/scores/index.html";
-}
-
-function ouvrirAppliPlacements() {
-    location = "applis/placements/index.html";
-}
 
 function ouvrirGestionMails (element) {
     let numMatch = element.getAttribute("data-match");

@@ -65,30 +65,31 @@ html {
 	transition: fill .1s linear;
 }
 
-
-
-
-.header .menu-item {
-  height: 70px;
-  color: white;
-  border-bottom: 2px solid white;
-  padding: 5px 0;
-}
-
-.header .menu-item button {
-  height: 60px;
-  width: 100%;
-  background-color: #111515;
-}
-
 .header .menu_deplie {
   max-height: 0;
   overflow: hidden;
   transition: all ease 0.7s;
 }
 
+.header .menu_deplie ul {
+	background-color: white;
+  border: 1px solid grey;
+  list-style-type: none;
+}
 
+.header .menu_deplie li {
+  padding: 15px;
+  color: black;
+  border-bottom: 1px solid grey;
+}
 
+.header .menu_deplie li:last-child {
+  border-bottom: none;
+}
+
+.header .menu_deplie a {
+  color:#00274c;
+}
 
 /* --------- classe joueurs -------------------- */
 .joueurs {

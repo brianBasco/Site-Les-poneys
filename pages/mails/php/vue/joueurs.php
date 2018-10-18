@@ -21,7 +21,9 @@
     echo '</div>';
 
     echo '
+        <div class="container choix">
         <button id="tous" class="btn btn-success" >Envoyer un mail à tous</button>
         <button id="presents" class="btn btn-danger" >Envoyer un mail aux présents</button>
+        </div>
         ';
 ?>

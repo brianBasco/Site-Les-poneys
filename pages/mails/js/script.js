@@ -1,3 +1,7 @@
+// A FAIRE function reset avec le bouton reset -> remettre le texte vide
+// Essayer de gérer expediteur De :
+
+
 document.addEventListener("DOMContentLoaded",
   function (event) {
 
