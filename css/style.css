@@ -251,20 +251,20 @@ html {
   width: 100%;
 }
 
-.match .commentaires .nom, .match .commentaires .contenu {
+.match .commentaires .nomComment, .match .commentaires .contenuComment {
   border: 0;
   border-radius: 0;
   margin-bottom: 3px;
   text-align: center;
 }
 
-.match .commentaires .nom {  
+.match .commentaires .nomComment {  
   background-color: #001e3c;  
   color: #db0a40;
 }
 
 
-.match .commentaires .contenu {
+.match .commentaires .contenuComment {
   background-color:white;
   color: black;
 }
@@ -300,7 +300,7 @@ html {
     left: 0;
     right: 0;
     bottom: 0;
-    padding-top: 5px;
+    padding-top: 8px;
     background-color: white;
     color: #001e3c;
     -webkit-transition: .4s;
@@ -358,7 +358,14 @@ html {
   input:focus + .slider.vote {
     box-shadow: 0 0 1px rgb(34, 245, 7);
   }
+
+  .slider.vote[data-perso="boulard"]::after{
+    content : "J'ai le boulard";
+  }
   
+  .slider.vote[data-perso="bouse"]::after{
+    content : "même moi";
+  }
   
   input:checked + .slider:before {
     -webkit-transform: translateX(162px);

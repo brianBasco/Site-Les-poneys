@@ -30,7 +30,7 @@
                 <div class="row">
                 <div class="col-5">
                 <button id="joueur'.$numsql.'" data-match="'.$numMatch.'" data-presence="'.$presence.'" data-no="'.$this->getId().'" data-sqlno="'.$numsql.'" 
-                data-photo="'.$this->getPhotoPath().'" class="btn-joueur nom select input'.$numMatch.'" >'.$this->nom.'</button>
+                data-photo="'.$this->getPhotoPath().'" class="btn-joueur nom eventNom select input'.$numMatch.'" >'.$this->nom.'</button>
                 </div>
                 <div class="col-7">';
 

@@ -68,19 +68,31 @@
 
 <!-- ancre pour insérer les inputs des votes-->
 <div id="votes" class="votes container">
-    <h1>Qui sera élu(e) l'homme (ou la femme)<sub><i> pas de sexisme </i></sub>du match ?</h1>
 
-    <div id="finDesVotes"></div>
+    <div id="action" class="action">
+    <h1>Pour la plus belle action du match</h1>
+    <div id="voteAction"></div>
 
-    <button id="btn-vote" class="btn btn-warning">Voter</button>
+        <button id="btn-voteAction" class="btn btn-warning">Voter</button>
 
-    <div class="retour container">
-        <div class="container">
-            <input type="text" readonly id="retourVote" class="retourVote" />
+        <div class="retour container">
+            <div class="container">
+                <input type="text" readonly id="retourVoteAction" class="retourVote" />
+            </div>
         </div>
     </div>
-</div>
 
+    <div id="cagade" class="cagade">
+        <h1>Tout le monde peut se trouer...</h1>
+        <div id="voteCagade"></div>
 
+        <button id="btn-voteCagade" class="btn btn-warning">Voter</button>
 
+            <div class="retour container">
+                <div class="container">
+                    <input type="text" readonly id="retourVoteCagade" class="retourVote" />
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

@@ -80,8 +80,8 @@ error_reporting (E_ALL);
                 if($commentaire['num_match'] == $balise->getId()) {
                     echo '
                             <div>
-                            <input class="form-control nom" type="text" readonly value="'.$commentaire['nom_joueur'].'" />
-                            <input class="form-control contenu" type="text" readonly value="'.$commentaire['commentaire'].'" />                             
+                            <input class="form-control nomComment" type="text" value="'.$commentaire['nom_joueur'].'" readonly="readonly" />
+                            <input class="form-control contenuComment" type="text" value="'.$commentaire['commentaire'].'" readonly="readonly" />                             
                             </div>';
                 }
             }

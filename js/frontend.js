@@ -8,21 +8,21 @@ document.addEventListener("DOMContentLoaded",
         colorerDiv(matchs[i]);
     }
    
-    let moins = document.querySelectorAll(".moins");
+    let moins = document.querySelectorAll(".eventMoins");
     for(let i = 0; i<moins.length; i++) {
         moins[i].addEventListener("click", function() {
             fermerJoueurs(this);
     })
     }
 
-    let plus = document.querySelectorAll(".plus");
+    let plus = document.querySelectorAll(".eventPlus");
     for(let i = 0; i<plus.length; i++) {
         plus[i].addEventListener("click", function() {
             ouvrirJoueurs(this);
     })
     }
 
-    let nom = document.querySelectorAll(".nom");
+    let nom = document.querySelectorAll(".eventNom");
     for(let i = 0; i<nom.length; i++) {
         nom[i].addEventListener("click", function() {
             ouvrirGestionJoueur(this);
@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded",
     document.querySelector("#menu_bouton").addEventListener("click", toggleMenu);
 
     //click du bouton de vote
-    document.querySelector("#btn-vote").addEventListener("click", voter);
+    document.querySelector("#btn-voteAction").addEventListener("click", voter);
 
 
     //affichage de la date du prochain match
@@ -151,56 +151,64 @@ function ouvrirGestionJoueur(element) {
     let photoPath = element.getAttribute("data-photo");
     photo.src = "css/images/joueurs/" + photoPath;
 
-    construireVotes(noMatch, noJoueur);   
-    enregistrerModifs();
+    
 
+    construirePresence();
+    construireVotes(noMatch, noJoueur, "queryAction", "voteAction", "boulard");
+    construireVotes(noMatch, noJoueur, "queryCagade", "voteCagade", "bouse");   
+    enregistrerModifs();
 }
 
-function construireVotes(numMatch, numJoueur) {
+function construireVotes(numMatch, numJoueur, selecteur, id, monType) {
 
     let div = document.createElement("div");
-    div.setAttribute("id", "listeVotes");
     div.className = "row";
    
     let inputs = document.querySelectorAll(".input" + numMatch);
     for(let i = 0; i<inputs.length; i++) {
 
         let num = inputs[i].getAttribute("data-no");
-        if(numJoueur != num) {
-            //construire la div container
-            let divContainer = document.createElement("div");
-            divContainer.className = "col-sm-12 col-md-6 col-lg-4";
-            //construire label
-            let label = document.createElement("label");
-            label.setAttribute("class", "switch");
-            //construire input
-            let input = document.createElement("input");
-            input.setAttribute("type", "checkbox");
-            input.setAttribute("class", "queryVote");
-            input.setAttribute("data-no", num);
-            //construire span
-            let span = document.createElement("span");
-            span.className = "slider vote";
-            span.innerHTML = inputs[i].innerHTML;
+        //construire la div container
+        let divContainer = document.createElement("div");
+        divContainer.className = "col-sm-12 col-md-6 col-lg-4";
+        //construire label
+        let label = document.createElement("label");
+        label.setAttribute("class", "switch");
+        //construire input
+        let input = document.createElement("input");
+        input.setAttribute("type", "checkbox");
+        input.setAttribute("class", selecteur);
+        input.setAttribute("data-no", num);
+        //construire span
+        let span = document.createElement("span");
+        span.className = "slider vote";
+
+        if(numJoueur != num) span.innerHTML = inputs[i].innerHTML;
+        else span.setAttribute("data-perso", monType);
                    
-            label.appendChild(input);
-            label.appendChild(span);
+        label.appendChild(input);
+        label.appendChild(span);
 
-            divContainer.appendChild(label);
+        divContainer.appendChild(label);
 
-            div.appendChild(divContainer);
-
-        }
+        div.appendChild(divContainer);
     }
 
-    let root = document.getElementById("votes");
-    let ancre = document.getElementById("finDesVotes");
+    let root = document.getElementById(id);
 
-    root.insertBefore(div, ancre);
+    root.appendChild(div);
+    console.log(root);
+
+    let queryVotes = document.querySelectorAll("." + selecteur);
+    for(let i = 0; i<queryVotes.length; i++) {
+        queryVotes[i].addEventListener("click", function() {            
+            checkClick(this, selecteur, "data-no");
+        });
+    }
+}
     
-    document.querySelector("#fermerGestion").addEventListener("click",
-        detruireVotes);
-
+    
+function construirePresence(){
     let querySelects = document.querySelectorAll(".querySelect");
     for(let i = 0; i<querySelects.length; i++) {
         querySelects[i].addEventListener("click", function() {
@@ -208,20 +216,18 @@ function construireVotes(numMatch, numJoueur) {
             checkClick(this, "querySelect", "data-present");
         });
     }
-
-    let queryVotes = document.querySelectorAll(".queryVote");
-    for(let i = 0; i<queryVotes.length; i++) {
-        queryVotes[i].addEventListener("click", function() {            
-            checkClick(this, "queryVote", "data-no");
-        });
-    }
 }
 
-function detruireVotes() {     
+function detruireVotes() {       
 
-    let div = document.getElementById("listeVotes");
-    let root = document.getElementById("votes");
-    root.removeChild(div);
+   //let root = document.getElementById("votes");
+    let divAction = document.getElementById("voteAction");
+    let divCagade = document.getElementById("voteCagade");
+    let action = document.getElementById("action");
+    let cagade = document.getElementById("cagade");
+    console.log(divAction);
+    divAction.removeChild(divAction.childNodes[0]);
+    divCagade.removeChild(divCagade.childNodes[0]);
 
     document.querySelector("#fermerGestion").removeEventListener("click",
         detruireVotes);
@@ -229,6 +235,7 @@ function detruireVotes() {
     document.querySelector("#enregisJoueur").removeEventListener("click", UpdateDb);
 
     let divGestion = document.getElementById("gestionJoueur");
+    location= "#listeMatchs";
     divGestion.style.display = "none";
     
     //effacement de commentaire
@@ -237,15 +244,18 @@ function detruireVotes() {
     //Bouton de retour
     let retourPres = document.getElementById("retourPresence");
     let retourCom = document.getElementById("retourCommentaire");
-    let retourVote = document.getElementById("retourVote");
+    let retourVoteAction = document.getElementById("retourVoteAction");
+    let retourVoteCagade = document.getElementById("retourVoteCagade");
     
     retourPres.value ="";
     retourCom.value ="";
-    retourVote.value ="";
+    retourVoteAction.value ="";
+    retourVoteCagade.value ="";
     
     retourPres.style.display = "none";
     retourCom.style.display = "none"; 
-    retourVote.style.display = "none";
+    retourVoteAction.style.display = "none";
+    retourVoteCagade.style.display = "none";
 }
 
 
@@ -294,9 +304,11 @@ function ouvrirGestionMails (element) {
     location = url; 
 }
 
-function enregistrerModifs(nosql) {
+function enregistrerModifs() {
 
-    document.querySelector("#enregisJoueur").addEventListener("click", UpdateDb); 
+    document.querySelector("#enregisJoueur").addEventListener("click", UpdateDb);
+    document.querySelector("#fermerGestion").addEventListener("click",
+    detruireVotes); 
 }
 
 function UpdateDb() {
@@ -332,12 +344,12 @@ function UpdateDb() {
             nom.setAttribute("type", "text");
             nom.setAttribute("readonly", "true");
             nom.setAttribute("value", nom_joueur);
-            nom.className = "form-control nom";
+            nom.className = "form-control nomComment";
             
             comment.setAttribute("type", "text");
             comment.setAttribute("readonly", "true");
             comment.setAttribute("value", commentaire);
-            comment.className = "form-control contenu";
+            comment.className = "form-control contenuComment";
 
             div.appendChild(nom);
             div.appendChild(comment);
@@ -362,30 +374,33 @@ function UpdateDb() {
     if(presence == undefined) presence = 0;
 
     //requête AJAX update presence
-    let urlPresence = "php/updatePresence.php?ligne=" + nosql + "&presence=" + presence;
-    console.log(urlPresence);
-    $ajaxUtils
-    .sendGetRequest(urlPresence, 
-      function (request) {
+    if(presence != 0) {
+        let urlPresence = "php/updatePresence.php?ligne=" + nosql + "&presence=" + presence;
+        console.log(urlPresence);
+        $ajaxUtils
+        .sendGetRequest(urlPresence, 
+        function (request) {
 
-        let retour = request.responseText;
-        let reponse = JSON.parse(retour);   
-        console.log(reponse);    
-        let div  = document.querySelector("#retourPresence");
-        div.value = reponse[1];
-        div.style.display = "block";
+            let retour = request.responseText;
+            let reponse = JSON.parse(retour);   
+            console.log(reponse);    
+            let div  = document.querySelector("#retourPresence");
+            div.value = reponse[1];
+            div.style.display = "block";
 
-        //si retour sans erreur
-        if(reponse[0]){
-        let nom = document.getElementById("joueur" + nosql);
-        let input = document.getElementById("input" + nosql);
+            //si retour sans erreur
+            if(reponse[0]){
+            let nom = document.getElementById("joueur" + nosql);
+            let input = document.getElementById("input" + nosql);
 
-        nom.setAttribute("data-presence", presence);
-        input.setAttribute("data-presence", presence);
-        afficherPresence(input);
-        }
-        
-  });
+            nom.setAttribute("data-presence", presence);
+            input.setAttribute("data-presence", presence);
+            afficherPresence(input);
+            calculerParticipants(num_match);
+            }
+            
+            });
+    }
 
   
 }

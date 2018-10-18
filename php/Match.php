@@ -48,8 +48,8 @@ class Match {
                 <textarea type="text" readonly rows="3" id="adresse'.$this->getId().'">'.$this->getAdresse().'</textarea>
             </div>
             <div class="info boutons">
-                <button class="btn btn-match moins" data-match="'.$this->getId().'" >-</button>
-                <button class="btn btn-match plus" data-match="'.$this->getId().'" >+</button>
+                <button class="btn btn-match moins eventMoins" data-match="'.$this->getId().'" >-</button>
+                <button class="btn btn-match plus eventPlus" data-match="'.$this->getId().'" >+</button>
                 <button class="btn btn-mail" data-match="'.$this->getId().'" ></button>
             </div>';            
             //La fin de la div col etc est dans le fichier listeDesMatchs
