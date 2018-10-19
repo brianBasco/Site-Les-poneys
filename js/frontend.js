@@ -445,7 +445,7 @@ function afficherDateMatch() {
             dateMatch = dateMatch.join('-');
             let heureMatch = matchs[i].getAttribute("data-heure");
 
-            dateMatch += "T"+heureMatch+":00";
+            dateMatch += "T23:59:00";
             dateMatch = new Date(dateMatch);
             let DateMatch = dateMatch.getTime();
 
@@ -503,9 +503,8 @@ function colorerDiv (el) {
     dateMatch = dateMatch.split('-');
     dateMatch.reverse();
     dateMatch = dateMatch.join('-');
-    let heureMatch = el.getAttribute("data-heure");
 
-    dateMatch += "T"+heureMatch+":00";
+    dateMatch += "T23:59:00";
 
     if(dateMatch < date) {
         let image = document.createElement("img");
