@@ -45,7 +45,11 @@ document.addEventListener("DOMContentLoaded",
     document.querySelector("#menu_bouton").addEventListener("click", toggleMenu);
 
     //click du bouton de vote
-    document.querySelector("#btn-voteAction").addEventListener("click", voter);
+    document.querySelector("#btn-voteAction").addEventListener("click", function(){
+        voter("VoteAction")});
+
+    document.querySelector("#btn-voteCagade").addEventListener("click", function(){
+        voter("VoteCagade")});
 
 
     //affichage de la date du prochain match
@@ -154,8 +158,8 @@ function ouvrirGestionJoueur(element) {
     
 
     construirePresence();
-    construireVotes(noMatch, noJoueur, "queryAction", "voteAction", "boulard");
-    construireVotes(noMatch, noJoueur, "queryCagade", "voteCagade", "bouse");   
+    construireVotes(noMatch, noJoueur, "queryVoteAction", "voteAction", "boulard");
+    construireVotes(noMatch, noJoueur, "queryVoteCagade", "voteCagade", "bouse");   
     enregistrerModifs();
 }
 
@@ -439,16 +443,17 @@ function afficherDateMatch() {
             dateMatch = dateMatch.split('-');
             dateMatch.reverse();
             dateMatch = dateMatch.join('-');
-            console.log("datematch = " + dateMatch);
-            let DateMatch = new Date(dateMatch);
-    
-            let dateTime = DateMatch.getTime();
-            console.log("date du match " + dateTime);
-            if(dateTime >= dateDuJour) {
+            let heureMatch = matchs[i].getAttribute("data-heure");
+
+            dateMatch += "T"+heureMatch+":00";
+            dateMatch = new Date(dateMatch);
+            let DateMatch = dateMatch.getTime();
+
+            if(DateMatch > dateDuJour) {
                 
                 numMatch = matchs[i].getAttribute("data-match");
                 console.log("num de match " + numMatch);
-                dates.push([dateTime, numMatch]);
+                dates.push([DateMatch, numMatch]);
                 
                 }
             }
@@ -491,18 +496,18 @@ function afficherDateMatch() {
 function colorerDiv (el) {
 
     let date = new Date();
+    date = date.toISOString();
     //let dateDuJour = date.getTime();
 
     let dateMatch = el.getAttribute("data-date");
     dateMatch = dateMatch.split('-');
     dateMatch.reverse();
     dateMatch = dateMatch.join('-');
+    let heureMatch = el.getAttribute("data-heure");
 
-    let DateMatch = new Date(dateMatch);
-    //DateDuMatch = DateMatch.getTime();
+    dateMatch += "T"+heureMatch+":00";
 
-    if(DateMatch < date && ((DateMatch - date) != 1)) {
-        console.log("ecart = : " + (DateMatch - date))
+    if(dateMatch < date) {
         let image = document.createElement("img");
         image.setAttribute("src", "css/images/expired.png");
         image.className = "expired";
@@ -536,7 +541,7 @@ function afficherPresence(element) {
     }
 }
 
-function voter() {
+function voter(query) {
 
     let ligne;
     let num_match;    
@@ -546,7 +551,7 @@ function voter() {
     num_match = div.getAttribute("data-match");
     ligne = div.getAttribute("data-nosql");
 
-    let votes = document.querySelectorAll(".queryVote");
+    let votes = document.querySelectorAll(".query"+ query);
     for(let i = 0; i<votes.length; i++) {
         let vote = votes[i];
         if(vote.checked == true) {
@@ -557,14 +562,14 @@ function voter() {
 
     if(num_vote != undefined) {
 
-        let url="php/updateVote.php?ligne=" + ligne + "&num_match=" + num_match +
+        let url="php/updateVote.php?query=" + query + "&ligne=" + ligne + "&num_match=" + num_match +
             "&num_vote=" + num_vote;
 
         $ajaxUtils.sendGetRequest(url, function(request) {
 
             let retour = request.responseText;
 
-            let retourVote = document.getElementById("retourVote");
+            let retourVote = document.getElementById("retour" + query);
             retourVote.value = retour;
             retourVote.style.display = "block";
         })

@@ -6,12 +6,14 @@ class Match {
     private $nom;
     private $adresse;
     private $date;
+    private $heure;
 
-    public function __construct($id, $nom, $adresse, $date) {
+    public function __construct($id, $nom, $adresse, $date, $heure) {
         $this->id = $id;
         $this->nom = $nom;
         $this->adresse = $adresse;
         $this->date = $date;
+        $this->heure = $heure;
     }
 
     public function getId() {
@@ -30,11 +32,15 @@ class Match {
         return $this->date;
     }
 
+    public function getHeure() {
+        return $this->heure;
+    }
+
     public function afficherMatch() {
         echo
             '<div class="col-sm-12 col-md-6 col-lg-4">
             <div id="match'.$this->getId().'" class="match"  data-match="'.$this->getId().'" 
-            data-date="'.$this->getDate().'" >
+            data-date="'.$this->getDate().'" data-heure="'.$this->getHeure().'" >
             <div class="info">
                 <p id="nom'.$this->getId().'" >'.$this->getNom().'</p>
             </div>
@@ -43,6 +49,9 @@ class Match {
             </div>
             <div class="info">
                 <p>'.$this->getDate().'</p>
+            </div>
+            <div class="info">
+                <p>'.$this->getHeure().'</p>
             </div>
             <div class="info">            
                 <textarea type="text" readonly rows="3" id="adresse'.$this->getId().'">'.$this->getAdresse().'</textarea>

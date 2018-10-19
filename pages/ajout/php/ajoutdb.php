@@ -18,8 +18,8 @@ $pdo->query("SET NAMES UTF8");
 
 //insertion du match
 try {
-    $req = $pdo->prepare("INSERT INTO matchs (nom, adresse, date_match) VALUES (?,?,?)") or exit(print_r($req->ErrorInfo()));
-    $req->execute(array($nom, $adresse, $date));
+    $req = $pdo->prepare("INSERT INTO matchs (nom, adresse, date_match, heure) VALUES (?,?,?,?)") or exit(print_r($req->ErrorInfo()));
+    $req->execute(array($nom, $adresse, $date, $heure));
 }
 catch(PDOException $e) {
     print_r($e->getMessage());
@@ -38,8 +38,8 @@ $presence = 0;
 $a_vote = 0;
 while($ligne = $reqJoueurs->fetch()){
     print_r( $ligne);
-    $req = $pdo->prepare("INSERT INTO presence (num_match, num_joueur, present, a_vote) VALUES (?,?,?,?)") or exit(print_r($req->ErrorInfo()));
-    $req->execute(array($numMatch,(int)$ligne['id'], $presence, $a_vote));
+    $req = $pdo->prepare("INSERT INTO presence (num_match, num_joueur, present, VoteAction, VoteCagade) VALUES (?,?,?,?,?)") or exit(print_r($req->ErrorInfo()));
+    $req->execute(array($numMatch,(int)$ligne['id'], $presence, $a_vote, $a_vote));
 }
 
 ?>

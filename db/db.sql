@@ -19,6 +19,7 @@ id int(11) NOT NULL AUTO_INCREMENT,
 nom VARCHAR(255) NOT NULL,
 adresse VARCHAR(255) NOT NULL,
 date_match DATE NOT NULL,
+heure TIME NOT NULL,
 PRIMARY KEY(id)
 )
 
@@ -29,7 +30,8 @@ id int(11) NOT NULL AUTO_INCREMENT,
 num_match int(11) NOT NULL,
 num_joueur int(11) NOT NULL,
 present int(11) NOT NULL,
-a_vote int(11) NOT NULL,
+VoteAction int(11) NOT NULL,
+VoteCagade int(11) NOT NULL,
 PRIMARY KEY(id)
 )
 
@@ -45,7 +47,16 @@ PRIMARY KEY(id)
 
 ENGINE = INNODB;
 
-CREATE TABLE votes (
+CREATE TABLE VoteAction (
+id int(11) NOT NULL AUTO_INCREMENT,
+num_match int(11) NOT NULL,
+num_vote int(11) NOT NULL,
+PRIMARY KEY(id)
+)
+
+ENGINE = INNODB;
+
+CREATE TABLE VoteCagade (
 id int(11) NOT NULL AUTO_INCREMENT,
 num_match int(11) NOT NULL,
 num_vote int(11) NOT NULL,

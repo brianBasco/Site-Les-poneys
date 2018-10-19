@@ -47,9 +47,10 @@ error_reporting (E_ALL);
 
     //Création et affichade des matchs
     while($row = $reqMatch->fetch()){
-        $strJour = strtotime($row['date_match']);
+        $strJour = strtotime($row['date_match'].$row['heure']);
         $jour = date("d-m-Y", $strJour);
-        $balise = new Match($row['id'], $row['nom'], $row['adresse'], $jour);
+        $heure = date("H:i", $strJour);
+        $balise = new Match($row['id'], $row['nom'], $row['adresse'], $jour, $heure);
         $balise->afficherMatch();
 
         //Affichage des joueurs
