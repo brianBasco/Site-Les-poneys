@@ -1,4 +1,8 @@
 <?php
+        include('php/session.php');
+?>
+
+<?php
 
     include('html/doctype.html');
 
@@ -17,6 +21,10 @@
 
     <?php
         include('php/vue/joueurs.php');
+    ?>
+
+    <?php
+        include('html/matchs.html');
     ?>
 
     

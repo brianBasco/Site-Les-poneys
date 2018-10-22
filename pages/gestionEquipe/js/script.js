@@ -1,3 +1,10 @@
+//(function (global) {
+
+    // Set up a namespace for our utility
+    var lesJoueurs;
+    var lesMatchs;
+    
+    //})(window);
 
 document.addEventListener("DOMContentLoaded", function (event) {
 
@@ -7,16 +14,36 @@ document.addEventListener("DOMContentLoaded", function (event) {
         retour();
       });
 
+      $ajaxUtils.sendGetRequest("php/vue/joueurs2.php", function(request) {
+
+        let reponse = request.responseText;
+
+        let joueurs = JSON.parse(reponse);
+
+        //deviennent GLOBAL
+        lesJoueurs = joueurs;
+        
+    
+    //construireScoreBoard(matchs);
+    })
+
       $ajaxUtils.sendGetRequest("php/vue/matchs.php", 
         function(request) {
 
             let reponse = request.responseText;
             
             let matchs = JSON.parse(reponse);
-            console.log(matchs);
-            construit(matchs);
-            //construireScoreBoard(matchs);
+
+            //deviennent GLOBAL
+            lesMatchs = matchs;
+
+                matchs.forEach(element => {
+                    console.log(element);
+                    construit(element);
+                });
         })
+
+        
 
         $ajaxUtils.sendGetRequest("php/vue/votes.php", 
         function(request) {
@@ -24,10 +51,11 @@ document.addEventListener("DOMContentLoaded", function (event) {
             let reponse = request.responseText;
             
             //let votes = JSON.parse(reponse);
-            console.log(reponse);
+            //console.log(reponse);
             //construitVotes(votes);
             //construireScoreBoard(matchs);
         })
+        
 })        
 
 function retour() {
@@ -50,24 +78,50 @@ function demandeDeSuppression(element) {
     }
 }
 
-function construit(objet) {
+function construit(match) {
 
-    for(let i = 0; i<objet.length; i++) {
+    let ancre = document.getElementById("matchs");
 
-        let input = document.createElement("input");
+    let div = document.createElement("div");
+    div.className = "match";
+    div.id = match.id;
 
-        input.setAttribute("type", "text");
-        input.className = "matchs";
-        input.setAttribute("data-id", objet[i].id);
-        input.setAttribute("value", objet[i].nom);
-        input.addEventListener("blur", function() {
-            modifierTab(this, objet);
-        });
+    let nom = document.createElement("input");
+    nom.setAttribute("type", "text");
+    nom.value = match.nom;
 
+    //rattacher les joueurs
+    let joueurs = listeJoueurs(match.joueurs);
+    joueurs.forEach(el => {
+        div.appendChild(el);
+    })
+
+    ancre.appendChild(div);
+    console.log(lesJoueurs);
+}
+
+function listeJoueurs(liste) {
+    
+    let tab = [];
+    liste.forEach(el => {
         
-        document.body.appendChild(input);
+        let input = document.createElement("input");
+        input.setAttribute("data-nosql", el.id);
+        input.setAttribute("type", "text");
+        //recup du nom
 
-    }
+        //console.log(lesJoueurs);
+        if(lesJoueurs != undefined) {
+            lesJoueurs.forEach(element => {
+                if(element.id == el.num_joueur) input.value = element.nom;
+            })
+        }
+        else input.value = "pas encore chargé";
+        
+        tab.push(input);
+    })
+
+    return tab;
 }
 
 function modifierTab(el, tab) {
@@ -124,3 +178,5 @@ function construitVotes(tab) {
 
     }
 }
+
+

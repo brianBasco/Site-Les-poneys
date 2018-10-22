@@ -1,4 +1,8 @@
 <?php
+        include('php/session.php');
+?>
+
+<?php
     include('php/queryDB.php');
 ?> 
 
@@ -10,7 +14,7 @@
 
  <body>
 
-     <?php
+    <?php
         include('html/header.html');
     ?>
 

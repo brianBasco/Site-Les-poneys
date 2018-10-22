@@ -12,7 +12,6 @@
     while($row = $reqJoueurs->fetch()) {
         array_push($joueurs, $row);
     }
-
-    ?>
+?>
 
     

@@ -1,10 +1,15 @@
 <?php
+    include('php/session.php');
+?>
+
+<?php
 
     include('html/doctype.html');
 
 ?>
 
  <body>
+ 
 
 <?php
      include('html/formulaire.html');

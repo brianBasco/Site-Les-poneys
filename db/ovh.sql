@@ -74,11 +74,11 @@ ENGINE = INNODB;
 INSERT INTO joueurs (id,nom,mail,photo) VALUES 
 (default, "ju", "julien.dablemont@elitt-sas.fr", "ju.png"),
 (default, "seb", "bast620@gmail.com", "default.svg"),
-(default, "marie", "baget.marie@gmail.com", "default.svg"),
-(default, "stef","stephane.meynard@nouvelle-aquitaine.fr", "default.svg"),
-(default, "eric","ericveber@hotmail.com", "default.svg"),
-(default, "pierrot","pierrepers2@gmail.com", "default.svg"),
+(default, "marie", "baget.marie@gmail.com", "marie.png"),
+(default, "stef","stephane.meynard@nouvelle-aquitaine.fr", "stef.png"),
+(default, "eric","ericveber@hotmail.com", "eric.png"),
+(default, "pierrot","pierrepers2@gmail.com", "pierrot.png"),
 (default, "sego","sego_debay@yahoo.fr", "sego.png"),
 (default, "jeremy","rien", "jeremy.png"),
-(default, "benbob","coyoben45@aol.com", "default.svg"),
-(default, "sylvain", "sylvod@hotmail.com", "default.svg");
+(default, "benbob","coyoben45@aol.com", "benbob.png"),
+(default, "sylvain", "sylvod@hotmail.com", "sylvain.png");
