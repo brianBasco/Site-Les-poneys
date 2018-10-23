@@ -18,11 +18,11 @@
         </div>
 
         <div class="form-group col-lg-6">
-            <input type="reset" class="btn btn-form btn-outline-warning" value="reset" />
+            <input id="reset" type="reset" class="btn btn-form btn-outline-warning" value="reset" />
         </div>
 
         <div class="form-group col-lg-6">
-            <button class="btn btn-form btn-outline-danger" id="annuler">Annuler</button>
+            <button class="btn btn-form btn-outline-danger" id="annuler">Retour</button>
         </div>
         
         </div>';

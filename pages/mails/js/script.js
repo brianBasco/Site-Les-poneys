@@ -6,33 +6,46 @@ document.addEventListener("DOMContentLoaded",
   function (event) {
 
       document.querySelector("#tous").addEventListener("click", selectTous);
+      document.querySelector("#aucun").addEventListener("click", deselectTous);
       document.querySelector("#presents").addEventListener("click", selectPresents);
       document.querySelector("#envoyerMail").addEventListener("click", envoyerMail);
+      document.querySelector("#annuler").addEventListener("click", retourAccueil);
+      document.querySelector("#reset").addEventListener("click", reset);
   }
 );
 
 function selectPresents () {
-    document.querySelectorAll(".querySelect").forEach(el => {
-        let present = el.getAttribute("data-present");
-        if(present == 1 || present == 2) el.checked;
-        else el.checked = false;
-    })
+    let tous = document.querySelectorAll(".querySelect");
+    for (let i = 0; i<tous.length; i++) {
+        let present = tous[i].getAttribute("data-present");
+        if(present == 1 || present == 2) tous[i].checked = true;
+        else tous[i].checked = false;
+    }
 }
 
 function selectTous () {
-    document.querySelectorAll(".querySelect").forEach(el => {
-        el.checked = true;
-    })
+    let tous = document.querySelectorAll(".querySelect");
+    for (let i = 0; i<tous.length; i++) {
+        tous[i].checked = true;
+    }
+}
+
+function deselectTous() {
+    let aucun = document.querySelectorAll(".querySelect");
+    for (let i = 0; i<aucun.length; i++) {
+        aucun[i].checked = false;
+    }
 }
 
 function recupAdressesMail() {
     let adresses = [];
-    document.querySelectorAll(".querySelect").forEach(el => {
-        if(el.checked) {
-            let adresse = el.value;
+    let tous = document.querySelectorAll(".querySelect");
+    for (let i = 0; i<tous.length; i++) {
+        if(tous[i].checked) {
+            let adresse = tous[i].value;
             adresses.push(adresse);
         }
-    })
+    }
     return adresses;
 }
 
@@ -50,7 +63,25 @@ function envoyerMail() {
     let mail = recupMail();
 
     url = "php/envoiMail.php?destinataires=" + adresses +"&entete=" + entete +"&contenu=" + mail;
-    console.log(url);
 
-    location = url;
+    $ajaxUtils.sendGetRequest(url, function(request) {
+
+        let reponse = request.responseText;
+
+        let retour = document.getElementById("retourEnvoi");
+        retour.value = reponse;
+        retour.style.display = "block";
+    })
+    //location = url;
+}
+
+function retourAccueil(){
+
+    location = "../../poneys.php";
+}
+
+function reset() {
+
+    let mail = document.getElementById("email");
+    mail.value = "";
 }

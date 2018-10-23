@@ -92,3 +92,14 @@ body {
 .mail .input-group {
   margin-top: 5px;
 }
+
+.retour {
+  text-align: center;
+}
+
+.retour .btn-retour {
+  border-radius: 0;
+  background-color: rgb(255, 208, 0);
+  color: black;
+  display: none;
+}

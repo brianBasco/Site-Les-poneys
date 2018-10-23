@@ -27,6 +27,10 @@
         include('php/vue/mail.php');
     ?>
 
+    <?php
+        include('html/retour.html');
+    ?>
+
 
 <!-- Bundle Bootstrap --------------------------------- -->
 <script type="text/javascript" src="../../bundle.js"></script>

@@ -23,7 +23,8 @@
     echo '
         <div class="container choix">
         <button id="tous" class="btn btn-success" >Envoyer un mail à tous</button>
-        <button id="presents" class="btn btn-danger" >Envoyer un mail aux présents</button>
+        <button id="presents" class="btn btn-warning" >Envoyer un mail aux présents</button>
+        <button id="aucun" class="btn btn-danger" >Tout déselectionner</button>
         </div>
         ';
 ?>
