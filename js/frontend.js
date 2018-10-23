@@ -120,8 +120,7 @@ function calculerParticipants(numMatch){
 
 function ouvrirGestionJoueur(element) {
 
-    let div = document.getElementById("gestionJoueur");
-    div.style.display = "block";
+    let div = document.getElementById("gestionJoueur");    
 
     location = "#gestionJoueur";
 
@@ -161,6 +160,8 @@ function ouvrirGestionJoueur(element) {
     construireVotes(noMatch, noJoueur, "queryVoteAction", "voteAction", "boulard");
     construireVotes(noMatch, noJoueur, "queryVoteCagade", "voteCagade", "bouse");   
     enregistrerModifs();
+
+    div.style.display = "block";
 }
 
 function construireVotes(numMatch, numJoueur, selecteur, id, monType) {

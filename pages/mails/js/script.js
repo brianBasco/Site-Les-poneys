@@ -48,9 +48,8 @@ function envoyerMail() {
     let adresses = recupAdressesMail();
     let entete = recupEntete();
     let mail = recupMail();
-    let destinataires = "";
 
-    url = "php/envoiMail.php?destinataires=" + adresses +"&entete=" + entete +"&mail=" + mail;
+    url = "php/envoiMail.php?destinataires=" + adresses +"&entete=" + entete +"&contenu=" + mail;
     console.log(url);
 
     location = url;

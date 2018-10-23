@@ -14,7 +14,7 @@
         </div>
 
         <div class="form-group col-lg-6">
-            <input id="envoyerMail" type="submit" class="btn btn-form btn-outline-success" value="ajouter" name="ajouter" />
+            <input id="envoyerMail" type="submit" class="btn btn-form btn-outline-success" value="envoyer" name="envoyer" />
         </div>
 
         <div class="form-group col-lg-6">
