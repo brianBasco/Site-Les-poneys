@@ -80,8 +80,14 @@ body {
      margin-bottom: 15px;
    }
 
+   .choix .btn {
+    margin: 2px;
+    height: 50px;
+   }
+
    .form-group {
      margin: 15px auto 0 auto;
+     text-align: center;
    }
 
    .btn-form {
@@ -95,6 +101,7 @@ body {
 
 .retour {
   text-align: center;
+  margin-top: 10px;
 }
 
 .retour .btn-retour {

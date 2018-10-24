@@ -387,6 +387,7 @@ html {
   .gestionJoueur {
     position: absolute;
     top: 0;
+    bottom: 0;
     padding-top: 20px;
     display: none;
     background-color: #001e3c;

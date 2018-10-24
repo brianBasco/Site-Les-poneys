@@ -1,3 +1,5 @@
+//variable globale, namespace Maposition
+Maposition = {};
 
 document.addEventListener("DOMContentLoaded",
   function (event) {
@@ -56,6 +58,12 @@ document.addEventListener("DOMContentLoaded",
     afficherDateMatch();
     
   });
+
+  // ------------- Liste des fonctions ---------------- //
+
+function getScroll() {
+    return window.pageYOffset;
+}
 
 
 function fermerJoueurs(element) {
@@ -120,9 +128,9 @@ function calculerParticipants(numMatch){
 
 function ouvrirGestionJoueur(element) {
 
-    let div = document.getElementById("gestionJoueur");    
+    Maposition.initiale = getScroll();
 
-    location = "#gestionJoueur";
+    let div = document.getElementById("gestionJoueur");
 
     //nomjoueur
     console.log("nom : " + element.innerHTML);
@@ -154,14 +162,13 @@ function ouvrirGestionJoueur(element) {
     let photoPath = element.getAttribute("data-photo");
     photo.src = "css/images/joueurs/" + photoPath;
 
-    
-
     construirePresence();
     construireVotes(noMatch, noJoueur, "queryVoteAction", "voteAction", "boulard");
     construireVotes(noMatch, noJoueur, "queryVoteCagade", "voteCagade", "bouse");   
     enregistrerModifs();
 
     div.style.display = "block";
+    window.scrollTo(0,0);
 }
 
 function construireVotes(numMatch, numJoueur, selecteur, id, monType) {
@@ -240,8 +247,11 @@ function detruireVotes() {
     document.querySelector("#enregisJoueur").removeEventListener("click", UpdateDb);
 
     let divGestion = document.getElementById("gestionJoueur");
-    location= "#listeMatchs";
     divGestion.style.display = "none";
+
+    //Retour de la vue là où on a cliqué à la base
+    
+    window.scrollTo(0,Maposition.initiale);
     
     //effacement de commentaire
     let commentaire = document.getElementById("commentJoueur").value="";
@@ -381,7 +391,7 @@ function UpdateDb() {
     //requête AJAX update presence
     if(presence != 0) {
         let urlPresence = "php/updatePresence.php?ligne=" + nosql + "&presence=" + presence;
-        console.log(urlPresence);
+
         $ajaxUtils
         .sendGetRequest(urlPresence, 
         function (request) {

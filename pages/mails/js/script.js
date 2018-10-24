@@ -63,16 +63,21 @@ function envoyerMail() {
     let mail = recupMail();
 
     url = "php/envoiMail.php?destinataires=" + adresses +"&entete=" + entete +"&contenu=" + mail;
-
+    
     $ajaxUtils.sendGetRequest(url, function(request) {
 
         let reponse = request.responseText;
 
         let retour = document.getElementById("retourEnvoi");
-        retour.value = reponse;
-        retour.style.display = "block";
+        //Remise à zero si un mail a déjà été envoyé
+        retour.value = "";
+        setTimeout(function() {
+            retour.value = reponse;
+            retour.style.display = "initial";
+        }, 200);
+        
     })
-    //location = url;
+    
 }
 
 function retourAccueil(){

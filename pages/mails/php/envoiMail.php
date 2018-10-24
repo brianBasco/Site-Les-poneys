@@ -9,9 +9,7 @@ require '../../../php/FooterMail.php';
 
 extract($_GET);
 
-$mail = 'bast620@gmail.com'; // Déclaration de l'adresse de destination.
-
-$sujet = "mon Test";
+$sujet = $entete;
 
 $message = '<p>'.$contenu.'</p><br>'.FOOTERMAIL;
 

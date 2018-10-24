@@ -83,7 +83,7 @@ INSERT INTO joueurs (id,nom,mail,photo) VALUES
 (default, "eric","ericveber@hotmail.com", "eric.png"),
 (default, "pierrot","pierrepers2@gmail.com", "pierrot.png"),
 (default, "sego","sego_debay@yahoo.fr", "sego.png"),
-(default, "jeremy","rien", "jeremy.png"),
+(default, "jeremy","jeremy.dumont2@gmail.com", "jeremy.png"),
 (default, "benbob","coyoben45@aol.com", "benbob.png"),
 (default, "sylvain", "sylvod@hotmail.com", "sylvain.png");
 
