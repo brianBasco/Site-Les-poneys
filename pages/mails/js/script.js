@@ -62,6 +62,8 @@ function envoyerMail() {
     let entete = recupEntete();
     let mail = recupMail();
 
+    mail = mail.replace("\n", "<br>");
+
     url = "php/envoiMail.php?destinataires=" + adresses +"&entete=" + entete +"&contenu=" + mail;
     
     $ajaxUtils.sendGetRequest(url, function(request) {
