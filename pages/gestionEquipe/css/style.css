@@ -128,16 +128,23 @@ body {
     right: 0;
     margin: 0 auto;
     width: 50%;
+    padding: 30px;
     top: 100px;
     height: 400px;
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(0, 0, 0, 0.9);
     border-radius: 0;
     border: none;
     box-shadow: 0px 4px 3px black;
     overflow: auto;
   }
 
+  .affichageVotes .contenu {
+    padding-top: 50px;
+    text-align: center;    
+  }
+
   .affichageVotes .nom {
+    display: block;
     text-align: center;
     border: none;
     border-radius: 0;
@@ -146,7 +153,35 @@ body {
   }
 
   .affichageVotes .photo{
-    width: 150px;
-    height: 150px;
+    display: block;
+    width: 175px;
+    height: 175px;
     border: 2px solid white;
+  }
+
+  .affichageVotes .fermer {
+    position: absolute;
+    right: 0;
+    width: 60px;
+    height: 60px;
+    background: transparent;
+    color: white;
+    border: none;
+    font-size: 2rem;    
+  }
+
+  .affichageVotes .fermer:hover {
+    cursor: pointer;
+  }
+
+  .affichageVotes .unJoueur {
+    display: inline-block;
+  }
+
+  .affichageVotes .enLigne {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
   }

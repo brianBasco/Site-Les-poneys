@@ -185,38 +185,53 @@ function construitVotes(tab) {
 
 
 function ouvrirAffichageVotes() {
-
-    let div = document.createElement("div");
-    let id = "affichageVotes";
-
-    div.setAttribute("id", id);
+    
+    let div = creerBalise("div", [["id","affichageVotes"]]);
     div.className = "affichageVotes";
 
-    let fermer = creerBoutonFermer(id);
+    let fermer = creerBalise("button", [["onclick", "fermerAffichageVotes()"]]);
+    fermer.className = "fermer";
+    fermer.innerHTML = 'X';
     div.appendChild(fermer);
 
+    //balises à créer
     let contenu = ["div", "div"];
-    let titres = ["Action du match", "casserole"];
-    
+    let titres = ["Action du match", "casserole"];    
 
     for(let i = 0; i<contenu.length; i++) {
+
+        //balise contenant l'ensemble d'un contenu
         let balise = document.createElement(contenu[i]);
+        balise.className = "contenu";
+
         let titre = document.createElement("h1");
         titre.innerHTML = titres[i];
         balise.appendChild(titre);        
 
         let joueur = lesJoueurs[i];
-        let input = document.createElement("input");
-        input.className = "nom";
-        input.setAttribute("type", "text");
-        input.setAttribute("readonly", "readonly");
-        input.setAttribute("value", joueur.nom);
-        balise.appendChild(input);
 
-        let photo = document.createElement("img");
-        photo.className = "photo";
-        photo.setAttribute("src", "../../css/images/joueurs/"+joueur.photo);
-        balise.appendChild(photo);
+        //balise contenant l'ensemble des joueurs élus
+        let row = document.createElement("div");
+        row.className = "enLigne";
+
+        //balise contenant le nom et l'image
+        let unJoueur = document.createElement("div");
+        unJoueur.className = "unJoueur";
+
+        let input = creerBalise("input", [["type", "text"],["readonly", "readonly"],["value", joueur.nom]]);
+        input.className = "nom";        
+        unJoueur.appendChild(input);
+
+        let chemin = "../../css/images/joueurs/";
+        let photo = creerBalise("img", [["src",chemin+joueur.photo]]);        
+        photo.className = "photo";        
+        unJoueur.appendChild(photo);
+
+        //les joueurs sont ajoutés en ligne
+        row.appendChild(unJoueur);
+
+        //la ligne est ajoutée après le titre
+        balise.appendChild(row);
 
         div.appendChild(balise);
     }
@@ -225,18 +240,21 @@ function ouvrirAffichageVotes() {
     
 }
 
-function creerBoutonFermer() {
-
-    let bouton = document.createElement("button");
-    bouton.innerHTML = 'X';
-    bouton.setAttribute("onclick", "fermerAffichageVotes()");
-
-    return bouton;
-}
 
 function fermerAffichageVotes() {
 
     let div = document.getElementById("affichageVotes");
     document.body.removeChild(div);
 
+}
+
+function creerBalise(type, attributs){
+
+    let balise  = document.createElement(type);
+
+    for(let i=0; i<attributs.length; i++) {
+        balise.setAttribute(attributs[i][0], attributs[i][1]);
+    }
+
+    return balise;
 }
