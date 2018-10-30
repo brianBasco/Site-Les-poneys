@@ -38,8 +38,21 @@ document.addEventListener("DOMContentLoaded", function (event) {
             lesMatchs = matchs;
 
                 matchs.forEach(element => {
-                    console.log(element);
-                    construit(element);
+                    //console.log(element);
+                    //constructionMatch(element);
+                });
+        })
+
+        $ajaxUtils.sendGetRequest("php/queryMatchs.php", 
+        function(request) {
+
+            let reponse = request.responseText;
+            
+            let matchs = JSON.parse(reponse);
+
+                matchs.forEach(element => {
+                    //console.log(element);
+                    constructionMatch(element);
                 });
         })
 
@@ -82,26 +95,37 @@ function demandeDeSuppression(element) {
     }
 }
 
-function construit(match) {
+function constructionMatch(match) {
 
+    //match est un objet
     let ancre = document.getElementById("matchs");
-
-    let div = document.createElement("div");
+    
+    let div = creerBalise("div", [["id", match.id]]);
     div.className = "match";
-    div.id = match.id;
+    
+    for(let attribut in match) {
+        console.log("attribut " + attribut);
+        type = "text";
+        if(attribut == "date_match") type = "date";
+        else if(attribut == "heure") type = "time"; 
 
-    let nom = document.createElement("input");
-    nom.setAttribute("type", "text");
-    nom.value = match.nom;
+        let balise = creerBalise("input", [["type", type], ["value", match[attribut]]]);
+        div.appendChild(balise);
+    }
 
-    //rattacher les joueurs
-    let joueurs = listeJoueurs(match.joueurs);
-    joueurs.forEach(el => {
-        div.appendChild(el);
+    let scoreNous = creerBalise("input", [["type", "text"], ["placeholder", "score Talence"]]);
+    let scoreEux = creerBalise("input", [["type", "text"], ["placeholder", "score " + match.nom]]);
+    div.appendChild(scoreNous);
+    div.appendChild(scoreEux);
+
+    let valider = creerBalise("button", [["data-id", match.id]]);
+    valider.innerHTML = "valider changements";
+    valider.addEventListener("click", function() {
+        updateDB(this);
     })
+    div.appendChild(valider);
 
     ancre.appendChild(div);
-    console.log(lesJoueurs);
 }
 
 function listeJoueurs(liste) {
@@ -252,9 +276,21 @@ function creerBalise(type, attributs){
 
     let balise  = document.createElement(type);
 
-    for(let i=0; i<attributs.length; i++) {
-        balise.setAttribute(attributs[i][0], attributs[i][1]);
+    if(attributs != null) {
+        for(let i=0; i<attributs.length; i++) {
+            balise.setAttribute(attributs[i][0], attributs[i][1]);
+        }
     }
 
     return balise;
+}
+
+function updateDB(element) {
+    console.log(element);
+
+    document.querySelectorAll("button").forEach(el => {
+        if(el.getAttribute("data-id") == element.getAttribute("data-id"))
+        el.remove(element);
+        //console.log("el " + el);
+    })
 }

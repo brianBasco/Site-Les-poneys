@@ -176,6 +176,7 @@ body {
 
   .affichageVotes .unJoueur {
     display: inline-block;
+    margin: 10px;
   }
 
   .affichageVotes .enLigne {
@@ -184,4 +185,25 @@ body {
     padding-left: 15px;
     margin-right: auto;
     margin-left: auto;
+  }
+
+
+  /* --------------- matchs -------------- */
+
+  .matchs .match {
+    display: inline-block;
+    margin: 10px;
+    padding: 10px;
+    border: 2px solid white;
+  }
+
+  .matchs .match input {
+    display: block;
+    height: 60px;
+    border: none;
+    border-radius: 0;
+    text-align: center;
+    box-shadow: none;
+    margin: 5px 0;
+    width: 175px;
   }
