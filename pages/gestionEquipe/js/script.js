@@ -55,6 +55,10 @@ document.addEventListener("DOMContentLoaded", function (event) {
             //construitVotes(votes);
             //construireScoreBoard(matchs);
         })
+
+    document.querySelector("#previous").addEventListener("click", function() {
+        ouvrirAffichageVotes();
+    })
         
 })        
 
@@ -180,3 +184,59 @@ function construitVotes(tab) {
 }
 
 
+function ouvrirAffichageVotes() {
+
+    let div = document.createElement("div");
+    let id = "affichageVotes";
+
+    div.setAttribute("id", id);
+    div.className = "affichageVotes";
+
+    let fermer = creerBoutonFermer(id);
+    div.appendChild(fermer);
+
+    let contenu = ["div", "div"];
+    let titres = ["Action du match", "casserole"];
+    
+
+    for(let i = 0; i<contenu.length; i++) {
+        let balise = document.createElement(contenu[i]);
+        let titre = document.createElement("h1");
+        titre.innerHTML = titres[i];
+        balise.appendChild(titre);        
+
+        let joueur = lesJoueurs[i];
+        let input = document.createElement("input");
+        input.className = "nom";
+        input.setAttribute("type", "text");
+        input.setAttribute("readonly", "readonly");
+        input.setAttribute("value", joueur.nom);
+        balise.appendChild(input);
+
+        let photo = document.createElement("img");
+        photo.className = "photo";
+        photo.setAttribute("src", "../../css/images/joueurs/"+joueur.photo);
+        balise.appendChild(photo);
+
+        div.appendChild(balise);
+    }
+
+    document.body.appendChild(div);
+    
+}
+
+function creerBoutonFermer() {
+
+    let bouton = document.createElement("button");
+    bouton.innerHTML = 'X';
+    bouton.setAttribute("onclick", "fermerAffichageVotes()");
+
+    return bouton;
+}
+
+function fermerAffichageVotes() {
+
+    let div = document.getElementById("affichageVotes");
+    document.body.removeChild(div);
+
+}

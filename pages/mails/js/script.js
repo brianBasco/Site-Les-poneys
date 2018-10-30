@@ -74,9 +74,13 @@ function envoyerMail() {
         //Remise à zero si un mail a déjà été envoyé
         retour.value = "";
         setTimeout(function() {
-            retour.value = reponse;
+            retour.value = reponse + " Vous allez être redirigé";
             retour.style.display = "initial";
         }, 200);
+
+        setTimeout(function() {
+            location = "../../index.php";
+        }, 2000);
         
     })
     
