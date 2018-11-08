@@ -16,51 +16,64 @@
     <link rel="stylesheet"  href="style/media.css"  /> <!-- css suivant la taille du device -->
 
     <!-- FOnts -->
-    <link href="https://fonts.googleapis.com/css?family=Teko" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css?family=Teko" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">  
 
 	</head>
 
 	<body class="body-scores">
 
 
+        <div id="appli" class="appli">
 
 		<header class="header">
-            <button class="btn" onclick="ouvrirDiv('confMatch')">Nouveau Match</button>
-            <button class="btn btn-recap" onclick="recap()">Recap</button>
-            <button id="nveauSet" class="btn" onclick="nouveauSet()" disabled>Nouveau set</button>
+            <button id="nveauMatch" class="btn match">match</button>
+            <button id="nveauSet" class="btn set" onclick="nouveauSet()" disabled>set</button>
+            <button id="btn_inverser" class="btn btn_inverser" ></button>
 		</header>
 
 
+        <div id="main_content" class="main_content">
 
             <!-- Sections du main-container -->
-    <section id="round" class="round">
+    <div id="round" class="round">
+        <div class="contenu">
+        <h1>SET</h1>            
+        <input type="text" id="numeroRound" class="numeroRound" readonly />
+        </div>
+    </div>
 
-        <span>SET N° </span>
-        <span id="numeroRound" class="numeroRound"></span>
 
-    </section>
+	<section class="scores container-fluid">
 
-
-	<section class="scores container-fluid row">
-
-            <!-- Score gauche -->
-            <div class="equipe-gauche anime">
-
+        <!-- Score gauche -->
+        <div class="equipe-gauche anime">
+        
+            <div class="container_equipe">
                 <div class="equipe">
-                     <input id="nomGauche" type="text" placeholder="equipe" onblur="scoreGauche.attribuerNom()">
+                    <div class="contenu">
+                        <input id="nomGauche" class="nom" type="text" placeholder="equipe">
+                        <input id="setGauche" class="scoreSet" readonly />
+                    </div>
                 </div>
+            </div>
+                
 
                 <div>
 
-                    <div class="row">
-                        <div class="score">
-                            <button id="annulerGauche" class="btn-score btn" onclick="clickScore(scoreGauche.moins())">-</button>
-                            <button class="btn-score btn  droite" onclick="clickScore(scoreGauche.plus())">+</button>
+                    <div class="container_btn">
+                        <div class="row row_btn-score">
+                            <div class="score score_moins">
+                                <button class="btn btn-score btn_moins" onclick="clickScore(scoreGauche.moins())"></button>
+                            </div>
+                            <div class="score score_plus">
+                                <button class="btn btn-score btn_plus" onclick="clickScore(scoreGauche.plus())"></button>
+                            </div>
                         </div>
                     </div>
 
                     <div class="row">
-                        <button id="scoreGauche" class="btn"></button>
+                        <input id="scoreGauche" class="unScore scoreGauche" readonly />
                     </div>
 
 
@@ -70,23 +83,13 @@
 
                 <div class="temps-mort row">
 
-                        <button id="tps1" class="btn btn-warning" onclick="enlever(1)">tps-mort</button>
-                        <button id="tps2"class="btn btn-warning" onclick="enlever(2)">tps-mort</button>
-
-                </div>
-
-                <div class="service row">
-                    <button id="serviceGauche" class="btn">Service</button>
-                </div>
-                        <!-- on-click: changer la couleur -->
-
-                <div class="set row">
-                    <div class="col-6">
-                        <button class="btn">Set</button>
+                    <div>
+                        <button id="tps1" class="btn tps-mort" data-tps_mort="1" ></button>
                     </div>
-                    <div class="col-6">
-                        <button id="setGauche" class="btn" ></button>
+                    <div>
+                        <button id="tps2" class="btn tps-mort" data-tps_mort="2" ></button>
                     </div>
+
                 </div>
 
             </div>
@@ -95,21 +98,30 @@
             <!-- Score droite -->
             <div class="equipe-droite anime droite">
 
-                <div class="equipe">
-                     <input id="nomDroite" type="text" placeholder="equipe" onblur="scoreDroite.attribuerNom()">
+                <div class="container_equipe">
+                    <div class="equipe droite">
+                        <div class="contenu">
+                            <input id="nomDroite" class="nom" type="text" placeholder="equipe" onblur="scoreDroite.attribuerNom()">
+                            <input id="setDroite" class="scoreSet droite" readonly />
+                        </div>
+                    </div>
                 </div>
 
                 <div>
 
-                    <div class="row">
-                        <div class="score">
-                            <button id="annulerDroite" class="btn-score btn" onclick="clickScore(scoreDroite.moins())">-</button>
-                            <button class="btn-score btn droite" onclick="clickScore(scoreDroite.plus())">+</button>
+                    <div class="container_btn">
+                        <div class="row row_btn-score droite">
+                            <div class="score score_moins">
+                                <button class="btn btn-score btn_moins" onclick="clickScore(scoreDroite.moins())"></button>
+                            </div>
+                            <div class="score score_plus">
+                                <button class="btn btn-score btn_plus" onclick="clickScore(scoreDroite.plus())"></button>
+                            </div>
                         </div>
                     </div>
 
                     <div class="row">
-                        <button id="scoreDroite" class="btn"></button>
+                        <input id="scoreDroite" class="unScore scoreDroite" readonly />
                     </div>
 
 
@@ -119,180 +131,136 @@
 
                 <div class="temps-mort row">
 
-                        <button id="tps3" class="btn btn-warning" onclick="enlever(3)">tps-mort</button>
-                        <button id="tps4"class="btn btn-warning" onclick="enlever(4)">tps-mort</button>
-
-                </div>
-
-                <div class="service row">
-                    <button id="serviceDroite" class="btn">Service</button>
-                </div>
-                        <!-- on-click: changer la couleur -->
-
-                <div class="set row">
-                    <div class="col-6">
-                        <button class="btn">Set</button>
+                    <div>
+                        <button id="tps3" class="btn tps-mort" data-tps_mort="3" ></button>
                     </div>
-                    <div class="col-6">
-                        <button id="setDroite" class="btn" ></button>
+                    <div>
+                        <button id="tps4" class="btn tps-mort" data-tps_mort="4" ></button>
                     </div>
-                </div>
 
+                </div>
+               
             </div>
 
     </section>
 
+    <!-- //////////////// RECAP ///////////// -->
+    <section id="recap" class="recap">
+
+        <div class="container contenu">
+
+            <table>
+                <tr>
+                    <th id="nom_score_gauche"></th>
+                    <th></th>
+                    <th id="nom_score_droite"></th>
+                </tr>
+
+                <tr>
+                    <td id="set1_score_gauche"></td>
+                    <td>set 1</td>
+                    <td id="set1_score_droite"></td>
+                </tr>
+
+                <tr>
+                    <td id="set2_score_gauche"></td>
+                    <td>set 2</td>
+                    <td id="set2_score_droite"></td>
+                </tr>
+
+                <tr>
+                    <td id="set3_score_gauche"></td>
+                    <td>set 3</td>
+                    <td id="set3_score_droite"></td>
+                </tr>
+
+                <tr>
+                    <td id="set4_score_gauche"></td>
+                    <td>set 4</td>
+                    <td id="set4_score_droite"></td>
+                </tr>
+
+                <tr>
+                    <td id="set5_score_gauche"></td>
+                    <td>set 5</td>
+                    <td id="set5_score_droite"></td>
+                </tr>
+
+                <tr>
+                    <td id="total_score_gauche"></td>
+                    <td>TOTAL</td>
+                    <td id="total_score_droite"></td>
+                </tr>
+
+            </table>
+
+        <div class="container">
+            <h2 id="total"></h2>
+        </div>
+
+    </div>
+
+    </section>
+
+
+<!-- //////////////////// affichage caché ////////////  -->
 
 <!-- //////////////////// TEMPS MORT technique ////////////  -->
-
-    <section id="accepterTpsMort" class="accepterTpsMort askUser">
-
-        <button class="btn" onclick="fermerDiv('accepterTpsMort')">Passer</button>
-        <button class="btn" onclick="afficherTempsMort('technique')">Prendre le Temps Mort Technique</button>
-    </section>
 
 
     <div id="tempsMortTechnique" class="tempsMortTechnique">
 
-        <div class="row">
-            <div class="col-6 equipeGauche">
-                    <p class="nomEquipe"></p>
-                    <button class="btn btn-tpsMort"></button>
+        <div class="contenu">
+            <div class="row">
+                <div class="col-6 equipeGauche">
+                        <p class="nomEquipe"></p>
+                        <button class="btn btn-tpsMort"></button>
+                </div>
+
+                <div class="col-6 equipeDroite">
+                        <p class="nomEquipe"></p>
+                        <button class="btn btn-tpsMort"></button>
+                </div>
             </div>
 
-            <div class="col-6 equipeDroite">
-                    <p class="nomEquipe"></p>
-                    <button class="btn btn-tpsMort"></button>
+            <div class="row">
+                <div class="col-6">
+                    <button class="btn btn-tpsMort btn-passer" onclick="passerTempsMortTechnique()">passer</button>
+                </div>
+                <div class="col-6">
+                        <button id="chrono" class="btn btn-tpsMort chrono"></button>
+                </div>
             </div>
         </div>
-
-        <div class="row">
-            <div class="col-6">
-                <button class="btn btn-tpsMort btn-passer" onclick="passerTempsMortTechnique()">passer</button>
-            </div>
-            <div class="col-6">
-                    <button id="chrono" class="btn btn-tpsMort chrono"></button>
-            </div>
-        </div>
-
-        <img  id="image" />
-
     </div>
 
 
 
 <!-- //////////////////// fin de match ///////////////////// -->
 
-<section id="finMatch" class="finMatch askUser">
-    <h1>End of Game</h1>
-    
-    <div class="row">
-        <div class="col-6 equipeGauche">
-            <p class="nomEquipe"></p>
-            <button class="btn btn-ask-score"></button>
-        </div>
-    
-        <div class="col-6 equipeDroite">
-            <p class="nomEquipe"></p>
-            <button class="btn btn-ask-score"></button>
-        </div>
-    </div>
-    
-    <div class="row">
-        <button class="btn" onclick="recap()">Recap</button>
-        <button class="btn" onclick="nouveauMatch()">Nouveau Match</button>    
-    </div>
-</section>
+    <section id="finMatch" class="finMatch askUser">
 
+        <button class="fermer">X</button>
 
-<!-- ///////////////////////// Fin de Set ///////////////////// -->
-<section id="confMatch" class="confMatch askUser">
+        <h1>End of Game</h1>
+        
+        <div class="row">
+            <div class="col-6 equipeGauche">
+                <p class="nomEquipe"></p>
+                <button class="btn btn-ask-score"></button>
+            </div>
+        
+            <div class="col-6 equipeDroite">
+                <p class="nomEquipe"></p>
+                <button class="btn btn-ask-score"></button>
+            </div>
+        </div>       
+        
+    </section>
 
-    <div class="container">
-        <h1>Vous Confirmez ?</h1>
-    </div>
+</div>
 
-    <div class="container">
-        <button class="btn" onclick="fermerDiv('confMatch')">NON</button>
-        <button class="btn" onclick="nouveauMatch()">OUI</button>
-    </div>
-
-
-</section>
-
-<!-- //////////////////// Set5 changement de position ///////////////////// -->
-
-<section id="chgtPosition" class="chgtPosition askUser">
-
-    <h1>Changer la position des équipes ?</h1>
-
-        <button class="btn" onclick="fermerDiv('chgtPosition')">NON</button>
-        <button class="btn" onclick="inverserPositionSet5()">OUI</button>
-
-</section>
-
-<!-- //////////////// RECAP ///////////// -->
-<section class="recap">
-
-        <button class="btn" onclick="close_recap()">X</button>
-
-    <div class="container">
-        <h1>Scores</h1>
-
-        <table>
-            <tr>
-                <th id="nom_score_gauche">Equipe 1</th>
-                <th></th>
-                <th id="nom_score_droite">Equipe 2</th>
-            </tr>
-
-            <tr>
-                <td id="set1_score_gauche"></td>
-                <td>set 1</td>
-                <td id="set1_score_droite"></td>
-            </tr>
-
-            <tr>
-                <td id="set2_score_gauche"></td>
-                <td>set 2</td>
-                <td id="set2_score_droite"></td>
-            </tr>
-
-            <tr>
-                <td id="set3_score_gauche"></td>
-                <td>set 3</td>
-                <td id="set3_score_droite"></td>
-            </tr>
-
-            <tr>
-                <td id="set4_score_gauche"></td>
-                <td>set 4</td>
-                <td id="set4_score_droite"></td>
-            </tr>
-
-            <tr>
-                <td id="set5_score_gauche"></td>
-                <td>set 5</td>
-                <td id="set5_score_droite"></td>
-            </tr>
-
-            <tr>
-                <td id="total_score_gauche"></td>
-                <td>TOTAL</td>
-                <td id="total_score_droite"></td>
-            </tr>
-
-        </table>
-
-    </div>
-
-    <div class="container">
-        <h2 id="total"></h2>
-    </div>
-
-</section>
-
-
+</div> <!--  Fin de Appli-->
 
 
         <script src="style/jquery/jquery.js"></script>
@@ -301,9 +269,10 @@
 
         <!-- scripts de l'application -->
         <script src="js/Scores.js"></script>
+        <script src="js/recap.js"></script>
         <script src="js/app.js"></script>
         <script src="js/init.js"></script>
-        <script src="js/recap.js"></script>
+       
 
     </body>
 </html>

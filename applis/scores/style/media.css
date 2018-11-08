@@ -2,16 +2,21 @@
 @media (min-width: 576px) { }
 
 @media (max-width: 576px) { 
-    /* .temps-mort button {
-        height: 40px;
-        width: 40px;
-        border-radius: 20px;
-        font-size: 8px;
+    .round {
+        width: 60px;
     }
 
-    .temps-mort li {
-        margin: 0 5px;
-    } */
+    .equipe .scoreSet {
+        width: 30%;
+    }
+
+    .equipe .scoreSet.droite {
+        right: 70%;
+    }
+
+    .round .contenu h1 {
+        font-size: 2rem;
+    }
  }
 
 /* Medium devices (tablets, 768px and up) */
@@ -19,12 +24,16 @@
  }
 
  @media (min-width: 768px) { 
-    
+    .body-scores {
+        width: 80%;
+    }
  }
 
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) { 
-    
+    .body-scores {
+        width: 700px;
+    }
  }
 
 /* Extra large devices (large desktops, 1200px and up) */

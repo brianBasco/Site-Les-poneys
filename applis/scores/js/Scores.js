@@ -19,10 +19,10 @@ var Score = function(cle, Cle_Nom, score_set){
     this.loading_score = function(){
         if(sessionStorage.getItem(this.cle) == null){
             sessionStorage.setItem(this.cle , 0);
-            document.getElementById(this.cle).innerHTML = sessionStorage.getItem(this.cle);
+            document.getElementById(this.cle).value = sessionStorage.getItem(this.cle);
         }
         else {
-            document.getElementById(this.cle).innerHTML = sessionStorage.getItem(this.cle);
+            document.getElementById(this.cle).value = sessionStorage.getItem(this.cle);
         }
 
     }   
@@ -41,10 +41,10 @@ var Score = function(cle, Cle_Nom, score_set){
     this.loading_score_set = function(){
         if(sessionStorage.getItem(this.score_set) == null){
             sessionStorage.setItem(this.score_set , 0);
-            document.getElementById(this.score_set).innerHTML = 0;
+            document.getElementById(this.score_set).value = 0;
         }
         else {
-            document.getElementById(this.score_set).innerHTML = sessionStorage.getItem(this.score_set);
+            document.getElementById(this.score_set).value = sessionStorage.getItem(this.score_set);
         }
     }
     
@@ -57,9 +57,8 @@ var Score = function(cle, Cle_Nom, score_set){
             var score = sessionStorage.getItem(this.cle);
             score++;
             sessionStorage.setItem(this.cle, score);         
-            document.getElementById(this.cle).innerHTML = sessionStorage.getItem(this.cle);
-            //On donne la classe hasService pour l'equipe qui vient de marquer
-            attrService(cle);
+            document.getElementById(this.cle).value = sessionStorage.getItem(this.cle);
+            
     }
 
     this.moins = function(){
@@ -68,21 +67,20 @@ var Score = function(cle, Cle_Nom, score_set){
             score --
             sessionStorage.setItem(this.cle, score);
         }        
-        document.getElementById(this.cle).innerHTML = sessionStorage.getItem(this.cle);
-        //Remet à 0 le service 
-        setService();
+        document.getElementById(this.cle).value = sessionStorage.getItem(this.cle);
+        
     }
 
     this.setPlusUn = function(){
         var scoreSet = sessionStorage.getItem(this.score_set);
         scoreSet++;
         sessionStorage.setItem(this.score_set, scoreSet);
-        document.getElementById(this.score_set).innerHTML = scoreSet;
+        document.getElementById(this.score_set).value = scoreSet;
     }
 
     this.remiseZero = function(){
         sessionStorage.setItem(this.cle, 0);
-        document.getElementById(this.cle).innerHTML = sessionStorage.getItem(this.cle);
+        document.getElementById(this.cle).value = sessionStorage.getItem(this.cle);
     }
    
 }

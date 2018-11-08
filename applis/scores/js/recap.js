@@ -1,32 +1,19 @@
-function a(cle){
+function afficherItem(cle){
     return document.getElementById(cle).innerHTML = sessionStorage.getItem(cle);
 }
 
-function b(cle){
+function get_Item(cle){
     return sessionStorage.getItem(cle);
 }
 
-function c(cle){
+function get_element(cle){
     return document.getElementById(cle);
 }
 
 function recap(){
-    var hauteur = $( document ).height();
-    $(".recap").css("height", hauteur);
-    $(".recap").css("display", "block");
-    setTimeout(function(){        
-        $(".recap").css("opacity", "1");
-    }, 50);
-
+    
     //insertion des noms
-    //lors de l'initialisation les noms d'equipe sont "equipe"
-    //si l'utilisateur ne rentre pas de nom le nom d'equipe devient une chaine
-    //de caractères vides, donc il faut checker ces 2 conditions
-    if(b("nomGauche") != "equipe" && b("nomGauche") != "") c("nom_score_gauche").innerHTML = b("nomGauche");
-    else c("nom_score_gauche").innerHTML = "equipe 1";
-
-    if(b("nomDroite") != "equipe" && b("nomDroite") != "") c("nom_score_droite").innerHTML = b("nomDroite");
-    else c("nom_score_droite").innerHTML = "equipe 2";
+    recapNom();
 
     //insertion des scores du recap
     //pour chaque ligne, si le score du set n'a pas été initialisé,
@@ -35,8 +22,8 @@ function recap(){
     
     for(var i = 1; i <= 10; i++){
 
-        if(b(getKey(i)) == null)  c(getKey(i)).innerHTML = "0";
-        else a(getKey(i));
+        if(get_Item(getKey(i)) == null)  get_element(getKey(i)).innerHTML = "0";
+        else afficherItem(getKey(i));
 
     }
     
@@ -44,11 +31,7 @@ function recap(){
     
 }
 
-function close_recap(){
 
-    $(".recap").css("display", "none");
-    $(".recap").css("opacity", "0");
-}
 
 function total(){
 
@@ -57,28 +40,28 @@ function total(){
     var total = 0;
 
     for(var i = 0; i<5; i++){
-        if(isNaN(parseInt(c("set"+ (i+1) + "_score_gauche").innerHTML))){
+        if(isNaN(parseInt(get_element("set"+ (i+1) + "_score_gauche").innerHTML))){
             totalGauche += 0;
         }
         else {
-            totalGauche += parseInt(c("set"+ (i+1) + "_score_gauche").innerHTML);
+            totalGauche += parseInt(get_element("set"+ (i+1) + "_score_gauche").innerHTML);
         }
     }
 
     for(var i = 0; i<5; i++){
-        if(isNaN(parseInt(c("set"+ (i+1) + "_score_droite").innerHTML))){
+        if(isNaN(parseInt(get_element("set"+ (i+1) + "_score_droite").innerHTML))){
             totalDroite += 0;
         }
         else {
-            totalDroite += parseInt(c("set"+ (i+1) + "_score_droite").innerHTML);
+            totalDroite += parseInt(get_element("set"+ (i+1) + "_score_droite").innerHTML);
         }
     }
 
     total = totalGauche + totalDroite;
 
-    c("total_score_gauche").innerHTML = totalGauche;
-    c("total_score_droite").innerHTML = totalDroite;
-    c('total').innerHTML = "Points au TOTAL : " + total;
+    get_element("total_score_gauche").innerHTML = totalGauche;
+    get_element("total_score_droite").innerHTML = totalDroite;
+    get_element('total').innerHTML = "Points au TOTAL : " + total;
 
 }
 
@@ -97,4 +80,15 @@ function getKey(numero){
     if(numero == 9) return "set5_score_gauche";
     if(numero == 10) return "set5_score_droite";
 
+}
+
+function recapNom() {
+
+    let noms = ["nomGauche", "nomDroite"];
+    let inputs = ["nom_score_gauche", "nom_score_droite"];
+
+    for(let i = 0; i<noms.length; i++) {        
+        document.getElementById(inputs[i]).innerHTML = get_Item(noms[i]);
+    }
+    
 }
