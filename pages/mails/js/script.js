@@ -59,13 +59,16 @@ function recupEntete() {
 
 function envoyerMail() {
     let adresses = recupAdressesMail();
-    let entete = recupEntete();
-    let mail = recupMail();
 
-    mail = mail.replace("\n", "<br>");
+    let entete = recupEntete();
+    entete = encodeURIComponent(entete);
+
+    let mail = recupMail();
+    mail = mail.replace("\n", "sautdeligne");
+    mail = encodeURIComponent(mail);
 
     url = "php/envoiMail.php?destinataires=" + adresses +"&entete=" + entete +"&contenu=" + mail;
-    
+        
     $ajaxUtils.sendGetRequest(url, function(request) {
 
         let reponse = request.responseText;
@@ -80,7 +83,7 @@ function envoyerMail() {
 
         setTimeout(function() {
             location = "../../index.php";
-        }, 2000);
+        }, 2000); 
         
     })
     

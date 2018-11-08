@@ -63,10 +63,10 @@ $jourSemaine = TABDESJOURS[(date("N", $strJour)-1)];
 
 $sujet = "ajout de match";
 
-$message = "<p>un match contre {$nom} le {$jourSemaine} {$jour} à {$heure} se jouera à {$adresse}</p><br>".FOOTERMAIL;
+$message = "un match contre {$nom} le {$jourSemaine} {$jour} à {$heure} se jouera à {$adresse}".FOOTERMAIL;
 
 $headers = 'From: grandchef@poneysdetalence.fr' . "\r\n" .
-     'Content-type:text/html;charset=UTF-8'. "\r\n" .
+     'Content-type:text/plain;charset=UTF-8'. "\r\n" .
      'X-Mailer: PHP/' . phpversion();
  
 

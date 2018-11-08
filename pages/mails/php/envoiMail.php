@@ -11,10 +11,12 @@ extract($_GET);
 
 $sujet = $entete;
 
-$message = '<p>'.$contenu.'</p><br>'.FOOTERMAIL;
+$contenu = str_replace("sautdeligne","\n",$contenu);
+
+$message = $contenu.FOOTERMAIL;
 
 $headers = 'From: grandchef@poneysdetalence.fr' . "\r\n" .
-     'Content-type:text/html;charset=UTF-8'. "\r\n" .
+     'Content-type:text/plain;charset=UTF-8'. "\r\n" .
      'X-Mailer: PHP/' . phpversion();
  
 
