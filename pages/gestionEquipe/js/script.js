@@ -3,6 +3,7 @@
     // Set up a namespace for our utility
     var lesJoueurs;
     var lesMatchs;
+    var TousLesMatchs;
     
     //})(window);
 
@@ -49,6 +50,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
             let reponse = request.responseText;
             
             let matchs = JSON.parse(reponse);
+            TousLesMatchs = matchs;
 
                 matchs.forEach(element => {
                     //console.log(element);
@@ -105,11 +107,27 @@ function constructionMatch(match) {
     
     for(let attribut in match) {
         console.log("attribut " + attribut);
-        type = "text";
-        if(attribut == "date_match") type = "date";
-        else if(attribut == "heure") type = "time"; 
+        let type = "text";
+        let nomAttribut = "value";
 
-        let balise = creerBalise("input", [["type", type], ["value", match[attribut]]]);
+        if(attribut == "date_match") {
+            /*type = "text";
+            //renversement de la date pour affichage fr
+            match[attribut] =   match[attribut].split('-').reverse().join('/');        
+            */
+           type = "date";
+        }
+
+        else if(attribut == "heure") {
+            type = "time";
+            //match[attribut] = match[attribut].split(':').pop().join(':');            
+            match[attribut] = match[attribut].split(':');
+            match[attribut].pop();
+            match[attribut] = match[attribut].join(':');
+        }
+
+        let balise = creerBalise("input", [["type", type], [nomAttribut, match[attribut]],
+        ["data-id",match.id]]);
         div.appendChild(balise);
     }
 
@@ -118,7 +136,7 @@ function constructionMatch(match) {
     div.appendChild(scoreNous);
     div.appendChild(scoreEux);
 
-    let valider = creerBalise("button", [["data-id", match.id]]);
+    let valider = creerBalise("button", [["query-id", match.id]]);
     valider.innerHTML = "valider changements";
     valider.addEventListener("click", function() {
         updateDB(this);
@@ -288,9 +306,36 @@ function creerBalise(type, attributs){
 function updateDB(element) {
     console.log(element);
 
-    document.querySelectorAll("button").forEach(el => {
-        if(el.getAttribute("data-id") == element.getAttribute("data-id"))
+    /* document.querySelectorAll("button").forEach(el => {
+        if(el.getAttribute("query-id") == element.getAttribute("query-id"))
         el.remove(element);
         //console.log("el " + el);
-    })
+    }) */
+
+    let id = element.getAttribute("query-id");
+    let div = document.getElementById(id);
+    let inputs = div.querySelectorAll("input");
+
+    console.log(inputs);
+    TousLesMatchs.forEach(element => {
+       if(element.id == id)  {
+           console.log(element);
+           /* for(let i = 0; i<inputs.length-2;i++) {
+               if(inputs[i].value != element[i]) console.log(element[i] + "différents");
+               else console.log(element[i] + "égaux");
+           } */
+           let i = 0;
+           for(let cle in element) {
+            if(inputs[i].value != element[cle]) 
+                console.log("différents " + cle + " = " + element[cle] + ", input = " + inputs[i].value);
+                else
+                console.log("égaux " + cle + " = " + element[cle] + ", input = " + inputs[i].value);
+            i++;
+            
+        }
+       }
+    });
+    
+
+    //location = "php/updateDb.php?id=1&";
 }
