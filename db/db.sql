@@ -75,6 +75,7 @@ PRIMARY KEY(id)
 
 ENGINE = INNODB;
 
+
 INSERT INTO joueurs (id,nom,mail,photo) VALUES 
 (default, "ju", "julien.dablemont@elitt-sas.fr", "ju.png"),
 (default, "seb", "bast620@gmail.com", "default.svg"),

@@ -326,17 +326,16 @@ function compareInputs(element) {
     let div = document.getElementById(id);
     let inputs = div.querySelectorAll("input");
     let cles = [];
+    //ajout de l'id du match dans le tableau des clés
+    cles.push(["id",id]);
+    let invalide = true;
 
     console.log(inputs);
     TousLesMatchs.forEach(element => {
        if(element.id == id)  {
            console.log(element);
 
-           //ajout de l'id du match dans le tableau des clés
-           cles.push["id",id];
-
-           let i = 0;
-           let invalide = true;
+           let i = 0;           
 
            for(let cle in element) {
             
@@ -362,7 +361,11 @@ function compareInputs(element) {
     });
 
     //envoi en ajax du tableau contenant les clés pour update de la bdd
-    //if(!invalide) updateDb(cles);
+    console.log("cles  = " + cles);
+    if(!invalide) updateDb(cles);
+
+    //enregistrement des scores
+    enregistrerScores(id, inputs);    
 }
 
 function updateDb(tableau) {
@@ -370,7 +373,7 @@ function updateDb(tableau) {
     //tableau contient les clés à updater dans le fichier updateDb.php
     if(tableau.length > 1) {
 
-        let url = "php/updateDb.php?";
+        let url = "php/updateMatch.php?";
         for(let i = 0; i<tableau.length; i++) {
             if(i<tableau.length-1) {
                 url += tableau[i][0];
@@ -384,12 +387,13 @@ function updateDb(tableau) {
         }
 
         console.log(url);
-        $ajaxUtils.sendGetRequest(url, function(request) {
+        location = url;
+        /* $ajaxUtils.sendGetRequest(url, function(request) {
 
             let reponse = request.responseText;
 
             //affichage du message de retour
-        })
+        }) */
 
 
     }
@@ -410,4 +414,31 @@ function baliseInvalide(balise) {
         target.setCustomValidity("sans espaces c'est OK");
         console.log("pattern = " + target.validity.patternMismatch);
     }    
+}
+
+function enregistrerScores(id, tableau) {
+
+     //reçoit toutes les inputs de la div du match
+    //sélectionne les 2 dernières inputs qui correspondent aux inputs des scores
+    let taille = tableau.length;   
+    
+    let nous = null;
+    let eux = null;
+    
+    if(tableau[taille-2].value != "") nous = tableau[taille-2].value;
+    if(tableau[taille-1].value != "") eux = tableau[taille-1].value;
+    console.log("nous : " + nous + ",  eux : " + eux);
+
+    //requête uniquement si les 2 variables ne sont pas nulles
+    if(nous != null && eux != null) {
+        let url = "php/updateScores.php?id=" + id + "&nous=" + nous +"&eux=" + eux;
+        location = url;
+        /* $ajaxUtils.sendGetRequest(url, function(request) {
+
+            let reponse = request.responseText;
+
+            //affichage du message de retour
+        }) */
+    }
+    
 }
