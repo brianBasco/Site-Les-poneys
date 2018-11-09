@@ -207,3 +207,8 @@ body {
     margin: 5px 0;
     width: 175px;
   }
+
+
+  .matchs .match input.invalide {
+    border: 3px solid #ff2626;
+  }

@@ -109,25 +109,35 @@ function constructionMatch(match) {
         console.log("attribut " + attribut);
         let type = "text";
         let nomAttribut = "value";
+        let balise;
 
-        if(attribut == "date_match") {
+        if(attribut == "nom") {
+            balise = creerBalise("input", [["type", type], [nomAttribut, match[attribut]],
+            ["pattern","[a-zA-Z0-9]{1,}"]]);
+            balise.addEventListener("blur", function(element) {
+                baliseInvalide(element);
+            });
+        }
+
+        else {
+            if(attribut == "date_match") {
             /*type = "text";
             //renversement de la date pour affichage fr
             match[attribut] =   match[attribut].split('-').reverse().join('/');        
             */
            type = "date";
-        }
+            }
 
-        else if(attribut == "heure") {
+            else if(attribut == "heure") {
             type = "time";
             //match[attribut] = match[attribut].split(':').pop().join(':');            
             match[attribut] = match[attribut].split(':');
             match[attribut].pop();
             match[attribut] = match[attribut].join(':');
-        }
+            }
 
-        let balise = creerBalise("input", [["type", type], [nomAttribut, match[attribut]],
-        ["data-id",match.id]]);
+        balise = creerBalise("input", [["type", type], [nomAttribut, match[attribut]]]);        
+        }
         div.appendChild(balise);
     }
 
@@ -139,7 +149,7 @@ function constructionMatch(match) {
     let valider = creerBalise("button", [["query-id", match.id]]);
     valider.innerHTML = "valider changements";
     valider.addEventListener("click", function() {
-        updateDB(this);
+        compareInputs(this);
     })
     div.appendChild(valider);
 
@@ -303,7 +313,7 @@ function creerBalise(type, attributs){
     return balise;
 }
 
-function updateDB(element) {
+function compareInputs(element) {
     console.log(element);
 
     /* document.querySelectorAll("button").forEach(el => {
@@ -315,27 +325,89 @@ function updateDB(element) {
     let id = element.getAttribute("query-id");
     let div = document.getElementById(id);
     let inputs = div.querySelectorAll("input");
+    let cles = [];
 
     console.log(inputs);
     TousLesMatchs.forEach(element => {
        if(element.id == id)  {
            console.log(element);
-           /* for(let i = 0; i<inputs.length-2;i++) {
-               if(inputs[i].value != element[i]) console.log(element[i] + "différents");
-               else console.log(element[i] + "égaux");
-           } */
+
+           //ajout de l'id du match dans le tableau des clés
+           cles.push["id",id];
+
            let i = 0;
+           let invalide = true;
+
            for(let cle in element) {
-            if(inputs[i].value != element[cle]) 
+            
+            if(cle == "nom") {
+                invalide = inputs[i].validity.patternMismatch;
+                if(invalide) {
+                    inputs[i].focus();
+                    break;
+                }
+            }
+
+            if(inputs[i].value != element[cle])
+                { 
                 console.log("différents " + cle + " = " + element[cle] + ", input = " + inputs[i].value);
+                cles.push([cle,inputs[i].value]);
+                }
+
                 else
                 console.log("égaux " + cle + " = " + element[cle] + ", input = " + inputs[i].value);
-            i++;
-            
+                i++;            
+            }       
         }
-       }
     });
-    
 
-    //location = "php/updateDb.php?id=1&";
+    //envoi en ajax du tableau contenant les clés pour update de la bdd
+    //if(!invalide) updateDb(cles);
+}
+
+function updateDb(tableau) {
+
+    //tableau contient les clés à updater dans le fichier updateDb.php
+    if(tableau.length > 1) {
+
+        let url = "php/updateDb.php?";
+        for(let i = 0; i<tableau.length; i++) {
+            if(i<tableau.length-1) {
+                url += tableau[i][0];
+                url += "=" + tableau[i][1] + "&";
+            }
+            else {
+                url += tableau[i][0];
+                url += "=" + tableau[i][1];
+            }
+
+        }
+
+        console.log(url);
+        $ajaxUtils.sendGetRequest(url, function(request) {
+
+            let reponse = request.responseText;
+
+            //affichage du message de retour
+        })
+
+
+    }
+}
+
+function baliseInvalide(balise) {
+
+    let target = balise.target;
+    //console.log(balise);
+
+    if(target.validity.patternMismatch) {
+        target.className = "invalide";
+        target.setCustomValidity("Toujours pas d'espaces !!!");
+        console.log("pattern = " + target.validity.patternMismatch);
+    }
+    else {
+        target.className = "";
+        target.setCustomValidity("sans espaces c'est OK");
+        console.log("pattern = " + target.validity.patternMismatch);
+    }    
 }
