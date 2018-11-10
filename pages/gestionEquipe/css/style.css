@@ -212,3 +212,30 @@ body {
   .matchs .match input.invalide {
     border: 3px solid #ff2626;
   }
+
+  /* classe match */
+  .match .btn {
+      border-radius: 0;
+      width: 100%;
+      height: 50px;
+      background: transparent;
+      border: 3px solid #2af62a;
+      color: white;
+  }
+
+  /* message de retour lors de la validation */
+  .validation.retour {
+    text-align: center;
+    border-radius: 0;
+    border: none;
+    background-color: rgb(255, 208, 0);
+    color: black;
+    position: fixed;
+    bottom: 180px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    width: 50%;
+    height: 150px;
+  }
+  

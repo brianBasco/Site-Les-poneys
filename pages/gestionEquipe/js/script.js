@@ -4,6 +4,7 @@
     var lesJoueurs;
     var lesMatchs;
     var TousLesMatchs;
+    var lesScores;
     
     //})(window);
 
@@ -56,7 +57,33 @@ document.addEventListener("DOMContentLoaded", function (event) {
                     //console.log(element);
                     constructionMatch(element);
                 });
-        })
+
+                $ajaxUtils.sendGetRequest("php/queryScores.php", 
+                function(request) {
+
+                    let reponse = request.responseText;
+                    
+                    lesScores = JSON.parse(reponse);
+                    //remplissage des inputs des scores
+                    for(let i = 0; i<lesScores.length; i++) {
+                        let id = lesScores[i].num_match;
+                        
+                        let div = document.getElementById(id);
+                        let inputs = div.querySelectorAll("input");
+                
+                        for(let j = 0; j<inputs.length; j++) {
+                            //console.log("inputs = " + inputs);
+                            if(inputs[j].getAttribute("data_score") == "nous")
+                            inputs[j].value = lesScores[i].nous;
+                            else if(inputs[j].getAttribute("data_score") == "eux")
+                            inputs[j].value = lesScores[i].eux;
+                        }
+                    }
+            
+                })
+            })
+
+        
 
         
 
@@ -111,6 +138,7 @@ function constructionMatch(match) {
         let nomAttribut = "value";
         let balise;
 
+        
         if(attribut == "nom") {
             balise = creerBalise("input", [["type", type], [nomAttribut, match[attribut]],
             ["pattern","[a-zA-Z0-9]{1,}"]]);
@@ -125,7 +153,7 @@ function constructionMatch(match) {
             //renversement de la date pour affichage fr
             match[attribut] =   match[attribut].split('-').reverse().join('/');        
             */
-           type = "date";
+        type = "date";
             }
 
             else if(attribut == "heure") {
@@ -138,16 +166,19 @@ function constructionMatch(match) {
 
         balise = creerBalise("input", [["type", type], [nomAttribut, match[attribut]]]);        
         }
-        div.appendChild(balise);
+        div.appendChild(balise);        
     }
 
-    let scoreNous = creerBalise("input", [["type", "text"], ["placeholder", "score Talence"]]);
-    let scoreEux = creerBalise("input", [["type", "text"], ["placeholder", "score " + match.nom]]);
+    let scoreNous = creerBalise("input", [["type", "text"], ["placeholder", "score Talence"],
+    ["data_score","nous"]]);
+    let scoreEux = creerBalise("input", [["type", "text"], ["placeholder", "score " + match.nom],
+    ["data_score","eux"]]);
     div.appendChild(scoreNous);
     div.appendChild(scoreEux);
 
     let valider = creerBalise("button", [["query-id", match.id]]);
     valider.innerHTML = "valider changements";
+    valider.className = "btn";
     valider.addEventListener("click", function() {
         compareInputs(this);
     })
@@ -351,6 +382,8 @@ function compareInputs(element) {
                 { 
                 console.log("différents " + cle + " = " + element[cle] + ", input = " + inputs[i].value);
                 cles.push([cle,inputs[i].value]);
+                //MAJ de la variable globale avec le nouvelle value
+                element[cle] = inputs[i].value;
                 }
 
                 else
@@ -425,20 +458,41 @@ function enregistrerScores(id, tableau) {
     let nous = null;
     let eux = null;
     
-    if(tableau[taille-2].value != "") nous = tableau[taille-2].value;
-    if(tableau[taille-1].value != "") eux = tableau[taille-1].value;
+    let tabNous = tableau[taille-2].value;
+    let tabEux = tableau[taille-1].value;
+
+    if(tabNous != ""){
+        if(!(tabNous>=0 && tabNous<=3)) messageDeRetour("ce n'est pas un score de volley");
+        else  nous = tabNous;
+    }
+   
+    if(tabEux != "") {
+        if(!(tabEux>=0 && tabEux<=3)) messageDeRetour("ce n'est pas un score de volley");
+        else eux = tabEux;
+    }
+
     console.log("nous : " + nous + ",  eux : " + eux);
 
     //requête uniquement si les 2 variables ne sont pas nulles
     if(nous != null && eux != null) {
         let url = "php/updateScores.php?id=" + id + "&nous=" + nous +"&eux=" + eux;
-        location = url;
-        /* $ajaxUtils.sendGetRequest(url, function(request) {
+        //location = url;
+        $ajaxUtils.sendGetRequest(url, function(request) {
 
             let reponse = request.responseText;
 
             //affichage du message de retour
-        }) */
-    }
-    
+            messageDeRetour(reponse);
+        })
+    }    
+}
+
+function messageDeRetour(message){
+    let input = creerBalise("input", [["type", "text"], ["value", message], ["readonly", "readonly"]]);
+    input.className = "validation retour";
+    document.body.appendChild(input);
+
+    setTimeout(function() {
+        document.body.removeChild(input);
+    }, 3000);
 }

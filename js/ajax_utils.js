@@ -20,7 +20,7 @@
     }
     
     
-    // Makes an Ajax GET request to 'requestUrl'
+    // Makes an Ajax GET ASYNCHRONUOUS request to 'requestUrl'
     ajaxUtils.sendGetRequest = 
       function(requestUrl, responseHandler) {
         var request = getRequestObject();
@@ -31,6 +31,18 @@
         request.open("GET", requestUrl, true);
         request.send(null); // for POST only
       };
+
+     // Makes an Ajax GET request SYNCHRONUOUS to 'requestUrl'
+     ajaxUtils.sendSynchronousGetRequest = 
+     function(requestUrl, responseHandler) {
+       var request = getRequestObject();
+       request.onreadystatechange = 
+         function() { 
+           handleResponse(request, responseHandler); 
+         };
+       request.open("GET", requestUrl, false);
+       request.send(null); // for POST only
+     };
     
     
     // Only calls user provided 'responseHandler'
