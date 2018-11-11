@@ -1,0 +1,248 @@
+body {
+    background-color: #001e3c;
+    font-family: 'Roboto Condensed', sans-serif;
+    color: white;
+    position: relative;
+}
+
+.header {
+    position: relative;
+    min-height: 100px;
+    padding-top: 18px;
+    margin-bottom: 30px;
+    background-color: white;
+    color: black;
+  }
+  
+  .header .wrapper-logo {  
+    display: inline-flex;
+  }
+  
+  .header .logo img {
+    width: 70px;
+    height: 65px;
+  }
+  
+  .header .titre {
+    height: 65px;
+    font-family: 'Pacifico', cursive;
+    color: #ffc107;
+    text-shadow: 1px 1px 4px black, 2px 2px 2px black;
+    padding-top: 8px;
+    margin-left: 15px;
+  }
+  
+  .header .titre b {
+    color: #d22121;
+  }
+    
+  .header .menu button:hover {
+    cursor: pointer;
+  }
+  
+  .header .menu button {
+    background-color: #001e3c;
+    color: #ffc107;
+    width: 120px;
+    height: 50px;
+    border: none;    
+  }
+  
+  
+  
+  
+  .listeJoueurs .photo {
+      width: 150px;
+      height: 150px;
+      border: 4px solid white;
+  }
+
+  #scoreBoard {
+    background-color: grey;
+    position: relative;
+    height: 97px;   
+  }
+
+  .scoreBoardMatch {
+    height: 96px;
+    width: 225px;
+    border: 1px dotted grey;
+    background-color: white;
+    color: black;
+    font-size: 11px;
+    line-height: 16px;
+    display: inline-block;
+  }
+
+  .scoreBoardNom {
+    font-weight: 700;
+    color: #00274c;
+    text-transform: uppercase;
+  }
+
+  li {
+    display: inline;
+    list-style: none; /* pour enlever les puces sur IE7 */
+    margin: 10px;
+  }
+
+  #scoreBoard button {
+    /* transition: 0.2s; */
+    -webkit-transition: 0.2s ease-in-out;
+    transition: 0.2s ease-in-out;
+    position: absolute;
+    width: 24px;
+    height: 100%;
+    background-color: #eeeeee;
+    border: 1px solid #cccccc;
+    border-top: none;
+    border-bottom: 1px solid #cccccc;
+    text-align: center;
+    font-size: 0;
+    padding: 0;
+    outline: none;
+  }
+
+  #scoreBoard button::before {
+    content: '\e862';
+  }
+
+  #scoreBoard button.previous {
+    top: 0;
+    left: 0;
+  }
+
+  #scoreBoard button.next {
+    top: 0;
+    right: 0;
+  }
+  
+
+  .affichageVotes {
+    position: fixed;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    width: 50%;
+    padding: 30px;
+    top: 100px;
+    height: 400px;
+    background-color: rgba(0, 0, 0, 0.9);
+    border-radius: 0;
+    border: none;
+    box-shadow: 0px 4px 3px black;
+    overflow: auto;
+  }
+
+  .affichageVotes .contenu {
+    padding-top: 50px;
+    text-align: center;    
+  }
+
+  .affichageVotes .nom {
+    display: block;
+    text-align: center;
+    border: none;
+    border-radius: 0;
+    height: 60px;
+    box-shadow: none;
+  }
+
+  .affichageVotes .photo{
+    display: block;
+    width: 175px;
+    height: 175px;
+    border: 2px solid white;
+  }
+
+  .affichageVotes .fermer {
+    position: absolute;
+    right: 0;
+    width: 60px;
+    height: 60px;
+    background: transparent;
+    color: white;
+    border: none;
+    font-size: 2rem;    
+  }
+
+  .affichageVotes .fermer:hover {
+    cursor: pointer;
+  }
+
+  .affichageVotes .unJoueur {
+    display: inline-block;
+    margin: 10px;
+  }
+
+  .affichageVotes .enLigne {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+
+  /* --------------- matchs -------------- */
+.matchs {
+  text-align: center;
+}
+
+  .matchs .match {
+    display: inline-block;
+    margin: 10px;
+    padding: 20px;
+    border: 2px solid white;
+    border-radius: 10px;
+    background-color: #ffc107;
+  }
+
+  .matchs .match input {
+    display: block;
+    height: 60px;
+    border: none;
+    border-radius: 0;
+    text-align: center;
+    box-shadow: none;
+    margin: 5px 0;
+    width: 250px;
+  }
+
+  .matchs .match .cache {
+    display: none;
+  }
+
+
+  .matchs .match input.invalide {
+    border: 3px solid #ff2626;
+  }
+
+  /* classe match */
+
+  .match {
+    position: relative;
+  }  
+
+  .match .btn {
+      border-radius: 0;
+      width: 100%;
+      height: 50px;
+      background-color: #077a00;
+      border: 3px solid #2af62a;
+      color: white;
+  }
+
+  /* message de retour lors de la validation */
+  .validation.retour {
+    position: absolute;
+    bottom: 0;
+    text-align: center;
+    border-radius: 0;
+    border: none;
+    background-color: rgb(255, 208, 0);
+    color: black;
+    margin: 0 auto;
+    width: 100%;
+  }
+  

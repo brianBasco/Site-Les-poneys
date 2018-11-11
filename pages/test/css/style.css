@@ -62,21 +62,26 @@ body {
   }
 
   #scoreBoard {
+    padding: 0 24px;
     background-color: grey;
     position: relative;
     height: 97px;   
   }
 
   .scoreBoardMatch {
-    height: 96px;
-    width: 225px;
     border: 1px dotted grey;
     background-color: white;
     color: black;
     font-size: 11px;
     line-height: 16px;
-    display: inline-block;
+    display: inline;
   }
+
+.scoreBoardMatch .contenu {
+    display: block;
+    height: 96px;
+    width: 225px;
+}
 
   .scoreBoardNom {
     font-weight: 700;
@@ -189,6 +194,9 @@ body {
 
 
   /* --------------- matchs -------------- */
+.matchs {
+  text-align: center;
+}
 
   .matchs .match {
     display: inline-block;
@@ -208,12 +216,21 @@ body {
     width: 175px;
   }
 
+  .matchs .match .cache {
+    display: none;
+  }
+
 
   .matchs .match input.invalide {
     border: 3px solid #ff2626;
   }
 
   /* classe match */
+
+  .match {
+    position: relative;
+  }  
+
   .match .btn {
       border-radius: 0;
       width: 100%;
@@ -225,17 +242,13 @@ body {
 
   /* message de retour lors de la validation */
   .validation.retour {
+    position: absolute;
+    bottom: 0;
     text-align: center;
     border-radius: 0;
     border: none;
     background-color: rgb(255, 208, 0);
     color: black;
-    position: fixed;
-    bottom: 180px;
-    left: 0;
-    right: 0;
     margin: 0 auto;
-    width: 50%;
-    height: 150px;
+    width: 100%;
   }
-  

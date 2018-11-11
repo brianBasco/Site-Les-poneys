@@ -9,19 +9,12 @@
 ?>
 
  <body>
-
-    <?php
-        include('html/scoreBoard.html');
-    ?>
+   
 
     <?php
         include('html/header.html');
     ?>
 
-
-    <?php
-        include('php/vue/joueurs.php');
-    ?>
 
     <?php
         include('html/matchs.html');

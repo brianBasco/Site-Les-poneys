@@ -1,7 +1,7 @@
 <?php
 
-ini_set('display_errors', true);
-error_reporting (E_ALL);
+//ini_set('display_errors', true);
+//error_reporting (E_ALL);
 
 extract($_GET);
 //variables du get : id, nous, eux
@@ -17,6 +17,7 @@ require '../../../php/ConnexionDb.php';
  $pdo = new PDO(MYSQL, USER, PSWD);
  $pdo->query("SET NAMES UTF8");
 
+
 $reqMatchs = $pdo->prepare('SELECT * FROM scores');
 $reqMatchs->execute();
 // $res récupère si le match est déjà enregistré dans les scores 
@@ -24,6 +25,7 @@ $res = null;
 while($ligne = $reqMatchs->fetch(PDO::FETCH_ASSOC)) {
     if($ligne["num_match"] == $id) $res = $ligne["id"];
 }
+
 
 //si res n'est pas nul, le match est déjà crée, donc update du match
 if($res != null) {
@@ -34,7 +36,7 @@ if($res != null) {
 //sinon, le match n'a pas été crée, insert into scores
 else {
     $reqInsert = $pdo->prepare('INSERT INTO scores (num_match,nous,eux) VALUES (?,?,?)');
-    $reqInsert->execute(array($id, $nous, $eux,)) or exit(print_r($reqInsert->ErrorInfo()));
+    $reqInsert->execute(array($id, $nous, $eux)); //or exit(print_r($reqInsert->ErrorInfo()));
 }
 
 echo "scores enregistrés";
