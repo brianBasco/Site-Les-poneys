@@ -68,20 +68,43 @@ body {
     height: 97px;   
   }
 
+  #scoreBoard_contenu {
+    position: relative;
+  }
+
   .scoreBoardMatch {
     border: 1px dotted grey;
-    background-color: white;
+    background-color:#ffffcc;
     color: black;
     font-size: 11px;
     line-height: 16px;
-    display: inline;
-  }
-
-.scoreBoardMatch .contenu {
-    display: block;
     height: 96px;
     width: 225px;
-}
+    display: inline-block;
+    position: relative;
+    left: 0;
+    transition: all ease-in-out 1s;
+  }
+
+  .scoreBoardMatch input {
+    display: inline-block;
+    width: 50%;
+    height: 32px;
+    background: transparent;
+    border: none;
+    text-align: center;
+  }
+
+  .scoreBoardMatch hr {
+    width: 80%;
+    border-bottom: 1px dotted grey;
+    margin: 0 auto;
+    padding: 0;
+  }
+
+  .scoreBoardMatch .date {
+    width: 100%;
+  }
 
   .scoreBoardNom {
     font-weight: 700;
@@ -110,6 +133,7 @@ body {
     font-size: 0;
     padding: 0;
     outline: none;
+    z-index: 1;
   }
 
   #scoreBoard button::before {

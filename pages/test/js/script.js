@@ -1,4 +1,10 @@
-var lesScores;
+
+//variables globales, namespace lesScores
+    var LesScores = {
+        lesScores : null,
+        base : 0,
+        unDecalage : 225
+    };
 
 document.addEventListener("DOMContentLoaded", function (event) {
 
@@ -15,20 +21,34 @@ document.addEventListener("DOMContentLoaded", function (event) {
           //reponse reçoit le tableau de la bdd des scores
           let tableau = JSON.parse(reponse);
 
-          lesScores = tableau;
+          LesScores.lesScores = tableau;
 
           construireScoreBoard(tableau);
         
       })
 
     document.querySelector("#previous").addEventListener("click", function() {
-        ouvrirAffichageVotes();
+        decalerScores(-LesScores.unDecalage);
     })
+
+    document.querySelector("#next").addEventListener("click", function() {
+        decalerScores(LesScores.unDecalage);
+    })
+
         
 })        
 
 function retour() {
     location ="../../index.php";
+}
+
+function decalerScores(decalage) {
+    let scores = document.querySelectorAll(".scoreBoardMatch");
+    let res = (LesScores.base + decalage);
+    for(let i = 0; i<scores.length; i++) {            
+        scores[i].style.left = res + "px";
+    }
+    LesScores.base = res;
 }
 
 function demandeDeSuppression(element) {
@@ -49,8 +69,8 @@ function demandeDeSuppression(element) {
 
 function construireScoreBoard(tab) {
 
-    // !!!! rajouter des Br entre les inputs pour garder la propiété inline !
-    let scores = document.getElementById("scoreBoard");    
+    let scores = document.getElementById("scoreBoard_contenu");
+    scores.style.width = (tab.length * 225) + "px";
 
     for(let i = 0; i<tab.length; i++) {
 
@@ -59,32 +79,37 @@ function construireScoreBoard(tab) {
         let div = document.createElement("div");
         div.className = "scoreBoardMatch";
 
-        let container = document.createElement("div");
-        container.className = "contenu";
+        let date = document.createElement("input");
+        date.setAttribute("type", "text");
+        date.className = "date";
+        date.value = dateFormatFr(match.date_match);
 
-        let nom = document.createElement("input");
-        nom.setAttribute("type", "text");
-        nom.id = "score/" + match.num_match;
-        nom.className = "scoreBoardNom";
-        nom.value = match.num_match;
+
+        let talence = document.createElement("input");
+        talence.setAttribute("type", "text");
+        talence.className = "scoreBoardNom";
+        talence.value = "talence";
 
         let nous = document.createElement("input");
         nous.setAttribute("type", "text");
         nous.value = match.nous;
 
+        let nom = document.createElement("input");
+        nom.setAttribute("type", "text");
+        nom.id = "score_" + match.num_match;
+        nom.className = "scoreBoardNom";
+        nom.value = match.nom;        
+
         let eux = document.createElement("input");
         eux.setAttribute("type", "text");
         eux.value = match.eux;
 
-        //let date = document.createElement("div");
-        //date.innerHTML = match.date_match;
-
-        container.appendChild(nom);
-        //div.appendChild(date);
-        container.appendChild(nous);
-        container.appendChild(eux);
-
-        div.appendChild(container);
+        div.appendChild(date);
+        div.appendChild(document.createElement("hr"));
+        div.appendChild(talence);
+        div.appendChild(nous);
+        div.appendChild(nom);        
+        div.appendChild(eux);
 
         scores.appendChild(div);
     }
@@ -102,6 +127,10 @@ function construitVotes(tab) {
         document.body.appendChild(input);
 
     }
+}
+
+function dateFormatFr(date) {
+    return date.split("-").reverse().join("-");
 }
 
 
@@ -330,16 +359,17 @@ function enregistrerScores(id, tableau) {
 function comparerScores(id, nous, eux) {
 
     let modif = false;
+    let tab = LesScores.lesScores;
 
-    for(let i =0; i<lesScores.length; i++) {
-        if(lesScores[i].num_match == id) {
-            if(lesScores[i].nous != nous) {
+    for(let i =0; i<tab.length; i++) {
+        if(tab[i].num_match == id) {
+            if(tab[i].nous != nous) {
                 modif = true;
-                lesScores[i].nous = nous;
+                tab[i].nous = nous;
             }
-            else if(lesScores[i].eux != eux) {
+            else if(tab[i].eux != eux) {
                 modif = true;
-                lesScores[i].eux = eux;
+                tab[i].eux = eux;
             }
             break;
         }

@@ -11,7 +11,7 @@ $scores = array();
     $pdo = new PDO(MYSQL, USER, PSWD);
     $pdo->query("SET NAMES UTF8");
 
-    $reqScores = $pdo->prepare("SELECT * FROM scores");
+    $reqScores = $pdo->prepare("SELECT * FROM scores, matchs WHERE scores.num_match = matchs.id");
     $reqScores->execute();
     while($ligne = $reqScores->fetch(PDO::FETCH_ASSOC)) {
         array_push($scores, $ligne);
