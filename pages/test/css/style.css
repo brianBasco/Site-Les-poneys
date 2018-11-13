@@ -61,14 +61,14 @@ body {
       border: 4px solid white;
   }
 
-  #scoreBoard {
+  .scoreBoard {
     padding: 0 24px;
     background-color: grey;
     position: relative;
-    height: 97px;   
+    height: 100px;   
   }
 
-  #scoreBoard_contenu {
+  .scoreBoard_contenu {
     position: relative;
   }
 
@@ -78,7 +78,7 @@ body {
     color: black;
     font-size: 11px;
     line-height: 16px;
-    height: 96px;
+    height: 100px;
     width: 225px;
     display: inline-block;
     position: relative;
@@ -104,6 +104,11 @@ body {
 
   .scoreBoardMatch .date {
     width: 100%;
+    font-size: larger;
+  }
+
+  .scoreBoardMatch .score {
+    font-size: 16px;
   }
 
   .scoreBoardNom {
@@ -112,13 +117,7 @@ body {
     text-transform: uppercase;
   }
 
-  li {
-    display: inline;
-    list-style: none; /* pour enlever les puces sur IE7 */
-    margin: 10px;
-  }
-
-  #scoreBoard button {
+  .scoreBoard button {
     /* transition: 0.2s; */
     -webkit-transition: 0.2s ease-in-out;
     transition: 0.2s ease-in-out;
@@ -136,20 +135,21 @@ body {
     z-index: 1;
   }
 
-  #scoreBoard button::before {
-    content: '\e862';
+  .scoreBoard button .fas {
+    font-size: initial;
   }
 
-  #scoreBoard button.previous {
+  .scoreBoard button.previous {
     top: 0;
     left: 0;
   }
 
-  #scoreBoard button.next {
+  .scoreBoard button.next {
     top: 0;
     right: 0;
   }
   
+  /* Votes ------------ */
 
   .affichageVotes {
     position: fixed;

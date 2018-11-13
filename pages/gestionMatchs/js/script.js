@@ -286,7 +286,11 @@ function comparerScores(id, nous, eux) {
 
     let modif = false;
 
+    //Si tab est vide, il n'y a aucun score dans la bdd, on peut donc la mettre a jour
+    if(lesScores.length == 0) return true;
+
     for(let i =0; i<lesScores.length; i++) {
+        //s'il trouve le match il compare
         if(lesScores[i].num_match == id) {
             if(lesScores[i].nous != nous) {
                 modif = true;
@@ -298,6 +302,8 @@ function comparerScores(id, nous, eux) {
             }
             break;
         }
+        //sinon pas encore de score donc MAJ de la bdd à faire
+        else return true;
     }
     return modif;
 }

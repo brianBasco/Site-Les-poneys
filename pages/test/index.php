@@ -10,21 +10,17 @@
 
  <body>
 
-    <?php
-        include('html/scoreBoard.html');
-    ?>
-
+    
     <?php
         include('html/header.html');
     ?>
 
-
     <?php
-        include('php/vue/joueurs.php');
+        include('html/matchs.html');
     ?>
 
     <?php
-        include('html/matchs.html');
+        include('html/votes.html');
     ?>
 
     

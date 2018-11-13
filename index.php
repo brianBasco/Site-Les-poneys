@@ -13,11 +13,17 @@
       include('html/header.html');
     ?>
 
+     <?php
+
+      include('html/scoreBoard.html');
+    ?>
+
     
     <?php
 
       include('html/infos.html');
     ?>
+   
 
     <?php
       include('php/listeDesMatchs.php');  
@@ -37,6 +43,7 @@
   <script type="text/javascript" src="bundle.js"></script>
   <script type="text/javascript" src="jquery.js"></script>
   <script type="text/javascript" src="js/frontend.js"></script>
+  <script type="text/javascript" src="js/scoreBoard.js"></script>
        
   </body>
 </html>

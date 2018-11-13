@@ -20,7 +20,6 @@ html {
   padding-top: 18px;
   background-color: #00274c;
   border-bottom: 1px solid white;
-  margin-bottom: 30px;
 }
 
 .header .wrapper-logo {  
@@ -394,7 +393,8 @@ html {
     text-align: center;
     color: white;
     width: 100%;
-    min-height: 2000px;   
+    min-height: 2000px;
+    z-index: 2;   
   }
 
   .gestionJoueur .fermer {
@@ -554,4 +554,96 @@ html {
     color: black;
     height: 52px;
     width: 100px;
+  }
+
+  /* ----------------- scoreBoard ------------------ */
+
+  .scoreBoard {
+    padding: 0 24px;
+    background-color: grey;
+    position: relative;
+    height: 100px;    
+    margin-bottom: 30px;
+    overflow: hidden;   
+  }
+
+  .scoreBoard_contenu {
+    position: relative;
+  }
+
+  .scoreBoardMatch {
+    border: 1px dotted grey;
+    background-color:#ffffcc;
+    color: black;
+    font-size: 11px;
+    line-height: 16px;
+    height: 100px;
+    width: 225px;
+    display: inline-block;
+    position: relative;
+    left: 0;
+    transition: all ease-in-out 1s;
+  }
+
+  .scoreBoardMatch input {
+    display: inline-block;
+    width: 50%;
+    height: 32px;
+    background: transparent;
+    border: none;
+    text-align: center;
+  }
+
+  .scoreBoardMatch hr {
+    width: 80%;
+    border-bottom: 1px dotted grey;
+    margin: 0 auto;
+    padding: 0;
+  }
+
+  .scoreBoardMatch .date {
+    width: 100%;
+    font-size: larger;
+  }
+
+  .scoreBoardMatch .score {
+    font-size: 16px;
+  }
+
+  .scoreBoard button {
+    /* transition: 0.2s; */
+    -webkit-transition: 0.2s ease-in-out;
+    transition: 0.2s ease-in-out;
+    position: absolute;
+    width: 24px;
+    height: 100%;
+    background-color: #eeeeee;
+    border: 1px solid #cccccc;
+    border-top: none;
+    border-bottom: 1px solid #cccccc;
+    text-align: center;
+    font-size: 0;
+    padding: 0;
+    outline: none;
+    z-index: 1;
+  }
+
+  .scoreBoard button .fas {
+    font-size: initial;
+  }
+
+  .scoreBoard button.previous {
+    top: 0;
+    left: 0;
+  }
+
+  .scoreBoard button.next {
+    top: 0;
+    right: 0;
+  }
+
+  .scoreBoardNom {
+    font-weight: 700;
+    color: #00274c;
+    text-transform: uppercase;
   }
