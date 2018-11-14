@@ -1,9 +1,20 @@
 
 //variables globales, namespace lesScores
     var Info = {
+        matchs : null,
         votes : null,
-        matchs: null
     };
+
+    var Matchs = [];
+
+    /* var match = {
+        id: null,
+        nom: null,
+        date: null,
+        action: [],
+        cagade: []
+    }; */
+    
 
 document.addEventListener("DOMContentLoaded", function (event) {
 
@@ -11,21 +22,37 @@ document.addEventListener("DOMContentLoaded", function (event) {
         retour();
       });
 
-
       $ajaxUtils.sendGetRequest("php/queryMatchs.php", 
       function(request) {
 
           let reponse = request.responseText;
           
-          Info.matchs = JSON.parse(reponse);          
+          Info.matchs = JSON.parse(reponse);   
+          
+          console.log(Info.matchs);
 
-            Info.matchs.forEach(element => {
-                  //console.log(element);
-                  constructionMatch(element);
-              });
+          Info.matchs.forEach(element => {
+            let unMatch = new Object();
+            unMatch.id = element.id;
+            unMatch.nom = element.nom;
+            unMatch.date = element.date_match;
+            unMatch.action = [];
+            unMatch.cagade = [];
+            Matchs.push(unMatch);
+
+          })
+
+          Matchs.forEach(element => {
+            console.log(element);    
+          });
+          
+
+
+          
 
         })
 
+       
         $ajaxUtils.sendGetRequest("php/queryVotes.php", 
       function(request) {
 
