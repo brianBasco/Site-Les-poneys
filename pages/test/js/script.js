@@ -2,18 +2,11 @@
 //variables globales, namespace lesScores
     var Info = {
         matchs : null,
-        votes : null,
+        action : null,
+        cagade : null
     };
 
     var Matchs = [];
-
-    /* var match = {
-        id: null,
-        nom: null,
-        date: null,
-        action: [],
-        cagade: []
-    }; */
     
 
 document.addEventListener("DOMContentLoaded", function (event) {
@@ -27,9 +20,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
           let reponse = request.responseText;
           
-          Info.matchs = JSON.parse(reponse);   
-          
-          console.log(Info.matchs);
+          Info.matchs = JSON.parse(reponse);
 
           Info.matchs.forEach(element => {
             let unMatch = new Object();
@@ -41,27 +32,50 @@ document.addEventListener("DOMContentLoaded", function (event) {
             Matchs.push(unMatch);
 
           })
-
-          Matchs.forEach(element => {
-            console.log(element);    
-          });
           
 
+        //Les matchs sont construits et les votes sont des tableaux vides pour l'instant
+        $ajaxUtils.sendGetRequest("php/queryAction.php", 
+            function(request) {
 
-          
+            let reponse = request.responseText;  
+            Info.action = JSON.parse(reponse);
 
+            //insertion des votes dans chaque match
+            Matchs.forEach(match => {
+                Info.action.forEach(vote => {
+                    if(match.id == vote.num_match) 
+                        match.action.push(vote.num_vote);
+                })
+            })
+
+            //Les matchs sont construits et les votes sont des tableaux vides pour l'instant
+            $ajaxUtils.sendGetRequest("php/queryCagade.php", 
+            function(request) {
+
+            let reponse = request.responseText; 
+            Info.cagade = JSON.parse(reponse);
+
+            //insertion des votes dans chaque match
+            Matchs.forEach(match => {
+                Info.cagade.forEach(vote => {
+                    if(match.id == vote.num_match) 
+                        match.cagade.push(vote.num_vote);
+                })
+            });
+
+            Matchs.forEach(match => {
+                //construit le frontend
+                //si les tableaux ne sont pas vides
+                //fonction à mettre dans la boucle avant, pour chaque match
+                if(match.action.length > 0 || match.cagade.length > 0)
+                    constructionMatch(match);
+            });
         })
 
-       
-        $ajaxUtils.sendGetRequest("php/queryVotes.php", 
-      function(request) {
 
-          let reponse = request.responseText;
-          
-            Info.votes = JSON.parse(reponse);
-
-            console.log(Info.votes);
         })
+    })
         
 })        
 
@@ -71,67 +85,66 @@ function retour() {
 
 function constructionMatch(match) {
 
+    let maxCount;
+    let gagnant;
+    let perdant;
+    let tailleAction;
+    let tailleCagade;
+
+    console.log("pb ???");
+
+    if(match.action.length > 0) {
+        let action = match.action;
+        //nbre de votants
+        tailleAction = action.length;
+        maxCount = calculerMaxCount(action);
+        gagnant = joueurEnTete(action, maxCount);
+        for(let i = 0; i<gagnant.length; i++) {
+            console.log("winner " + gagnant[i]);
+        }
+    }
+    if(match.cagade.length > 0) {
+        let cagade = match.cagade;
+        //nbre de votants
+        tailleCagade = cagade.length;
+        maxCount = calculerMaxCount(cagade);
+        perdant = joueurEnTete(cagade, maxCount);
+        for(let i = 0; i<perdant.length; i++) {
+            console.log("perdant " + perdant[i]);
+        }
+    }
+
     //match est un objet
+    //à ce stade action ou cagade est n'est pas vide, pas besoin de check
     let ancre = document.getElementById("matchs");
     
     let div = creerBalise("div", [["id", match.id]]);
     div.className = "match";
     
-    for(let attribut in match) {
-        console.log("attribut " + attribut);
-        let type = "text";
-        let nomAttribut = "value";
-        let balise;
+    /* for(let attribut in match) {
+        let balise = creerBalise("input", [["type", "text"],["value", match[attribut]]]);
+        div.appendChild(balise);
+    } */
 
-        if(attribut == "id"){
-            balise = creerBalise("input", [["type", type], [nomAttribut, match[attribut]]]);
-            balise.className = "cache";
-        }
+    let nom = creerBalise("input", [["type", "text"],["value", match["nom"]]]);
+    div.appendChild(nom);
 
-        else if(attribut == "nom") {
-            balise = creerBalise("input", [["type", type], [nomAttribut, match[attribut]],
-            ["pattern","[a-zA-Z0-9]{1,}"]]);
-            balise.addEventListener("blur", function(element) {
-                baliseInvalide(element);
-            });
-        }
-
-        else {
-            if(attribut == "date_match") {
-            /*type = "text";
-            //renversement de la date pour affichage fr
-            match[attribut] =   match[attribut].split('-').reverse().join('/');        
-            */
-        type = "date";
-            }
-
-            else if(attribut == "heure") {
-            type = "time";
-            //match[attribut] = match[attribut].split(':').pop().join(':');            
-            match[attribut] = match[attribut].split(':');
-            match[attribut].pop();
-            match[attribut] = match[attribut].join(':');
-            }
-
-        balise = creerBalise("input", [["type", type], [nomAttribut, match[attribut]]]);        
-        }
-        div.appendChild(balise);        
+    for(let i = 0;i<gagnant.length; i++) {
+        console.log(gagnant);
+    let win = creerBalise("input", [["type", "text"],["value", gagnant[i]]]);
+    //nbre de votants
+    let winVotants = creerBalise("input", [["type", "text"],["value", tailleAction]]);
+    div.appendChild(winVotants);
+    div.appendChild(win);
     }
 
-    let scoreNous = creerBalise("input", [["type", "text"], ["placeholder", "score Talence"],
-    ["data_score","nous"]]);
-    let scoreEux = creerBalise("input", [["type", "text"], ["placeholder", "score " + match.nom],
-    ["data_score","eux"]]);
-    div.appendChild(scoreNous);
-    div.appendChild(scoreEux);
-
-    let valider = creerBalise("button", [["query-id", match.id]]);
-    valider.innerHTML = "valider changements";
-    valider.className = "btn";
-    valider.addEventListener("click", function() {
-        compareInputs(this);
-    })
-    div.appendChild(valider);
+    for(let i = 0;i<perdant.length; i++) {
+        console.log(perdant);
+    let loose = creerBalise("input", [["type", "text"],["value", perdant[i]]]);
+    let looseVotants = creerBalise("input", [["type", "text"],["value", tailleCagade]]);
+    div.appendChild(looseVotants);
+    div.appendChild(loose);
+    }
 
     ancre.appendChild(div);
 }
@@ -236,3 +249,65 @@ function fermerAffichageVotes() {
 
 }
 
+
+//retourne le nombre max trouvé dans un tableau, pas l'indice
+// tab[1,1,1,3,3,2] retourne 3
+function calculerMaxCount(tab) {
+    
+    let max = 0;
+   
+    let taille = tab.length;
+    for(let i = 0; i<taille; i++) {
+
+        let compte = count(tab, tab[i]);
+        console.log("compte = " + compte);
+
+        if(compte > max) max = compte;
+    }
+
+    console.log("max = " + max);
+    return max;
+}
+
+//retourne le num de joueur compté le plus dans un tableau
+// tab[1,1,1,3,3,2] retourne 1
+function joueurEnTete(tab, comptage) {
+
+    //res retourne le tableau des joueurs qui ont le compte max
+    //plusieurs joueurs peuvent être ex aequo
+    let res = [];
+    if(tab.length >0) {
+
+        let taille = tab.length;
+        for(let i = 0; i<taille; i++) {
+
+            let compte = count(tab, tab[i]);
+            console.log("count = " + compte);
+
+            if(compte == comptage) {
+                //verif si pas déjà de doublons
+                let doublons = false;
+                for(let j = 0; j<res.length; j++) {
+                    if(res[j] == tab[i]) doublons = true;
+                }
+                if(!doublons)  res.push(tab[i]);
+            }
+
+        }
+    }
+    console.log("res " + res);
+    return res;
+}
+
+function count(tab, valeur) {
+
+    let count = 0;
+
+    if(tab.length > 0) {
+        for(let i = 0; i<tab.length; i++) {
+            if(tab[i] == valeur) count++;
+        }
+    }
+
+    return count;
+}
