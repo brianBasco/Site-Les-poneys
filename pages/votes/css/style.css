@@ -50,103 +50,13 @@ body {
     width: 120px;
     height: 50px;
     border: none;    
-  }
-  
-  
+  } 
   
   
   .listeJoueurs .photo {
       width: 150px;
       height: 150px;
       border: 4px solid white;
-  }
-
-  .scoreBoard {
-    padding: 0 24px;
-    background-color: grey;
-    position: relative;
-    height: 100px;   
-  }
-
-  .scoreBoard_contenu {
-    position: relative;
-  }
-
-  .scoreBoardMatch {
-    border: 1px dotted grey;
-    background-color:#ffffcc;
-    color: black;
-    font-size: 11px;
-    line-height: 16px;
-    height: 100px;
-    width: 225px;
-    display: inline-block;
-    position: relative;
-    left: 0;
-    transition: all ease-in-out 1s;
-  }
-
-  .scoreBoardMatch input {
-    display: inline-block;
-    width: 50%;
-    height: 32px;
-    background: transparent;
-    border: none;
-    text-align: center;
-  }
-
-  .scoreBoardMatch hr {
-    width: 80%;
-    border-bottom: 1px dotted grey;
-    margin: 0 auto;
-    padding: 0;
-  }
-
-  .scoreBoardMatch .date {
-    width: 100%;
-    font-size: larger;
-  }
-
-  .scoreBoardMatch .score {
-    font-size: 16px;
-  }
-
-  .scoreBoardNom {
-    font-weight: 700;
-    color: #00274c;
-    text-transform: uppercase;
-  }
-
-  .scoreBoard button {
-    /* transition: 0.2s; */
-    -webkit-transition: 0.2s ease-in-out;
-    transition: 0.2s ease-in-out;
-    position: absolute;
-    width: 24px;
-    height: 100%;
-    background-color: #eeeeee;
-    border: 1px solid #cccccc;
-    border-top: none;
-    border-bottom: 1px solid #cccccc;
-    text-align: center;
-    font-size: 0;
-    padding: 0;
-    outline: none;
-    z-index: 1;
-  }
-
-  .scoreBoard button .fas {
-    font-size: initial;
-  }
-
-  .scoreBoard button.previous {
-    top: 0;
-    left: 0;
-  }
-
-  .scoreBoard button.next {
-    top: 0;
-    right: 0;
   }
   
   /* Votes ------------ */
@@ -218,42 +128,23 @@ body {
 
 
   /* --------------- matchs -------------- */
-.matchs {
-  text-align: center;
-}
 
-  .matchs .match {
-    display: inline-block;
-    margin: 10px;
-    padding: 10px;
-    border: 2px solid white;
-  }
-
-  .matchs .match input {
-    display: block;
-    height: 60px;
-    border: none;
-    border-radius: 0;
+  .matchs {
     text-align: center;
-    box-shadow: none;
-    margin: 5px 0;
-    width: 175px;
-  }
-
-  .matchs .match .cache {
-    display: none;
-  }
-
-
-  .matchs .match input.invalide {
-    border: 3px solid #ff2626;
   }
 
   /* classe match */
-
-  .match {
-    position: relative;
-  }  
+.match {
+    display: inline-block;
+    margin: 10px;
+    padding: 20px;
+    border: 2px solid white;
+    text-align: center;
+    vertical-align: top;
+    width: 350px;
+    background-color: #958804;
+    border-radius: 10Px;
+  }
 
   .match .btn {
       border-radius: 0;
@@ -262,6 +153,26 @@ body {
       background: transparent;
       border: 3px solid #2af62a;
       color: white;
+  }
+
+  .match input {
+    display: block;
+    height: 60px;
+    border: none;
+    border-radius: 0;
+    text-align: center;
+    box-shadow: none;
+    margin: 5px 0;
+    width: 100%;
+  }
+
+  .match .enLigne {
+    display: inline-block;
+    width: 50%;
+  }
+
+  .match .photo {
+    width: 100%;
   }
 
   /* message de retour lors de la validation */

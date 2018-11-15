@@ -3,7 +3,8 @@
     var Info = {
         matchs : null,
         action : null,
-        cagade : null
+        cagade : null,
+        joueurs: null
     };
 
     var Matchs = [];
@@ -62,15 +63,23 @@ document.addEventListener("DOMContentLoaded", function (event) {
                     if(match.id == vote.num_match) 
                         match.cagade.push(vote.num_vote);
                 })
-            });
+            });            
 
-            Matchs.forEach(match => {
-                //construit le frontend
-                //si les tableaux ne sont pas vides
-                //fonction à mettre dans la boucle avant, pour chaque match
-                if(match.action.length > 0 || match.cagade.length > 0)
-                    constructionMatch(match);
-            });
+                $ajaxUtils.sendGetRequest("php/queryJoueurs.php", 
+                function(request) {
+
+                let reponse = request.responseText; 
+                Info.joueurs = JSON.parse(reponse);
+
+                Matchs.forEach(match => {
+                    //construit le frontend
+                    //si les tableaux ne sont pas vides
+                    //fonction à mettre dans la boucle avant, pour chaque match
+                    if(match.action.length > 0 || match.cagade.length > 0)
+                        calculVotes(match);
+                });
+            })
+            
         })
 
 
@@ -83,67 +92,53 @@ function retour() {
     location ="../../index.php";
 }
 
-function constructionMatch(match) {
+function calculVotes(match) {
 
-    let maxCount;
+    let maxAction;
+    let maxCagade;
     let gagnant;
     let perdant;
-    let tailleAction;
-    let tailleCagade;
-
-    console.log("pb ???");
 
     if(match.action.length > 0) {
         let action = match.action;
-        //nbre de votants
-        tailleAction = action.length;
-        maxCount = calculerMaxCount(action);
-        gagnant = joueurEnTete(action, maxCount);
-        for(let i = 0; i<gagnant.length; i++) {
-            console.log("winner " + gagnant[i]);
-        }
-    }
-    if(match.cagade.length > 0) {
-        let cagade = match.cagade;
-        //nbre de votants
-        tailleCagade = cagade.length;
-        maxCount = calculerMaxCount(cagade);
-        perdant = joueurEnTete(cagade, maxCount);
-        for(let i = 0; i<perdant.length; i++) {
-            console.log("perdant " + perdant[i]);
-        }
+        maxAction = calculerMaxCount(action);
+        gagnant = joueurEnTete(action, maxAction);
     }
 
+    if(match.cagade.length > 0) {
+        let cagade = match.cagade;
+        maxCagade = calculerMaxCount(cagade);
+        perdant = joueurEnTete(cagade, maxCagade);
+    }
+
+    constructionMatch(match, gagnant, maxAction,  perdant, maxCagade);
+}
+
+
+function constructionMatch(match, gagnants, maxAction,  perdants, maxCagade) {
+
+    //gagnants ou perdants peuvent être undefined
     //match est un objet
-    //à ce stade action ou cagade est n'est pas vide, pas besoin de check
+
     let ancre = document.getElementById("matchs");
     
     let div = creerBalise("div", [["id", match.id]]);
     div.className = "match";
-    
-    /* for(let attribut in match) {
-        let balise = creerBalise("input", [["type", "text"],["value", match[attribut]]]);
-        div.appendChild(balise);
-    } */
 
     let nom = creerBalise("input", [["type", "text"],["value", match["nom"]]]);
     div.appendChild(nom);
 
-    for(let i = 0;i<gagnant.length; i++) {
-        console.log(gagnant);
-    let win = creerBalise("input", [["type", "text"],["value", gagnant[i]]]);
-    //nbre de votants
-    let winVotants = creerBalise("input", [["type", "text"],["value", tailleAction]]);
-    div.appendChild(winVotants);
-    div.appendChild(win);
+    if(gagnants != undefined) {
+
+        let votants  = match.action.length;
+        frontEndVotes(div, gagnants, votants, maxAction, "ACTION DU MATCH");
     }
 
-    for(let i = 0;i<perdant.length; i++) {
-        console.log(perdant);
-    let loose = creerBalise("input", [["type", "text"],["value", perdant[i]]]);
-    let looseVotants = creerBalise("input", [["type", "text"],["value", tailleCagade]]);
-    div.appendChild(looseVotants);
-    div.appendChild(loose);
+    if(perdants != undefined) {
+
+        let votants  = match.cagade.length;
+        frontEndVotes(div, perdants, votants, maxCagade, "CAGADE DU MATCH");
+
     }
 
     ancre.appendChild(div);
@@ -310,4 +305,54 @@ function count(tab, valeur) {
     }
 
     return count;
+}
+
+function frontEndVotes(div, tab, votants, maxVotes, titre) {
+
+    let unTitre = creerBalise("input", [["type", "text"], ["value",titre]]);
+    div.appendChild(unTitre);
+
+    let label = creerBalise("input", [["type", "text"], ["value","nombre de votants"]]);
+    label.className = "enLigne";
+    div.appendChild(label);
+
+    let winVotants = creerBalise("input", [["type", "text"],["value", votants]]);       
+    winVotants.className = "enLigne";
+    div.appendChild(winVotants);
+
+    let copain;
+    maxVotes > 1 ? copain = " copains ont voté " : copain = " copain a voté ";
+    let votes = creerBalise("input", [["type", "text"], ["value",maxVotes + copain + "pour toi"]]);
+    div.appendChild(votes);
+
+    /* let nbreVotes = creerBalise("input", [["type", "text"],["value", maxVotes]]);       
+    nbreVotes.className = "enLigne";
+    div.appendChild(nbreVotes); */
+
+    //affichage des joueurs, infos, nom, photo
+    for(let i = 0;i<tab.length; i++) {
+    /* let win = creerBalise("input", [["type", "text"],["value", tab[i]]]);
+    div.appendChild(win); */
+    afficherJoueur(div, tab[i]);
+    }        
+}
+
+function afficherJoueur(div, numero) {
+
+    //numero représente l'id du joueur
+    //recoupement avec la variable globale Info.joueurs
+
+    let joueurs = Info.joueurs;
+    for(let i = 0; i<joueurs.length; i++) {
+        if(joueurs[i].id == numero) {
+            console.log("winner =  " + joueurs[i].nom);
+            let nom = creerBalise("input", [["type", "text"],["value", joueurs[i].nom]]);
+            div.appendChild(nom);
+            
+            let chemin = "../../css/images/joueurs/";
+            let photo = creerBalise("img", [["src",chemin+joueurs[i].photo]]);        
+            photo.className = "photo";        
+            div.appendChild(photo);
+        }
+    }
 }
