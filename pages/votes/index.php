@@ -19,10 +19,6 @@
         include('html/matchs.html');
     ?>
 
-    <?php
-        include('html/votes.html');
-    ?>
-
     
 
 <!-- Bundle Bootstrap --------------------------------- -->
