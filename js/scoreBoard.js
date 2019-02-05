@@ -19,11 +19,11 @@ document.addEventListener("DOMContentLoaded", function (event) {
         })
 
     document.querySelector("#previous").addEventListener("click", function () {
-        decalerScores(-LesScores.unDecalage);
+        decalerScores(LesScores.unDecalage);
     })
 
     document.querySelector("#next").addEventListener("click", function () {
-        decalerScores(LesScores.unDecalage);
+        decalerScores(-LesScores.unDecalage);
     })
 })
 
@@ -50,29 +50,34 @@ function construireScoreBoard(tab) {
         div.setAttribute("data-no", match.num_match);
 
         let date = document.createElement("input");
-        date.setAttribute("type", "text");
+        date.setAttribute("type", "text");        
+        date.setAttribute("readonly", "readonly");
         date.className = "date";
         date.value = dateFormatFr(match.date_match);
 
 
         let talence = document.createElement("input");
         talence.setAttribute("type", "text");
+        talence.setAttribute("readonly", "readonly");
         talence.className = "scoreBoardNom";
         talence.value = "talence";
 
         let nous = document.createElement("input");
         nous.setAttribute("type", "text");
+        nous.setAttribute("readonly", "readonly");
         nous.className = "score";
         nous.value = match.nous;
 
         let nom = document.createElement("input");
         nom.setAttribute("type", "text");
+        nom.setAttribute("readonly", "readonly");
         nom.id = "score_" + match.num_match;
         nom.className = "scoreBoardNom";
         nom.value = match.nom;
 
         let eux = document.createElement("input");
         eux.setAttribute("type", "text");
+        eux.setAttribute("readonly", "readonly");
         eux.className = "score";
         eux.value = match.eux;
 
