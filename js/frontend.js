@@ -87,8 +87,8 @@ function ouvrirJoueurs(element) {
 
     div.style.maxHeight = "initial";
     div.style.display = "block"; 
-    div.style.paddingBottom = "10px";   
-    let hauteur = div.offsetHeight;
+    div.style.paddingBottom = "10px";
+    let hauteur = div.clientHeight;
     div.style.maxHeight = "0px";
     setTimeout(function() {
         div.style.opacity = 1;       
@@ -245,6 +245,7 @@ function detruireVotes() {
         detruireVotes);
 
     document.querySelector("#enregisJoueur").removeEventListener("click", UpdateDb);
+    document.querySelector("#enregisComment").removeEventListener("click", UpdateComment);
 
     let divGestion = document.getElementById("gestionJoueur");
     divGestion.style.display = "none";
@@ -322,8 +323,67 @@ function ouvrirGestionMails (element) {
 function enregistrerModifs() {
 
     document.querySelector("#enregisJoueur").addEventListener("click", UpdateDb);
+    document.querySelector("#enregisComment").addEventListener("click", UpdateComment);
     document.querySelector("#fermerGestion").addEventListener("click",
     detruireVotes); 
+}
+
+function UpdateComment() {
+
+    let num_match = document.getElementById("nomJoueur").getAttribute("data-match");
+    let nom_joueur = document.getElementById("nomJoueur").value;
+
+      //update de la table commentaire, num_match, num_joueur
+      let commentaire = document.getElementById("commentJoueur").value;
+      let urlCommentaire;
+      //si le commentaire n'est pas vide
+      if(commentaire != "") {
+          urlCommentaire = "php/updateCommentaire.php?commentaire=" + commentaire +
+          "&num_match=" + num_match + "&nom_joueur=" + nom_joueur ;
+          //requête ajax 
+          $ajaxUtils.sendGetRequest(urlCommentaire, 
+          function (request) {
+              
+          let retour = request.responseText;
+          let reponse = JSON.parse(retour); 
+  
+          let div = document.querySelector("#retourCommentaire");
+          div.value = reponse[1];
+          div.style.display = "block";
+          
+  
+          //affichage du commentaire dans la div match
+          if(reponse[0]){
+
+            //UI on remet à vide l'input commentaire, cela évite aussi de dupliquer un commentaire
+            //si l'utilisateur appuie plusieurs fois de suite sur Envoyer
+            document.getElementById("commentJoueur").value = "";
+
+              let DIVcommentaire = document.getElementById("commentaires" + num_match);
+             
+              let div = document.createElement("div");
+              let nom = document.createElement("input");
+              let comment = document.createElement("input");
+              nom.setAttribute("type", "text");
+              nom.setAttribute("readonly", "true");
+              nom.setAttribute("value", nom_joueur);
+              nom.className = "form-control nomComment";
+              
+              comment.setAttribute("type", "text");
+              comment.setAttribute("readonly", "true");
+              comment.setAttribute("value", commentaire);
+              comment.className = "form-control contenuComment";
+  
+              div.appendChild(nom);
+              div.appendChild(comment);
+              DIVcommentaire.appendChild(div);
+  
+              let DIVmatch = document.getElementById("match" + num_match);
+              ouvrirJoueurs(DIVmatch);
+              }
+  
+        });
+    }    
 }
 
 function UpdateDb() {
@@ -331,51 +391,7 @@ function UpdateDb() {
     let nom_joueur = document.getElementById("nomJoueur").value;
     let no_joueur = document.getElementById("nomJoueur").getAttribute("data-no");
 
-    //update de la table commentaire, num_match, num_joueur
-    let commentaire = document.getElementById("commentJoueur").value;
-    let urlCommentaire;
-    //si le commentaire n'est pas vide
-    if(commentaire != "") {
-        urlCommentaire = "php/updateCommentaire.php?commentaire=" + commentaire +
-        "&num_match=" + num_match + "&nom_joueur=" + nom_joueur ;
-        //requête ajax 
-        $ajaxUtils.sendGetRequest(urlCommentaire, 
-        function (request) {
-            
-        let retour = request.responseText;
-        let reponse = JSON.parse(retour); 
-
-        let div = document.querySelector("#retourCommentaire");
-        div.value = reponse[1];
-        div.style.display = "block";
-
-        //affichage du commentaire dans la div match
-        if(reponse[0]){
-            let DIVcommentaire = document.getElementById("commentaires" + num_match);
-           
-            let div = document.createElement("div");
-            let nom = document.createElement("input");
-            let comment = document.createElement("input");
-            nom.setAttribute("type", "text");
-            nom.setAttribute("readonly", "true");
-            nom.setAttribute("value", nom_joueur);
-            nom.className = "form-control nomComment";
-            
-            comment.setAttribute("type", "text");
-            comment.setAttribute("readonly", "true");
-            comment.setAttribute("value", commentaire);
-            comment.className = "form-control contenuComment";
-
-            div.appendChild(nom);
-            div.appendChild(comment);
-            DIVcommentaire.appendChild(div);
-
-            let DIVmatch = document.getElementById("match" + num_match);
-            ouvrirJoueurs(DIVmatch);
-            }
-
-    });
-    }    
+  
 
     //update de la table presence
     let presence;

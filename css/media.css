@@ -10,6 +10,20 @@
     .header .titre h1{
         font-size: 1.8rem;
     }
+
+    .scoreBoard_votes .star {
+        width: 40px;
+        height: 40px;
+    }
+
+    .scoreBoard_votes .container_etoiles {
+        padding-top: 30px;
+    }
+
+    .scoreBoard_votes .photo {
+        width: 100px;
+        height: 100px;
+    }
 }
 
 
@@ -34,6 +48,16 @@
         margin: 0 auto;
         padding: 10px;
     }
+
+    
    
 }
 
+@media (max-width: 400px) {
+
+    .scoreBoard_votes .star {
+        width: 30px;
+        height: 30px;
+    }
+
+}

@@ -47,6 +47,7 @@ function construireScoreBoard(tab) {
 
         let div = document.createElement("div");
         div.className = "scoreBoardMatch";
+        div.setAttribute("data-no", match.num_match);
 
         let date = document.createElement("input");
         date.setAttribute("type", "text");
@@ -82,6 +83,11 @@ function construireScoreBoard(tab) {
         div.appendChild(nom);
         div.appendChild(eux);
 
+        div.addEventListener("click", function () {
+            //decalerScores(-LesScores.unDecalage);
+            resultatDesVotes(match.num_match);
+        })
+
         scores.appendChild(div);
     }
 }
@@ -103,3 +109,152 @@ function creerBalise(type, attributs) {
     return balise;
 }
 
+function resultatDesVotes(num_match) {
+
+    let div = document.createElement("div");
+    
+    div.setAttribute("id", "scoreBoard_votes");
+    div.className = "scoreBoard_votes";
+
+    //bouton fermer
+    let fermer = document.createElement("button");
+    fermer.innerHTML = "X";
+    fermer.addEventListener("click", function() {
+        fermerResultatDesVotes();
+    })
+
+    div.appendChild(fermer);   
+
+    document.body.appendChild(div);
+    
+    getStars(num_match);
+    //getZippers(num_match);
+}
+
+function fermerResultatDesVotes() {
+
+    let votes = document.getElementById("scoreBoard_votes");
+
+    document.body.removeChild(votes);
+}
+
+
+function ajouterStars(div, tableau) {
+
+    let container = document.createElement("div");
+    container.className = "container votes_joueurs";
+    
+    let titre  = document.createElement("h2");
+    titre.innerHTML = "Les stars of THE Match"
+
+    container.appendChild(titre);
+    
+    //1 pour indiquer à la fonction des symboles lequel mettre
+    creerJoueurResultatDesVotes(tableau, container, 1);
+    div.appendChild(container);
+
+}
+
+function ajouterZippers(div, tableau) {
+
+    let container = document.createElement("div");
+    container.className = "container votes_joueurs";
+    
+    let titre  = document.createElement("h2");
+    titre.innerHTML = "J'ai Zippé, tu zippes, il zippe..."
+
+    container.appendChild(titre);
+    
+    //0 pour indiquer à la fonction des symboles lequel mettre
+    creerJoueurResultatDesVotes(tableau, container, 0);
+    div.appendChild(container);
+
+}
+
+function getStars(num_match) {
+
+    
+    $ajaxUtils.sendGetRequest("php/queryAction.php?num_match=" + num_match,
+        function (request) {
+
+            let reponse = request.responseText;
+
+            //reponse reçoit le tableau de la bdd des scores
+            let tableau = JSON.parse(reponse);
+             
+            //Ajouter les joueurs
+            let div = document.getElementById("scoreBoard_votes");
+            ajouterStars(div, tableau);
+
+            //Les stars sont récupérées, on peut lancer les zippers
+            getZippers(num_match);            
+
+        })
+     
+
+    //location = "php/queryAction.php?num_match=" + num_match;
+        
+}
+
+function getZippers(num_match) {
+    
+    $ajaxUtils.sendGetRequest("php/queryCagade.php?num_match=" + num_match,
+        function (request) {
+
+            let reponse = request.responseText;
+
+            //reponse reçoit le tableau de la bdd des scores
+            let tableau = JSON.parse(reponse);
+             
+            //Ajouter les joueurs
+            let div = document.getElementById("scoreBoard_votes");
+            ajouterZippers(div, tableau);
+        })
+}
+
+function creerJoueurResultatDesVotes(tab, container, flag) {
+
+    for(let i =0; i<tab.length; i++) {
+
+        let joueur = document.createElement("div");
+        joueur.className = "container unJoueur";
+
+        let row = document.createElement("div");
+        row.className = "row";
+
+        let photo = document.createElement("div");
+        photo.className = "col-4";
+
+        let img = document.createElement("img");
+        img.setAttribute("src", "css/images/joueurs/" + tab[i][0]);
+        img.className = "photo";
+
+        row.appendChild(img);
+
+        //Ajout des étoiles
+        let nbreSymboles = tab[i][1]; 
+        ajoutDessymboles(nbreSymboles, row, flag);
+
+        joueur.appendChild(row);        
+        container.appendChild(joueur);
+    }
+}
+
+function ajoutDessymboles(nbre, row, flag) {
+    
+    //création conteneur des étoiles
+    let star_container = document.createElement("div");
+    star_container.className = "col-8 container_etoiles";
+
+    //création des étoiles et rattachement au container
+    for(let i = 0; i<nbre; i++) {
+        let etoile = document.createElement("img");
+        if(flag == 1) etoile.setAttribute("src", "css/images/star.png");
+        else etoile.setAttribute("src", "css/images/banana.png");
+        etoile.className = "star";
+        star_container.appendChild(etoile);
+    }
+
+    //rattachement du container étoiles à joueur
+    row.appendChild(star_container);
+}

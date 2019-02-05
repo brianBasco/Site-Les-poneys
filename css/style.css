@@ -445,6 +445,11 @@ html {
     margin-top: 10px;
   }
 
+  .gestionJoueur .enregisJoueur {
+    width: 200px;
+    margin: 0 0 30px 0;
+  }
+
   .gestionJoueur .votes {
     margin-top: 50px;
   }
@@ -583,6 +588,7 @@ html {
     position: relative;
     left: 0;
     transition: all ease-in-out 1s;
+    cursor: pointer;
   }
 
   .scoreBoardMatch input {
@@ -592,6 +598,7 @@ html {
     background: transparent;
     border: none;
     text-align: center;
+    cursor: inherit;
   }
 
   .scoreBoardMatch hr {
@@ -647,3 +654,55 @@ html {
     color: #00274c;
     text-transform: uppercase;
   }
+
+  /* CSS de scoreBoard_votes */
+
+  .scoreBoard_votes {
+    position: absolute;
+    width: 100%;    
+    background: #00274c;
+    top: 0;
+    bottom: 0;
+    min-height: 2000px;
+    z-index: 3;
+  }
+
+  .scoreBoard_votes h2 {
+  text-align: center;
+  color: white;
+  }
+
+  .scoreBoard_votes button {
+    color: white;
+    font-size: 2rem;
+    float: right;
+    padding: 10px;
+    margin: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  .scoreBoard_votes .votes_joueurs {
+
+    margin-top: 80px;
+
+  }
+
+  .scoreBoard_votes .container_etoiles {
+    padding-top: 40px;
+  }
+
+  .scoreBoard_votes .star { 
+  width: 50px;
+  height: 50px;
+}
+
+.scoreBoard_votes .photo {
+  width: 150px;
+  height: 150px;
+}
+
+.scoreBoard_votes .unJoueur {
+  margin: 5px 0;
+}
