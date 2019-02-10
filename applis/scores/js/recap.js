@@ -61,7 +61,7 @@ function total(){
 
     get_element("total_score_gauche").innerHTML = totalGauche;
     get_element("total_score_droite").innerHTML = totalDroite;
-    get_element('total').innerHTML = "Points au TOTAL : " + total;
+    get_element('total').innerHTML = "Points au TOTAL : <b>" + total + "</b>";
 
 }
 

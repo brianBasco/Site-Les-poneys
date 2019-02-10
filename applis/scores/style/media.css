@@ -2,9 +2,6 @@
 @media (min-width: 576px) { }
 
 @media (max-width: 576px) { 
-    .round {
-        width: 60px;
-    }
 
     .equipe .scoreSet {
         width: 30%;
@@ -16,6 +13,10 @@
 
     .round .contenu h1 {
         font-size: 2rem;
+    }
+
+    .recap tr, th {
+        width: 85px;
     }
  }
 

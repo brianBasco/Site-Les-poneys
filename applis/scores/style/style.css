@@ -30,10 +30,6 @@ background-color: rgb(255, 241, 43);
 .appli {
   border: 2px solid black;
   box-shadow: 2px 2px 3px grey;
-  background-image: url("images/arriere_plan.png");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
 }
 
 /* --------------- header --------------------- */
@@ -69,50 +65,33 @@ background-color: rgb(255, 241, 43);
 
 .header .btn_inverser {
   right: 15px;
-  background-image: url("images/btn_inverser.png");
-  background-position: center; /* Center the image */
-  background-repeat: no-repeat; /* Do not repeat the image */
-  background-size: contain;
   background-color: white;
-  width: 100px;
 }
 
 
 /* --------------------------- main_content ---------------- */
+
 .main_content {
-  
-  padding-top: 10px;
-  padding-bottom: 30px;
-  background: #222226;
-  background-color: rgba(22,21,20,0.7); 
+	padding-top: 10px;
+	padding-bottom: 30px;
+	background: #0f0e27;
 }
 
 
-
 .round {
-	position: absolute;
-	top: 114px;
-	left: 0;
-	right: 0;
-	margin: 0 auto;
-	text-align: center;
+	position: static;
+	margin: 5px auto;
 	text-transform: uppercase;
 	background-color: rgba(0,0,0,0.5);
 	border: 2px solid white;
 	font-size: 20px;
 	font-weight: bold;
 	color: rgb(255, 241, 43);
-	width: 94px;
-	vertical-align: initial;
-	z-index: 2;
+	width: 100%;
 }
 
-.round .contenu {
-  position: relative;
-  height: 140px;
-}
 
-.round .contenu h1 {
+.round h1 {
   position: absolute;
   left: 0;
   right: 0;
@@ -123,6 +102,8 @@ background-color: rgb(255, 241, 43);
   font-weight: bold;
   text-shadow: 0px 0px 3px #0c99bf;
 }
+
+
 
 .numeroRound {
   width: 100%;
@@ -141,10 +122,9 @@ background-color: rgb(255, 241, 43);
 
 
 /****** ------------- scores ---------------- */
-
 .scores {
-  position: relative;
-  height: 450px;
+	position: relative;
+	height: 540px;
 }
 
 .scores-panneau {
@@ -156,20 +136,14 @@ background-color: rgb(255, 241, 43);
 }
 
 
-.container_equipe {
-  height: 70px;
-  position: relative;
-}
-
 .equipe, .nom, .scoreSet {
   transition: all linear .5s;
 }
 
 .equipe {
-  position: absolute;
-  height: 70px;
-  width: 84%;
-  right: 16%;
+	position: static;
+	height: 70px;
+	width: 100%;
 }
 
 .equipe.gauche {
@@ -194,8 +168,6 @@ background-color: rgb(255, 241, 43);
 }
 
 .equipe .nom {
-	position: absolute;
-	left: 0;
 	height: 60px;
   bottom: 3px;
   width: 100%;
@@ -258,14 +230,10 @@ background-color: rgb(255, 241, 43);
 }
 
 .row_btn-score {
-  position: absolute;
-  left: 0;    
-  width: 84%;
-  transition: all linear 0.5s;
-}
-
-.row_btn-score.droite {
-  left: 16%;
+	position: absolute;
+	left: 0;
+	width: 100%;
+	transition: all linear 0.5s;
 }
 
 .score .btn-score{
@@ -389,6 +357,7 @@ background-color: rgb(255, 241, 43);
 /* CSS du recap */
 .recap {
   padding: 20px 0;
+  color: black;
 }
 
 .recap .container{
@@ -398,21 +367,22 @@ background-color: rgb(255, 241, 43);
 }
 
 .recap .contenu {
-  border: 2px solid white;
-  border-radius: 10px;
-  padding: 30px 0;
-  background: rgba(0,0,0,0.7);
+	/* border: 2px solid white; */
+	/* border-radius: 10px; */
+	padding: 30px 0;
+	background: white;
 }
 
 .recap table{
   margin: 0 auto;
 }
 
+
 .recap tr, th {
-  padding: 10px;
-  text-align: center;
-  border-bottom: 1px solid wheat;
-  width: 70px;
+	padding: 10px;
+	text-align: center;
+	border-bottom: 3px solid #0f0e27;
+	width: 100px;
 }
 
 .recap tr:last-child {
@@ -444,6 +414,10 @@ background-color: rgb(255, 241, 43);
   width: 60px;
   background-color: wheat;
   box-shadow: 2px 2px 2px black;
+}
+
+.recap_score {
+  font-weight: bold;
 }
 
 /* CSS du temps Mort technique */
@@ -549,4 +523,123 @@ background-color: rgb(255, 241, 43);
   border: 1px solid #00bcdb;
   box-shadow: none;
   background-color: transparent;
+}
+
+
+/* -------------------- CSS 7 segment digit ----------------------- */
+
+/*
+.digit {
+  width:120px;
+  height:200px;
+  margin:0 5px;
+  position:relative;
+  display:inline-block;
+}
+*/
+.clock {
+  position: relative;
+  height: 135px;
+}
+
+.digit {
+	width: 85px;
+	height: 120px;
+	margin: 5px 5px;
+	position: absolute;
+	display: inline-block;
+	border: 2px solid;
+	transition: all 1s cubic-bezier(.64,.2,.3,.94);
+}
+
+.digit.droite {
+	right: 0;
+}
+
+.digit .segment {
+  /* background:#c00; */
+  background: #d5da18;
+  border-radius:5px;
+  position:absolute;
+  opacity:0.15;
+  
+  transition:opacity 0.2s;
+  -webkit-transition:opacity 0.2s;
+  -ms-transition:opacity 0.2s;
+  -moz-transition:opacity 0.2s;
+  -o-transition:opacity 0.2s;
+}
+
+.digit .segment.on, .separator {
+  opacity:1;
+  box-shadow:0 0 50px rgba(255,0,0,0.7);
+  transition:opacity 0s;
+  -webkit-transition:opacity 0s;
+  -ms-transition:opacity 0s;
+  -moz-transition:opacity 0s;
+  -o-transition:opacity 0s;
+}
+
+.separator {
+  width:20px;
+  height:20px;
+  background:#c00;
+  border-radius:50%;
+  display:inline-block;
+  position:relative;
+  top:-90px;
+}
+
+.digit .segment:nth-child(1) {
+  top:10px;
+  left:20px;
+  right:20px;
+  height:10px;
+}
+
+.digit .segment:nth-child(2) {
+  top:20px;
+  right:10px;
+  width:10px;
+  height:75px;
+  height:calc(50% - 25px);
+}
+
+.digit .segment:nth-child(3) {
+  bottom:20px;
+  right:10px;
+  width:10px;
+  height:75px;
+  height:calc(50% - 25px);
+}
+
+.digit .segment:nth-child(4) {
+  bottom:10px;
+  right:20px;
+  height:10px;
+  left:20px;
+}
+
+.digit .segment:nth-child(5) {
+  bottom:20px;
+  left:10px;
+  width:10px;
+  height:75px;
+  height:calc(50% - 25px);
+}
+
+.digit .segment:nth-child(6) {
+  top:20px;
+  left:10px;
+  width:10px;
+  height:75px;
+  height:calc(50% - 25px);
+}
+
+.digit .segment:nth-child(7) {
+  bottom:95px;
+  bottom:calc(50% - 5px);
+  right:20px;
+  left:20px;
+  height:10px;
 }

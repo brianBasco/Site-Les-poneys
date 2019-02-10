@@ -29,19 +29,44 @@
 		<header class="header">
             <button id="nveauMatch" class="btn match">match</button>
             <button id="nveauSet" class="btn set" onclick="nouveauSet()" disabled>set</button>
-            <button id="btn_inverser" class="btn btn_inverser" ></button>
+            <button id="btn_inverser" class="btn btn_inverser" >inverser</button>
 		</header>
 
 
         <div id="main_content" class="main_content">
 
             <!-- Sections du main-container -->
-    <div id="round" class="round">
-        <div class="contenu">
-        <h1>SET</h1>            
-        <input type="text" id="numeroRound" class="numeroRound" readonly />
-        </div>
-    </div>
+
+            <div id="round" class="round">
+
+                <div class="clock">
+                    <div class="digit setGauche">
+                        <div class="segment"></div>
+                        <div class="segment"></div>
+                        <div class="segment"></div>
+                        <div class="segment"></div>
+                        <div class="segment"></div>
+                        <div class="segment"></div>
+                        <div class="segment"></div>
+                    </div>
+
+                    <div class="digit setDroite droite">
+                        <div class="segment"></div>
+                        <div class="segment"></div>
+                        <div class="segment"></div>
+                        <div class="segment"></div>
+                        <div class="segment"></div>
+                        <div class="segment"></div>
+                        <div class="segment"></div>
+                    </div>
+
+                    <h1>SET</h1>            
+                    <input type="text" id="numeroRound" class="numeroRound" readonly />
+                    
+                </div>    
+                    
+            </div>
+    
 
 
 	<section class="scores container-fluid">
@@ -53,7 +78,6 @@
                 <div class="equipe">
                     <div class="contenu">
                         <input id="nomGauche" class="nom" type="text" placeholder="equipe">
-                        <input id="setGauche" class="scoreSet" readonly />
                     </div>
                 </div>
             </div>
@@ -102,7 +126,6 @@
                     <div class="equipe droite">
                         <div class="contenu">
                             <input id="nomDroite" class="nom" type="text" placeholder="equipe" onblur="scoreDroite.attribuerNom()">
-                            <input id="setDroite" class="scoreSet droite" readonly />
                         </div>
                     </div>
                 </div>
@@ -110,7 +133,7 @@
                 <div>
 
                     <div class="container_btn">
-                        <div class="row row_btn-score droite">
+                        <div class="row row_btn-score">
                             <div class="score score_moins">
                                 <button class="btn btn-score btn_moins" onclick="clickScore(scoreDroite.moins())"></button>
                             </div>
@@ -157,39 +180,39 @@
                 </tr>
 
                 <tr>
-                    <td id="set1_score_gauche"></td>
+                    <td id="set1_score_gauche" class="recap_score"></td>
                     <td>set 1</td>
-                    <td id="set1_score_droite"></td>
+                    <td id="set1_score_droite" class="recap_score"></td>
                 </tr>
 
                 <tr>
-                    <td id="set2_score_gauche"></td>
+                    <td id="set2_score_gauche" class="recap_score"></td>
                     <td>set 2</td>
-                    <td id="set2_score_droite"></td>
+                    <td id="set2_score_droite" class="recap_score"></td>
                 </tr>
 
                 <tr>
-                    <td id="set3_score_gauche"></td>
+                    <td id="set3_score_gauche" class="recap_score"></td>
                     <td>set 3</td>
-                    <td id="set3_score_droite"></td>
+                    <td id="set3_score_droite" class="recap_score"></td>
                 </tr>
 
                 <tr>
-                    <td id="set4_score_gauche"></td>
+                    <td id="set4_score_gauche" class="recap_score"></td>
                     <td>set 4</td>
-                    <td id="set4_score_droite"></td>
+                    <td id="set4_score_droite" class="recap_score"></td>
                 </tr>
 
                 <tr>
-                    <td id="set5_score_gauche"></td>
+                    <td id="set5_score_gauche" class="recap_score"></td>
                     <td>set 5</td>
-                    <td id="set5_score_droite"></td>
+                    <td id="set5_score_droite" class="recap_score"></td>
                 </tr>
 
                 <tr>
-                    <td id="total_score_gauche"></td>
+                    <td id="total_score_gauche" class="recap_score"></td>
                     <td>TOTAL</td>
-                    <td id="total_score_droite"></td>
+                    <td id="total_score_droite" class="recap_score"></td>
                 </tr>
 
             </table>

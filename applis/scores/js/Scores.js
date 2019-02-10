@@ -39,12 +39,19 @@ var Score = function(cle, Cle_Nom, score_set){
     }   
     
     this.loading_score_set = function(){
+
+        let display = document.querySelectorAll('.' + this.score_set)[0];
+
         if(sessionStorage.getItem(this.score_set) == null){
             sessionStorage.setItem(this.score_set , 0);
-            document.getElementById(this.score_set).value = 0;
+            //document.getElementById(this.score_set).value = 0;            
+            setNumber(display, 0);
+            console.log("set loaded");
         }
         else {
-            document.getElementById(this.score_set).value = sessionStorage.getItem(this.score_set);
+            //document.getElementById(this.score_set).value = sessionStorage.getItem(this.score_set);
+            setNumber(display, sessionStorage.getItem(this.score_set));
+            console.log("set Reloaded");
         }
     }
     
@@ -75,7 +82,9 @@ var Score = function(cle, Cle_Nom, score_set){
         var scoreSet = sessionStorage.getItem(this.score_set);
         scoreSet++;
         sessionStorage.setItem(this.score_set, scoreSet);
-        document.getElementById(this.score_set).value = scoreSet;
+        //document.getElementById(this.score_set).value = scoreSet;
+        let display = document.querySelectorAll('.' + this.score_set)[0];
+        setNumber(display, scoreSet);
     }
 
     this.remiseZero = function(){
