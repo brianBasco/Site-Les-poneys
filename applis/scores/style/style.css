@@ -47,7 +47,7 @@ background-color: rgb(255, 241, 43);
   font-weight: bold;
   border: 2px solid black;
   border-radius: 50px;
-  box-shadow: 0;
+  box-shadow: 2px 2px 2px #5d93c3;
   height: 50px;
 }
 
@@ -206,13 +206,17 @@ background-color: rgb(255, 241, 43);
 }
 
 .temps-mort button {
-  opacity: 0;
-  padding: 0;
-  height: 60px;
-  width: 100%;
-  font-size: 12px;
+	opacity: 0;
+	padding: 0;
+	height: 60px;
+	width: 100%;
+	font-size: 12px;
   border-radius: 0;
-  background-color:  rgb(255, 241, 43);
+  /*
+  background: linear-gradient(to bottom, #e1e86d 0%,#dade28 50%,#dec228 50%,#bec21f 51%,#bec21f 51%,#b6d633 100%);
+  
+  */
+  background-color: rgb(255, 241, 43);
 }
 
 .equipe-gauche, .equipe-droite {
@@ -254,19 +258,54 @@ background-color: rgb(255, 241, 43);
   margin-bottom: 10px;
 }
 
-.score .btn_plus {
-  font-size: 3rem;
+.score .btn_plus {  
   line-height: 0;
+  /*
+  font-size: 3rem;
   color: #19bbe4;
-  border-color: #19bbe4; 
-}
+  border-color: #19bbe4;
+  */
+  text-align: center;
+    color: #fff;
+	font-size: 30px;
+	font-weight: bold;
+	text-shadow: 2px 1px 1px #386379;
+	border: 1px solid #3180a7;
+	background: #6dbfe8;
+	background: -moz-linear-gradient(top,  #6dbfe8 0%, #28a1de 50%, #28a1de 50%, #1f8cc2 51%, #1f8cc2 51%, #33a0d6 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#6dbfe8), color-stop(50%,#28a1de), color-stop(50%,#28a1de), color-stop(51%,#1f8cc2), color-stop(51%,#1f8cc2), color-stop(100%,#33a0d6));
+	background: -webkit-linear-gradient(top,  #6dbfe8 0%,#28a1de 50%,#28a1de 50%,#1f8cc2 51%,#1f8cc2 51%,#33a0d6 100%);
+	background: -o-linear-gradient(top,  #6dbfe8 0%,#28a1de 50%,#28a1de 50%,#1f8cc2 51%,#1f8cc2 51%,#33a0d6 100%);
+	background: -ms-linear-gradient(top,  #6dbfe8 0%,#28a1de 50%,#28a1de 50%,#1f8cc2 51%,#1f8cc2 51%,#33a0d6 100%);
+	background: linear-gradient(to bottom,  #6dbfe8 0%,#28a1de 50%,#28a1de 50%,#1f8cc2 51%,#1f8cc2 51%,#33a0d6 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6dbfe8', endColorstr='#33a0d6',GradientType=0 );
+	border-radius: 3px;
+	outline: none;
+  box-shadow: inset 0 1px 1px rgba(255,255,255,0.7);
+  }
 
-.score .btn_moins {
-    font-size: 3rem;
+  .score .btn_moins {
+    /* font-size: 3rem; */
+    /* color: #ef8e12; */
+    /* border-color: #ef8e12; */
+    /* text-align: center; */
     line-height: 0;
-    color: #ef8e12;
-    border-color: #ef8e12;
-}
+    color: #fff;
+    font-size: 30px;
+    font-weight: bold;
+    text-shadow: 2px 1px 1px #386379;
+    border: 1px solid #de922f;
+    background: #6dbfe8;
+    background: -moz-linear-gradient(to bottom, #e8bf6d 0%,#de891a 50%,#d7645b 50%,#c2811f 51%,#c2811f 51%,#d67233 100%);
+    background: -webkit-gradient(to bottom, #e8bf6d 0%,#de891a 50%,#d7645b 50%,#c2811f 51%,#c2811f 51%,#d67233 100%);
+    background: -webkit-linear-gradient(to bottom, #e8bf6d 0%,#de891a 50%,#d7645b 50%,#c2811f 51%,#c2811f 51%,#d67233 100%);
+    background: -o-linear-gradient(to bottom, #e8bf6d 0%,#de891a 50%,#d7645b 50%,#c2811f 51%,#c2811f 51%,#d67233 100%);
+    background: -ms-linear-gradient(to bottom, #e8bf6d 0%,#de891a 50%,#d7645b 50%,#c2811f 51%,#c2811f 51%,#d67233 100%);
+    background: linear-gradient(to bottom, #e8bf6d 0%,#de891a 50%,#d7645b 50%,#c2811f 51%,#c2811f 51%,#d67233 100%);    
+    border-radius: 3px;
+    outline: none;
+    box-shadow: inset 0 1px 1px rgba(255,255,255,0.7);
+  }
 
 .score .btn_plus:after {
   content: '+';
@@ -356,8 +395,9 @@ background-color: rgb(255, 241, 43);
 
 /* CSS du recap */
 .recap {
-  padding: 20px 0;
+  padding-bottom: 50px;
   color: black;
+  background: darkorange;
 }
 
 .recap .container{
@@ -366,11 +406,33 @@ background-color: rgb(255, 241, 43);
   text-align: center;
 }
 
+.recap .gatorade {
+  /* background: darkorange;
+  box-shadow: inset 0px 1px 1px aliceblue;
+  */
+	color: white;
+	font-style: italic;
+	font-size: 2rem;
+  border: 1px solid grey;
+	background: linear-gradient(to bottom, #4dec35 0%,#6dde28 50%,#28de2a 50%,#85c21f 51%,#46c21f 51%,#c0fe18 100%);
+	box-shadow: 0px 2px 8px 1px black;
+}
+
+.recap .gatorade p {
+	display: inline-block;
+	font-family: 'Bangers', cursive;
+	text-shadow: 1px 1px 4px black;
+}
+
+.recap .gatorade img{
+  width: 100px;
+}
+
+
 .recap .contenu {
-	/* border: 2px solid white; */
-	/* border-radius: 10px; */
-	padding: 30px 0;
-	background: white;
+	border: 5px solid;
+	background: linear-gradient(to bottom, #f5f5f5 50%,#d4d4d4 50%,#c9c8c8 50%,#f6dfd9 10%,#f2f2f2 10%,#c9c9c9 100%);
+	box-shadow: inset 0 0px 8px grey;
 }
 
 .recap table{
