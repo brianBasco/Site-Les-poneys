@@ -25,9 +25,9 @@
 	<body class="body-scores">
 
 
-        <div id="appli" class="appli">
+        <div id="appli" class="appli">        
 
-		<header class="header">
+		<header id="header" class="header">
             <button id="nveauMatch" class="btn match">match</button>
             <button id="nveauSet" class="btn set" onclick="nouveauSet()" disabled>set</button>
             <button id="btn_inverser" class="btn btn_inverser" >inverser</button>
@@ -37,6 +37,10 @@
         <div id="main_content" class="main_content">
 
             <!-- Sections du main-container -->
+
+            <div class="logo_ffvb">
+                <img src="style/images/logo_ffvb.jpg" />
+            </div>   
 
             <div id="round" class="round">
 
@@ -243,12 +247,12 @@
             <div class="row">
                 <div class="col-6 equipeGauche">
                         <p class="nomEquipe"></p>
-                        <button class="btn btn-tpsMort"></button>
+                        <button class="btn btn-tpsMort gauche"></button>
                 </div>
 
                 <div class="col-6 equipeDroite">
                         <p class="nomEquipe"></p>
-                        <button class="btn btn-tpsMort"></button>
+                        <button class="btn btn-tpsMort droite"></button>
                 </div>
             </div>
 
@@ -269,9 +273,9 @@
 
     <section id="finMatch" class="finMatch askUser">
 
-        <button class="fermer">X</button>
+        <button class="fermer" onclick="fermerDiv('finMatch')">X</button>
 
-        <h1>End of Game</h1>
+        <h1>Fin du match</h1>
         
         <div class="row">
             <div class="col-6 equipeGauche">

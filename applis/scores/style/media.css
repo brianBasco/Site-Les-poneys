@@ -27,12 +27,20 @@
  @media (min-width: 768px) { 
     .body-scores {
         width: 80%;
+        padding-top: 30px;
+    }
+    .tempsMortTechnique {
+        width: 700px;
     }
  }
 
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) { 
     .body-scores {
+        width: 700px;
+    }
+
+    .tempsMortTechnique {
         width: 700px;
     }
  }

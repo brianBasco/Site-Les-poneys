@@ -213,7 +213,9 @@ function clickScore(actionAfaire) {
 
         }
     }
-        
+       
+    //Balise de fin de match retirée, le score peut continuer indéfiniment
+    /*
     else if(set_en_cours() == 5){
        
         if((gauche >=15 || droite >= 15) && (((gauche - droite) >= 2) || ((droite - gauche) >= 2)))
@@ -221,6 +223,7 @@ function clickScore(actionAfaire) {
             finMatch();
         }
     }
+    */
 }
 
 
@@ -495,7 +498,6 @@ function setNumber(digit, number) {
 
 }
         
-
 
 
 
