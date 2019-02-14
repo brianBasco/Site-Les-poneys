@@ -501,8 +501,10 @@ background-color: rgb(255, 241, 43);
 /* CSS du temps Mort technique */
 .tempsMortTechnique {
   z-index: 3;
+  /*
   display: none;
-  opacity: 0;
+  */
+  opacity: 1;
   position: fixed;
   top: 0;
   bottom: 0;
@@ -511,7 +513,14 @@ background-color: rgb(255, 241, 43);
   text-align: center;
   color: white;
   background-color: rgba(0,0,0,0.9);
-  transition: all linear 0.3s;
+  transition: all ease-in-out 0.5s 0.3s;
+}
+
+.tempsMortTechnique.initial {
+	width: 0;
+	overflow: hidden;
+  padding: 0;
+  opacity: 0;
 }
 
 .tempsMortTechnique .contenu {

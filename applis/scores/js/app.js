@@ -267,35 +267,41 @@ function afficherTempsMort(tpsMort) {
 
     insertionInfos();
     var tps = $("#tempsMortTechnique");
-
+    tps.removeClass("initial");
+    
     //Si c'est un temps mort technique
-    if (tpsMort == "technique") {
+    if (tpsMort == "technique")  chrono(60);
+    /* 
+    {
               
         tps.css("display", "block");
 
         setTimeout(function () {
             tps.css("opacity", 1);
         }, 200)
-
-        chrono(60);
     }
-    else if (tpsMort == "normal"){
+    */
+    else if (tpsMort == "normal")  chrono(30);
+    /*{
 
         tps.css("display", "block");
 
         setTimeout(function () {
             tps.css("opacity", 1);
         }, 200)
-
-        chrono(30);
     }
+    */
+    
 }
 
 function passerTempsMortTechnique(){
     var tps = $("#tempsMortTechnique");
 
+    tps.addClass("initial");
+    /*
     tps.css("opacity", 0);
     tps.css("display", "none");
+    */
 }
 
 
@@ -382,14 +388,18 @@ function c(cle){
 function chrono(tps){
     var chrono = $("#chrono");
     var time = tps;
-    var display = $("#tempsMortTechnique").css("display");
+    //var display = $("#tempsMortTechnique").css("display");
+    //la classe initial est lorsque le temps mort n'est pas affiché
+    let display = $("#tempsMortTechnique").hasClass("initial");
 
     setInterval(function(){
         
-        if((time >= 0) && (display == "block")){
+        //if((time >= 0) && (display == "block")){
+        if((time >= 0) && (!display)){
             chrono.html(time);
             time--;
-            display = $("#tempsMortTechnique").css("display");            
+            //display = $("#tempsMortTechnique").css("display");
+            display = $("#tempsMortTechnique").hasClass("initial");            
         }
         else {
             
@@ -491,8 +501,6 @@ function setNumber(digit, number) {
     digitSegments[number].forEach(function(digitSegment) {
         
           segments[digitSegment-1].classList.add('on');
-
-          //enlever la classe on
 
     })
 
