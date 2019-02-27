@@ -3,6 +3,11 @@ header {
     background-image: linear-gradient(-90deg, #ef6d6d, #00ff4b);
 }
 
+header .btnAjouter {
+	float: right;
+	margin: 5px;
+}
+
 header h1 {
     font-family: 'Lobster', cursive;
     text-shadow: 1px 1px 8px white;
@@ -47,8 +52,42 @@ header .mort img {
 }
 
 footer {
-    background: rgb(32, 127, 170);
+    background: linear-gradient(-90deg, #1d1a1a, #ff38c5);
+    height: 400px;
+	color: white;
+	padding: 20px;
+	margin-top: 60px;
 }
+
+footer p {
+    display: inline-block;
+}
+
+/* Css de base des boutons comics ----------------- */
+.comics {
+    background: yellow;
+    color: black;
+    font-family: 'Permanent Marker', cursive;
+    transform: skewX(-5deg);
+    border-radius: 0;
+    border: 3px solid black;
+    box-shadow: 1px 1px 1px 1px black;
+    padding: 10px;
+}
+
+/* matrix(scaleX(),skewY(),skewX(),scaleY(),translateX(),translateY()) */
+footer p:first-child {
+    transform: skewX(-5deg) scale(2, 3) rotate(20deg) translate(50%, 30%);
+}
+
+footer p:last-child {
+	transform: skewX(5deg) scale(2, 2) rotate(-20deg) translate(300px, 100px);
+}
+
+footer p:nth-child(2) {
+	transform: skewX(-1deg) scale(2, 2) rotate(-5deg) translate(300%, 50%);
+}
+
 
 
 
@@ -61,9 +100,10 @@ footer {
     width: 100%;    
     top: 0;
     bottom: 0;
-    background: darkslategrey;
+    background:linear-gradient(to bottom right, black, yellow);
     transition: all ease-in-out 0.5s;
     overflow: hidden;
+    z-index: 2;
 }
 
 .pageAjout.ouverte {

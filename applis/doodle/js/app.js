@@ -37,6 +37,8 @@ document.addEventListener("DOMContentLoaded", function (event) {
    ajouterData();
    btnInscription(); 
    creerUneDate(doodleData.dates);
+
+   
 })
 
 function ouvrirPageAjout() {
@@ -103,3 +105,4 @@ function btnInscription() {
 
     document.getElementById("app").appendChild(container);
 }
+
