@@ -82,3 +82,28 @@ footer {
 .pageAjout input, .pageAjout button {
     width: 200px;
 }
+
+/* --------------- css btnInscription -------------- */
+
+div.btnInscription {
+	text-align: center;
+	padding: 15px;
+	background: darkorange;
+}
+
+.btnInscription button {
+	background: yellow;
+	color: black;
+	width: 200px;
+    height: 70px;
+    font-family: 'Permanent Marker', cursive;
+    transform: skewX(-5deg);
+    border-radius: 0;
+    border: 3px solid black;
+    box-shadow: 1px 1px 1px 1px black;
+}
+
+/* CSS de uneDate ------------ */
+.uneDate input {
+    display: block;
+}
