@@ -1,17 +1,84 @@
+header {
+    background: darkorange;
+    background-image: linear-gradient(-90deg, #ef6d6d, #00ff4b);
+}
+
+header h1 {
+    font-family: 'Lobster', cursive;
+    text-shadow: 1px 1px 8px white;
+    font-size: 3rem;
+
+	border: 6px solid black;
+	display: inline-block;
+	padding: 8px;
+	background: yellow;
+	box-shadow: 1px 1px 3px 2px currentColor;
+}
+
+header .regles {
+    font-family: 'Permanent Marker', cursive;
+}
+
+header .regles p {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    border: 4px solid black;
+    padding: 5px;
+    background: yellow;
+    box-shadow: 1px 1px 4px 1px black;
+}
+
+header .mort {
+    font-family: 'Anton', sans-serif;
+    text-align: center;
+    font-size: 1.5rem;    
+}
+
+header .mort p, header .mort img {
+    display: inline-block;
+}
+
+header .mort .annonce {
+    padding-top: 30px;
+}
+
+header .mort img {
+    width: 100px;
+}
+
+footer {
+    background: rgb(32, 127, 170);
+}
+
+
+
+/* pageAjout */
 .pageAjout {
 
-    display: none;
+    height: 0;
+    opacity: 0;
     position: fixed;
-    width: 100%;
-    height: 100%;
+    width: 100%;    
     top: 0;
     bottom: 0;
+    background: darkslategrey;
+    transition: all ease-in-out 0.5s;
+    overflow: hidden;
 }
 
 .pageAjout.ouverte {
-    display: block;
+    opacity: 1;
+    height: 100%;
 }
 
 .pageAjout div {
     text-align: center;
+}
+
+.pageAjout .btn-fermer {
+	text-align: right;
+}
+
+.pageAjout input, .pageAjout button {
+    width: 200px;
 }

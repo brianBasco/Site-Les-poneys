@@ -12,35 +12,45 @@
     <link rel="stylesheet"  href="style/style.css"  /> <!-- css de la landing-page -->
     <link rel="stylesheet"  href="style/media.css"  /> <!-- css suivant la taille du device -->
 
+    <link href="https://fonts.googleapis.com/css?family=Anton|Lobster|Permanent+Marker" rel="stylesheet"> 
+
     
 </head>
 <body>
 
     <header>
-        <h1>Doodle</h1>
+        <div class="container">
+            <h1>Doodle</h1>
+        </div>
+        
 
-        <div>
+        <div class="container regles">
             <p>La première règle est que tout personne présente doit d'inscrire</p>
-            <p>La seconde règle est que tout personne inscrite doit être présente</p>
-            <p>Le non respect de ces règles entraine la mort instantanée</p>
+            <p>La seconde règle est que tout personne inscrite doit être présente</p>            
+        </div>
+
+        <div class="container mort">
+            <img src="style/images/panneau.png" />
+            <p class="annonce">Le non respect de ces règles entrainera la mort</p>
+            <img src="style/images/panneau.png" />
         </div>
 
         <div>
-            <button id="btnAjouter">Ajouter</button>
+            <button id="btnAjouter" class="btn btn-success">Ajouter</button>
         </div>
     </header>
 
     <div id="pageAjout" class="container-fluid pageAjout">
-        <div class="container">
-            <button id="fermerPageAjout" class="btn">X</button>
+        <div class="container btn-fermer">
+            <button id="fermerPageAjout" class="btn btn-success">X</button>
         </div>
 
         <div class="container">
-            <input type="text" placeholder="date" />            
+            <input type="date" placeholder="date" />            
         </div>
 
         <div class="container">
-            <button id="btnAjouterDate" class="btn btn-primary">Ajouter</button>
+            <button id="btnAjouterDate" class="btn btn-success">Ajouter</button>
         </div>
         
     </div>
