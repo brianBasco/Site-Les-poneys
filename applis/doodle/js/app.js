@@ -215,20 +215,23 @@ function ajouterDates(div) {
 
 function attacherDates(noeud, tabDesDates) {
 
+    let row = document.createElement("div");
+    row.className = "row";
+
     tabDesDates.forEach(element => {
         let input = document.createElement("input");
         input.setAttribute("type", "text");
         input.setAttribute("value", element);
         input.setAttribute("readonly", "readonly");
 
-        let row = document.createElement("div");
-        row.className = "container row";
+        let col = document.createElement("div");
+        col.className = "col-sm-12 col-md-6 col-lg-4";
 
         let div = document.createElement("div");
-        div.className = "container col-3";
         div.appendChild(input);
 
         //attacher btn de présence
+        /*
         for(let i = 0; i<4; i++) {
             let btn = document.createElement("input");
             switch(i) {
@@ -239,8 +242,43 @@ function attacherDates(noeud, tabDesDates) {
             }
             div.appendChild(btn);
         }
+        */
 
-        row.appendChild(div);
-        noeud.appendChild(row);
+        construireBoutonsSelection(div);
+
+        col.appendChild(div);
+        row.appendChild(col);
+        
     });
+    
+    noeud.appendChild(row);
 };
+
+function construireBoutonsSelection(div) {
+
+
+    for(let i = 0; i<4; i++) {
+
+    //construire label
+    let label = document.createElement("label");
+    label.setAttribute("class", "switch");
+    //construire input
+    let input = document.createElement("input");
+    input.setAttribute("type", "checkbox");
+    input.setAttribute("data-no", "en attente,amodifier");
+    switch(i) {
+        case 0: input.className = "absent";
+        case 1: input.className = "présent";
+        case 2: input.className = "à la bourre";
+        case 3: input.className = "incertain";
+    }
+    //construire span
+    let span = document.createElement("span");
+    span.className = "slider vote";
+
+    label.appendChild(input);
+    label.appendChild(span);
+
+    div.appendChild(label);
+    }
+}
