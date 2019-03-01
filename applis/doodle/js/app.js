@@ -219,6 +219,7 @@ function attacherDates(noeud, tabDesDates) {
     row.className = "row";
 
     tabDesDates.forEach(element => {
+        //element correspond à une date format String
         let input = document.createElement("input");
         input.setAttribute("type", "text");
         input.setAttribute("value", element);
@@ -227,23 +228,14 @@ function attacherDates(noeud, tabDesDates) {
         let col = document.createElement("div");
         col.className = "col-sm-12 col-md-6 col-lg-4";
 
+        //on place la date en attribut data-no pour sélectionner par la suite le contenu
+        //de cette div
         let div = document.createElement("div");
+        div.setAttribute("id", "inscription" + element);
+        div.setAttribute("data-no", element);
         div.appendChild(input);
 
-        //attacher btn de présence
-        /*
-        for(let i = 0; i<4; i++) {
-            let btn = document.createElement("input");
-            switch(i) {
-                case 0: btn.className = "absent";
-                case 1: btn.className = "présent";
-                case 2: btn.className = "à la bourre";
-                case 3: btn.className = "incertain";
-            }
-            div.appendChild(btn);
-        }
-        */
-
+        //construction des boutons present absent retard incertain
         construireBoutonsSelection(div);
 
         col.appendChild(div);
@@ -265,20 +257,83 @@ function construireBoutonsSelection(div) {
     //construire input
     let input = document.createElement("input");
     input.setAttribute("type", "checkbox");
+    input.setAttribute("numero", i);
     input.setAttribute("data-no", "en attente,amodifier");
-    switch(i) {
-        case 0: input.className = "absent";
-        case 1: input.className = "présent";
-        case 2: input.className = "à la bourre";
-        case 3: input.className = "incertain";
-    }
+    input.className = "queryPresence";
+
+    //
+    let cle = div.id;
+    input.addEventListener("click", function() {            
+        checkClick(this, cle);
+    });
+    
     //construire span
     let span = document.createElement("span");
-    span.className = "slider vote";
+    switch(i) {
+        case 0: {
+            span.className = "slider absent";
+            break;
+            }
+        case 1: {
+            span.className = "slider present";
+            break;
+            }
+        case 2: {
+            span.className = "slider retard";
+            break;
+            }
+        case 3: {
+            span.className = "slider incertain";
+            break;
+            }
+    }
 
     label.appendChild(input);
     label.appendChild(span);
 
     div.appendChild(label);
     }
+
+    /*
+    //EventListener sur chaque bouton 
+    let queryPresence = document.querySelectorAll(".slider");
+    for(let i = 0; i<queryPresence.length; i++) {
+        queryPresence[i].addEventListener("click", function() {            
+            checkClick(this);
+        });
+    }
+    */
+}
+
+/*
+//on passe un attribut qui porte un numero, data-no - date-present
+//Sélection de toutes les inputs avec la classe à vérifier
+function checkClick(element, classe, attribut) {
+    console.log("checked");
+    let noElement = element.getAttribute(attribut);
+
+    let classes = document.querySelectorAll("." + classe);
+    for(let i = 0; i<classes.length; i++) {
+        let noEl = classes[i].getAttribute(attribut);
+        if(classes[i].checked && noElement != noEl) classes[i].checked = false;
+    }
+}
+*/
+
+function checkClick(bouton, cle) {
+
+    //document.querySelectorAll("");
+    let div = document.getElementById(cle);
+    console.log(div);
+    let inputs = div.getElementsByClassName("queryPresence");
+    console.log(inputs);
+    for(let i = 0; i<inputs.length; i++) {
+        if(inputs[i].checked == true && bouton.attributes["numero"] != inputs[i].attributes["numero"])
+            inputs[i].checked = false;
+    }
+
+    //pour empécher de déselectionner une balise checked et se retrouver
+    //sans aucune balise checked
+    if(bouton.checked == false) bouton.checked = true;
+
 }

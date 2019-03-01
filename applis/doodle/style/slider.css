@@ -78,12 +78,20 @@
     box-shadow: 0 0 1px rgb(34, 245, 7);
   }
 
-  .slider.vote[data-perso="boulard"]::after{
-    content : "J'ai le boulard";
+  .slider.present::after {
+    content : "présent";
   }
   
-  .slider.vote[data-perso="bouse"]::after{
-    content : "même moi";
+  .slider.absent::after {
+    content : "absent";
+  }
+
+  .slider.retard::after {
+    content : "à la bourre";
+  }
+
+  .slider.incertain::after {
+    content : "incertain";
   }
   
   input:checked + .slider:before {
