@@ -1,7 +1,11 @@
 //namespace doodleData
 doodleData = {
     dates:["19 février 1983", "01 Mars 1983", "02 Janvier 2000", "17 Juin 2018"],
-    presences: ["seb", "ju"]
+    presences: ["seb", "ju"],
+    joueurs: [
+        {entrainement: "1",nom:"seb",statut:"0"},
+        {entrainement: "1",nom:"ju",statut:"2"},
+        {entrainement: "2",nom:"mischael",statut:"3"}]
 }
 
 document.addEventListener("DOMContentLoaded", function (event) {
@@ -35,8 +39,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
    })
 
    ajouterData();
-   btnInscription(); 
-   creerUneDate(doodleData.dates);
+   //creerUneDate(doodleData.dates);
 
    
 })
@@ -53,26 +56,50 @@ function fermerPageAjout() {
     div.removeClass("ouverte");
 }
 
+
+//#app affichage ou non des dates, s'il y a des dates dans la table
 function ajouterData() {
 
-    let affichage = "il y a des doodles";
     let dates = doodleData.dates;
 
-    if(dates.length == 0) affichage = "pas de doodle";
-    else affichage = dates[0];
+    if(dates.length == 0) {
 
-    let p = document.createElement("p");
-    p.innerHTML = affichage;
+        let p = document.createElement("p");
+        p.innerHTML = "pas de doodle";
+        document.getElementById("app").appendChild(p);
+    }
+    else {
+        btnInscription();
+        creationConteneurDates();
 
-    document.getElementById("app").appendChild(p);
+        dates.forEach(date => {
+            creerUneDate(date);
+        })
+    }
 }
+
+function creationConteneurDates() {
+
+    let row = document.createElement("div");
+    row.className = "row conteneurDates";
+    row.id = "conteneurDates";
+
+    document.getElementById("app").appendChild(row);
+
+}
+
 
 function creerUneDate(date) {
 
-    //container à attacher à la div #app
+    //container à attacher à la div #conteneurDates
+    let conteneurDates = document.getElementById("conteneurDates");
+
+    let col = document.createElement("div");
+    col.className = "col-sm-12 col-md-6 col-lg-4";
 
     let container = document.createElement("div");
     container.className = "container uneDate";
+    container.setAttribute("data-no", "1");
 
     let inputDate = document.createElement("input");
     inputDate.setAttribute("readonly", "readonly");
@@ -86,10 +113,63 @@ function creerUneDate(date) {
 
     //test
     container.appendChild(inputDate);
-    container.appendChild(inputNbreJoueurs);
+    container.appendChild(inputNbreJoueurs);    
 
-    document.getElementById("app").appendChild(container);
+    attacherPresences(container);
 
+    col.appendChild(container);
+    conteneurDates.appendChild(col);
+    
+}
+
+//récupère une div et attache tous les joueurs de la bdd associés à la clé de cette div
+function attacherPresences(div) {
+
+    //tab des données des joueurs
+    let joueurs = doodleData.joueurs;    
+
+    //div.no correspond au No d'entrainement dans la bdd
+    //joueur.entrainement correspond au No d'entrainement dans la bdd
+    let no = div.attributes["data-no"].value;
+    //console.log(no);
+
+    joueurs.forEach(joueur => {
+
+        if(joueur.entrainement == no) {
+
+            let row = document.createElement("div");
+            row.className = "row";
+
+            let containerNom = document.createElement("div");
+            containerNom.className = "col-5";
+
+            let containerStatut = document.createElement("div");
+            containerStatut.className = "col-7";
+
+            let nom = document.createElement("input");
+            nom.setAttribute("type", "text");
+            nom.setAttribute("readonly", "readonly");
+            nom.value = joueur.nom;
+
+            //ajouter son statut
+            let statut = document.createElement("input");
+            statut.setAttribute("type", "text");
+            statut.setAttribute("readonly", "readonly");
+            statut.setAttribute("data-statut", joueur.statut);
+            statut.className = "statut";
+
+            //mettre un evenlistener click pour mettre à jour son statut
+
+            containerNom.appendChild(nom);
+            containerStatut.appendChild(statut);
+
+            row.appendChild(containerNom);
+            row.appendChild(containerStatut);
+
+            div.appendChild(row);
+
+        }
+    })
 }
 
 function btnInscription() {
@@ -255,11 +335,13 @@ function construireBoutonsSelection(div) {
     let label = document.createElement("label");
     label.setAttribute("class", "switch");
     //construire input
+    //i = 0 present, 1 en retard, 2 incertain, 3 absent 
     let input = document.createElement("input");
     input.setAttribute("type", "checkbox");
     input.setAttribute("numero", i);
     input.setAttribute("data-no", "en attente,amodifier");
     input.className = "queryPresence";
+    if(i == 3) input.checked = true;
 
     //
     let cle = div.id;
@@ -271,19 +353,19 @@ function construireBoutonsSelection(div) {
     let span = document.createElement("span");
     switch(i) {
         case 0: {
-            span.className = "slider absent";
-            break;
-            }
-        case 1: {
             span.className = "slider present";
             break;
             }
-        case 2: {
+        case 1: {
             span.className = "slider retard";
             break;
             }
-        case 3: {
+        case 2: {
             span.className = "slider incertain";
+            break;
+            }
+        case 3: {
+            span.className = "slider absent";
             break;
             }
     }
@@ -293,43 +375,17 @@ function construireBoutonsSelection(div) {
 
     div.appendChild(label);
     }
-
-    /*
-    //EventListener sur chaque bouton 
-    let queryPresence = document.querySelectorAll(".slider");
-    for(let i = 0; i<queryPresence.length; i++) {
-        queryPresence[i].addEventListener("click", function() {            
-            checkClick(this);
-        });
-    }
-    */
 }
-
-/*
-//on passe un attribut qui porte un numero, data-no - date-present
-//Sélection de toutes les inputs avec la classe à vérifier
-function checkClick(element, classe, attribut) {
-    console.log("checked");
-    let noElement = element.getAttribute(attribut);
-
-    let classes = document.querySelectorAll("." + classe);
-    for(let i = 0; i<classes.length; i++) {
-        let noEl = classes[i].getAttribute(attribut);
-        if(classes[i].checked && noElement != noEl) classes[i].checked = false;
-    }
-}
-*/
 
 function checkClick(bouton, cle) {
 
     //document.querySelectorAll("");
     let div = document.getElementById(cle);
-    console.log(div);
+
     let inputs = div.getElementsByClassName("queryPresence");
-    console.log(inputs);
+
     for(let i = 0; i<inputs.length; i++) {
-        if(inputs[i].checked == true && bouton.attributes["numero"] != inputs[i].attributes["numero"])
-            inputs[i].checked = false;
+        if(inputs[i].checked == true) inputs[i].checked = false;
     }
 
     //pour empécher de déselectionner une balise checked et se retrouver

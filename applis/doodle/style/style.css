@@ -199,3 +199,36 @@ div.btnInscription {
     border-radius: 5px;
     margin-top: 5px;
 }
+
+
+/* -------------------- .conteneurDates ----------------*/
+.conteneurDates .uneDate {
+    background: cornflowerblue;
+}
+
+.conteneurDates .uneDate input {
+    width: 80%;
+    text-align: center;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    margin: 5px auto;
+    height: 50px;
+}
+
+/* 0 présent, 1 retard, 2 incertain, 3 absent */
+.conteneurDates .uneDate input.statut[data-statut="0"] {
+    background-color: rgb(34, 245, 7);
+  }
+
+.conteneurDates .uneDate input.statut[data-statut="1"] {
+    background-color: rgb(243, 222, 33);
+}
+
+.conteneurDates .uneDate input.statut[data-statut="2"] {
+    background-color: rgb(132, 41, 182);
+}
+
+.conteneurDates .uneDate input.statut[data-statut="3"] {
+    background-color: rgb(243, 33, 33);
+}
