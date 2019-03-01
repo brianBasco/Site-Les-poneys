@@ -1,11 +1,17 @@
 //namespace doodleData
 doodleData = {
-    dates:["19 février 1983", "01 Mars 1983", "02 Janvier 2000", "17 Juin 2018"],
+    dates:[
+        {entrainement:"1",date:"19 février 1983"},
+        {entrainement:"2",date:"01 Mars 1983"},
+        {entrainement:"3",date:"02 Janvier 2000"},
+        {entrainement:"4",date:"17 Juin 2018"}
+    ],
     presences: ["seb", "ju"],
     joueurs: [
         {entrainement: "1",nom:"seb",statut:"0"},
         {entrainement: "1",nom:"ju",statut:"2"},
-        {entrainement: "2",nom:"mischael",statut:"3"}]
+        {entrainement: "2",nom:"mischael",statut:"3"}
+    ]
 }
 
 document.addEventListener("DOMContentLoaded", function (event) {
@@ -75,6 +81,9 @@ function ajouterData() {
         dates.forEach(date => {
             creerUneDate(date);
         })
+
+        //boucler sur le nbre de div suivante ->
+        nbreParticipants(document.getElementsByClassName("uneDate")[0]);
     }
 }
 
@@ -91,6 +100,9 @@ function creationConteneurDates() {
 
 function creerUneDate(date) {
 
+    //date est un objet composé du numero d'entrainement et de la date
+    //date.entrainement, date.date
+
     //container à attacher à la div #conteneurDates
     let conteneurDates = document.getElementById("conteneurDates");
 
@@ -99,17 +111,17 @@ function creerUneDate(date) {
 
     let container = document.createElement("div");
     container.className = "container uneDate";
-    container.setAttribute("data-no", "1");
+    container.setAttribute("data-no", date.entrainement);
 
     let inputDate = document.createElement("input");
     inputDate.setAttribute("readonly", "readonly");
     inputDate.setAttribute("type", "text");
-    inputDate.value = date;
+    inputDate.value = date.date;
 
     let inputNbreJoueurs = document.createElement("input");
     inputNbreJoueurs.setAttribute("readonly", "readonly");
     inputNbreJoueurs.setAttribute("type", "text");
-    inputNbreJoueurs.value = "nbre de participants";
+    inputNbreJoueurs.className = "nbreParticipants";
 
     //test
     container.appendChild(inputDate);
@@ -133,9 +145,17 @@ function attacherPresences(div) {
     let no = div.attributes["data-no"].value;
     //console.log(no);
 
+    //compteur de joueurs inscrits
+    let count = 0;
+
     joueurs.forEach(joueur => {
 
         if(joueur.entrainement == no) {
+
+            count++;
+
+            let classeStatuts = ["present", "retard", "incertain", "absent"];
+            let statuts = ["présent", "à la bourre", "incertain", "absent"];
 
             let row = document.createElement("div");
             row.className = "row";
@@ -149,14 +169,17 @@ function attacherPresences(div) {
             let nom = document.createElement("input");
             nom.setAttribute("type", "text");
             nom.setAttribute("readonly", "readonly");
+            nom.className = classeStatuts[joueur.statut];
             nom.value = joueur.nom;
 
             //ajouter son statut
+            
             let statut = document.createElement("input");
             statut.setAttribute("type", "text");
             statut.setAttribute("readonly", "readonly");
             statut.setAttribute("data-statut", joueur.statut);
-            statut.className = "statut";
+            statut.className = "statut " + classeStatuts[joueur.statut];
+            statut.value = statuts[joueur.statut];
 
             //mettre un evenlistener click pour mettre à jour son statut
 
@@ -170,6 +193,25 @@ function attacherPresences(div) {
 
         }
     })
+    //si pas d'inscrits on marque "aucun inscrit"
+    if(count==0) {
+        let p = document.createElement("p");
+        p.innerHTML = "aucun inscrit";
+        p.className = "aucunInscrit";
+
+        div.appendChild(p);
+    }
+}
+
+function nbreParticipants(div) {
+
+    //dans le DOM 2 inputs par joueur ont la même classe
+    //donc pour avoir le nbre de joueurs on doit diviser par 2
+    //pas de risque car il ne peut pas y avoir de nbres impairs dans le DOM
+    let presents = div.getElementsByClassName("present").length/2;
+    let retards = div.getElementsByClassName("retard").length/2;
+
+    console.log(presents + retards);
 }
 
 function btnInscription() {
