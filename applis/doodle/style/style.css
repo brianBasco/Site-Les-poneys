@@ -1,3 +1,5 @@
+/* Reprendre le css de page s'inscrire et passer en absolute plutôt qu'en fixed */
+
 header {
     background: darkorange;
     background-image: linear-gradient(-90deg, #ef6d6d, #00ff4b);

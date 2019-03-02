@@ -10,9 +10,15 @@ doodleData = {
     joueurs: [
         {entrainement: "1",nom:"seb",statut:"0"},
         {entrainement: "1",nom:"ju",statut:"2"},
-        {entrainement: "2",nom:"mischael",statut:"3"}
+        {entrainement: "2",nom:"mischael",statut:"3"},
+        {entrainement: "2",nom:"jean",statut:"0"},
+        {entrainement: "2",nom:"michel",statut:"1"},
+        {entrainement: "2",nom:"alain",statut:"2"},
+        {entrainement: "2",nom:"pierre",statut:"3"},
     ]
 }
+
+
 
 document.addEventListener("DOMContentLoaded", function (event) {
 
@@ -44,11 +50,44 @@ document.addEventListener("DOMContentLoaded", function (event) {
        fermerPageAjout();
    })
 
-   ajouterData();
-   //creerUneDate(doodleData.dates);
 
+   //initialisation des infos à mettre dans la page
+   ajouterData();
+
+   //tests de fonctions :
    
+   /*
+   let joueur = doodleData.joueurs[0];
+   let div = document.getElementsByClassName("uneDate")[0];
+   creerUneLigneParticipant(div, joueur);
+   */
+   let no = 1;
+   marquerNbrePresents(no, 8);
+   console.log(selectionnerDivUneDate(no));
+   /**/
 })
+
+//retourne la ref de la div uneDate trouvée, si ne trouve pas retourne null
+function selectionnerDivUneDate(no) {
+
+    let div = null;
+    //no est l'id de l'entrainement
+
+    //selection des div uneDate :
+    let divs = document.getElementsByClassName("uneDate");
+
+    let trouve = false;
+
+    for(let i = 0; i<divs.length; i++) {    
+        if(divs[i].attributes["data-no"].value == no) {
+            trouve = true;
+            div = divs[i];
+        }
+    }
+    if(!trouve) console.log("pas de no de div correspondant à " + no);
+
+    return div;
+}
 
 function ouvrirPageAjout() {
 
@@ -80,10 +119,11 @@ function ajouterData() {
 
         dates.forEach(date => {
             creerUneDate(date);
+            marquerNbrePresents(date.entrainement);
         })
 
         //boucler sur le nbre de div suivante ->
-        nbreParticipants(document.getElementsByClassName("uneDate")[0]);
+        //calculernbrePresents(document.getElementsByClassName("uneDate")[1]);
     }
 }
 
@@ -109,9 +149,9 @@ function creerUneDate(date) {
     let col = document.createElement("div");
     col.className = "col-sm-12 col-md-6 col-lg-4";
 
-    let container = document.createElement("div");
-    container.className = "container uneDate";
-    container.setAttribute("data-no", date.entrainement);
+    let div = document.createElement("div");
+    div.className = "container uneDate";
+    div.setAttribute("data-no", date.entrainement);
 
     let inputDate = document.createElement("input");
     inputDate.setAttribute("readonly", "readonly");
@@ -124,12 +164,12 @@ function creerUneDate(date) {
     inputNbreJoueurs.className = "nbreParticipants";
 
     //test
-    container.appendChild(inputDate);
-    container.appendChild(inputNbreJoueurs);    
+    div.appendChild(inputDate);
+    div.appendChild(inputNbreJoueurs);    
 
-    attacherPresences(container);
+    attacherPresences(div);
 
-    col.appendChild(container);
+    col.appendChild(div);
     conteneurDates.appendChild(col);
     
 }
@@ -154,43 +194,7 @@ function attacherPresences(div) {
 
             count++;
 
-            let classeStatuts = ["present", "retard", "incertain", "absent"];
-            let statuts = ["présent", "à la bourre", "incertain", "absent"];
-
-            let row = document.createElement("div");
-            row.className = "row";
-
-            let containerNom = document.createElement("div");
-            containerNom.className = "col-5";
-
-            let containerStatut = document.createElement("div");
-            containerStatut.className = "col-7";
-
-            let nom = document.createElement("input");
-            nom.setAttribute("type", "text");
-            nom.setAttribute("readonly", "readonly");
-            nom.className = classeStatuts[joueur.statut];
-            nom.value = joueur.nom;
-
-            //ajouter son statut
-            
-            let statut = document.createElement("input");
-            statut.setAttribute("type", "text");
-            statut.setAttribute("readonly", "readonly");
-            statut.setAttribute("data-statut", joueur.statut);
-            statut.className = "statut " + classeStatuts[joueur.statut];
-            statut.value = statuts[joueur.statut];
-
-            //mettre un evenlistener click pour mettre à jour son statut
-
-            containerNom.appendChild(nom);
-            containerStatut.appendChild(statut);
-
-            row.appendChild(containerNom);
-            row.appendChild(containerStatut);
-
-            div.appendChild(row);
-
+            creerUneLigneParticipant(div, joueur);
         }
     })
     //si pas d'inscrits on marque "aucun inscrit"
@@ -203,15 +207,78 @@ function attacherPresences(div) {
     }
 }
 
-function nbreParticipants(div) {
+//permet de rajouter à une div (un entrainement) le nom et le statut d'un joueur
+function creerUneLigneParticipant(div, joueur) {
+
+    //div est l'ancre à laquelle on append le joueur
+    //joueur est un objet contenant les attributs du joueur
+    let classeStatuts = ["present", "retard", "incertain", "absent"];
+    let statuts = ["présent", "à la bourre", "incertain", "absent"];
+
+    let row = document.createElement("div");
+    row.className = "row";
+
+    let containerNom = document.createElement("div");
+    containerNom.className = "col-5";
+
+    let containerStatut = document.createElement("div");
+    containerStatut.className = "col-7";
+
+    let nom = document.createElement("input");
+    nom.setAttribute("type", "text");
+    nom.setAttribute("readonly", "readonly");
+    nom.className = classeStatuts[joueur.statut];
+    nom.value = joueur.nom;
+
+    //ajouter son statut
+    
+    let statut = document.createElement("input");
+    statut.setAttribute("type", "text");
+    statut.setAttribute("readonly", "readonly");
+    statut.setAttribute("data-statut", joueur.statut);
+    statut.className = "statut " + classeStatuts[joueur.statut];
+    statut.value = statuts[joueur.statut];
+
+    //mettre un evenlistener click pour mettre à jour son statut
+
+    containerNom.appendChild(nom);
+    containerStatut.appendChild(statut);
+
+    row.appendChild(containerNom);
+    row.appendChild(containerStatut);
+
+    div.appendChild(row);
+
+}
+
+//calcule et retoure le nbre de participants (presents et en retard)
+function calculernbrePresents(div) {
 
     //dans le DOM 2 inputs par joueur ont la même classe
     //donc pour avoir le nbre de joueurs on doit diviser par 2
     //pas de risque car il ne peut pas y avoir de nbres impairs dans le DOM
-    let presents = div.getElementsByClassName("present").length/2;
-    let retards = div.getElementsByClassName("retard").length/2;
+    let presents = div.getElementsByClassName("present").length;
+    let retards = div.getElementsByClassName("retard").length;
 
-    console.log(presents + retards);
+    let total = (presents + retards) /2;
+    
+    //console.log(presents + retards);
+    return total;
+}
+
+function marquerNbrePresents(noDeDiv) {
+    
+    let div = selectionnerDivUneDate(noDeDiv);
+
+    let nbre = calculernbrePresents(div);
+
+    let input = div.getElementsByClassName("nbreParticipants")[0];
+
+    let orthographe = "présent";
+
+    if(nbre >= 2) orthographe = orthographe + "s";
+
+    input.value = nbre + " " + orthographe;
 }
 
 function btnInscription() {
@@ -316,23 +383,17 @@ let finaliserInscription = function(event) {
 }
 
 function ajouterDates(div) {
-
-    //let appDates = document.getElementById("appDates");
-
+    
     let tab = div.childNodes;
-    console.log(tab);
+    //console.log(tab);
 
+    //si on trouve l'ancre appDates de la div
     tab.forEach(element => {
         if(element.id == "appDates") {
-            //attache toutes les dates de doodle.dates
+            //attache toutes les dates de doodle.dates à div #appDates
             attacherDates(element, doodleData.dates);
         };
     });
-
-    let p = document.createElement("p");
-    p.innerHTML = "hmmmm";
-
-    //appDates.appendChild(p);
 }
 
 function attacherDates(noeud, tabDesDates) {
@@ -341,10 +402,12 @@ function attacherDates(noeud, tabDesDates) {
     row.className = "row";
 
     tabDesDates.forEach(element => {
-        //element correspond à une date format String
+        //element.date correspond à une date format String
+        let date = element.date;
+
         let input = document.createElement("input");
         input.setAttribute("type", "text");
-        input.setAttribute("value", element);
+        input.setAttribute("value", date);
         input.setAttribute("readonly", "readonly");
 
         let col = document.createElement("div");
@@ -353,8 +416,8 @@ function attacherDates(noeud, tabDesDates) {
         //on place la date en attribut data-no pour sélectionner par la suite le contenu
         //de cette div
         let div = document.createElement("div");
-        div.setAttribute("id", "inscription" + element);
-        div.setAttribute("data-no", element);
+        div.setAttribute("id", "inscription" + date);
+        div.setAttribute("data-no", date);
         div.appendChild(input);
 
         //construction des boutons present absent retard incertain
