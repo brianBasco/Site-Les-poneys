@@ -1,8 +1,9 @@
-/* Reprendre le css de page s'inscrire et passer en absolute plutôt qu'en fixed */
+button:hover {
+    cursor: grab;
+}
 
 header {
-    background: darkorange;
-    background-image: linear-gradient(-90deg, #ef6d6d, #00ff4b);
+    background: #0b5b65;
 }
 
 header .btnAjouter {
@@ -54,15 +55,25 @@ header .mort img {
 }
 
 footer {
-    background: linear-gradient(-90deg, #1d1a1a, #ff38c5);
-    height: 400px;
+    
+    height: 200px;
 	color: white;
-	padding: 20px;
-	margin-top: 60px;
+    background-image: url("images/Volleyball-Widescreen.jpg");
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Do not repeat the image */
+    background-size: cover; /* Resize the background image to cover the entire container */
+    
 }
 
 footer p {
     display: inline-block;
+}
+
+footer .contenuImage {
+	background-color: #4b2e83;
+	width: 100%;
+	height: 100%;
+	opacity: 0.9;
 }
 
 /* Css de base des boutons comics ----------------- */
@@ -94,23 +105,25 @@ footer p:nth-child(2) {
 
 
 /* pageAjout */
-.pageAjout {
 
-    height: 0;
-    opacity: 0;
+.pageAjout {
     position: fixed;
-    width: 100%;    
-    top: 0;
-    bottom: 0;
-    background:linear-gradient(to bottom right, black, yellow);
-    transition: all ease-in-out 0.5s;
-    overflow: hidden;
+    top: 60px;
+    width: 500px;
+    height: 400px;
+	transition: all ease-in-out 0.5s;
     z-index: 2;
+    left: 100%;
+	background: white;
+    border: 1px solid #0d2345;
+    visibility: hidden;
+    box-shadow: -1px 1px 3px 1px #4e4444;
 }
 
 .pageAjout.ouverte {
-    opacity: 1;
-    height: 100%;
+	
+    transform: translateX(-500px);
+    visibility: visible;
 }
 
 .pageAjout div {
@@ -121,8 +134,40 @@ footer p:nth-child(2) {
 	text-align: right;
 }
 
-.pageAjout input, .pageAjout button {
-    width: 200px;
+.pageAjout .btn-fermer button {
+	width: 50px;
+	height: 50px;
+	border-radius: 25px;
+	background: #0d2345;
+	box-shadow: 1px 1px 1px 1px grey;
+	color: wheat;
+	font-weight: bold;
+	margin: 20px;
+	transition: all linear 0.1s;
+	font-size: 1.5rem;
+	border: 2px solid wheat;
+}
+
+.pageAjout .btn-fermer button:active {
+    box-shadow: none;
+}
+
+.pageAjout .ajoutDate {
+	width: 200px;
+	height: 40px;
+	border: none;
+	text-align: center;
+	box-shadow: inset 0px 0 2px 0px #534343;
+}
+
+.pageAjout .ajoutBtn {
+	width: 200px;
+	height: 50px;
+	background: #0d2345;
+	color: wheat;
+	font-weight: bold;
+	margin-top: 50px;
+	border: 1px solid wheat;
 }
 
 /* --------------- css btnInscription -------------- */
@@ -130,7 +175,8 @@ footer p:nth-child(2) {
 div.btnInscription {
 	text-align: center;
 	padding: 15px;
-	background: darkorange;
+	background: white;
+	margin: 20px;
 }
 
 .btnInscription button {
@@ -143,6 +189,12 @@ div.btnInscription {
     border-radius: 0;
     border: 3px solid black;
     box-shadow: 1px 1px 1px 1px black;
+}
+
+.btnInscription hr {
+	border: 1px solid wheat;
+	width: 50%;
+	margin-top: 50px;
 }
 
 /* CSS de uneDate ------------ */
@@ -229,6 +281,10 @@ div.btnInscription {
 
 
 /* -------------------- .conteneurDates ----------------*/
+.conteneurDates {
+    background-color: #ECE9E2;
+}
+
 .conteneurDates .uneDate {
 	background: black;
 	text-align: center;

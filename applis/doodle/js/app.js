@@ -284,15 +284,21 @@ function marquerNbrePresents(noDeDiv) {
 function btnInscription() {
 
     let container = document.createElement("div");
-    container.className = "container btnInscription";
+    container.className = "btnInscription";
 
     let btnInscrire = document.createElement("button");
     btnInscrire.className = "btn";
     btnInscrire.innerHTML = "s'inscrire !";
 
+    //création des hr
+    //let hr1 = document.createElement("hr");
+    let hr2 = document.createElement("hr");
+
     btnInscrire.addEventListener("click", creerPageInscription);
 
+    //container.appendChild(hr1);
     container.appendChild(btnInscrire);
+    container.appendChild(hr2);
 
     document.getElementById("app").appendChild(container);
 }
