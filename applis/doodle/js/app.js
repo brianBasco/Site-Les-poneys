@@ -406,16 +406,18 @@ function attacherDates(noeud, tabDesDates) {
         let date = element.date;
 
         let input = document.createElement("input");
+        input.className = "date";
         input.setAttribute("type", "text");
         input.setAttribute("value", date);
         input.setAttribute("readonly", "readonly");
 
         let col = document.createElement("div");
-        col.className = "col-sm-12 col-md-6 col-lg-4";
+        col.className = "conteneurDiv col-sm-12 col-md-6 col-lg-4";
 
         //on place la date en attribut data-no pour sélectionner par la suite le contenu
         //de cette div
         let div = document.createElement("div");
+        div.className = "presences";
         div.setAttribute("id", "inscription" + date);
         div.setAttribute("data-no", date);
         div.appendChild(input);
