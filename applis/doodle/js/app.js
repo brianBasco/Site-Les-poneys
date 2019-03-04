@@ -54,6 +54,14 @@ document.addEventListener("DOMContentLoaded", function (event) {
    //initialisation des infos à mettre dans la page
    ajouterData();
 
+   //eventListener pour ouvrir le frontend .joueurs
+   let uneDate = document.getElementsByClassName("uneDate");
+   for(let i = 0; i<uneDate.length; i++) {
+    uneDate[i].addEventListener("click", function() {
+        ouvrirJoueurs(this);
+     })
+ }
+
    //tests de fonctions :
    
    /*
@@ -66,6 +74,21 @@ document.addEventListener("DOMContentLoaded", function (event) {
    console.log(selectionnerDivUneDate(no));
    /**/
 })
+
+
+
+//ouvre la liste des joueurs par balise lors du click sur la balise
+function ouvrirJoueurs(div) {   
+
+    let hauteur = div.getElementsByClassName("joueurs")[0].offsetHeight;
+    
+    if(div.offsetHeight == "117") {
+        let total = parseInt(hauteur) + 117;
+        div.style.height = total + "px";
+    }
+    else div.style.height = "117px";
+}
+
 
 //retourne la ref de la div uneDate trouvée, si ne trouve pas retourne null
 function selectionnerDivUneDate(no) {
@@ -148,10 +171,11 @@ function creerUneDate(date) {
 
     let col = document.createElement("div");
     col.className = "col-sm-12 col-md-6 col-lg-4";
+    col.setAttribute("data-no", date.entrainement);
 
     let div = document.createElement("div");
     div.className = "container uneDate";
-    div.setAttribute("data-no", date.entrainement);
+    div.setAttribute("data-no", date.entrainement);    
 
     let inputDate = document.createElement("input");
     inputDate.setAttribute("readonly", "readonly");
@@ -163,27 +187,27 @@ function creerUneDate(date) {
     inputNbreJoueurs.setAttribute("type", "text");
     inputNbreJoueurs.className = "nbreParticipants";
 
-    //test
+    //ancre pour les joueurs et leurs statuts
+    let ancreJoueurs = document.createElement("div");
+    ancreJoueurs.className = "joueurs";
+
     div.appendChild(inputDate);
-    div.appendChild(inputNbreJoueurs);    
+    div.appendChild(inputNbreJoueurs);
+    div.appendChild(ancreJoueurs);
+    
+    //date.entrainement correspond au no d'entrainement
+    attacherPresences(ancreJoueurs, date.entrainement);
 
-    attacherPresences(div);
-
-    col.appendChild(div);
+    col.appendChild(div);    
     conteneurDates.appendChild(col);
     
 }
 
 //récupère une div et attache tous les joueurs de la bdd associés à la clé de cette div
-function attacherPresences(div) {
+function attacherPresences(div,no) {
 
     //tab des données des joueurs
-    let joueurs = doodleData.joueurs;    
-
-    //div.no correspond au No d'entrainement dans la bdd
-    //joueur.entrainement correspond au No d'entrainement dans la bdd
-    let no = div.attributes["data-no"].value;
-    //console.log(no);
+    let joueurs = doodleData.joueurs;   
 
     //compteur de joueurs inscrits
     let count = 0;
@@ -209,7 +233,7 @@ function attacherPresences(div) {
 
 //permet de rajouter à une div (un entrainement) le nom et le statut d'un joueur
 function creerUneLigneParticipant(div, joueur) {
-
+    
     //div est l'ancre à laquelle on append le joueur
     //joueur est un objet contenant les attributs du joueur
     let classeStatuts = ["present", "retard", "incertain", "absent"];
@@ -247,6 +271,7 @@ function creerUneLigneParticipant(div, joueur) {
     row.appendChild(containerNom);
     row.appendChild(containerStatut);
 
+    //div.appendChild(row);
     div.appendChild(row);
 
 }
