@@ -1,3 +1,14 @@
+/* bleu : #0b5b65; */
+
+/*
+
+font-family: "Encode Sans Compressed",sans-serif;
+font-size: 14px;
+font-weight: 600;
+letter-spacing: .01em;
+    
+*/
+
 button:hover {
     cursor: grab;
 }
@@ -8,7 +19,14 @@ header {
 
 header .btnAjouter {
 	float: right;
-	margin: 5px;
+    margin: 5px;
+    background: #18b0e1;
+	color: white;
+	border-radius: 0;
+	border: 2px solid black;
+	padding: 10px 20px;
+	text-shadow: 0px 1px 3px #000;
+	border-radius: 3px;
 }
 
 header h1 {
@@ -70,7 +88,7 @@ footer p {
 }
 
 footer .contenuImage {
-	background-color: #4b2e83;
+	background-color: #0b5b65;
 	width: 100%;
 	height: 100%;
 	opacity: 0.9;
@@ -174,33 +192,31 @@ footer p:nth-child(2) {
 
 div.btnInscription {
 	text-align: center;
-	padding: 15px;
 	background: white;
-	margin: 20px;
+	margin-top: 50px;
 }
 
 .btnInscription button {
-	background: yellow;
-	color: black;
+	background: #0b5b65;
+	color: white;
 	width: 200px;
-    height: 70px;
-    font-family: 'Permanent Marker', cursive;
-    transform: skewX(-5deg);
-    border-radius: 0;
-    border: 3px solid black;
-    box-shadow: 1px 1px 1px 1px black;
+	height: 70px;
+	border-radius: 0;
+    box-shadow: 1px 1px 3px 1px black;
+    
+    font-family: "Encode Sans Compressed",sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: .01em;
 }
 
 .btnInscription hr {
 	border: 1px solid wheat;
 	width: 50%;
-	margin-top: 50px;
+	margin: 20px auto;
 }
 
-/* CSS de uneDate ------------ */
-.uneDate input {
-    display: block;
-}
+
 
 /* ----------- pageInscription ------------------- */
 .pageInscription {
@@ -286,14 +302,22 @@ div.btnInscription {
 }
 
 .conteneurDates .uneDate {
-	background: black;
+    border: 1px solid #cccccc;
+    box-shadow: 1px 1px 3px #cccccc;
+    background-color: white;
 	text-align: center;
 	margin-top: 20px;
 	margin-bottom: 20px;
-	padding: 15px;
+    padding: 15px;
+
+    font-family: "Encode Sans Compressed",sans-serif;
+	font-size: 14px;
+	font-weight: 600;
+	letter-spacing: .01em;
 }
 
 .conteneurDates .uneDate input {
+    display: block;
     width: 80%;
     text-align: center;
     border: none;
@@ -301,6 +325,11 @@ div.btnInscription {
     box-shadow: none;
     margin: 5px auto;
     height: 50px;
+
+    font-family: "Encode Sans Compressed",sans-serif;
+	font-size: 14px;
+	font-weight: 600;
+	letter-spacing: .01em;
 }
 
 /* 0 présent, 1 retard, 2 incertain, 3 absent */
