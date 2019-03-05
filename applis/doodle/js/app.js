@@ -143,6 +143,7 @@ function ajouterData() {
         dates.forEach(date => {
             creerUneDate(date);
             marquerNbrePresents(date.entrainement);
+            colorierCarreNbreJoueurs(date.entrainement);
         })
 
         //boucler sur le nbre de div suivante ->
@@ -160,6 +161,24 @@ function creationConteneurDates() {
 
 }
 
+function creerCarreNbreJoueurs(div) {
+
+    let carre = document.createElement("div");
+    carre.className = "carreNbreJoueurs";
+
+    div.appendChild(carre);
+}
+
+function colorierCarreNbreJoueurs(no) {
+
+    let div = selectionnerDivUneDate(no);
+    let nbre = calculernbrePresents(div);
+    let carre = div.getElementsByClassName("carreNbreJoueurs")[0];
+
+    if(nbre >= 8) carre.style.borderLeftColor = "green";
+    else carre.style.borderLeftColor = "red";
+    
+}
 
 function creerUneDate(date) {
 
@@ -194,6 +213,7 @@ function creerUneDate(date) {
     div.appendChild(inputDate);
     div.appendChild(inputNbreJoueurs);
     div.appendChild(ancreJoueurs);
+    creerCarreNbreJoueurs(div);
     
     //date.entrainement correspond au no d'entrainement
     attacherPresences(ancreJoueurs, date.entrainement);

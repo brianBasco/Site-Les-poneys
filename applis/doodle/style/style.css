@@ -302,6 +302,7 @@ div.btnInscription {
 }
 
 .conteneurDates .uneDate {
+	position: relative;
     border: 1px solid #cccccc;
     box-shadow: 1px 1px 3px #cccccc;
     background-color: white;
@@ -317,6 +318,17 @@ div.btnInscription {
 	font-size: 14px;
 	font-weight: 600;
 	letter-spacing: .01em;
+}
+
+.conteneurDates .uneDate .carreNbreJoueurs {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 0;
+	height: 0;
+	border-bottom: 30px solid transparent;
+	border-left: 30px solid;
+	transition: all ease-in-out 0.5s;
 }
 
 .conteneurDates .uneDate:hover, .conteneurDates .uneDate input:hover {
@@ -367,3 +379,5 @@ div.btnInscription {
 	margin: 40px;
 	color: black;
 }
+
+
