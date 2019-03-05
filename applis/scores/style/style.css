@@ -43,15 +43,12 @@ background-color: rgb(255, 241, 43);
   background-image: radial-gradient(circle, #004bff -10%, #0093ff 10%, #001221);
 }
 
-.header .btn{
-  position: absolute;
-  background-color: white;
-  color:black;
-  font-weight: bold;
-  border: 2px solid black;
-  border-radius: 50px;
-  box-shadow: 2px 2px 2px #5d93c3;
-  height: 50px;
+.header .btn {
+	background-color: white;
+	color: black;
+	font-weight: bold;
+	border: 2px solid black;
+	height: 50px;
 }
 
 .header .btn.match {
@@ -71,6 +68,9 @@ background-color: rgb(255, 241, 43);
   background-color: white;
 }
 
+.header .btn.technique {
+  background: yellow;
+}
 
 /* --------------------------- main_content ---------------- */
 
@@ -500,27 +500,21 @@ background-color: rgb(255, 241, 43);
 
 /* CSS du temps Mort technique */
 .tempsMortTechnique {
-  z-index: 3;
-  /*
-  display: none;
-  */
-  opacity: 1;
-  position: fixed;
+	z-index: 3;
+	position: fixed;
   top: 0;
-  bottom: 0;
   width: 100%;
-  padding: 20px;
-  text-align: center;
-  color: white;
-  background-color: rgba(0,0,0,0.9);
-  transition: all ease-in-out 0.5s 0.3s;
+  left: 0;
+	padding: 20px;
+	text-align: center;
+	color: white;
+	background-color: rgba(0,0,0,0.9);
+	transition: all ease-in-out 0.5s 0.3s;
 }
 
 .tempsMortTechnique.initial {
-	width: 0;
+	left: -100%;
 	overflow: hidden;
-  padding: 0;
-  opacity: 0;
 }
 
 .tempsMortTechnique .contenu {
@@ -541,12 +535,14 @@ background-color: rgb(255, 241, 43);
 
 .tempsMortTechnique .btn-tpsMort {
 	width: 100%;
-	height: 180px;
+	height: 140px;
 	font-size: 70px;
 	background-color: black;
-	font-family: 'Bangers', cursive;
 	color: white;
-	border-radius: 0;
+  border-radius: 0;
+  font-family: 'Encode Sans Condensed', sans-serif;
+  letter-spacing: 0.1em;
+  font-weight: bold;
 }
 
 .tempsMortTechnique .btn-tpsMort.gauche {
@@ -557,9 +553,10 @@ background-color: rgb(255, 241, 43);
   color: cadetblue;
 }
 
+
 .tempsMortTechnique .btn-tpsMort.btn-passer {
-  font-size: 25px;
-  background: linear-gradient(to bottom, #4dec35 0%,#6dde28 50%,#28de2a 50%,#85c21f 51%,#46c21f 51%,#c0fe18 100%);
+	font-size: 25px;
+	background: linear-gradient(to bottom, #000 0%,#6dde28 50%,#28de2a 50%,#85c21f 51%,#46c21f 51%,#000 100%);
 }
 
 .tempsMortTechnique .btn-tpsMort.chrono {

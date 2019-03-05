@@ -194,7 +194,9 @@ function clickScore(actionAfaire) {
     var droite = parseInt(sessionStorage.getItem("scoreDroite"));
 
 
+    
     if(set_en_cours() < 5){
+        /*
         if( (gauche == 8 || droite == 8) && (tpsMorttech1 == 0) )
             {
                 if(window.confirm("prendre tps mort")) afficherTempsMort("technique");
@@ -205,7 +207,7 @@ function clickScore(actionAfaire) {
                 if(window.confirm("prendre tps mort")) afficherTempsMort("technique");
                 sessionStorage.setItem('tpsMortTech2', 1);
             }
-
+        */
         //calcul des scores pour la fin de match:
         if((gauche >= 25 || droite >= 25) && (((gauche - droite) >= 2) || ((droite - gauche) >= 2)))
         {
@@ -261,13 +263,20 @@ function enlever(element){
     
 }
 
+function technique() {
+    afficherTempsMort("technique");   
+}
    
 //affiche TEMPS MORT TECHNIQUE
 function afficherTempsMort(tpsMort) {
 
-    insertionInfos();
+    //insertionInfos();
     var tps = $("#tempsMortTechnique");
     tps.removeClass("initial");
+    let marge = $(".body-scores").css("margin-left");
+
+    tps.css("left", marge);
+    
     
     //Si c'est un temps mort technique
     if (tpsMort == "technique")  chrono(60);
@@ -298,10 +307,8 @@ function passerTempsMortTechnique(){
     var tps = $("#tempsMortTechnique");
 
     tps.addClass("initial");
-    /*
-    tps.css("opacity", 0);
-    tps.css("display", "none");
-    */
+
+    tps.css("left", "-100%");
 }
 
 
