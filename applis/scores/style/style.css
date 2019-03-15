@@ -27,10 +27,10 @@ background-color: rgb(255, 241, 43);
 
 /* ---------------- appli ------------------- */
 .appli {
-  /*
-  border: 2px solid black;
-  */
-  box-shadow: 2px 2px 3px grey;
+	/* border: 2px solid black; */
+	box-shadow: 2px 2px 3px grey;
+	overflow: hidden;
+	position: relative;
 }
 
 /* --------------- header --------------------- */
@@ -51,24 +51,46 @@ background-color: rgb(255, 241, 43);
 	height: 50px;
 }
 
-.header .btn.match {
-  left: 15px;
+/* --------------------------- menu flottant ---------------- */
+.menuFlottant {
+	position: absolute;
+	z-index: 2;
+	top: 0;
+	left: 0;
+	width: 350px;
+	transition: all ease-in-out 0.5s;
+	box-shadow: 0 0 20px 3px rgba(0,0,0,.22);
+	border-bottom-left-radius: 2px;
+	border-bottom-right-radius: 2px;
+	border: medium currentColor;
+	text-align: center;
+	background: white;
+	padding: 25px;
 }
 
-.header .btn.set {
-  left: 0;
-  right: 0;
-  margin: 0 auto;
-  width: 50px;
+.menuFlottant.ferme {
+  left:-350px;  
 }
 
-
-.header .btn_inverser {
-  right: 15px;
-  background-color: white;
+.menuFlottant button {
+	display: block;
+	width: 100%;
+	padding: 10px;
+	margin-top: 5px;
+	background-color: white;
+	color: black;
+	font-weight: bold;
+	border: 2px solid black;
+	height: 50px;
+	box-shadow: 1px 1px 1px 1px #cccc;
 }
 
-.header .btn.technique {
+.menuFlottant button.fermer {
+	background: #f99;
+	margin-bottom: 40px;
+}
+
+.menuFlottant button.technique {
   background: yellow;
 }
 
@@ -135,7 +157,7 @@ background-color: rgb(255, 241, 43);
 /****** ------------- scores ---------------- */
 .scores {
 	position: relative;
-	height: 510px;
+	height: 550px;
 }
 
 .scores-panneau {
@@ -217,7 +239,6 @@ background-color: rgb(255, 241, 43);
 }
 
 .temps-mort button {
-	opacity: 0;
 	padding: 0;
 	height: 60px;
 	width: 100%;
@@ -228,6 +249,7 @@ background-color: rgb(255, 241, 43);
   
   */
   background-color: rgb(255, 241, 43);
+  visibility: hidden;
 }
 
 .equipe-gauche, .equipe-droite {
@@ -328,17 +350,17 @@ background-color: rgb(255, 241, 43);
 
 /* ------------------------ unScore ------------------ */
 .unScore {
-  text-align: center;
-  font-family: 'Teko', sans-serif;
-  text-shadow: 3px 3px 3px rgb(140, 151, 160);
-  margin: 0 auto;
-  width: 98%;
-  height: 200px;
-  font-size: 150px;
-  color: rgb(0, 0, 0);
-  background-color: white;
-  border-radius: 0;
-  border: none;
+	text-align: center;
+	font-family: 'Teko', sans-serif;
+	text-shadow: 3px 3px 3px rgb(140, 151, 160);
+	margin: 30px auto 10px auto;
+	width: 98%;
+	height: 200px;
+	font-size: 150px;
+	color: rgb(0, 0, 0);
+	background-color: white;
+	border-radius: 0;
+	border: none;
 }
 
 
@@ -498,6 +520,204 @@ background-color: rgb(255, 241, 43);
   font-weight: bold;
 }
 
+
+/* Pop-up de confirmation de temps mort d'une équipe */
+.demandeTpsMort {
+  
+  position: fixed;
+  top: 10px;
+  left:0;
+  right:0;
+  width: 300px;
+  margin: 0 auto;
+  transition: all ease-in-out 0.5s;
+  box-shadow: 0 0 20px 3px rgba(0,0,0,.22);
+  border-bottom-left-radius: 2px;
+  border-bottom-right-radius: 2px;
+  border: medium currentColor;
+  text-align: center;
+  background: white;
+  z-index: 1000;
+  color: black;
+   
+}
+
+.demandeTpsMort.ferme {  
+  top: -150px;
+}
+
+
+.demandeTpsMort .btnConfirmation {
+ width: 130px;
+	height: 40px;
+	margin: 10px auto;
+	position: relative;
+	-webkit-border-radius: 25px;
+	-moz-border-radius: 25px;
+	border-radius: 25px;
+	border: 1px solid #4864a9;
+	color: #000;
+	font-size: 0.750em;
+	text-shadow: 1px 1px 0px rgba(255,255,255,.5);
+	-webkit-box-shadow:  0px 1px 3px 0px rgba(0, 0, 0, .2);    
+  box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, .2);
+}
+
+.demandeTpsMort .btnConfirmation.oui {
+  
+  background: #94c4fe;
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(31%,#94c4fe), color-stop(100%,#d3f6fe));
+	background: -webkit-linear-gradient(top,  #94c4fe 31%,#d3f6fe 100%);
+	background: -moz-linear-gradient(top,  #94c4fe 31%, #d3f6fe 100%);
+	background: -o-linear-gradient(top,  #94c4fe 31%,#d3f6fe 100%);
+	background: -ms-linear-gradient(top,  #94c4fe 31%,#d3f6fe 100%);
+	background: linear-gradient(to bottom,  #94c4fe 31%,#d3f6fe 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#94c4fe', endColorstr='#d3f6fe',GradientType=0 );
+}
+ 
+.demandeTpsMort .btnConfirmation.non {
+	background: #94c4fe;
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(31%,#94c4fe), color-stop(100%,#d3f6fe));
+	background: -webkit-linear-gradient(top, #ed5d3e 31%,#fbb792 100%);
+	background: -moz-linear-gradient(top, #ed5d3e 31%,#fbb792 100%);
+	background: -o-linear-gradient(top, #ed5d3e 31%,#fbb792 100%);
+	background: -ms-linear-gradient(top, #ed5d3e 31%,#fbb792 100%);
+	background: linear-gradient(to bottom, #ed5d3e 31%,#fbb792 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ed5d3e', endColorstr='#fbb792',GradientType=0 );
+}
+
+/* Pop-up de confirmation de nouveau set */
+.demandeNveauSet {
+  
+  position: fixed;
+  top: 10px;
+  left:0;
+  right:0;
+  width: 300px;
+  margin: 0 auto;
+  transition: all ease-in-out 0.5s;
+  box-shadow: 0 0 20px 3px rgba(0,0,0,.22);
+  border-bottom-left-radius: 2px;
+  border-bottom-right-radius: 2px;
+  border: medium currentColor;
+  text-align: center;
+  background: white;
+  z-index: 1000;
+  color: black;
+   
+}
+
+.demandeNveauSet.ferme {  
+  top: -150px;
+}
+
+
+.demandeNveauSet .btnConfirmation {
+ width: 130px;
+	height: 40px;
+	margin: 10px auto;
+	position: relative;
+	-webkit-border-radius: 25px;
+	-moz-border-radius: 25px;
+	border-radius: 25px;
+	border: 1px solid #4864a9;
+	color: #000;
+	font-size: 0.750em;
+	text-shadow: 1px 1px 0px rgba(255,255,255,.5);
+	-webkit-box-shadow:  0px 1px 3px 0px rgba(0, 0, 0, .2);    
+  box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, .2);
+}
+
+.demandeNveauSet .btnConfirmation.oui {
+  
+  background: #94c4fe;
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(31%,#94c4fe), color-stop(100%,#d3f6fe));
+	background: -webkit-linear-gradient(top,  #94c4fe 31%,#d3f6fe 100%);
+	background: -moz-linear-gradient(top,  #94c4fe 31%, #d3f6fe 100%);
+	background: -o-linear-gradient(top,  #94c4fe 31%,#d3f6fe 100%);
+	background: -ms-linear-gradient(top,  #94c4fe 31%,#d3f6fe 100%);
+	background: linear-gradient(to bottom,  #94c4fe 31%,#d3f6fe 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#94c4fe', endColorstr='#d3f6fe',GradientType=0 );
+}
+ 
+.demandeNveauSet .btnConfirmation.non {
+	background: #94c4fe;
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(31%,#94c4fe), color-stop(100%,#d3f6fe));
+	background: -webkit-linear-gradient(top, #ed5d3e 31%,#fbb792 100%);
+	background: -moz-linear-gradient(top, #ed5d3e 31%,#fbb792 100%);
+	background: -o-linear-gradient(top, #ed5d3e 31%,#fbb792 100%);
+	background: -ms-linear-gradient(top, #ed5d3e 31%,#fbb792 100%);
+	background: linear-gradient(to bottom, #ed5d3e 31%,#fbb792 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ed5d3e', endColorstr='#fbb792',GradientType=0 );
+}
+
+
+/* Pop-up de confirmation de nouveau match */
+.demandeNveauMatch {
+  
+  position: fixed;
+  top: 10px;
+  left:0;
+  right:0;
+  width: 300px;
+  margin: 0 auto;
+  transition: all ease-in-out 0.5s;
+  box-shadow: 0 0 20px 3px rgba(0,0,0,.22);
+  border-bottom-left-radius: 2px;
+  border-bottom-right-radius: 2px;
+  border: medium currentColor;
+  text-align: center;
+  background: white;
+  z-index: 1000;
+  color: black;
+   
+}
+
+.demandeNveauMatch.ferme {  
+  top: -150px;
+}
+
+
+.demandeNveauMatch .btnConfirmation {
+ width: 130px;
+	height: 40px;
+	margin: 10px auto;
+	position: relative;
+	-webkit-border-radius: 25px;
+	-moz-border-radius: 25px;
+	border-radius: 25px;
+	border: 1px solid #4864a9;
+	color: #000;
+	font-size: 0.750em;
+	text-shadow: 1px 1px 0px rgba(255,255,255,.5);
+	-webkit-box-shadow:  0px 1px 3px 0px rgba(0, 0, 0, .2);    
+  box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, .2);
+}
+
+.demandeNveauMatch .btnConfirmation.oui {
+  
+  background: #94c4fe;
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(31%,#94c4fe), color-stop(100%,#d3f6fe));
+	background: -webkit-linear-gradient(top,  #94c4fe 31%,#d3f6fe 100%);
+	background: -moz-linear-gradient(top,  #94c4fe 31%, #d3f6fe 100%);
+	background: -o-linear-gradient(top,  #94c4fe 31%,#d3f6fe 100%);
+	background: -ms-linear-gradient(top,  #94c4fe 31%,#d3f6fe 100%);
+	background: linear-gradient(to bottom,  #94c4fe 31%,#d3f6fe 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#94c4fe', endColorstr='#d3f6fe',GradientType=0 );
+}
+ 
+.demandeNveauMatch .btnConfirmation.non {
+	background: #94c4fe;
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(31%,#94c4fe), color-stop(100%,#d3f6fe));
+	background: -webkit-linear-gradient(top, #ed5d3e 31%,#fbb792 100%);
+	background: -moz-linear-gradient(top, #ed5d3e 31%,#fbb792 100%);
+	background: -o-linear-gradient(top, #ed5d3e 31%,#fbb792 100%);
+	background: -ms-linear-gradient(top, #ed5d3e 31%,#fbb792 100%);
+	background: linear-gradient(to bottom, #ed5d3e 31%,#fbb792 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ed5d3e', endColorstr='#fbb792',GradientType=0 );
+}
+
+
 /* CSS du temps Mort technique */
 .tempsMortTechnique {
 	z-index: 3;
@@ -564,63 +784,6 @@ background-color: rgb(255, 241, 43);
   background-color:black;
   color: rgb(231, 114, 36);
   border: 2px solid white;
-}
-
-/* CSS de la fin du match */
-
-.finMatch {
-  display: none;
-  z-index: 3;
-}
-
-.finMatch .row {
-  padding: 15px;
-}
-
-.finMatch h1 {
-  text-align: center;
-  font-size: 2rem;
-  font-family: 'Bangers', cursive;
-}
-
-.finMatch button.fermer {
-	float: right;
-	border: none;
-	background: transparent;
-	font-size: 2rem;
-	color: white;
-	width: initial;
-	height: initial;
-	font-weight: bold;
-}
-/* CSS de confMatch*/
-
-.confMatch  {
-  display: none;
-}
-
-.confMatch h1 {
-  text-align: center;
-  margin: 3px 0;
-}
-
-
-/* CSS alternatif */
-.body-scores.alt {
-  background-color: rgb(42, 34, 34);
-}
-
-.score .alt {
-  color: #00bcdb;
-  border-color: #00bcdb;
-}
-
-.equipe.alt input {
-  color: #00bcdb;
-  border-radius: 0;
-  border: 1px solid #00bcdb;
-  box-shadow: none;
-  background-color: transparent;
 }
 
 

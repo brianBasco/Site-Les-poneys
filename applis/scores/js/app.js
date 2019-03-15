@@ -1,9 +1,14 @@
 document.addEventListener("DOMContentLoaded", function(event) {
 
+    
     document.querySelector("#nveauMatch").addEventListener("click", function() {
-        nouveauMatch();
-    })
+        ouvrirDemandeNveauMatch();
+    })    
 
+    document.querySelector("#nveauSet").addEventListener("click", function() {
+        ouvrirDemandeNveauSet();
+    })   
+    
     document.querySelector("#btn_inverser").addEventListener("click", function() {
         change();
     })
@@ -16,12 +21,20 @@ document.addEventListener("DOMContentLoaded", function(event) {
     document.querySelector("#nomDroite").addEventListener("blur" , function() {
         scoreDroite.attribuerNom();
         recapNom();
-    })  
+    })
+    
+    let menuFlottant = document.getElementById("menuFlottant");
+    let boutonsMenuFlottant = menuFlottant.getElementsByTagName("button");
+    for(let i = 0; i<boutonsMenuFlottant.length; i++) {
+        boutonsMenuFlottant[i].addEventListener("click", fermerMenuFlottant);
+    }
+
 
     let tps_morts = document.querySelectorAll(".tps-mort");
     for(let i = 0; i<tps_morts.length; i++) {
         tps_morts[i].addEventListener("click", function(){
-            enlever(this);
+            //enlever(this);
+            demandeTpsMort(this);
         })
     }
 })
@@ -45,11 +58,11 @@ function loadingTpsMort(){
     var tpsmortDroite = sessionStorage.getItem('tpsMortDroite');
     for(var i = 0; i<tpsmortGauche; i++){
         var id = "tps" + (i+1);
-        document.getElementById(id).style.opacity = 1;
+        document.getElementById(id).style.visibility = "visible";
     }
     for(var i = 0; i<tpsmortDroite; i++){
         var id = "tps" + (i+3);
-        document.getElementById(id).style.opacity = 1;
+        document.getElementById(id).style.visibility = "visible";
     }
 
 }
@@ -75,6 +88,43 @@ function setTpsMortTech(){
 }
 
 
+//menu flottant
+function ouvrirMenuFlottant() {  
+    document.getElementById("menuFlottant").classList.remove("ferme");
+}
+
+function fermerMenuFlottant() {
+    document.getElementById("menuFlottant").classList.add("ferme");
+}
+
+//Pop up nouveau set
+function ouvrirDemandeNveauSet() {  
+    document.getElementById("demandeNveauSet").classList.remove("ferme");
+}
+
+function fermerDemandeNveauSet() {
+    document.getElementById("demandeNveauSet").classList.add("ferme");
+}
+
+function accepterNveauSet() {
+    fermerDemandeNveauSet();
+    nouveauSet();
+}
+
+
+//Pop up nouveau Match
+function ouvrirDemandeNveauMatch() {  
+    document.getElementById("demandeNveauMatch").classList.remove("ferme");
+}
+
+function fermerDemandeNveauMatch() {
+    document.getElementById("demandeNveauMatch").classList.add("ferme");
+}
+
+function accepterNveauMatch() {
+    nouveauMatch();
+}
+
 //récupère l'ID d'une balise et l'affiche
 function ouvrirDiv(div) {
 
@@ -91,14 +141,6 @@ function fermerDiv(div) {
     myDiv.css("display", "none");
 }
 
-function disableBtnNveauSet(){
-    $("#nveauSet").attr('disabled', true);
-}
-
-function enableBtnNveauSet(){
-    $("#nveauSet").attr('disabled', false);
-}
-
 function nouveauSet(){
 
     //check si on est à la fin du match    
@@ -110,7 +152,7 @@ function nouveauSet(){
 
     fermerDiv('finSet');
 
-    disableBtnNveauSet();
+    //disableBtnNveauSet();
 
     //Insertion du score du set suivant le vainqueur
     inscrire_score_set();
@@ -211,7 +253,10 @@ function clickScore(actionAfaire) {
         //calcul des scores pour la fin de match:
         if((gauche >= 25 || droite >= 25) && (((gauche - droite) >= 2) || ((droite - gauche) >= 2)))
         {
-            enableBtnNveauSet();
+            //enableBtnNveauSet();
+            //proposer le set suivant
+            ouvrirDemandeNveauSet();
+
 
         }
     }
@@ -234,40 +279,90 @@ function finSet(){
         ouvrirDiv('finSet');
 }
 
-function finMatch(){
-    insertionInfos();
-    ouvrirDiv('finMatch');    
+function finMatch(){    
+    /*
+        //smooth scrolling avec JQUERY, du site www.design-fluide.com, à personnaliser
+		$(document).ready(function() {
+		$('.js-scrollTo').on('click', function() { // Au clic sur un élément
+			var page = $(this).attr('href'); // Page cible
+			var speed = 750; // Durée de l'animation (en ms)
+			$('html, body').animate( { scrollTop: $(page).offset().top }, speed ); // Go
+			return false;
+		});
+	});
+    */
+
+    // Scroll to a certain element
+    document.getElementById("recap").scrollIntoView({ 
+    behavior: 'smooth' 
+  });
+    
+
 }
 
-//Fait disparaitre les temps morts quand ils sont cliqués
-function enlever(element){
+
+//Fait disparaitre un temps mort quand on clique dessus
+function enlever(element){    
+   
+    fermerDemandeTpsMort();
+    afficherTempsMort('normal');
+
+    //element comprend le bouton dernièrement cliqué
+    //dans lequel j'ai placé un autre bouton(tpsMort) dans mesParametres.
+    //ce bouton tpsMort est accessible grâce à element.target.mesParametres
+    let balise =  element.target.mesParametres;
     
-    if(window.confirm("temps mort")) {
-        afficherTempsMort('normal');
+    let numero = balise.getAttribute("data-tps_mort");
 
-        let numero = element.getAttribute("data-tps_mort");
-
-        if(numero == 1 || numero == 2){
-            var tpsMort = sessionStorage.getItem('tpsMortGauche');
-            tpsMort --;
-            sessionStorage.setItem('tpsMortGauche', tpsMort);
-        }
-        else {
-            var tpsMort = sessionStorage.getItem('tpsMortDroite');
-            tpsMort --;
-            sessionStorage.setItem('tpsMortDroite', tpsMort);
-        }
-        
-        element.style.opacity = 0;
+    if(numero == 1 || numero == 2){
+        var tpsMort = sessionStorage.getItem('tpsMortGauche');
+        tpsMort --;
+        sessionStorage.setItem('tpsMortGauche', tpsMort);
+    }
+    else {
+        var tpsMort = sessionStorage.getItem('tpsMortDroite');
+        tpsMort --;
+        sessionStorage.setItem('tpsMortDroite', tpsMort);
     }
     
+    balise.style.visibility = "hidden";
+    
 }
 
-function technique() {
-    afficherTempsMort("technique");   
+function demandeTpsMort(element){    
+    ouvrirDemandeTpsMort();
+    let button = document.getElementById("accepterTpsMort");
+    button.mesParametres = element;
+
+    //element correspond au tpsMort qui a été cliqué
+    //on passe cet element en paramètre du bouton d'acceptation du Tps mort
+    //l event listener prend l'objet enlever, dans lequel il y a les paramètres
+    //du button donc du tpsMort qui a été cliqué plus haut
+    //Pas besoin d'enlever l'event listener car à chaque fois mesParametres sont remplacés
+    //par la nouvelle cible et en l'absence de cible li n'y a aucun changement
+    button.addEventListener('click', enlever);
+}
+
+
+// POP UP div demandeTpsMort
+function fermerDemandeTpsMort() {  
+    document.getElementById("demandeTpsMort").classList.add("ferme");
+}
+  
+function ouvrirDemandeTpsMort(element) {    
+    document.getElementById("demandeTpsMort").classList.remove("ferme");
+    return element;
+}
+
+
+
+//affiche TEMPS MORT : TECHNIQUE ou EQUIPE
+function accepterTpsMortEquipe() {
+    fermerDemandeTpsMort();
+    afficherTempsMort("normal");   
 }
    
-//affiche TEMPS MORT TECHNIQUE
+
 function afficherTempsMort(tpsMort) {
 
     //insertionInfos();
@@ -313,12 +408,9 @@ function passerTempsMortTechnique(){
 
 
 //Tout remettre à zéro et supprimer les sessions storage
-function nouveauMatch(){
-
-    if(window.confirm("nouveau Match ?")) {
+function nouveauMatch(){    
         sessionStorage.clear();
         location = location;
-    }
 }
 
 //Enregistrement du score dans sessionStorage
@@ -345,33 +437,6 @@ function incrementer_set(){
     set++;
 
     sessionStorage.setItem('set', set);
-}
-
-
-
-
-function afficherNewSet(){
-    var height = $(document).height();
-    var equipe1 = document.getElementById('equipe1');
-    var equipe2 = document.getElementById('equipe2');
-    var x = document.getElementById("myAudio");
-
-    x.play();
-
-    afficherRound();
-
-    if(b("nomGauche") != "equipe" && b("nomGauche") != "") equipe1.value = sessionStorage.getItem('nomGauche');
-    else equipe1.value = "equipe 1";
-
-    if(b("nomDroite") != "equipe" && b("nomDroite") != "") equipe2.value = sessionStorage.getItem('nomDroite');
-    else equipe2.value = "equipe 2";
-
-    $('.newSet').css('height', height);
-    $('.newSet').css('display', 'block');
-
-    setTimeout(function(){
-        $('.newSet').css('display', 'none');
-    }, 5000) //Afficher le nouveau set pendant 5 secondes
 }
 
 function afficherRound(){

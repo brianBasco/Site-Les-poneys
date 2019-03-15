@@ -28,11 +28,10 @@
 
         <div id="appli" class="appli">        
 
-		<header id="header" class="header">
-            <button id="nveauMatch" class="btn match">match</button>
-            <button id="nveauSet" class="btn set" onclick="nouveauSet()" disabled>set</button>
-            <button id="technique" class="btn technique" onclick="technique()" >technique</button>
-            <button id="btn_inverser" class="btn btn_inverser" >inverser</button>
+		<header id="header" class="header">            
+            <button class="btn" onclick="ouvrirMenuFlottant()">
+                Menu
+            </button>
 		</header>
 
 
@@ -44,19 +43,49 @@
             <!-- tmps mort technique, placé à l'extérieur de la vue -->
             <!-- tant qu'il reste caché -->
             <div id="tempsMortTechnique" class="tempsMortTechnique initial">
-
-                    <div>
-                        <div class="row">
-                            <div class="col-6">
-                                <button class="btn btn-tpsMort btn-passer" onclick="passerTempsMortTechnique()">passer</button>
-                            </div>
-                            <div class="col-6">
-                                    <button id="chrono" class="btn btn-tpsMort chrono"></button>
-                            </div>
+                <div>
+                    <div class="row">
+                        <div class="col-6">
+                            <button class="btn btn-tpsMort btn-passer" onclick="passerTempsMortTechnique()">passer</button>
+                        </div>
+                        <div class="col-6">
+                                <button id="chrono" class="btn btn-tpsMort chrono"></button>
                         </div>
                     </div>
-                    
-                </div>
+                </div>                    
+            </div>
+
+            <!--  Pop-up de confirmation de temps mort d'une équipe -->
+            <div id="demandeTpsMort" class="demandeTpsMort ferme" >  
+                <h1>Temps-Mort ?</h1>                
+                <button id="accepterTpsMort" class="btnConfirmation oui" >Oui</button>                
+                <button class="btnConfirmation non" onclick="fermerDemandeTpsMort()">Non</button>                
+            </div>
+
+             <!--  Pop-up de confirmation de set suivant -->
+            <div id="demandeNveauSet" class="demandeNveauSet ferme" >  
+                <h1>Set suivant ?</h1>                
+                <button class="btnConfirmation oui" onclick="accepterNveauSet()">Oui</button>                
+                <button class="btnConfirmation non" onclick="fermerDemandeNveauSet()">Non</button>                
+            </div>
+
+             <!--  Pop-up de confirmation de set suivant -->
+            <div id="demandeNveauMatch" class="demandeNveauMatch ferme" >  
+                <h1>Nouveau Match ?</h1>                
+                <button class="btnConfirmation oui" onclick="accepterNveauMatch()">Oui</button>                
+                <button class="btnConfirmation non" onclick="fermerDemandeNveauMatch()">Non</button>                
+            </div>
+
+            <!-- ---------------Menu flottant non visible au démarrage----------------- -->
+            <div id="menuFlottant" class="menuFlottant ferme">
+                <button class="fermer">Fermer</button>  
+                <button id="nveauMatch">Nouveau match</button>
+                <button id="nveauSet">Set suivant</button>
+                <button id="technique" class="technique" onclick="afficherTempsMort('technique')" >Tps-mort Technique</button>
+                <button id="btn_inverser">Inverser terrain</button>
+                <button>Enregistrer Match</button>
+            </div>
+
 
             <div class="logo_ffvb">
                 <img src="style/images/logo_ffvb.jpg" />
@@ -287,30 +316,6 @@
         </div>
     </div>
 -->
-
-
-
-<!-- //////////////////// fin de match ///////////////////// -->
-
-    <section id="finMatch" class="finMatch askUser">
-
-        <button class="fermer" onclick="fermerDiv('finMatch')">X</button>
-
-        <h1>Fin du match</h1>
-        
-        <div class="row">
-            <div class="col-6 equipeGauche">
-                <p class="nomEquipe"></p>
-                <button class="btn btn-ask-score"></button>
-            </div>
-        
-            <div class="col-6 equipeDroite">
-                <p class="nomEquipe"></p>
-                <button class="btn btn-ask-score"></button>
-            </div>
-        </div>       
-        
-    </section>
 
 </div>
 
