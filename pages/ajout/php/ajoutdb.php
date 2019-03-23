@@ -4,7 +4,7 @@
 //ATTENTION aux espaces vides
 
 
-header('location:../../../poneys.php');
+header('location:../../../index.php');
 extract($_POST);
 
 //ajout du match dans la bdd
