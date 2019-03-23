@@ -3,25 +3,27 @@ document.addEventListener("DOMContentLoaded", function(event) {
     
     document.querySelector("#nveauMatch").addEventListener("click", function() {
         ouvrirDemandeNveauMatch();
-    })    
+    });    
 
+    document.querySelector("#boutonMenu").addEventListener("click", ouvrirMenuFlottant, false);
+    
     document.querySelector("#nveauSet").addEventListener("click", function() {
         ouvrirDemandeNveauSet();
-    })   
+    });   
     
     document.querySelector("#btn_inverser").addEventListener("click", function() {
         change();
-    })
+    });
 
     document.querySelector("#nomGauche").addEventListener("blur" , function() {
         scoreGauche.attribuerNom();
         recapNom();
-    })
+    });
     
     document.querySelector("#nomDroite").addEventListener("blur" , function() {
         scoreDroite.attribuerNom();
         recapNom();
-    })
+    });
     
     let menuFlottant = document.getElementById("menuFlottant");
     let boutonsMenuFlottant = menuFlottant.getElementsByTagName("button");
@@ -37,7 +39,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
             demandeTpsMort(this);
         })
     }
-})
+});
 
 function initSet(){
     if(sessionStorage.getItem('set') == null) sessionStorage.setItem('set', 1);
@@ -90,11 +92,13 @@ function setTpsMortTech(){
 
 //menu flottant
 function ouvrirMenuFlottant() {  
-    document.getElementById("menuFlottant").classList.remove("ferme");
+    //document.getElementById("menuFlottant").classList.remove("ferme");
+    document.getElementById("menuFlottant").style.left = "0px";
 }
 
 function fermerMenuFlottant() {
-    document.getElementById("menuFlottant").classList.add("ferme");
+    //document.getElementById("menuFlottant").classList.add("ferme");
+    document.getElementById("menuFlottant").style.left = "-350px";
 }
 
 //Pop up nouveau set

@@ -35,14 +35,15 @@
             $_SESSION['mdp'] = $_POST['mdp'];
             //Si c'est ok je crée un booléen qui me dit que la session est ouverte et validée
             if(verif_connexion($_SESSION['mdp'])){
-                $_SESSION['connecte'] = true;
-                    header("Location: index.php");
-                    exit();
+                //$_SESSION['connecte'] = true;
+                setcookie("mdp",$_SESSION['mdp'],time()+ (60*60*24*30));
+                header("Location: index.php");
+                exit();
             }
             //Sinon la session est ouverte mais le booléen en restant à False ne permet pas l'accès
             // aux pages protégées
             else {
-                $_SESSION['connecte'] = false;    
+                //$_SESSION['connecte'] = false;    
                 echo '<div class="reponse">
                         <p>Le mot de passe n\'est pas valide</p>
                     </div>';

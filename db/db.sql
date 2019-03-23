@@ -12,7 +12,7 @@ PRIMARY KEY(id)
 
 ENGINE = INNODB;
 
-INSERT INTO connexion(mdp) VALUES ("passeurpenetrant");
+INSERT INTO connexion(mdp) VALUES ("talence");
 
 CREATE TABLE joueurs (
 id int(11) NOT NULL AUTO_INCREMENT,

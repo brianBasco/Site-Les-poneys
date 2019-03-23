@@ -2,7 +2,7 @@
 ini_set('display_errors', true);
 error_reporting (E_ALL);
 
-    require 'ConnexionDb.php';
+    //require 'ConnexionDb.php';
     require 'Match.php';
     require 'Joueur.php';
     require 'Presence.php';

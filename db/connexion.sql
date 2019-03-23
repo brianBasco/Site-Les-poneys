@@ -12,4 +12,4 @@ PRIMARY KEY(id)
 
 ENGINE = INNODB;
 
-INSERT INTO connexion(mdp) VALUES ("passeurpenetrant");
+INSERT INTO connexion(mdp) VALUES ("talence");

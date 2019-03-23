@@ -2,7 +2,7 @@
 
     $match = (int) $_GET['match'];
 
-    require '../../php/ConnexionDb.php';    
+    //require '../../php/ConnexionDb.php';    
 
     //affichage de chaque match trouvé dans la bdd
     $pdo = new PDO(MYSQL, USER, PSWD);
