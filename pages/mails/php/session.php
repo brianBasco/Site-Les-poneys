@@ -1,31 +1,5 @@
-
-<?php
-/*
-	session_start();
-	//Si l'utilisateur n'a pas ouvert de session il est redirigé vers le formulaire
-	// d'authentification
-    if(!$_SESSION['connecte']){
-       header("Location: ../../authentification.php");
-       exit();
-    }
-*/
-?>
-
 <?php
     session_start();
-
-    //echo $_COOKIE["mdp"];
-
-    /*
-    //ancien code   
-	//Si l'utilisateur n'a pas ouvert de session il est redirigé vers le formulaire
-    // d'authentification
-    
-    if(!$_SESSION['connecte']){
-       header("Location: authentification.php");
-       exit();
-    }
-    */
     
     //variable globale $mdp
     $mdp  = null;
