@@ -17,8 +17,9 @@
     //variable globale $mdp
     $mdp  = null;
 
+    $path = $_SERVER['DOCUMENT_ROOT'];
     //récupération du mdp enregistré dans la bdd : 
-    require 'php/ConnexionDb.php';
+    require $path.'/php/ConnexionDb.php';
     $pdo = new PDO(MYSQL, USER, PSWD);
     $pdo->query("SET NAMES UTF8");
     

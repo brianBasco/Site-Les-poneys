@@ -36,7 +36,7 @@ error_reporting (E_ALL);
         $reqVote = $pdo->prepare("INSERT INTO {$queryVote} (num_match, num_vote) VALUES (?,?)") or exit(print_r($pdo->errorInfo()));
         $reqVote->execute(array($numMatch,$numVote));
 
-        echo "Vote pris en compte";
+        echo $queryVote." pris en compte";
     }
 
 ?>
