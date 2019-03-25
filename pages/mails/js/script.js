@@ -91,7 +91,7 @@ function envoyerMail() {
 
 function retourAccueil(){
 
-    location = "../../poneys.php";
+    location = "../../index.php";
 }
 
 function reset() {
