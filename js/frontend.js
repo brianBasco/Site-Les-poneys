@@ -214,7 +214,7 @@ function construireVotes(numMatch, numJoueur, selecteur, id, monType) {
     let queryVotes = document.querySelectorAll("." + selecteur);
     for(let i = 0; i<queryVotes.length; i++) {
         queryVotes[i].addEventListener("click", function() {            
-            checkClick(this, selecteur, "data-no");
+            //checkClick(this, selecteur, "data-no");
         });
     }
 }
@@ -235,8 +235,6 @@ function detruireVotes() {
    //let root = document.getElementById("votes");
     let divAction = document.getElementById("voteAction");
     let divCagade = document.getElementById("voteCagade");
-    let action = document.getElementById("action");
-    let cagade = document.getElementById("cagade");
     console.log(divAction);
     divAction.removeChild(divAction.childNodes[0]);
     divCagade.removeChild(divCagade.childNodes[0]);
@@ -255,23 +253,12 @@ function detruireVotes() {
     window.scrollTo(0,Maposition.initiale);
     
     //effacement de commentaire
-    let commentaire = document.getElementById("commentJoueur").value="";
+    document.getElementById("commentJoueur").value="";
     
     //Bouton de retour
-    let retourPres = document.getElementById("retourPresence");
-    let retourCom = document.getElementById("retourCommentaire");
-    let retourVoteAction = document.getElementById("retourVoteAction");
-    let retourVoteCagade = document.getElementById("retourVoteCagade");
-    
-    retourPres.value ="";
-    retourCom.value ="";
-    retourVoteAction.value ="";
-    retourVoteCagade.value ="";
-    
+    let retourPres = document.getElementById("retourPresence");    
+    retourPres.value ="";    
     retourPres.style.display = "none";
-    retourCom.style.display = "none"; 
-    retourVoteAction.style.display = "none";
-    retourVoteCagade.style.display = "none";
 }
 
 
@@ -347,7 +334,7 @@ function UpdateComment() {
           let retour = request.responseText;
           let reponse = JSON.parse(retour); 
   
-          let div = document.querySelector("#retourCommentaire");
+          let div = document.querySelector("#retourPresence");
           div.value = reponse[1];
           div.style.display = "block";
           
@@ -571,7 +558,7 @@ function voter(query) {
 
     let ligne;
     let num_match;    
-    let num_vote;
+    let num_vote = "";
 
     let div = document.getElementById("nomJoueur");
     num_match = div.getAttribute("data-match");
@@ -581,12 +568,11 @@ function voter(query) {
     for(let i = 0; i<votes.length; i++) {
         let vote = votes[i];
         if(vote.checked == true) {
-            num_vote = vote.getAttribute("data-no");
-            break;
+            num_vote += vote.getAttribute("data-no") + "_";            
         }
     }
 
-    if(num_vote != undefined) {
+    if(num_vote != "") {
 
         let url="php/updateVote.php?query=" + query + "&ligne=" + ligne + "&num_match=" + num_match +
             "&num_vote=" + num_vote;
@@ -595,9 +581,10 @@ function voter(query) {
 
             let retour = request.responseText;
 
-            let retourVote = document.getElementById("retour" + query);
-            retourVote.value = retour;
-            retourVote.style.display = "block";
+            let div  = document.querySelector("#retourPresence");
+            div.value = retour;
+            div.style.display = "block";
+            
         })
 
     }

@@ -469,9 +469,14 @@ html {
     color:  #001e3c;
     display: none;
     width: 250px;
-    margin: 0 auto 5px auto; 
+    margin: 0 auto 5px auto;
+    
+    position: fixed;
+    top: 10px;
+    left: 0;
+    right: 0;
   }
-  
+
 
   #listeVotes {
     padding-top: 30px;

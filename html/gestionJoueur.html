@@ -58,15 +58,6 @@
         <div class="container">
             <button id="enregisComment" class="btn btn-success" >Enregistrer commentaire</button>
         </div>
-
-    <div class="retour container">
-        <div class="container">
-            <input type="text" readonly id="retourCommentaire" class="retourCommentaire" />
-        </div>
-        <div class="container">
-            <input type="text" readonly id="retourPresence" class="retourPresence" />
-        </div>
-    </div>
 </div>
 
 
@@ -78,12 +69,7 @@
     <div id="voteAction"></div>
 
         <button id="btn-voteAction" class="btn btn-warning">Voter pour l'action</button>
-
-        <div class="retour container">
-            <div class="container">
-                <input type="text" readonly id="retourVoteAction" class="retourVote" />
-            </div>
-        </div>
+       
     </div>
 
     <div id="cagade" class="cagade">
@@ -91,12 +77,18 @@
         <div id="voteCagade"></div>
 
         <button id="btn-voteCagade" class="btn btn-warning">Voter pour la cagade</button>
-
-            <div class="retour container">
-                <div class="container">
-                    <input type="text" readonly id="retourVoteCagade" class="retourVote" />
-                </div>
-            </div>
+            
         </div>
     </div>
+
+    <!-- Bloc d'infos bulle de retour lors des requêtes AJAX -->
+    <div class="retour container">
+        <div class="container">
+            <input type="text" readonly id="retourCommentaire" class="retourCommentaire" />
+        </div>
+        <div class="container">
+            <input type="text" readonly id="retourPresence" class="retourPresence" />
+        </div>
+    </div>
+    
 </div>

@@ -150,7 +150,7 @@ function ajouterStars(div, tableau) {
     container.className = "container votes_joueurs";
     
     let titre  = document.createElement("h2");
-    titre.innerHTML = "Les stars of THE Match"
+    titre.innerHTML = "une action de Dingue !";
 
     container.appendChild(titre);
     
@@ -166,7 +166,7 @@ function ajouterZippers(div, tableau) {
     container.className = "container votes_joueurs";
     
     let titre  = document.createElement("h2");
-    titre.innerHTML = "J'ai Zippé, tu zippes, il zippe..."
+    titre.innerHTML = "un Zip, c'est cadeau aussi...";
 
     container.appendChild(titre);
     

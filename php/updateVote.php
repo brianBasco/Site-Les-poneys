@@ -9,8 +9,13 @@ error_reporting (E_ALL);
     //ligne sql de la table presence
     $ligne = (int)$_GET['ligne'];
     $numMatch = (int)$_GET['num_match'];
-    $numVote = (int)$_GET['num_vote'];
+    $numVote = $_GET['num_vote'];
     $queryVote = $_GET['query'];
+
+    //Insertion des votes dans un tableau
+    //La String numVote reçue est délimitée par un "_" entre chaque nombre
+    $tabDesVotes = array_filter(explode("_", $numVote));   
+
 
     $pdo = new PDO(MYSQL, USER, PSWD);
     $pdo->query("SET NAMES UTF8");
@@ -33,9 +38,11 @@ error_reporting (E_ALL);
         $req->execute(array($a_vote,$ligne));
 
         //Enregistrement dans la table votes
-        $reqVote = $pdo->prepare("INSERT INTO {$queryVote} (num_match, num_vote) VALUES (?,?)") or exit(print_r($pdo->errorInfo()));
-        $reqVote->execute(array($numMatch,$numVote));
-
+        foreach ($tabDesVotes as $unVote) {
+            $reqVote = $pdo->prepare("INSERT INTO {$queryVote} (num_match, num_vote) VALUES (?,?)") or exit(print_r($pdo->errorInfo()));
+            $reqVote->execute(array($numMatch,(int)$unVote));
+        }
+        
         echo $queryVote." pris en compte";
     }
 

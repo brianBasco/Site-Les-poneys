@@ -10,6 +10,8 @@ $id = (int)$id;
 $nous = (int)$nous;
 $eux = (int)$eux;
 
+$retour = "scores enregistrés";
+
 //require '../classes/Match.php';
 require '../../../php/ConnexionDb.php';
 
@@ -29,16 +31,28 @@ while($ligne = $reqMatchs->fetch(PDO::FETCH_ASSOC)) {
 
 //si res n'est pas nul, le match est déjà crée, donc update du match
 if($res != null) {
-    $reqUpdate = $pdo->prepare('UPDATE scores SET nous = (?), eux = (?) WHERE id=(?)');
-    $reqUpdate->execute(array($nous, $eux, $id));
+
+    try {
+        $reqUpdate = $pdo->prepare('UPDATE scores SET nous = (?), eux = (?) WHERE id=(?)');
+        $reqUpdate->execute(array($nous, $eux, $id)) or exit($retour = "Pb update");
+    }
+    catch(Exception $e) {
+        $retour = $e->getMessage();
+    }
 }
 
 //sinon, le match n'a pas été crée, insert into scores
 else {
-    $reqInsert = $pdo->prepare('INSERT INTO scores (num_match,nous,eux) VALUES (?,?,?)');
-    $reqInsert->execute(array($id, $nous, $eux)); //or exit(print_r($reqInsert->ErrorInfo()));
+
+    try {
+        $reqInsert = $pdo->prepare('INSERT INTO scores (num_match,nous,eux) VALUES (?,?,?)');
+        $reqInsert->execute(array($id, $nous, $eux)) or exit($retour = "Pb Insert");
+    }
+    catch(Exception $e) {
+        $retour = $e->getMessage();
+    }
 }
 
-echo "scores enregistrés";
+echo $retour;
 
 ?>
