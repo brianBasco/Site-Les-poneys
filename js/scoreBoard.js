@@ -133,7 +133,6 @@ function resultatDesVotes(num_match) {
     document.body.appendChild(div);
     
     getStars(num_match);
-    //getZippers(num_match);
 }
 
 function fermerResultatDesVotes() {
@@ -192,7 +191,8 @@ function getStars(num_match) {
             ajouterStars(div, tableau);
 
             //Les stars sont récupérées, on peut lancer les zippers
-            getZippers(num_match);            
+            //Zippers commentés pour ne pas lancer la fonction
+            //getZippers(num_match);            
 
         })
      

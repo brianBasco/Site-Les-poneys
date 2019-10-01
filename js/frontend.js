@@ -50,8 +50,12 @@ document.addEventListener("DOMContentLoaded",
     document.querySelector("#btn-voteAction").addEventListener("click", function(){
         voter("VoteAction")});
 
+
+    //annulation du vote cagade
+    /*
     document.querySelector("#btn-voteCagade").addEventListener("click", function(){
         voter("VoteCagade")});
+    */
 
 
     //affichage de la date du prochain match
@@ -164,7 +168,8 @@ function ouvrirGestionJoueur(element) {
 
     construirePresence();
     construireVotes(noMatch, noJoueur, "queryVoteAction", "voteAction", "boulard");
-    construireVotes(noMatch, noJoueur, "queryVoteCagade", "voteCagade", "bouse");   
+    //annulation du vote cagade
+    //construireVotes(noMatch, noJoueur, "queryVoteCagade", "voteCagade", "bouse");   
     enregistrerModifs();
 
     div.style.display = "block";
@@ -234,10 +239,12 @@ function detruireVotes() {
 
    //let root = document.getElementById("votes");
     let divAction = document.getElementById("voteAction");
-    let divCagade = document.getElementById("voteCagade");
-    console.log(divAction);
     divAction.removeChild(divAction.childNodes[0]);
+
+    /*
+    let divCagade = document.getElementById("voteCagade");
     divCagade.removeChild(divCagade.childNodes[0]);
+    */
 
     document.querySelector("#fermerGestion").removeEventListener("click",
         detruireVotes);

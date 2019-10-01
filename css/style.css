@@ -455,7 +455,12 @@ html {
   }
 
   .gestionJoueur .votes h1{
-    margin-bottom: 30px;
+    margin-bottom: 8px;
+  }
+
+  .gestionJoueur .votes p {
+    font-style: italic;
+    padding-bottom: 25px;
   }
 
   .gestionJoueur .retour {
