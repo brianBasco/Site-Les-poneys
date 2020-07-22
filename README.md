@@ -1,13 +1,29 @@
-# ajax_exemple
+# lesponeysdetalence.fr
 
-NodeJs utilisé comme manager de paquets pour bootstrap, jquery, popper.js
-Browserify app.js -> bundle.js
+Site internet, gestion des joueurs pour les matchs
 
-Fonctionnement du site en PHP pour les requêtes BDD Mysql
+Les joueurs peuvent mettre à jour leur présence :
+- présent
+- absent
+- à la bourre
+- ne sais pas
 
-Requêtes AJAX pour la mise de la bdd
+Possibilité d'ajout de commentaires par match
 
-Pas de framework Front End
+Envoi de mail : Sélection des destinataires (à tous, à ceux présents ou sélection individuelle)
 
-Tableau final des votes sur la table VoteAction :
+Possibilité de vote par match pour les meilleurs joueurs et les plus mauvais
+
+Affichage du résultat des matchs
+
+Liens vers Applications :
+-> compteur de score
+-> placement sur terrain de 6 équipes
+-> résultats FFVB
+
+Site crée en PHP.
+Bdd Mysql
+frontend : javascript, bootstrap et requêtes AJAX
+
+commande sql : classement des joueurs par nombre de votes reçus (sur la table VoteAction)
 SELECT joueurs.nom, num_vote, count(num_vote) FROM `VoteAction` , joueurs WHERE joueurs.id = num_vote GROUP BY num_vote
